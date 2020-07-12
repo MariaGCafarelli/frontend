@@ -140,7 +140,6 @@ export class ForosComponent implements OnInit {
           this.myforums = res.forums;
           console.log(this.myforums);
         });
-        alert('¡Ahora estás suscrito en el foro!');
       }
     });
   }
@@ -153,7 +152,7 @@ export class ForosComponent implements OnInit {
           this.myforums = res.forums;
           console.log(this.myforums);
         });
-        alert('¡Ya no estás suscrito en el foro!');
+        
       }
     });
   }

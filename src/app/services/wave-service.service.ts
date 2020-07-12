@@ -15,8 +15,8 @@ import { RespI } from '../model/resp-i';
   providedIn: 'root',
 })
 export class WaveServiceService {
-  //url = 'http://localhost:3000';
-  url = 'https://wave-service.herokuapp.com';
+  url = 'http://localhost:3000';
+  //url = 'https://wave-service.herokuapp.com';
 
   public token: string;
   public picture: string;
@@ -423,6 +423,59 @@ export class WaveServiceService {
   return this.http.post(`${this.url}/user/reset/password?token=${token}`, {password });
 }
 
+  //CRUD category
+  
+  CreateCategory(
+    name: string,
+    text: string,
+  ): Observable<any> {
+    return this.http.post(
+      `${this.url}/category/admin/create`,
+      { name, text }
+    );
+  }
 
+  updatePicCategory(id: number, files: File[]): Observable<any> {
+    console.log(files[0]);
+    let file = files[0];
+    const fd = new FormData();
+    fd.append('file', file, file.name);
+    return this.http.post(
+      `${this.url}/category/photo/upload/${id}`,
+      fd
+    );
+  }
+
+  stateCategory(id: number): Observable<any> {
+    return this.http.patch(`${this.url}/category/change/status/${id}`, []);
+  }
+
+  //CRUD category
+  
+  CreateSubCategory(
+    name: string,
+    text: string,
+  ): Observable<any> {
+    return this.http.post(
+      `${this.url}/sub-category/admin/create`,
+      { name, text }
+    );
+  }
+
+
+  updatePicSubCategory(id: number, files: File[]): Observable<any> {
+    console.log(files[0]);
+    let file = files[0];
+    const fd = new FormData();
+    fd.append('file', file, file.name);
+    return this.http.post(
+      `${this.url}/category/photo/upload/${id}`,
+      fd
+    );
+  }
+
+  stateSubCategory(id: number): Observable<any> {
+    return this.http.patch(`${this.url}/category/change/status/${id}`, []);
+  }
 
 }
