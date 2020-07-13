@@ -15,8 +15,12 @@ export class ContenidoRecomendadoComponent implements OnInit {
   categoryId: number;
   categoryById: any;
   files: File[] = [];
+  categories: any;
+  panelOpenState = false;
+  contenido: any;
   contentForm: FormGroup;
   pattern = /^https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*$/;
+  
   public selected: ContentCategory = {
     id: null,
     title: null,
@@ -27,9 +31,6 @@ export class ContenidoRecomendadoComponent implements OnInit {
 
   @ViewChild('btnClose') btnClose: ElementRef;
   @ViewChild(MatAccordion) accordion: MatAccordion;
-  categories: any;
-  panelOpenState = false;
-  contenido: any;
 
   createFormGroup() {
     return new FormGroup({

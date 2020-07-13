@@ -116,7 +116,7 @@ export class WaveServiceService {
     userName: string,
     email: string,
     birthday: Date,
-    password: string,
+    password: string
   ): Observable<any> {
     return this.http
       .post<any>(`${this.url}/user/register/admin`, {
@@ -125,7 +125,7 @@ export class WaveServiceService {
         userName,
         email,
         birthday,
-        password
+        password,
       })
       .pipe(
         tap((res: any) => {
@@ -275,6 +275,12 @@ export class WaveServiceService {
     );
   }
 
+  getSubcategoriesWCategories(): Observable<any> {
+    return this.http.get(
+      `${this.url}/category/admin/all/subcategories`
+    );
+  }
+
   saveFavoriteSubCategoria(subcategoryId: any) {
     return this.http.patch(`${this.url}/sub-category/add/favorite`, [
       { id: subcategoryId },
@@ -339,7 +345,7 @@ export class WaveServiceService {
     return this.http.get(`${this.url}/forum/created/user`);
   }
 
-  becomePremium(): Observable<any>{
+  becomePremium(): Observable<any> {
     return this.http.patch(`${this.url}/user/premium/activate`, []).pipe(
       tap((res: any) => {
         if (res) {
@@ -349,7 +355,7 @@ export class WaveServiceService {
           console.log('no hay respuesta');
         }
       })
-    );;
+    );
   }
   //Servicios content category
 
@@ -395,8 +401,12 @@ export class WaveServiceService {
     link: string
   ): Observable<any> {
     console.log(id, title, text, link);
-    return this.http.post(`${this.url}/content-category/update/${id}`, { text, title, link });
-  } 
+    return this.http.post(`${this.url}/content-category/update/${id}`, {
+      text,
+      title,
+      link,
+    });
+  }
 
   updatePicContent(id: number, files: File[]) {
     console.log(files[0]);
@@ -411,7 +421,7 @@ export class WaveServiceService {
 
   //recuperar password
 
-  generateLink(email:string):Observable<any>{
+  generateLink(email: string): Observable<any> {
     return this.http.post(`${this.url}/user/generate/passwordURL`, { email });
   }
 

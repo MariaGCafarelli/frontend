@@ -36,8 +36,8 @@ export class CategoriasAdminComponent implements OnInit {
  
 
   ngOnInit(): void {
-    this.waveService.getCategoriesWSubcategories().subscribe((response) => {
-      this.categories = response.items;
+    this.waveService.getAllCategories().subscribe((response) => {
+      this.categories = response;
       console.log('categorias', this.categories);
     });
   }
