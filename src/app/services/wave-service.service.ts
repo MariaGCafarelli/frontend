@@ -450,7 +450,7 @@ export class WaveServiceService {
     return this.http.patch(`${this.url}/category/change/status/${id}`, []);
   }
 
-  //CRUD category
+  //CRUD subcategory
   
   CreateSubCategory(
     name: string,
