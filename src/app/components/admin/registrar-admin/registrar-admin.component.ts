@@ -8,6 +8,7 @@ import {
   FormBuilder,
   FormArray,
   RequiredValidator,
+  AbstractControl,
 } from '@angular/forms';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -31,6 +32,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+
 @Component({
   selector: 'app-registrar-admin',
   templateUrl: './registrar-admin.component.html',
@@ -38,7 +40,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegistrarAdminComponent implements OnInit {
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  private passwordPattern: any = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])/;
+  private passwordPattern: any = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/;
+  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
   registerForm: FormGroup;
   matcher = new MyErrorStateMatcher();
 
@@ -48,16 +51,18 @@ export class RegistrarAdminComponent implements OnInit {
     router: Router) {
       this.registerForm = this.formBuilder.group(
         {
-          nombres: new FormControl('', [Validators.required]),
-          apellidos: new FormControl('', [Validators.required]),
+          nombres: new FormControl('', [
+            Validators.required, 
+            Validators.pattern(this.onlyletters)]),
+          apellidos: new FormControl('', [Validators.required, 
+          Validators.pattern(this.onlyletters)]),
           fecha: new FormControl('', [Validators.required]),
           correo: new FormControl('', [
             Validators.required,
             Validators.pattern(this.emailPattern)
           ]),
           usuario: new FormControl('', [
-            Validators.required,
-            Validators.pattern(''),
+            Validators.required
           ]),
           contra: new FormControl('', [
             Validators.required,
