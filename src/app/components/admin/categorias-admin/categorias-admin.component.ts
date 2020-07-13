@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-categorias-admin',
@@ -26,11 +27,29 @@ export class CategoriasAdminComponent implements OnInit {
   }
   
   constructor(private spinner: NgxSpinnerService,
-    private waveService: WaveServiceService) { 
+    private waveService: WaveServiceService,
+    private route: ActivatedRoute,
+    private router: Router) { 
       this.CategoryForm = this.createFormGroup();
     }
+  categories: any;
+ 
 
   ngOnInit(): void {
+    this.waveService.getCategoriesWSubcategories().subscribe((response) => {
+      this.categories = response.items;
+      console.log('categorias', this.categories);
+    });
+  }
+
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
   ChangeStatus(id: number) {
