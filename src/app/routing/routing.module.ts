@@ -23,6 +23,7 @@ import { CategoriasAdminComponent } from '../components/admin/categorias-admin/c
 import { RegistrarAdminComponent } from '../components/admin/registrar-admin/registrar-admin.component';
 import { LostPasswordComponent } from '../components/lost-password/lost-password.component';
 import { AdminGuard } from '../guards/admin.guard';
+import { SubAdminComponent } from '../components/admin/sub-admin/sub-admin.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -64,10 +65,13 @@ const routes: Routes = [
   ,  canActivate: [AdminGuard]
 },
 
-  { path: 'admin/contenido-recomendado', component: ContenidoRecomendadoComponent},
-  { path: 'admin/registrar-admin', component: RegistrarAdminComponent},
+  { path: 'admin/contenido-recomendado', component: ContenidoRecomendadoComponent, canActivate: [AdminGuard] },
+  { path: 'admin/registrar-admin', component: RegistrarAdminComponent, canActivate: [AdminGuard] },
 
   { path: 'admin/contenido-recomendado', component: ContenidoRecomendadoComponent
+ ,  canActivate: [AdminGuard]
+},
+{ path: 'admin/subcategorias', component: SubAdminComponent
  ,  canActivate: [AdminGuard]
 },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

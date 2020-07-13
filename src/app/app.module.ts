@@ -40,6 +40,7 @@ import { CategoriasAdminComponent } from './components/admin/categorias-admin/ca
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { RegistrarAdminComponent } from './components/admin/registrar-admin/registrar-admin.component';
 import { LostPasswordComponent } from './components/lost-password/lost-password.component';
+import { SubAdminComponent } from './components/admin/sub-admin/sub-admin.component';
 
 const config: SocketIoConfig = {
   url: 'https://wave-service.herokuapp.com',
@@ -75,6 +76,7 @@ const config: SocketIoConfig = {
     CategoriasAdminComponent,
     RegistrarAdminComponent,
     LostPasswordComponent,
+    SubAdminComponent,
   ],
   imports: [
     BrowserModule,
