@@ -1,1 +1,237 @@
 <app-navbar></app-navbar>
+
+<h4 style="margin-left: 1em; display: inline;">Categorías</h4>
+<mat-icon
+  style="color: black; margin-top: 1em; margin-left: 0.5em;"
+  data-toggle="modal"
+  data-target="#exampleModal"
+  >add</mat-icon
+>
+
+<div class="carousel" style="margin-top: 1em;">
+  <div *ngFor="let cat of categories" class="contenido">
+    <mat-card
+      class="example-card container para-sobrevivir"
+      style="margin-bottom: 1em;"
+    >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <img mat-card-avatar src="{{ cat.image }}" alt="User Avatar" />
+        </div>
+        <mat-card-title>{{ cat.name }}</mat-card-title>
+        <mat-card-subtitle style="text-align: justify;">{{ cat.text }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content> </mat-card-content>
+      <mat-card-actions>
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          class="btn btn-primary"
+        >
+          <mat-icon> create </mat-icon>
+        </button>
+
+        <div *ngIf="cat.isActive; else activo" style="display: inline;">
+          <a class="btn btn-primary"><mat-icon> close </mat-icon></a>
+        </div>
+        <ng-template #activo
+          ><button type="button" class="btn btn-primary">
+            <mat-icon> check </mat-icon>
+          </button>
+        </ng-template>
+        <button
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal2"
+          class="btn btn-primary"
+        >
+          <mat-icon> cloud_download </mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Modal Editar o Agregar-->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong> TITULO</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+              <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex"></div>
+                <div class="card-body" style="width: 100%;">
+                  <form class="form-signin">
+                    <div class="form-label-group">
+                      <label for="inputUserame">Título</label>
+                      <input
+                        type="text"
+                        id="inputUserame"
+                        class="form-control"
+                        placeholder="Títutlo"
+                        required
+                        autofocus
+                      />
+                    </div>
+
+                    <div class="form-label-group">
+                      <label for="inputEmail">Descripción</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Descripción del contenido"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-label-group">
+                      <label>Dirección al contenido recomendado</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Link"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-label-group">
+                      <label>Imagen</label>
+                      <ngx-dropzone (change)="onSelect($event)">
+                        <ngx-dropzone-label>Drop it</ngx-dropzone-label>
+                        <ngx-dropzone-preview
+                          *ngFor="let f of files"
+                          [removable]="true"
+                          (removed)="onRemove(f)"
+                        >
+                          <ngx-dropzone-label>archivo</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                      </ngx-dropzone>
+                    </div>
+
+                    <br />
+                    <button
+                      class="btn btn1 btn-primary"
+                      type="submit"
+                      data-dismiss="modal"
+                      style="margin-left: 27, 5%;"
+                    >
+                      continuar
+                    </button>
+
+                    <hr class="my-4" />
+                    <button
+                      class="btn btn1 btn-primary"
+                      data-dismiss="modal"
+                      style="margin-left: 27, 5%;"
+                    >
+                      cancelar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar Imagen-->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong> Cambiar imagen de la categoría </strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+              <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex"></div>
+                <div class="card-body" style="width: 100%;">
+                  <form class="form-signin">
+                    <div class="form-label-group">
+                      <label for="inputPassword">Imagen</label>
+                      <ngx-dropzone (change)="onSelect($event)">
+                        <ngx-dropzone-label>Drop it</ngx-dropzone-label>
+                        <ngx-dropzone-preview
+                          *ngFor="let f of files"
+                          [removable]="true"
+                          (removed)="onRemove(f)"
+                        >
+                          <ngx-dropzone-label>archivo</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                      </ngx-dropzone>
+                    </div>
+
+                    <br />
+                    <button
+                      class="btn btn1 btn-primary"
+                      type="submit"
+                      data-dismiss="modal"
+                      style="margin-left: 27, 5%;"
+                    >
+                      continuar
+                    </button>
+
+                    <hr class="my-4" />
+                    <button
+                      class="btn btn1 btn-primary"
+                      data-dismiss="modal"
+                      style="margin-left: 27, 5%;"
+                    >
+                      cancelar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
