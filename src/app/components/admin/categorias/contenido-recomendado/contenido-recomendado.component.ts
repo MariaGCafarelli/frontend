@@ -151,21 +151,11 @@ export class ContenidoRecomendadoComponent implements OnInit {
     }
   }
 
-  disableContent(id: number) {
-    this.spinner.show();
-    this.waveService.disableContent(id).subscribe((data) => {
-      console.log(data);
-      this.waveService.getAllCategoriesContent().subscribe((response) => {
-        this.categories = response;
-        console.log('categorias', this.categories);
-        this.spinner.hide();
-      });
-    });
-  }
+  
 
-  activateContent(id: number) {
+  changeStatus(id: number) {
     this.spinner.show();
-    this.waveService.enableContent(id).subscribe((data) => {
+    this.waveService.statusContent(id).subscribe((data) => {
       console.log(data);
       this.waveService.getAllCategoriesContent().subscribe((response) => {
         this.categories = response;

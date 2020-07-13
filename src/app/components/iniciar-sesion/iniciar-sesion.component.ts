@@ -63,7 +63,8 @@ export class IniciarSesionComponent implements OnInit {
       
       error => {
         this.spinner.hide();
-        alert("Usuario o Contraseña incorrectos")} 
+        console.log(error);
+        alert(error.error.message)} 
       )  
     this.onResetForm();
     }else{

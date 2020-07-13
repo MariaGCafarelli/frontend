@@ -12,6 +12,7 @@ import {
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -43,7 +44,8 @@ export class RegistrarAdminComponent implements OnInit {
 
   constructor(private spinner: NgxSpinnerService, 
     private formBuilder: FormBuilder,
-    private waveService: WaveServiceService) {
+    private waveService: WaveServiceService,
+    router: Router) {
       this.registerForm = this.formBuilder.group(
         {
           nombres: new FormControl('', [Validators.required]),
@@ -93,12 +95,12 @@ export class RegistrarAdminComponent implements OnInit {
           )
           .subscribe((data) => {
             console.log(data);
-            alert("Registrado con  exito")
-           
+            alert("Registrado con  exito");
+            this.registerForm.reset(); 
             this.spinner.hide();
           },
           (error)=>{
-            alert("El usuario ya se encuentra registrado");
+            alert(error.error.message);
             this.spinner.hide();
           });
       }

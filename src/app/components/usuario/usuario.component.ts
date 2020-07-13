@@ -101,7 +101,7 @@ export class UsuarioComponent implements OnInit {
     };
 
     this.user = JSON.parse(this.waveService.getCurrentUser());
-    if (!this.user.image) {
+    if (this.waveService.getPic()) {
       this.user.image = this.waveService.getPic();
     }
     //console.log(this.user);

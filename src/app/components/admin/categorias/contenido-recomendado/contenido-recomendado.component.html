@@ -89,14 +89,14 @@
               </button>
 
               <div *ngIf="com.isActive; else activo" style="display: inline;">
-                <a (click)="disableContent(com.id)" class="btn btn-primary"
+                <a (click)="changeStatus(com.id)" class="btn btn-primary"
                   ><mat-icon> close </mat-icon></a
                 >
               </div>
               <ng-template #activo
                 ><button
                   type="button"
-                  (click)="activateContent(com.id)"
+                  (click)="changeStatus(com.id)"
                   class="btn btn-primary"
                 >
                   <mat-icon> check </mat-icon>

@@ -384,12 +384,8 @@ export class WaveServiceService {
     );
   }
 
-  disableContent(id: number): Observable<any> {
-    return this.http.patch(`${this.url}/content-category/disable/${id}`, []);
-  }
-
-  enableContent(id: number): Observable<any> {
-    return this.http.patch(`${this.url}/content-category/activate/${id}`, []);
+  statusContent(id: number): Observable<any> {
+    return this.http.patch(`${this.url}/content-category/change/status/${id}`, []);
   }
 
   updateContent(
