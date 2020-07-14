@@ -29,6 +29,15 @@
         >
           Por favor introduzca su nombre
         </mat-error>
+        <mat-error
+          *ngIf="
+            nombres.invalid &&
+            (nombres.dirty || nombres.touched) &&
+            nombres.errors.pattern
+          "
+        >
+         Por favor Introduzca solo letras.
+        </mat-error>
               <div class="form-label-group">
                 <label for="inputApellido">Apellidos</label>
                 <input formControlName="apellidos"
@@ -43,7 +52,16 @@
               <mat-error
           *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)"
         >
-          Por favor introduzca al menos un apellido
+          Por favor introduzca al menos un apellido.
+        </mat-error>
+        <mat-error
+          *ngIf="
+            apellidos.invalid &&
+            (apellidos.dirty || apellidos.touched) &&
+            apellidos.errors.pattern
+          "
+        >
+         Por favor Introduzca solo letras.
         </mat-error>
               <div class="form-label-group">
                 <label for="inputCorreo">Correo</label>
@@ -91,6 +109,7 @@
             >
               Por favor introduzca un username
             </mat-error>
+            
             <div class="form-label-group">
               <mat-label>Fecha de nacimiento</mat-label>
               <input matInput [matDatepicker]="picker" formControlName="fecha" />

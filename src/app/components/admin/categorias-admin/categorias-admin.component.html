@@ -105,17 +105,45 @@
                         autofocus
                       />
                     </div>
+                    <div *ngIf="name.invalid && name.dirty">
+                      <div
+                        *ngIf="name.errors.required"
+                        class="mat-error"
+                      >
+                        Descripcion es Requerida
+                      </div>
+                      <div
+                        *ngIf="name.errors.minlength"
+                        class="mat-error"
+                      >
+                        Debe tener al menos 4 caracteres
+                      </div>
+                    </div>
 
                     <div class="form-label-group">
                       <label for="inputEmail">Descripción</label>
-                      <input
+                      <textarea
                         [(ngModel)]="this.selected.text"
                         formControlName="text"
                         type="text"
                         class="form-control"
                         placeholder="Descripción del contenido"
                         required
-                      />
+                      > </textarea>
+                    </div>
+                    <div *ngIf="text.invalid && text.dirty">
+                      <div
+                        *ngIf="text.errors.required"
+                        class="mat-error"
+                      >
+                        Descripcion es Requerida
+                      </div>
+                      <div
+                        *ngIf="text.errors.minlength"
+                        class="mat-error"
+                      >
+                        Debe tener al menos 4 caracteres
+                      </div>
                     </div>
                     <div *ngIf="!this.selected.id" class="form-label-group">
                       <label>Imagen</label>

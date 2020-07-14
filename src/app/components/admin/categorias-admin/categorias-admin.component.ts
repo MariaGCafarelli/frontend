@@ -12,6 +12,7 @@ import { Category } from 'src/app/model/category';
 })
 export class CategoriasAdminComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
+  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
   CategoryForm: FormGroup;
   files:File[]=[];
   public selected: Category = {
@@ -26,11 +27,11 @@ export class CategoriasAdminComponent implements OnInit {
     return new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(4)
       ]),
       text: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(4)
       ]),
     });
   }
@@ -157,6 +158,14 @@ updatePic(){
     }
     this.CategoryForm.reset();
   }
+  }
+
+  get name() {
+    return this.CategoryForm.get('name');
+  }
+
+  get text() {
+    return this.CategoryForm.get('text');
   }
 
 }
