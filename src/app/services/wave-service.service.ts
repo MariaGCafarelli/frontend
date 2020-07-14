@@ -483,14 +483,13 @@ export class WaveServiceService {
     let file = files[0];
     const fd = new FormData();
     fd.append('file', file, file.name);
-    return this.http.post(
-      `${this.url}/category/photo/upload/${id}`,
-      fd
+    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`,{
+      fd}
     );
   }
 
   stateSubCategory(id: number): Observable<any> {
-    return this.http.patch(`${this.url}/category/change/status/${id}`, []);
+    return this.http.patch(`${this.url}/sub-category/change/status/${id}`, []);
   }
 
   updateSubcategory(id: number, name: string, text: string): Observable<any>{

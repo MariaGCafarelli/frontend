@@ -70,16 +70,14 @@ export class SubAdminComponent implements OnInit {
       if (this.subCategoryForm.valid) {
         if(this.files.length>0){
         this.spinner.show();
-        this.waveService
-          .CreateSubCategory(
+        this.waveService.CreateSubCategory(
             this.subCategoryForm.value.name,
             this.subCategoryForm.value.text,
-            this.idCategory
-           
-          )
+            this.idCategory)
           .subscribe((res) => {
-            if (res) {
-              this.waveService.SavePicContent(res.content.id, this.files).subscribe
+              if (res) {
+              console.log(res);
+              this.waveService.updatePicSubCategory(res.SubCategory.id, this.files).subscribe
                ((res)=>{
                if(res){
                 console.log(res)
@@ -168,11 +166,16 @@ export class SubAdminComponent implements OnInit {
 
   updatePic(){
     if(this.files.length>0){
+      this.spinner.show();
     this.waveService.updatePicSubCategory(this.selected.id, this.files).subscribe
     ((res)=>{
-     if(res){
-     console.log(res)
-  }}
+      console.log(res)
+      this.waveService.getSubcategoriesWCategories().subscribe((response) => {
+        this.subCategories = response;
+        this.spinner.hide();
+      });
+     
+  }
   )}else{
     alert("Debe seleccionar una imagen");
     this.reset();

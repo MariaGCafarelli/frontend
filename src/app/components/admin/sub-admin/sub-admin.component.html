@@ -260,6 +260,7 @@
         </h5>
         <button
           type="button"
+          (click)="reset()"
           class="close"
           data-dismiss="modal"
           aria-label="Close"
@@ -292,10 +293,12 @@
                     <br />
                     <button
                       class="btn btn1 btn-primary"
+                      (click)="updatePic()"
                       type="submit"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
                     >
+                    
                       continuar
                     </button>
 
