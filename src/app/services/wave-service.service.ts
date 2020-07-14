@@ -483,8 +483,8 @@ export class WaveServiceService {
     let file = files[0];
     const fd = new FormData();
     fd.append('file', file, file.name);
-    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`,{
-      fd}
+    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`,
+      fd
     );
   }
 
