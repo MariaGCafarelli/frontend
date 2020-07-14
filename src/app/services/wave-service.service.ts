@@ -441,6 +441,14 @@ export class WaveServiceService {
     );
   }
 
+  updateCategory(id: number, name: string, text: string): Observable<any>{
+      return this.http.post(`${this.url}/category/update/${id}`, {
+        name,
+        text  
+      });
+
+    }
+
   updatePicCategory(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
