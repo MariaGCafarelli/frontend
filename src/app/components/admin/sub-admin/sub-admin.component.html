@@ -31,7 +31,7 @@
           }}<mat-icon
             data-toggle="modal"
             data-target="#exampleModal"
-            
+            (click)="catchId(cat.id)"     
           >
             add
           </mat-icon>
@@ -75,15 +75,17 @@
             <mat-card-actions>
               <button
                 type="button"
+                (click)="preUpdate(com)"
                 data-toggle="modal"
                 data-target="#exampleModal"
                 class="btn btn-primary"
+                
               >
                 <mat-icon> create </mat-icon>
               </button>
 
               <div *ngIf="com.isActive; else activo" style="display: inline;">
-                <a  class="btn btn-primary"
+                <a  class="btn btn-primary" (click)="changeStatus(com.id)"
                   ><mat-icon> close </mat-icon></a
                 >
               </div>
@@ -91,12 +93,14 @@
                 ><button
                   type="button"
                   class="btn btn-primary"
+                  (click)="changeStatus(com.id)"
                 >
                   <mat-icon> check </mat-icon>
                 </button>
               </ng-template>
               <button
               type="button"
+              (click)="preUpdate(com)"
               data-toggle="modal"
               data-target="#exampleModal2"
               class="btn btn-primary"
@@ -125,9 +129,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <strong> TITULO</strong>
+          <strong> {{ !this.selected.id ? "Crear" : "Modificar" }}</strong>
         </h5>
         <button
+        (click)="reset()"
           type="button"
           class="close"
           data-dismiss="modal"
@@ -143,10 +148,12 @@
               <div class="card card-signin flex-row my-5">
                 <div class="card-img-left d-none d-md-flex"></div>
                 <div class="card-body" style="width: 100%;">
-                  <form class="form-signin">
+                  <form [formGroup]="subCategoryForm" class="form-signin">
                     <div class="form-label-group">
                       <label for="inputUserame">Título</label>
                       <input
+                      [(ngModel)]="this.selected.name"
+                      formControlName="name"
                         type="text"
                         id="inputUserame"
                         class="form-control"
@@ -155,28 +162,43 @@
                         autofocus
                       />
                     </div>
+                    <div *ngIf="name.invalid && name.dirty">
+                      <div *ngIf="name.errors.required" class="mat-error">
+                        Titulo es Requerido
+                      </div>
+                      <div *ngIf="name.errors.minlength" class="mat-error">
+                        Debe tener al menos 4 caracteres
+                      </div>
+                    </div>
 
                     <div class="form-label-group">
                       <label for="inputEmail">Descripción</label>
                       <input
+                      [(ngModel)]="this.selected.text"
+                      formControlName="text"
                         type="text"
                         class="form-control"
                         placeholder="Descripción de la subcategoria"
                         required
                       />
                     </div>
-
-                    <div class="form-label-group">
-                      <label>Dirección al contenido recomendado</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Link"
-                        required
-                      />
+                    <div *ngIf="text.invalid && text.dirty">
+                      <div
+                        *ngIf="text.errors.required"
+                        class="mat-error"
+                      >
+                        Descripcion es Requerida
+                      </div>
+                      <div
+                        *ngIf="text.errors.minlength"
+                        class="mat-error"
+                      >
+                        Debe tener al menos 4 caracteres
+                      </div>
                     </div>
+                    
 
-                    <div class="form-label-group">
+                    <div class="form-label-group" *ngIf="!this.selected.id">
                       <label>Imagen</label>
                       <ngx-dropzone (change)="onSelect($event)">
                         <ngx-dropzone-label>Drop it</ngx-dropzone-label>
@@ -193,15 +215,17 @@
                     <br />
                     <button
                       class="btn btn1 btn-primary"
-                      type="submit"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
+                      (click)="onSubmit()"
                     >
                       continuar
                     </button>
 
                     <hr class="my-4" />
                     <button
+                    #btnClose
+                      (click)="reset()"
                       class="btn btn1 btn-primary"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"

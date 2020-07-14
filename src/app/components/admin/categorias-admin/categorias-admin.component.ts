@@ -12,7 +12,6 @@ import { Category } from 'src/app/model/category';
 })
 export class CategoriasAdminComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
-  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
   CategoryForm: FormGroup;
   files:File[]=[];
   public selected: Category = {

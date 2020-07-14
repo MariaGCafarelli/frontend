@@ -188,6 +188,7 @@ export class ContenidoRecomendadoComponent implements OnInit {
 
   reset(){
     this.contentForm.reset();
+    this.files=[];
     this.selected = {
       id: null,
       title: null,

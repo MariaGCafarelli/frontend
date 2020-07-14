@@ -469,10 +469,11 @@ export class WaveServiceService {
   CreateSubCategory(
     name: string,
     text: string,
+    category:number
   ): Observable<any> {
     return this.http.post(
       `${this.url}/sub-category/admin/create`,
-      { name, text }
+      { name, text, category }
     );
   }
 
@@ -490,6 +491,13 @@ export class WaveServiceService {
 
   stateSubCategory(id: number): Observable<any> {
     return this.http.patch(`${this.url}/category/change/status/${id}`, []);
+  }
+
+  updateSubcategory(id: number, name: string, text: string): Observable<any>{
+    return this.http.post(`${this.url}/sub-category/update/${id}`, {
+      name,
+      text  
+    });
   }
 
 }
