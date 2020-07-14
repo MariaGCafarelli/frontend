@@ -33,11 +33,11 @@ export class SubAdminComponent implements OnInit {
 
   createFormGroup() {
     return new FormGroup({
-      titulo: new FormControl('', [
+      name: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
       ]),
-      descripcion: new FormControl('', [
+      text: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
       ]),
