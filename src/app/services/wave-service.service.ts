@@ -110,6 +110,10 @@ export class WaveServiceService {
       );
   }
 
+  getAllForumsAdmin(): Observable<any> {
+    return this.http.get(`${this.url}/category/admin/all/subcategories/forums`);
+  }
+
   registerAdmin(
     firstName: string,
     lastName: string,
@@ -276,9 +280,7 @@ export class WaveServiceService {
   }
 
   getSubcategoriesWCategories(): Observable<any> {
-    return this.http.get(
-      `${this.url}/category/admin/all/subcategories`
-    );
+    return this.http.get(`${this.url}/category/admin/all/subcategories`);
   }
 
   saveFavoriteSubCategoria(subcategoryId: any) {

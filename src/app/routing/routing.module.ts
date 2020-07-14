@@ -24,6 +24,7 @@ import { RegistrarAdminComponent } from '../components/admin/registrar-admin/reg
 import { LostPasswordComponent } from '../components/lost-password/lost-password.component';
 import { AdminGuard } from '../guards/admin.guard';
 import { SubAdminComponent } from '../components/admin/sub-admin/sub-admin.component';
+import { ForosAdminComponent } from '../components/admin/foros-admin/foros-admin.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -33,9 +34,17 @@ const routes: Routes = [
   { path: 'favoritas', component: FavoritasComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'picture', component: PictureComponent, canActivate: [AuthGuard] },
-  { path: 'crear-foro', component: CrearForoComponent, canActivate: [AuthGuard] },
-  { path: 'picture-foro/:id', component: PictureForoComponent, canActivate: [AuthGuard] },
-  { path: 'cambiar-contrasena', component:LostPasswordComponent},
+  {
+    path: 'crear-foro',
+    component: CrearForoComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'picture-foro/:id',
+    component: PictureForoComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'cambiar-contrasena', component: LostPasswordComponent },
   {
     path: 'perfil-usuario',
     component: UsuarioComponent,
@@ -58,22 +67,39 @@ const routes: Routes = [
   },
   { path: 'foros', component: ForosComponent, canActivate: [AuthGuard] },
   { path: 'foro/:id', component: ForoComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent
-  , canActivate: [AdminGuard] 
-},
-  { path: 'admin/categorias', component: CategoriasAdminComponent
-  ,  canActivate: [AdminGuard]
-},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  {
+    path: 'admin/categorias',
+    component: CategoriasAdminComponent,
+    canActivate: [AdminGuard],
+  },
 
-  { path: 'admin/contenido-recomendado', component: ContenidoRecomendadoComponent, canActivate: [AdminGuard] },
-  { path: 'admin/registrar-admin', component: RegistrarAdminComponent, canActivate: [AdminGuard] },
+  {
+    path: 'admin/contenido-recomendado',
+    component: ContenidoRecomendadoComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/registrar-admin',
+    component: RegistrarAdminComponent,
+    canActivate: [AdminGuard],
+  },
 
-  { path: 'admin/contenido-recomendado', component: ContenidoRecomendadoComponent
- ,  canActivate: [AdminGuard]
-},
-{ path: 'admin/subcategorias', component: SubAdminComponent
- ,  canActivate: [AdminGuard]
-},
+  {
+    path: 'admin/contenido-recomendado',
+    component: ContenidoRecomendadoComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/subcategorias',
+    component: SubAdminComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/foros',
+    component: ForosAdminComponent,
+    canActivate: [AdminGuard],
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: InicioComponent },
 ];
