@@ -177,7 +177,9 @@ export class ContenidoRecomendadoComponent implements OnInit {
     this.waveService.SavePicContent(this.selected.id, this.files).subscribe
     ((res)=>{
      if(res){
-     console.log(res)
+     console.log(res);
+     this.btnClose.nativeElement.click();
+
   }}
   )}else{
     alert("Debe seleccionar una imagen");
