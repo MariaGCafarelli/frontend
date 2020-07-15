@@ -1,4 +1,12 @@
 <app-navbar></app-navbar>
+<ngx-spinner
+  bdColor="rgba(10,57,158,0.8)"
+  size="large"
+  color="#6be7db"
+  type="ball-scale-multiple"
+  [fullScreen]="true"
+  ><p style="color: white;">Wave...</p>
+</ngx-spinner>
 
 <h4 style="margin-left: 1em; display: inline;">Categorías</h4>
 <mat-icon
@@ -245,7 +253,6 @@
                     <button
                       class="btn btn1 btn-primary"
                       type="submit"
-                      data-dismiss="modal"
                       style="margin-left: 27, 5%;"
                       (click)="updatePic()"
                     >
