@@ -31,6 +31,7 @@ export class SubCategoriaComponent implements OnInit {
   nextPage: boolean = false;
   comment;
   previousUrl: string;
+  forumActive: any[] = [];
 
   createFormGroup() {
     return new FormGroup({
@@ -95,6 +96,11 @@ export class SubCategoriaComponent implements OnInit {
               .subscribe((response) => {
                 console.log('suscribes', response.forums);
                 this.subscribedForums = response.forums;
+                for(let forum of this.subscribedForums){
+                  if(forum.isActive){
+                    this.forumActive.push(forum);
+                  }
+                }
                 this.waveService.getAllForums({}).subscribe((response) => {
                   this.forums = response.forums;
 

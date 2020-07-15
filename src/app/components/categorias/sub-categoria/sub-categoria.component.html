@@ -71,16 +71,16 @@
   </button>
 </div>
 
-<div *ngIf="subscribedForums.length > 0">
+<div *ngIf="forumActive.length > 0">
   <hr />
   <h4>Ya estas suscrito en estos foros</h4>
   <br />
 
   <div></div>
 
-  <div *ngFor="let foro of subscribedForums" class="foros">
+  <div *ngFor="let foro of forumActive" class="foros">
     
-    
+    <div *ngIf="foro.isActive">
       
       <mat-card class="foros1" style="text-align: right; padding-top: 4px !important">
         <mat-card-actions style="padding:0 !important; margin:0 !important">
@@ -117,6 +117,7 @@
         </ng-template></a
         >
       </mat-card>
+      </div>
   </div>
 </div>
 

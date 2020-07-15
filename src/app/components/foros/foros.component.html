@@ -48,50 +48,50 @@
 
   <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
     <div *ngIf="foro.isActive">
-    <mat-card>
-      <div *ngIf="!isFav(foro.id); else notSuscribed">
-        <mat-card-actions>
-          <mat-icon
-            (click)="likeForo(foro.id)"
-            class="agregar"
-            [inline]="true"
-            style="cursor: pointer; color: red;"
-            >favorite_border</mat-icon
-          >
-        </mat-card-actions>
-      </div>
-      <ng-template #notSuscribed>
-        <mat-card-actions>
-          <mat-icon
-            (click)="dislikeForo(foro.id)"
-            class="agregar"
-            [inline]="true"
-            style="cursor: pointer; color: red;"
-            >favorite</mat-icon
-          >
-        </mat-card-actions>
-      </ng-template>
-      <div
-        *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
-        class="ordenar"
-      >
-        <a routerLink="/foro/{{ foro.id }}"
-          ><img mat-card-avatar [src]="foro.image" alt="User Avatar" />
-        </a>
-        <p style="align-self: center;">{{ foro.title }}</p>
-      </div>
-      <ng-template #sinFoto>
-        <a routerLink="/foro/{{ foro.id }}"
-          ><img
-            mat-card-avatar
-            src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-            alt="User Avatar"
-          /> </a
-        >{{ foro.title }}
-      </ng-template>
-    </mat-card>
+      <mat-card>
+        <div *ngIf="!isFav(foro.id); else notSuscribed">
+          <mat-card-actions>
+            <mat-icon
+              (click)="likeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red;"
+              >favorite_border</mat-icon
+            >
+          </mat-card-actions>
+        </div>
+        <ng-template #notSuscribed>
+          <mat-card-actions>
+            <mat-icon
+              (click)="dislikeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red;"
+              >favorite</mat-icon
+            >
+          </mat-card-actions>
+        </ng-template>
+        <div
+          *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
+          class="ordenar"
+        >
+          <a routerLink="/foro/{{ foro.id }}"
+            ><img mat-card-avatar [src]="foro.image" alt="User Avatar" />
+          </a>
+          <p style="align-self: center;">{{ foro.title }}</p>
+        </div>
+        <ng-template #sinFoto>
+          <a routerLink="/foro/{{ foro.id }}"
+            ><img
+              mat-card-avatar
+              src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
+              alt="User Avatar"
+            /> </a
+          >{{ foro.title }}
+        </ng-template>
+      </mat-card>
+    </div>
   </div>
-</div>
   <button
     *ngIf="nextPage"
     (click)="traerMasForos()"
@@ -100,5 +100,4 @@
   >
     Mas Foros
   </button>
-
 </div>
