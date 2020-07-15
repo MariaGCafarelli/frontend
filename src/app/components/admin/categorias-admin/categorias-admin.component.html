@@ -165,8 +165,8 @@
                     <button
                       class="btn btn1 btn-primary"
                       (click)="onSubmit()"
-                      data-dismiss="modal"
                       style="margin-left: 27, 5%;"
+                      [disabled]="CategoryForm.invalid"
                     >
                       continuar
                     </button>

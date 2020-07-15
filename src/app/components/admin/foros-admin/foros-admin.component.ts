@@ -78,7 +78,7 @@ export class ForosAdminComponent implements OnInit {
         alert('Algunos de los datos ingresados son incorrectos')
         }
      }else{
-       this.btnClose.nativeElement.click();
+       this.reset()
        alert('Debe cargar una imagen primero');
      }
     }else {

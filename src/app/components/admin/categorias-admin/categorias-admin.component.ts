@@ -128,7 +128,7 @@ updatePic(){
       }
    }else{
      alert('Debe cargar una imagen primero');
-     this.btnClose.nativeElement.click();
+     this.reset()
    }
   }else {
     if (this.CategoryForm.valid) {
