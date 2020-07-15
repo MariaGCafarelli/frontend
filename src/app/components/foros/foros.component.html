@@ -47,6 +47,7 @@
   </mat-form-field>
 
   <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
+    <div *ngIf="foro.isActive">
     <mat-card>
       <div *ngIf="!isFav(foro.id); else notSuscribed">
         <mat-card-actions>
@@ -90,6 +91,7 @@
       </ng-template>
     </mat-card>
   </div>
+</div>
   <button
     *ngIf="nextPage"
     (click)="traerMasForos()"
@@ -98,4 +100,5 @@
   >
     Mas Foros
   </button>
+
 </div>

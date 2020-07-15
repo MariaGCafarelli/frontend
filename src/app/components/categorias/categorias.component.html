@@ -9,6 +9,7 @@
 
   <div class="carousel">
     <div *ngFor="let cat of categories" class="contenido">
+      <div *ngIf="cat.isActive">
       <mat-card class="example-card container para-sobrevivir">
         <a routerLink="/categoria/{{ cat.id }}">
           <img mat-card-image src="{{ cat.image }}" />
@@ -34,6 +35,7 @@
         >
       </mat-card>
     </div>
+  </div>
   </div>
   <button
     *ngIf="nextPage"

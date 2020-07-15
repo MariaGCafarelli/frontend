@@ -30,6 +30,7 @@ export class SubCategoriaComponent implements OnInit {
   currentPage: number = 1;
   nextPage: boolean = false;
   comment;
+  previousUrl: string;
 
   createFormGroup() {
     return new FormGroup({
@@ -115,6 +116,7 @@ export class SubCategoriaComponent implements OnInit {
               });
           });
       });
+      this.previousUrl = this.waveService.getPreviousUrl();
   }
 
   traerMasForos() {

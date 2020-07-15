@@ -2,7 +2,7 @@
 <div class="fondo">
   <div class="opciones">
     <div *ngIf="Foro.subCategory" style="display: inline;">
-      <a routerLink="/sub-categoria/{{ Foro.subCategory.id }}">
+      <a routerLink="{{ previousUrl }}">
         <mat-icon class="volver" style="font-size: 2em;"
           >keyboard_backspace</mat-icon
         >

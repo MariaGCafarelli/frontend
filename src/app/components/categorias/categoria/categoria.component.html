@@ -2,7 +2,7 @@
 <div class="separador" style="color: transparent;">cargando contenid extra</div>
 
 <div style=" margin-left: 5%;">
-  <a routerLink="/categorias" style="color: grey;">
+  <a routerLink="{{ previousUrl }}" style="color: grey;">
     <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
   </a>
 </div>
@@ -85,8 +85,9 @@
   <div class="row card-list">
     <div
       class="col-md-3 col-6 card-container"
-      *ngFor="let sub of subcategories; index as i"
+      *ngFor="let sub of subActive; index as i"
     >
+    
       <a routerLink="/sub-categoria/{{ sub.id }}">
         <mat-card>
           <img mat-card-image src="{{ sub.image }}" class="mat-card-image" />
@@ -97,6 +98,7 @@
           </mat-card-content>
         </mat-card>
       </a>
+    
     </div>
   </div>
 </div>

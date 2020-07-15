@@ -3,7 +3,7 @@
 <div class="separador"></div>
 
 <div style="padding-top: 5.4em; margin-left: 5%;" *ngIf="subcategory.category">
-  <a routerLink="/categoria/{{ subcategory.category.id }}" style="color: grey;">
+  <a routerLink="{{ previousUrl }}" style="color: grey;">
     <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
   </a>
 </div>
@@ -32,34 +32,28 @@
   </mat-form-field>
 </form>
 
-<div *ngFor="let cont of subcategory.contentSubcategories">
+
   <mat-card class="example-card container head">
     <mat-card-title class="top">{{ subcategory.name }}</mat-card-title>
     <img mat-card-image [src]="subcategory.image" class="encabezado" />
 
     <strong>
       <mat-card-content>
-        <mat-card-title style="justify-content: left;"
-          ><strong
-            >Recomendación Wave:
-            <br />
-            {{ subcategory.contentSubcategories[0].title }}</strong
-          ></mat-card-title
-        >
+        
         <p>
-          {{ subcategory.contentSubcategories[0].text }}
+          {{ subcategory.text }}
         </p>
         <br />
         <p>
           Consigue más en:
-          <a href="{{ subcategory.contentSubcategories[0].link }}"
+          <a href="{{ subcategory.link }}"
             >Contenido extra</a
           >
         </p>
       </mat-card-content>
     </strong>
   </mat-card>
-</div>
+
 
 <div *ngIf="isFav(subcategoryId)">
   <a
@@ -125,6 +119,8 @@
       </mat-card>
   </div>
 </div>
+
+<div *ngIf="favoriteForums && favoriteForums.length > 0">
 <hr />
 <h4>También puedes participar en estos foros</h4>
 <br />
@@ -132,7 +128,7 @@
 <div></div>
 
 <div *ngFor="let foro of favoriteForums" class="foros">
-  <div *ngIf="!isSuscribed(foro.id)">
+  <div *ngIf="!isSuscribed(foro.id) && foro.isActive">
   <mat-card class="foros1" style="text-align: right; padding-top: 4px !important"
       >       
      <mat-card-actions  style="padding:0 !important; margin:0 !important">
@@ -233,4 +229,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

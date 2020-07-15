@@ -28,6 +28,7 @@ export class ForoComponent implements OnInit {
   subcategory: any;
   colorIcon: number;
   postForm: FormGroup;
+  previousUrl: string;
 
   createFormGroup() {
     return new FormGroup({
@@ -99,6 +100,7 @@ export class ForoComponent implements OnInit {
           });
       });
     });
+    this.previousUrl = this.waveService.getPreviousUrl();
   }
 
   refreshPost() {

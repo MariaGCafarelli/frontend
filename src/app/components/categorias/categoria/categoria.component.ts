@@ -20,6 +20,8 @@ export class CategoriaComponent implements OnInit {
   panelOpenState = false;
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  previousUrl: string;
+  subActive: any[] = [];
 
   constructor(
     private waveService: WaveServiceService,
@@ -43,8 +45,15 @@ export class CategoriaComponent implements OnInit {
             console.log(response);
             this.subcategories = response.subCategories;
             console.log(this.subcategories);
+            for(let sub of this.subcategories){
+              if(sub.isActive){
+                this.subActive.push(sub);
+                console.log(this.subActive);
+              }
+            }
           });
       
     });
+    this.previousUrl = this.waveService.getPreviousUrl();
   }
 }
