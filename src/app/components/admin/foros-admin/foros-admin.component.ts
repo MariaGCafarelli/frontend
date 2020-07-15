@@ -23,7 +23,7 @@ export class ForosAdminComponent implements OnInit {
     image: null,
     subcategory: null
   };
-  subcategoryId: any;
+  subcategoryId: number;
   
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
@@ -59,10 +59,10 @@ export class ForosAdminComponent implements OnInit {
       if(this.files.length>0){
         if(this.foroForm.valid){
         this.spinner.show();
-        this.waveService.CreateCategory(this.foroForm.value.title, this.subcategoryId).
+        this.waveService.createForumByAdmin(this.subcategoryId, this.foroForm.value.title ).
         subscribe((res)=>{
           console.log(res);
-          this.waveService.updatePicCategory(res.forum.id, this.files).subscribe((res)=>{
+          this.waveService.updatePicForum(res.forum.id, this.files).subscribe((res)=>{
               console.log(res);
               this.foroForm.reset();
               this.waveService.getAllForumsAdmin().subscribe((response) => {
@@ -78,6 +78,7 @@ export class ForosAdminComponent implements OnInit {
         alert('Algunos de los datos ingresados son incorrectos')
         }
      }else{
+       this.btnClose.nativeElement.click();
        alert('Debe cargar una imagen primero');
      }
     }else {
@@ -130,10 +131,14 @@ export class ForosAdminComponent implements OnInit {
 
 updatePic(){
   if(this.files.length>0){
+    this.spinner.show()
   this.waveService.updatePicForum(this.selected.id, this.files).subscribe
   ((res)=>{
    if(res){
-   console.log(res)
+    this.waveService.getAllForumsAdmin().subscribe((response) => {
+      this.categories = response;
+      this.spinner.hide();
+    });
 }}
 )}else{
   alert("Debe seleccionar una imagen");

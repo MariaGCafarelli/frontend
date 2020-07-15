@@ -4,7 +4,7 @@
   size="large"
   color="#6be7db"
   type="ball-scale-multiple"
-  [fullScreen]="true"
+  [fullScreen]="false"
   ><p style="color: white;">Wave...</p>
 </ngx-spinner>
 <h4 style="margin-top: 3%; margin-left: 3%;">Foros</h4>
@@ -116,7 +116,7 @@
                   </button>
 
                   <div
-                    *ngIf="com.isActive; else activo"
+                    *ngIf="foro.isActive; else activo"
                     style="display: inline;"
                   >
                     <a class="btn btn-primary" (click)="changeStatus(foro.id)"><mat-icon> close </mat-icon></a>
@@ -202,7 +202,7 @@
                       </div>
                     </div>
 
-                    <div class="form-label-group">
+                    <div class="form-label-group" *ngIf="!this.selected.id">
                       <label>Imagen</label>
                       <ngx-dropzone (change)="onSelect($event)">
                         <ngx-dropzone-label>Drop it</ngx-dropzone-label>
@@ -222,7 +222,7 @@
                       type="submit"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
-                      
+                      (click)="onSubmit()"
                     >
                       continuar
                     </button>
@@ -297,6 +297,7 @@
                     <br />
                     <button
                       class="btn btn1 btn-primary"
+                      (click)="updatePic()"
                       type="submit"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
@@ -306,6 +307,8 @@
 
                     <hr class="my-4" />
                     <button
+                    #btnClose
+                    (click)="reset()"
                       class="btn btn1 btn-primary"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
