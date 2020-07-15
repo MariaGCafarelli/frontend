@@ -172,6 +172,7 @@ export class SubAdminComponent implements OnInit {
       console.log(res)
       this.waveService.getSubcategoriesWCategories().subscribe((response) => {
         this.subCategories = response;
+        this.btnClose.nativeElement.click();
         this.spinner.hide();
       });
      

@@ -137,6 +137,7 @@ updatePic(){
    if(res){
     this.waveService.getAllForumsAdmin().subscribe((response) => {
       this.categories = response;
+      this.btnClose.nativeElement.click();
       this.spinner.hide();
     });
 }}
