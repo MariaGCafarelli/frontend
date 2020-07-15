@@ -1,5 +1,12 @@
 <app-navbar></app-navbar>
-
+<ngx-spinner
+  bdColor="rgba(10,57,158,0.8)"
+  size="large"
+  color="#6be7db"
+  type="ball-scale-multiple"
+  [fullScreen]="true"
+  ><p style="color: white;">Wave...</p>
+</ngx-spinner>
 <h4 style="margin-top: 3%; margin-left: 3%;">Foros</h4>
 
 <div
@@ -64,7 +71,7 @@
               "
             >
               {{ com.name }}
-              <mat-icon data-toggle="modal" data-target="#exampleModal">
+              <mat-icon (click)="catchId(com.id)" data-toggle="modal" data-target="#exampleModal">
                 add
               </mat-icon>
             </mat-panel-description>
@@ -100,6 +107,7 @@
                 <mat-card-actions>
                   <button
                     type="button"
+                    (click)="preUpdate(foro)"
                     data-toggle="modal"
                     data-target="#exampleModal"
                     class="btn btn-primary"
@@ -111,14 +119,15 @@
                     *ngIf="com.isActive; else activo"
                     style="display: inline;"
                   >
-                    <a class="btn btn-primary"><mat-icon> close </mat-icon></a>
+                    <a class="btn btn-primary" (click)="changeStatus(foro.id)"><mat-icon> close </mat-icon></a>
                   </div>
                   <ng-template #activo
-                    ><button type="button" class="btn btn-primary">
+                    ><button type="button" (click)="changeStatus(foro.id)" class="btn btn-primary">
                       <mat-icon> check </mat-icon>
                     </button>
                   </ng-template>
                   <button
+                    (click)="preUpdate(foro)"
                     type="button"
                     data-toggle="modal"
                     data-target="#exampleModal2"
@@ -139,6 +148,8 @@
 <!-- Modal Editar o Agregar-->
 <div
   class="modal fade"
+  data-backdrop="static" 
+  data-keyboard="false"
   id="exampleModal"
   tabindex="-1"
   role="dialog"
@@ -149,9 +160,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <strong> EDITAR</strong>
+          <strong> {{ !this.selected.id ? "Crear" : "Editar" }}</strong>
         </h5>
         <button
+          (click)="reset()"
           type="button"
           class="close"
           data-dismiss="modal"
@@ -167,10 +179,12 @@
               <div class="card card-signin flex-row my-5">
                 <div class="card-img-left d-none d-md-flex"></div>
                 <div class="card-body" style="width: 100%;">
-                  <form class="form-signin">
+                  <form [formGroup]="foroForm" class="form-signin">
                     <div class="form-label-group">
                       <label for="inputUserame">Título</label>
                       <input
+                        [(ngModel)]="this.selected.title"
+                        formControlName="title"
                         type="text"
                         id="inputUserame"
                         class="form-control"
@@ -178,6 +192,14 @@
                         required
                         autofocus
                       />
+                    </div>
+                    <div *ngIf="title.invalid && title.dirty">
+                      <div *ngIf="title.errors.required" class="mat-error">
+                        Titulo es Requerido
+                      </div>
+                      <div *ngIf="title.errors.minlength" class="mat-error">
+                        Debe tener al menos 4 caracteres
+                      </div>
                     </div>
 
                     <div class="form-label-group">
@@ -200,12 +222,15 @@
                       type="submit"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
+                      
                     >
                       continuar
                     </button>
 
                     <hr class="my-4" />
                     <button
+                      #btnClose
+                      (click)="reset()"
                       class="btn btn1 btn-primary"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"

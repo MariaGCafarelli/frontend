@@ -134,7 +134,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <strong> {{ !this.selected.id ? "Crear" : "Modificar" }}</strong>
+          <strong> {{ !this.selected.id ? "Crear" : "Editar" }}</strong>
         </h5>
         <button
           (click)="reset()"
@@ -166,7 +166,7 @@
                         id="inputUserame"
                         formControlName="titulo"
                         class="form-control"
-                        placeholder="Títutlo"
+                        placeholder="Título"
                         required
                         autofocus
                       />

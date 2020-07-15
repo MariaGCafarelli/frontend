@@ -501,4 +501,36 @@ export class WaveServiceService {
     });
   }
 
+  //CRUD foros
+
+  statusForo(id: number): Observable<any> {
+    return this.http.patch(`${this.url}/forum/change/status/${id}`, []);
+  } 
+
+  createForumByAdmin(
+    subcategory:number,
+    title: string    
+  ): Observable<any> {
+    return this.http.post(
+      `${this.url}/forum/admin/create`,
+      { subcategory, title }
+    );
+  }
+
+  updatePicForum(id: number, files: File[]): Observable<any> {
+    console.log(files[0]);
+    let file = files[0];
+    const fd = new FormData();
+    fd.append('file', file, file.name);
+    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`,
+      fd
+    );
+  }
+
+  updateForum(id: number, title: string): Observable<any>{
+    return this.http.post(`${this.url}/forum/update/${id}`, {
+      title
+    });
+  }
+
 }
