@@ -118,7 +118,7 @@ export class ContenidoRecomendadoComponent implements OnInit {
           });
       }else{
         alert("Debe cargar una imagen primero");
-        this.btnClose.nativeElement.click();
+        this.reset();
       }
     }
     } else {
