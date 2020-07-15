@@ -118,7 +118,7 @@ export class ContenidoRecomendadoComponent implements OnInit {
           });
       }else{
         alert("Debe cargar una imagen primero");
-        this.reset();
+        this.reset()
       }
     }
     } else {
@@ -177,9 +177,8 @@ export class ContenidoRecomendadoComponent implements OnInit {
     this.waveService.SavePicContent(this.selected.id, this.files).subscribe
     ((res)=>{
      if(res){
-     console.log(res);
-     this.btnClose.nativeElement.click();
-
+       this.btnClose.nativeElement.click();
+     console.log(res)
   }}
   )}else{
     alert("Debe seleccionar una imagen");
