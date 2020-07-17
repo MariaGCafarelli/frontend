@@ -29,6 +29,7 @@ export class SubAdminComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('btnClose') btnClose: ElementRef;
+  @ViewChild('btnClose2') btnClose2: ElementRef;
   
 
   createFormGroup() {
@@ -172,7 +173,7 @@ export class SubAdminComponent implements OnInit {
       console.log(res)
       this.waveService.getSubcategoriesWCategories().subscribe((response) => {
         this.subCategories = response;
-        this.btnClose.nativeElement.click();
+        this.btnClose2.nativeElement.click();
         this.spinner.hide();
       });
      

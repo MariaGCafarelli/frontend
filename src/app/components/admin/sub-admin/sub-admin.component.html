@@ -1,4 +1,12 @@
 <app-navbar></app-navbar>
+<ngx-spinner
+  bdColor="rgba(10,57,158,0.8)"
+  size="large"
+  color="#6be7db"
+  type="ball-scale-multiple"
+  [fullScreen]="true"
+  ><p style="color: white;">Wave...</p>
+</ngx-spinner>
 
 <h4 style="margin-top:3%;margin-left: 3%;">Subcategorías</h4>
 
@@ -226,7 +234,7 @@
 
                     <hr class="my-4" />
                     <button
-                    #btnClose
+                      #btnClose
                       (click)="reset()"
                       class="btn btn1 btn-primary"
                       data-dismiss="modal"
@@ -308,6 +316,8 @@
                     <hr class="my-4" />
                     <button
                       class="btn btn1 btn-primary"
+                      #btnClose2
+                      (click)="reset()"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"
                     >

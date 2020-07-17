@@ -12,6 +12,7 @@ import { Category } from 'src/app/model/category';
 })
 export class CategoriasAdminComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
+  @ViewChild('btnClose2') btnClose2: ElementRef;
   CategoryForm: FormGroup;
   files:File[]=[];
   public selected: Category = {
@@ -93,11 +94,11 @@ updatePic(){
   ((res)=>{
     this.waveService.getAllCategories().subscribe((response) => {
       this.categories = response;
-      console.log('categorias', this.categories);
+      this.btnClose2.nativeElement.click();
     });
 }
 )
-this.btnClose.nativeElement.click();
+this.btnClose2.nativeElement.click();
 }else{
   alert("Debe seleccionar una imagen");
   this.reset();

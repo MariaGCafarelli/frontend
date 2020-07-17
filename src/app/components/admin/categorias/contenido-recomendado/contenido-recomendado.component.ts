@@ -30,6 +30,7 @@ export class ContenidoRecomendadoComponent implements OnInit {
   };
 
   @ViewChild('btnClose') btnClose: ElementRef;
+  @ViewChild('btnClose2') btnClose2: ElementRef;
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   createFormGroup() {
@@ -174,10 +175,12 @@ export class ContenidoRecomendadoComponent implements OnInit {
 
   updatePic(){
     if(this.files.length>0){
+      this.spinner.show();
     this.waveService.SavePicContent(this.selected.id, this.files).subscribe
     ((res)=>{
      if(res){
-       this.btnClose.nativeElement.click();
+       this.btnClose2.nativeElement.click();
+       this.spinner.hide();
      console.log(res)
   }}
   )}else{

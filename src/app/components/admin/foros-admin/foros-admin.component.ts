@@ -48,6 +48,7 @@ export class ForosAdminComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('btnClose') btnClose: ElementRef;
+  @ViewChild('btnClose2') btnClose2: ElementRef;
  
 
   createFormGroup() {
@@ -127,9 +128,8 @@ export class ForosAdminComponent implements OnInit {
           this.waveService.updatePicForum(res.forum.id, this.files).subscribe((res)=>{
               console.log(res);
               this.foroForm.reset();
-              this.waveService.getAllForumsAdmin().subscribe((response) => {
-                this.categories = response;
-                console.log('categorias', this.categories);
+              this.waveService.getAllForums({}).subscribe((response) => {
+                this.forums = response.items;
                 this.spinner.hide();
               });
               
@@ -154,9 +154,8 @@ export class ForosAdminComponent implements OnInit {
           .subscribe((res) => {
             if (res) {
               console.log(res);
-              this.waveService.getAllForumsAdmin().subscribe((response) => {
-                  this.categories = response;
-                  console.log('categorias', this.categories);
+                this.waveService.getAllForums({}).subscribe((response) => {
+                  this.forums = response.items;
                   this.spinner.hide();
                   this.btnClose.nativeElement.click();
                 });
@@ -231,8 +230,8 @@ export class ForosAdminComponent implements OnInit {
     this.spinner.show();
     this.waveService.statusForo(id).subscribe((data) => {
       console.log(data);
-      this.waveService.getAllForumsAdmin().subscribe((response) => {
-        this.categories = response;
+      this.waveService.getAllForums({}).subscribe((response) => {
+        this.forums = response.items;
         this.spinner.hide();
       });
     });
@@ -250,11 +249,12 @@ updatePic(){
   this.waveService.updatePicForum(this.selected.id, this.files).subscribe
   ((res)=>{
    if(res){
-    this.waveService.getAllForumsAdmin().subscribe((response) => {
-      this.categories = response;
-      this.btnClose.nativeElement.click();
+    this.waveService.getAllForums({}).subscribe((response) => {
+      this.forums = response.items;
+      this.btnClose2.nativeElement.click();
       this.spinner.hide();
     });
+    
 }}
 )}else{
   alert("Debe seleccionar una imagen");
