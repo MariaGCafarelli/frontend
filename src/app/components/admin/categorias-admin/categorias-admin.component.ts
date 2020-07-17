@@ -94,10 +94,11 @@ updatePic(){
     this.waveService.getAllCategories().subscribe((response) => {
       this.categories = response;
       console.log('categorias', this.categories);
-      this.btnClose.nativeElement.click();
     });
 }
-)}else{
+)
+this.btnClose.nativeElement.click();
+}else{
   alert("Debe seleccionar una imagen");
   this.reset();
 }
