@@ -48,6 +48,8 @@ export class RegistrarUsuarioComponent implements OnInit {
   public payPalConfig?: IPayPalConfig;
   public total: number = 20;
   public token: string;
+  minDate: Date;
+  maxDate: Date;
 
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   private passwordPattern: any = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/;
@@ -65,6 +67,11 @@ export class RegistrarUsuarioComponent implements OnInit {
     private router: Router,
     private waveService: WaveServiceService
   ) {
+    const currentYear = new Date().getFullYear();
+    const currentDay = new Date().getDate();
+    const currentMonth = new Date().getMonth();
+    this.minDate = new Date(currentYear - 80, currentMonth, currentDay);
+    this.maxDate = new Date(currentYear - 18, currentMonth, currentDay);
     this.registerForm = this.formBuilder.group(
       {
         nombres: new FormControl('', [Validators.required]),

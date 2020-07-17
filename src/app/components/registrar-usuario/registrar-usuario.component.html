@@ -28,7 +28,7 @@
         </mat-error>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="fecha" />
+          <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="fecha" />
           <mat-datepicker-toggle matSuffix [for]="picker" appearance="outline">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>

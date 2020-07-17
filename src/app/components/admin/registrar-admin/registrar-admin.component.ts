@@ -44,11 +44,18 @@ export class RegistrarAdminComponent implements OnInit {
   private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
   registerForm: FormGroup;
   matcher = new MyErrorStateMatcher();
+  minDate: Date;
+  maxDate: Date;
 
   constructor(private spinner: NgxSpinnerService, 
     private formBuilder: FormBuilder,
     private waveService: WaveServiceService,
     router: Router) {
+      const currentYear = new Date().getFullYear();
+      const currentDay = new Date().getDate();
+      const currentMonth = new Date().getMonth();
+      this.minDate = new Date(currentYear - 80, currentMonth, currentDay);
+      this.maxDate = new Date(currentYear - 18, currentMonth, currentDay);
       this.registerForm = this.formBuilder.group(
         {
           nombres: new FormControl('', [
