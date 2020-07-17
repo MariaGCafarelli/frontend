@@ -47,6 +47,12 @@ export class RegistrarAdminComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
+
   constructor(private spinner: NgxSpinnerService, 
     private formBuilder: FormBuilder,
     private waveService: WaveServiceService,
@@ -55,7 +61,7 @@ export class RegistrarAdminComponent implements OnInit {
       const currentDay = new Date().getDate();
       const currentMonth = new Date().getMonth();
       this.minDate = new Date(currentYear - 80, currentMonth, currentDay);
-      this.maxDate = new Date(currentYear - 18, currentMonth, currentDay);
+      this.maxDate = new Date(currentYear, currentMonth, currentDay);
       this.registerForm = this.formBuilder.group(
         {
           nombres: new FormControl('', [

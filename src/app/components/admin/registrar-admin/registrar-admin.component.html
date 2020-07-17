@@ -25,7 +25,7 @@
                 />
               </div>
               <mat-error
-          *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)"
+          *ngIf="nombres.invalid && nombres.errors.required && (nombres.dirty || nombres.touched)"
         >
           Por favor introduzca su nombre
         </mat-error>
@@ -36,7 +36,7 @@
             nombres.errors.pattern
           "
         >
-         Por favor Introduzca solo letras.
+         Por favor Introduzca datos válidos.
         </mat-error>
               <div class="form-label-group">
                 <label for="inputApellido">Apellidos</label>

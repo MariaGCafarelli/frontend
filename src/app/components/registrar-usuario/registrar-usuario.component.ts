@@ -53,6 +53,7 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   private passwordPattern: any = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/;
+  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
 
@@ -71,11 +72,11 @@ export class RegistrarUsuarioComponent implements OnInit {
     const currentDay = new Date().getDate();
     const currentMonth = new Date().getMonth();
     this.minDate = new Date(currentYear - 80, currentMonth, currentDay);
-    this.maxDate = new Date(currentYear - 18, currentMonth, currentDay);
+    this.maxDate = new Date(currentYear, currentMonth, currentDay);
     this.registerForm = this.formBuilder.group(
       {
-        nombres: new FormControl('', [Validators.required]),
-        apellidos: new FormControl('', [Validators.required]),
+        nombres: new FormControl('', [Validators.required, Validators.pattern(this.onlyletters)]),
+        apellidos: new FormControl('', [Validators.required, Validators.pattern(this.onlyletters)]),
         fecha: new FormControl('', [Validators.required]),
         correo: new FormControl('', [
           Validators.required,
