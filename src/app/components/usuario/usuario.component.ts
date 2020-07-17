@@ -99,11 +99,10 @@ export class UsuarioComponent implements OnInit {
         console.log('onClick', data, actions);
       },
     };
-
-    this.user = JSON.parse(this.waveService.getCurrentUser());
-    if (this.waveService.getPic()) {
-      this.user.image = this.waveService.getPic();
-    }
+    this.waveService.getCurrentUser().subscribe((response) => {
+      console.log(response);
+      this.user = response.user;
+    });
     //console.log(this.user);
     this.waveService.getForumsPostsByUser().subscribe((res) => {
       this.forumsPosts = res.forums;

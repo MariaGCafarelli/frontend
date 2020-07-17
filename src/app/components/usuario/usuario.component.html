@@ -1,7 +1,7 @@
 <app-menu></app-menu>
 
 <div class="fondo">
-  <div class="form">
+  <div *ngIf="user" class="form">
     <div *ngIf="user.role == 'premium'; else noPremium">
       <mat-icon style="margin-left: 4.5%; color: yellow; font-size: 2.3em;"
         >star</mat-icon
@@ -41,7 +41,7 @@
             (click)="accordion.openAll()"
             type="button"
             class="btn btn1 btn-primary btn-sm enviar"
-            style="background-color:#fec2a3;"
+            style="background-color: #fec2a3;"
           >
             mostrar todo
           </button>
@@ -50,7 +50,7 @@
             (click)="accordion.closeAll()"
             type="button"
             class="btn btn1 btn-primary btn-sm enviar"
-            style="background-color:#fec2a3;"
+            style="background-color: #fec2a3;"
           >
             ocultar todo
           </button>
@@ -175,160 +175,168 @@
         </div>
       </mat-tab>
       <div *ngIf="forumsCreated">
-      <div *ngIf="forumsCreated.length > 0">
-      <mat-tab label="Foros creados por ti">
-      
-        <div *ngFor="let foro of forumsCreated" class="contenedor">
-          <mat-card>
-            <div
-              *ngIf="
-                foro.image != null && foro.image != undefined;
-                else sinFoto
-              "
-              style="display: flex;"
-            >
-              <a
-                routerLink="/foro/{{ foro.id }}"
-                style="display: flex; color: black;"
-                ><img
-                  mat-card-avatar
-                  [src]="foro.image"
-                  alt="User Avatar"
-                  style="align-self: center;"
-                />
-
-                <p
-                  style="display: flex; align-items: center; margin-bottom: 0;"
+        <div *ngIf="forumsCreated.length > 0">
+          <mat-tab label="Foros creados por ti">
+            <div *ngFor="let foro of forumsCreated" class="contenedor">
+              <mat-card>
+                <div
+                  *ngIf="
+                    foro.image != null && foro.image != undefined;
+                    else sinFoto
+                  "
+                  style="display: flex;"
                 >
-                  {{ foro.title }}
-                </p>
-              </a>
-            </div>
-            <ng-template #sinFoto>
-              <a routerLink="/foro/{{ foro.id }}"
-                ><img
-                  mat-card-avatar
-                  src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-                  alt="User Avatar"
-                /> </a
-              >{{ foro.title }}
-            </ng-template>
-
-            <mat-card-actions>
-              <p
-                style="
-                  display: flex;
-                  align-items: center;
-                  margin-bottom: 5px;
-                  width: 45%;
-                  margin-left: 55%;
-                "
-              >
-                ¡Cambiar imagen!
-                <mat-icon
-                  class="agregar"
-                  style="color: orange; margin-left: 5px; width: 15px;"
-                  [inline]="true"
-                  routerLink="/picture-foro/{{ foro.id }}"
-                  >cloud_download</mat-icon
-                >
-              </p>
-            </mat-card-actions></mat-card
-          >
-        </div>
-      </mat-tab></div></div>
-      <div *ngIf="notSubscribedForumsPosts">
-        <div *ngIf="notSubscribedForumsPosts.length > 0">
-      <mat-tab label="Foros sin suscripción">
-        <div
-          *ngFor="let foro of notSubscribedForumsPosts"
-          style="margin-bottom: 1em; margin-top: 5px;"
-          class="expantion"
-        >
-          <mat-accordion multi>
-            <mat-expansion-panel hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
                   <a
                     routerLink="/foro/{{ foro.id }}"
-                    style="display: flex; width: 100%;"
-                  >
-                    <img
+                    style="display: flex; color: black;"
+                    ><img
                       mat-card-avatar
-                      src="{{ foro.image }}"
-                      class="example-header-image"
+                      [src]="foro.image"
+                      alt="User Avatar"
+                      style="align-self: center;"
                     />
+
+                    <p
+                      style="
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 0;
+                      "
+                    >
+                      {{ foro.title }}
+                    </p>
                   </a>
-                </mat-panel-title>
-                <mat-panel-description
-                  style="display: flex; align-items: center; width: 100%;"
-                  class="ordenar"
-                >
-                  <div style="color: rgb(61, 63, 65);">
-                    <a
-                      routerLink="/foro/{{ foro.id }}"
-                      style="display: flex; width: 100%; color: black;"
-                      >{{ foro.title }}</a
-                    >
-                  </div>
-                  <div>
-                    <mat-icon
-                      [inline]="true"
-                      style="color: #5cbcc4;"
-                      (click)="likeForo(foro.id)"
-                      >thumb_up</mat-icon
-                    >
-                  </div>
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p>This is the primary content of the panel.</p>
-            </mat-expansion-panel>
-            <mat-expansion-panel
-              (opened)="panelOpenState = true"
-              (closed)="panelOpenState = false"
-            >
-              <mat-expansion-panel-header>
-                <mat-panel-title style="color: rgb(61, 63, 65);">
-                  Comentarios
-                </mat-panel-title>
-                <mat-panel-description>
-                  Los comentarios {{ panelOpenState ? "visibles" : "ocultos" }}
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <div>
-                <div
-                  *ngFor="let com of foro.posts"
-                  style="margin-bottom: 10px;"
-                >
-                  <div class="ordenar">
-                    <div
-                      style="width: 75%; word-wrap: break-word;"
-                      class="tamano"
-                    >
-                      <p class="p" style="display: inline;">
-                        <mat-icon [inline]="true" style="color: #5cbcc4;"
-                          >arrow_right</mat-icon
-                        >
-                        {{ com.text }}
-                      </p>
-                    </div>
-                    <div style="display: inline; margin-right: 7px;">
-                      <mat-icon
-                        (click)="onDelete(com.id)"
-                        [inline]="true"
-                        class="like"
-                        style="cursor: pointer;"
-                      >
-                        delete
-                      </mat-icon>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
+                <ng-template #sinFoto>
+                  <a routerLink="/foro/{{ foro.id }}"
+                    ><img
+                      mat-card-avatar
+                      src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
+                      alt="User Avatar"
+                    /> </a
+                  >{{ foro.title }}
+                </ng-template>
+
+                <mat-card-actions>
+                  <p
+                    style="
+                      display: flex;
+                      align-items: center;
+                      margin-bottom: 5px;
+                      width: 45%;
+                      margin-left: 55%;
+                    "
+                  >
+                    ¡Cambiar imagen!
+                    <mat-icon
+                      class="agregar"
+                      style="color: orange; margin-left: 5px; width: 15px;"
+                      [inline]="true"
+                      routerLink="/picture-foro/{{ foro.id }}"
+                      >cloud_download</mat-icon
+                    >
+                  </p>
+                </mat-card-actions></mat-card
+              >
+            </div>
+          </mat-tab>
         </div>
-      </mat-tab></div></div>
+      </div>
+      <div *ngIf="notSubscribedForumsPosts">
+        <div *ngIf="notSubscribedForumsPosts.length > 0">
+          <mat-tab label="Foros sin suscripción">
+            <div
+              *ngFor="let foro of notSubscribedForumsPosts"
+              style="margin-bottom: 1em; margin-top: 5px;"
+              class="expantion"
+            >
+              <mat-accordion multi>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <a
+                        routerLink="/foro/{{ foro.id }}"
+                        style="display: flex; width: 100%;"
+                      >
+                        <img
+                          mat-card-avatar
+                          src="{{ foro.image }}"
+                          class="example-header-image"
+                        />
+                      </a>
+                    </mat-panel-title>
+                    <mat-panel-description
+                      style="display: flex; align-items: center; width: 100%;"
+                      class="ordenar"
+                    >
+                      <div style="color: rgb(61, 63, 65);">
+                        <a
+                          routerLink="/foro/{{ foro.id }}"
+                          style="display: flex; width: 100%; color: black;"
+                          >{{ foro.title }}</a
+                        >
+                      </div>
+                      <div>
+                        <mat-icon
+                          [inline]="true"
+                          style="color: #5cbcc4;"
+                          (click)="likeForo(foro.id)"
+                          >thumb_up</mat-icon
+                        >
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>This is the primary content of the panel.</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false"
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title style="color: rgb(61, 63, 65);">
+                      Comentarios
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Los comentarios
+                      {{ panelOpenState ? "visibles" : "ocultos" }}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div>
+                    <div
+                      *ngFor="let com of foro.posts"
+                      style="margin-bottom: 10px;"
+                    >
+                      <div class="ordenar">
+                        <div
+                          style="width: 75%; word-wrap: break-word;"
+                          class="tamano"
+                        >
+                          <p class="p" style="display: inline;">
+                            <mat-icon [inline]="true" style="color: #5cbcc4;"
+                              >arrow_right</mat-icon
+                            >
+                            {{ com.text }}
+                          </p>
+                        </div>
+                        <div style="display: inline; margin-right: 7px;">
+                          <mat-icon
+                            (click)="onDelete(com.id)"
+                            [inline]="true"
+                            class="like"
+                            style="cursor: pointer;"
+                          >
+                            delete
+                          </mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </mat-tab>
+        </div>
+      </div>
     </mat-tab-group>
   </div>
 </div>
