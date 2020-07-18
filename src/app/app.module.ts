@@ -42,6 +42,8 @@ import { RegistrarAdminComponent } from './components/admin/registrar-admin/regi
 import { LostPasswordComponent } from './components/lost-password/lost-password.component';
 import { SubAdminComponent } from './components/admin/sub-admin/sub-admin.component';
 import { ForosAdminComponent } from './components/admin/foros-admin/foros-admin.component';
+import { ComentariosComponent } from './components/admin/foros-admin/comentarios/comentarios.component';
+import { UsuariosAdminComponent } from './components/admin/usuarios-admin/usuarios-admin.component';
 
 const config: SocketIoConfig = {
   url: 'https://wave-service.herokuapp.com',
@@ -79,6 +81,8 @@ const config: SocketIoConfig = {
     LostPasswordComponent,
     SubAdminComponent,
     ForosAdminComponent,
+    ComentariosComponent,
+    UsuariosAdminComponent,
   ],
   imports: [
     BrowserModule,

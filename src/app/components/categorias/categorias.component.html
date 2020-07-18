@@ -12,13 +12,14 @@
       <div *ngIf="cat.isActive">
       <mat-card class="example-card container para-sobrevivir">
         <a routerLink="/categoria/{{ cat.id }}">
-          <img mat-card-image src="{{ cat.image }}" />
+          <img mat-card-image src="{{ cat.image }}" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
         </a>
         <div class="centered">{{ cat.name }}</div>
         <mat-divider></mat-divider>
         <mat-card-content>
           <mat-chip-list multiple aria-label="Fish selection">
             <div *ngFor="let sub of cat.subCategories">
+              <div *ngIf="sub.isActive">
               <mat-chip
                 style="background-color: #e98167;"
                 selected
@@ -30,6 +31,7 @@
                   >favorite</mat-icon
                 ></div>
               </mat-chip>
+            </div>
             </div>
           </mat-chip-list></mat-card-content
         >

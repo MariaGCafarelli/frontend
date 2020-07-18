@@ -90,7 +90,7 @@
     
       <a routerLink="/sub-categoria/{{ sub.id }}">
         <mat-card>
-          <img mat-card-image src="{{ sub.image }}" class="mat-card-image" />
+          <img mat-card-image src="{{ sub.image }}" class="mat-card-image" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
           <mat-card-content>
             <mat-card-footer 
               ><p style="margin-bottom: 0 !important;">{{ sub.name }}</p></mat-card-footer

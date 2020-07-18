@@ -76,7 +76,7 @@
           class="ordenar"
         >
           <a routerLink="/foro/{{ foro.id }}"
-            ><img mat-card-avatar [src]="foro.image" alt="User Avatar" />
+            ><img mat-card-avatar [src]="foro.image" alt="User Avatar" style="Object-fit:cover; min-height: 100%; object-position:cover;" />
           </a>
           <p style="align-self: center;">{{ foro.title }}</p>
         </div>
@@ -86,6 +86,7 @@
               mat-card-avatar
               src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
               alt="User Avatar"
+              style="Object-fit:cover; min-height: 100%; object-position:cover;"
             /> </a
           >{{ foro.title }}
         </ng-template>
