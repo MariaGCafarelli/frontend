@@ -23,7 +23,7 @@
       </button>
     </ng-template>
     <div class="logo">
-      <img class="img-profile" src="{{ user.image }}" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
+      <img class="img-profile" src="{{ user.image }}" />
     </div>
     <div class="datos">
       <h4>{{ user.firstName }} {{ user.lastName }}</h4>
@@ -34,8 +34,8 @@
       animationDuration="1000ms"
       style="color: black !important;"
     >
-      <mat-tab label="Foros suscritos" style="height:auto; overflow: hidden;">
-        <div class="example-action-buttons" style="text-align: center; height:auto; overflow: hidden;">
+      <mat-tab label="Foros suscritos">
+        <div class="example-action-buttons" style="text-align: center;">
           <button
             mat-button
             (click)="accordion.openAll()"
@@ -60,8 +60,8 @@
           style="margin-bottom: 1em; margin-top: 5px;"
           class="expantion"
         >
-          <mat-accordion multi style="height:auto; overflow: hidden;">
-            <mat-expansion-panel hideToggle style="height:auto; overflow: hidden;">
+          <mat-accordion multi>
+            <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <a
@@ -72,7 +72,6 @@
                       mat-card-avatar
                       src="{{ foro.image }}"
                       class="example-header-image"
-                      style="Object-fit:cover; min-height: 100%; object-position:cover;"
                   /></a>
                 </mat-panel-title>
                 <mat-panel-description
@@ -100,7 +99,6 @@
             <mat-expansion-panel
               (opened)="panelOpenState = true"
               (closed)="panelOpenState = false"
-              style="height:auto; overflow: hidden;"
             >
               <mat-expansion-panel-header>
                 <mat-panel-title style="color: rgb(61, 63, 65);">
@@ -177,90 +175,25 @@
         </div>
       </mat-tab>
       <div *ngIf="forumsCreated">
-      <div *ngIf="forumsCreated.length > 0">
-      <mat-tab label="Foros creados por ti" style="height:auto; overflow: hidden;">
-      
-        <div *ngFor="let foro of forumsCreated" class="contenedor">
-          <mat-card>
-            <div
-              *ngIf="
-                foro.image != null && foro.image != undefined;
-                else sinFoto
-              "
-              style="display: flex;"
-            >
-              <a
-                routerLink="/foro/{{ foro.id }}"
-                style="display: flex; color: black;"
-                ><img
-                  mat-card-avatar
-                  [src]="foro.image"
-                  alt="User Avatar"
-                  style="align-self: center; Object-fit:cover; min-height: 100%; object-position:cover;"
-                />
-
-                <p
-                  style="display: flex; align-items: center; margin-bottom: 0;"
+        <div *ngIf="forumsCreated.length > 0">
+          <mat-tab label="Foros creados por ti">
+            <div *ngFor="let foro of forumsCreated" class="contenedor">
+              <mat-card>
+                <div
+                  *ngIf="
+                    foro.image != null && foro.image != undefined;
+                    else sinFoto
+                  "
+                  style="display: flex;"
                 >
-                  {{ foro.title }}
-                </p>
-              </a>
-            </div>
-            <ng-template #sinFoto>
-              <a routerLink="/foro/{{ foro.id }}"
-                ><img
-                  mat-card-avatar
-                  src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-                  alt="User Avatar"
-                  style="Object-fit:cover; min-height: 100%; object-position:cover;"
-                /> </a
-              >{{ foro.title }}
-            </ng-template>
-
-            <mat-card-actions>
-              <p
-                style="
-                  display: flex;
-                  align-items: center;
-                  margin-bottom: 5px;
-                  width: 45%;
-                  margin-left: 55%;
-                "
-              >
-                ¡Cambiar imagen!
-                <mat-icon
-                  class="agregar"
-                  style="color: orange; margin-left: 5px; width: 15px;"
-                  [inline]="true"
-                  routerLink="/picture-foro/{{ foro.id }}"
-                  >cloud_download</mat-icon
-                >
-              </p>
-            </mat-card-actions></mat-card
-          >
-        </div>
-      </mat-tab></div></div>
-      <div *ngIf="notSubscribedForumsPosts">
-        <div *ngIf="notSubscribedForumsPosts.length > 0">
-      <mat-tab label="Foros sin suscripción" style="height:auto; overflow: hidden;">
-        <div
-          *ngFor="let foro of notSubscribedForumsPosts"
-          style="margin-bottom: 1em; margin-top: 5px;"
-          class="expantion"
-          style="height:auto; overflow: hidden;"
-        >
-          <mat-accordion multi style="height:auto; overflow: hidden;">
-            <mat-expansion-panel hideToggle style="height:auto; overflow: hidden;">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
                   <a
                     routerLink="/foro/{{ foro.id }}"
                     style="display: flex; color: black;"
                     ><img
                       mat-card-avatar
-                      src="{{ foro.image }}"
-                      class="example-header-image"
-                      style="Object-fit:cover; min-height: 100%; object-position:cover;"
+                      [src]="foro.image"
+                      alt="User Avatar"
+                      style="align-self: center;"
                     />
 
                     <p
