@@ -25,6 +25,8 @@ import { LostPasswordComponent } from '../components/lost-password/lost-password
 import { AdminGuard } from '../guards/admin.guard';
 import { SubAdminComponent } from '../components/admin/sub-admin/sub-admin.component';
 import { ForosAdminComponent } from '../components/admin/foros-admin/foros-admin.component';
+import { ComentariosComponent } from '../components/admin/foros-admin/comentarios/comentarios.component';
+import { UsuariosAdminComponent } from '../components/admin/usuarios-admin/usuarios-admin.component';
 
 const routes: Routes = [
   { path: 'inicio', component: InicioComponent },
@@ -100,8 +102,25 @@ const routes: Routes = [
     component: ForosAdminComponent,
     canActivate: [AdminGuard],
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: InicioComponent },
+  {
+    path: 'admin/foro/:id/comentarios',
+    component: ComentariosComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'admin/usuarios',
+    component: UsuariosAdminComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    component: InicioComponent,
+  },
 ];
 
 @NgModule({

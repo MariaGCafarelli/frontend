@@ -53,25 +53,19 @@ margin-left: 2%;">
 <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
   
     <mat-card>
-
-      <div
-        *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
+      <mat-card-header>
+      
+        <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
         
-      >
-        <a routerLink="/foro/{{ foro.id }}" style="display: inline"
-          ><img mat-card-avatar [src]="foro.image" alt="User Avatar" />
-        </a>
-        <mat-card-subtitle style="align-self: center; display: inline; margin-left: 3%;">{{ foro.title }}</mat-card-subtitle>
-      </div>
-      <ng-template #sinFoto>
-        <a routerLink="/foro/{{ foro.id }}"
-          ><img
-            mat-card-avatar
-            src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-            alt="User Avatar"
-          /> </a
-        ><mat-card-title>{{ foro.title }}</mat-card-title>
-      </ng-template>
+        <mat-card-title >{{ foro.title }}  </mat-card-title>
+        <mat-card-subtitle><p style="display: inline;">
+                    
+          <a href="admin/foro/{{foro.id}}/comentarios" style="display: inline;">Comentarios del foro</a>
+        </p></mat-card-subtitle>
+        
+
+      </mat-card-header>
+
       <mat-card-actions>
         <button
           type="button"
