@@ -204,6 +204,9 @@
             <mat-error *ngIf="text.errors.maxlength">
               255 caracteres máximo
             </mat-error>
+            <mat-error *ngIf="text.errors.pattern">
+              No deje el campo vacío
+            </mat-error>
           </div>
         </form>
       </div>
