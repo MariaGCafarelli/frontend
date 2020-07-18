@@ -6,6 +6,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router, NavigationEnd } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, tap, catchError, retry } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
@@ -42,7 +43,11 @@ export class WaveServiceService {
   }
   //
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private cookieService: CookieService
+  ) {
     this.currentUrl = this.router.url;
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -61,7 +66,7 @@ export class WaveServiceService {
   });
 
   //metodo del servicio que hace http request y espera la respuesta de tipo RespI
-  //que es una interfaz hubicada en la carpeta model, en caso de existir la respuesta llama al metodo que guarda el token en localstorage
+  //que es una interfaz hubicada en la carpeta model, en caso de existir la respuesta llama al metodo que guarda el token en un cookie
   loginUser(email: String, password: String): Observable<any> {
     return this.http
       .post<any>(`${this.url}/user/login`, { email, password })
@@ -70,7 +75,7 @@ export class WaveServiceService {
           if (res) {
             console.log(res);
             this.saveToken(res.accessToken);
-            this.saveUser(res.user);
+            this.setCurrentRole(res.user.role);
           } else {
             console.log('no hay respuesta');
           }
@@ -102,12 +107,24 @@ export class WaveServiceService {
           if (res) {
             console.log(res);
             this.saveToken(res.accessToken);
-            this.saveUser(res.userCreated);
+            this.setCurrentRole(res.userCreated.role);
           } else {
             console.log('no hay respuesta');
           }
         })
       );
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.http.get(`${this.url}/user/current`);
+  }
+
+  getCurrentRole(): string {
+    return this.cookieService.get('userRole');
+  }
+
+  setCurrentRole(role): void {
+    this.cookieService.set('userRole', role);
   }
 
   getAllForumsAdmin(): Observable<any> {
@@ -171,47 +188,35 @@ export class WaveServiceService {
   }
 
   private savePick(url: string) {
-    localStorage.setItem('ProfilePick', url);
+    this.cookieService.set('ProfilePick', url);
   }
 
   private saveToken(token: string): void {
-    localStorage.setItem('currentToken', token);
+    this.cookieService.set('currentToken', token);
 
     this.token = token;
   }
 
-  private saveUser(user: any) {
-    localStorage.setItem('currentUser', JSON.stringify(user));
-    this.user = user;
-  }
-
   logOutUser(): void {
-    localStorage.removeItem('currentToken');
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('ProfilePick');
+    this.cookieService.delete('currentToken');
+    this.cookieService.delete('userRole');
+    this.cookieService.delete('ProfilePick');
     this.token = null;
   }
 
   getToken() {
-    this.token = localStorage.getItem('currentToken');
-
+    this.token = this.cookieService.get('currentToken');
     return this.token;
   }
 
   getPic() {
-    this.picture = localStorage.getItem('ProfilePick');
+    this.picture = this.cookieService.get('ProfilePick');
     return this.picture;
   }
 
-  getCurrentUser() {
-    let user;
-    user = localStorage.getItem('currentUser');
-    return user;
-  }
-
   logOut() {
-    localStorage.removeItem('currentToken');
-    localStorage.removeItem('currentUser');
+    this.cookieService.delete('userRole');
+    this.cookieService.delete('currentToken');
   }
 
   getAllCategories(): Observable<any> {
@@ -232,7 +237,6 @@ export class WaveServiceService {
     searchTerm = '',
     currentPage = 1,
   }): Observable<any> {
-    //let token = localStorage.getItem('currentToken');
     return this.http.get(
       `${this.url}/forum/all?page=${currentPage}${
         searchTerm ? `&searchTerm=${searchTerm}` : ''
@@ -352,7 +356,7 @@ export class WaveServiceService {
       tap((res: any) => {
         if (res) {
           console.log(res);
-          this.saveUser(res.user);
+          this.cookieService.set('userRole', res.user.role);
         } else {
           console.log('no hay respuesta');
         }
@@ -393,7 +397,10 @@ export class WaveServiceService {
   }
 
   statusContent(id: number): Observable<any> {
-    return this.http.patch(`${this.url}/content-category/change/status/${id}`, []);
+    return this.http.patch(
+      `${this.url}/content-category/change/status/${id}`,
+      []
+    );
   }
 
   updateContent(
@@ -427,39 +434,31 @@ export class WaveServiceService {
     return this.http.post(`${this.url}/user/generate/passwordURL`, { email });
   }
 
- resetPassword(token, password):Observable<any>{
-  return this.http.post(`${this.url}/user/reset/password?token=${token}`, {password });
-}
-
-  //CRUD category
-  
-  CreateCategory(
-    name: string,
-    text: string,
-  ): Observable<any> {
-    return this.http.post(
-      `${this.url}/category/admin/create`,
-      { name, text }
-    );
+  resetPassword(token, password): Observable<any> {
+    return this.http.post(`${this.url}/user/reset/password?token=${token}`, {
+      password,
+    });
   }
 
-  updateCategory(id: number, name: string, text: string): Observable<any>{
-      return this.http.post(`${this.url}/category/update/${id}`, {
-        name,
-        text  
-      });
+  //CRUD category
 
-    }
+  CreateCategory(name: string, text: string): Observable<any> {
+    return this.http.post(`${this.url}/category/admin/create`, { name, text });
+  }
+
+  updateCategory(id: number, name: string, text: string): Observable<any> {
+    return this.http.post(`${this.url}/category/update/${id}`, {
+      name,
+      text,
+    });
+  }
 
   updatePicCategory(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
     const fd = new FormData();
     fd.append('file', file, file.name);
-    return this.http.post(
-      `${this.url}/category/photo/upload/${id}`,
-      fd
-    );
+    return this.http.post(`${this.url}/category/photo/upload/${id}`, fd);
   }
 
   stateCategory(id: number): Observable<any> {
@@ -467,37 +466,35 @@ export class WaveServiceService {
   }
 
   //CRUD subcategory
-  
+
   CreateSubCategory(
     name: string,
     text: string,
-    category:number
+    category: number
   ): Observable<any> {
-    return this.http.post(
-      `${this.url}/sub-category/admin/create`,
-      { name, text, category }
-    );
+    return this.http.post(`${this.url}/sub-category/admin/create`, {
+      name,
+      text,
+      category,
+    });
   }
-
 
   updatePicSubCategory(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
     const fd = new FormData();
     fd.append('file', file, file.name);
-    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`,
-      fd
-    );
+    return this.http.post(`${this.url}/sub-category/photo/upload/${id}`, fd);
   }
 
   stateSubCategory(id: number): Observable<any> {
     return this.http.patch(`${this.url}/sub-category/change/status/${id}`, []);
   }
 
-  updateSubcategory(id: number, name: string, text: string): Observable<any>{
+  updateSubcategory(id: number, name: string, text: string): Observable<any> {
     return this.http.post(`${this.url}/sub-category/update/${id}`, {
       name,
-      text  
+      text,
     });
   }
 
@@ -505,16 +502,13 @@ export class WaveServiceService {
 
   statusForo(id: number): Observable<any> {
     return this.http.patch(`${this.url}/forum/change/status/${id}`, []);
-  } 
+  }
 
-  createForumByAdmin(
-    subcategory:number,
-    title: string    
-  ): Observable<any> {
-    return this.http.post(
-      `${this.url}/forum/admin/create`,
-      { subcategory, title }
-    );
+  createForumByAdmin(subcategory: number, title: string): Observable<any> {
+    return this.http.post(`${this.url}/forum/admin/create`, {
+      subcategory,
+      title,
+    });
   }
 
   updatePicForum(id: number, files: File[]): Observable<any> {
@@ -522,15 +516,12 @@ export class WaveServiceService {
     let file = files[0];
     const fd = new FormData();
     fd.append('file', file, file.name);
-    return this.http.post(`${this.url}/forum/photo/upload/${id}`,
-      fd
-    );
+    return this.http.post(`${this.url}/forum/photo/upload/${id}`, fd);
   }
 
-  updateForum(id: number, title: string): Observable<any>{
+  updateForum(id: number, title: string): Observable<any> {
     return this.http.post(`${this.url}/forum/update/${id}`, {
-      title
+      title,
     });
   }
-
 }
