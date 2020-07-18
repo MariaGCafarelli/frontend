@@ -3,6 +3,7 @@ import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Postservice } from 'src/app/services/post.socket.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-foro',
@@ -29,17 +30,19 @@ export class ForoComponent implements OnInit {
   colorIcon: number;
   postForm: FormGroup;
   previousUrl: string;
-
+  nospace = /^$|\s+/
+  readonly  VAPID_PUBLIC_KEY  = "BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as";
   createFormGroup() {
     return new FormGroup({
       text: new FormControl('', [
         Validators.required,
         Validators.maxLength(255),
+        Validators.pattern(this.nospace)
       ]),
     });
   }
 
-  constructor(
+  constructor(private swPush: SwPush,
     private waveService: WaveServiceService,
     private postService: Postservice,
     private route: ActivatedRoute,
@@ -165,9 +168,17 @@ export class ForoComponent implements OnInit {
 
   likeForo(id: number) {
     this.agregarFavorito(this.Foro.subCategory.id);
+    
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.suscrito = true;
+        this. swPush . requestSubscription ( {
+          serverPublicKey : this . VAPID_PUBLIC_KEY
+      } )
+      . then ( sub  => console.log(sub)
+        // this . waveService . addPushSubscriber ( sub ) . subscribe ( ) 
+         )
+      //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
         // console.log(res);
       }
     });
