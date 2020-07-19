@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   showNavigationArrows = true;
   showNavigationIndicators = false;
+  categoriesFav: any[] = [];
 
   constructor(
     private waveService: WaveServiceService,
@@ -27,6 +28,11 @@ export class HomeComponent implements OnInit {
       console.log(response)
       this.favoriteCategories = response.categories;
       console.log('favorite', this.favoriteCategories);
+      for(let entry of this.favoriteCategories){
+        if(entry.isActive){
+          this.categoriesFav.push(entry);
+        }
+      }
     });
   }
 
