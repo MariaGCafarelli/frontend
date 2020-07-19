@@ -143,6 +143,7 @@ export class ForoComponent implements OnInit {
   }
 
   postCom() {
+    if(this.postForm.value.text.trim()!=''){
     this.postService.sendPost({
       text: this.postForm.value.text,
       foroId: this.foroId,
@@ -150,6 +151,9 @@ export class ForoComponent implements OnInit {
     });
     this.postForm.reset();
     this.btnClose.nativeElement.click();
+  }else{
+    alert("Por favor ingrese un comentario")
+  }
   }
 
   putDislikePost(id: number) {
