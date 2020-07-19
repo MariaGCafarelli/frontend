@@ -23,7 +23,7 @@
       </button>
     </ng-template>
     <div class="logo">
-      <img class="img-profile" src="{{ user.image }}" />
+      <img class="img-profile" src="{{ user.image }}" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
     </div>
     <div class="datos">
       <h4>{{ user.firstName }} {{ user.lastName }}</h4>
@@ -72,6 +72,7 @@
                       mat-card-avatar
                       src="{{ foro.image }}"
                       class="example-header-image"
+                      style="Object-fit:cover; min-height: 100%; object-position:cover;"
                   /></a>
                 </mat-panel-title>
                 <mat-panel-description
@@ -193,7 +194,7 @@
                       mat-card-avatar
                       [src]="foro.image"
                       alt="User Avatar"
-                      style="align-self: center;"
+                      style="align-self: center; Object-fit:cover; min-height: 100%; object-position:cover;"
                     />
 
                     <p
@@ -213,6 +214,7 @@
                       mat-card-avatar
                       src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
                       alt="User Avatar"
+                      style="Object-fit:cover; min-height: 100%; object-position:cover;"
                     /> </a
                   >{{ foro.title }}
                 </ng-template>
@@ -262,6 +264,7 @@
                           mat-card-avatar
                           src="{{ foro.image }}"
                           class="example-header-image"
+                          style="Object-fit:cover; min-height: 100%; object-position:cover;"
                         />
                       </a>
                     </mat-panel-title>
