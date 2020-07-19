@@ -11,6 +11,7 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, tap, catchError, retry } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { RespI } from '../model/resp-i';
+import { Location } from '@angular/common'
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,8 @@ export class WaveServiceService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private loc: Location
   ) {
     this.currentUrl = this.router.url;
     router.events.subscribe((event) => {
@@ -58,7 +60,7 @@ export class WaveServiceService {
   }
 
   public getPreviousUrl() {
-    return this.previousUrl;
+    this.loc.back();
   }
 
   headers: HttpHeaders = new HttpHeaders({

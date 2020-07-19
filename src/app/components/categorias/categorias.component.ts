@@ -35,7 +35,10 @@ export class CategoriasComponent implements OnInit {
 
     });
 
-    this.previousUrl = this.waveService.getPreviousUrl();
+    
+  }
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   traerMasCategorias() {

@@ -3,9 +3,9 @@
 <div class="separador"></div>
 
 <div style="padding-top: 5.4em; margin-left: 5%;" *ngIf="subcategory.category">
-  <a routerLink="{{ previousUrl }}" style="color: grey;">
+  <span (click)="getBack()" style="color: grey;">
     <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
-  </a>
+  </span>
 </div>
 
 <form class="example-form">

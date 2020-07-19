@@ -32,6 +32,7 @@ export class ForoComponent implements OnInit {
   previousUrl: string;
   nospace = /^$|\s+/
   readonly  VAPID_PUBLIC_KEY  = "BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as";
+  selectedP: string;
   createFormGroup() {
     return new FormGroup({
       text: new FormControl('', [
@@ -40,6 +41,14 @@ export class ForoComponent implements OnInit {
         Validators.pattern(this.nospace)
       ]),
     });
+  }
+
+  capturePic(pic: string){
+    this.selectedP = pic;
+  }
+
+  resetP(){
+    this.selectedP='';
   }
 
   constructor(private swPush: SwPush,
@@ -106,8 +115,11 @@ export class ForoComponent implements OnInit {
             });
         });
       });
-      this.previousUrl = this.waveService.getPreviousUrl();
     });
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   refreshPost() {

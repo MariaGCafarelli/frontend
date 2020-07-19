@@ -74,11 +74,13 @@ export class ForosComponent implements OnInit {
       });
     });
 
-    this.previousUrl = this.waveService.getPreviousUrl();
-
     this.waveService.getAllCategories().subscribe((response) => {
       this.categories = response;
     });
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   onChangeCategory(target) {

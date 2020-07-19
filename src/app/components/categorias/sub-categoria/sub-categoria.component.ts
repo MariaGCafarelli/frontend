@@ -122,7 +122,11 @@ export class SubCategoriaComponent implements OnInit {
               });
           });
       });
-      this.previousUrl = this.waveService.getPreviousUrl();
+     
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   traerMasForos() {
