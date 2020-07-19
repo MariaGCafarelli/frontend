@@ -164,8 +164,13 @@ export class SubCategoriaComponent implements OnInit {
               .subscribe((response) => {
                 console.log('suscribes', response.forums);
                 this.subscribedForums = response.forums;
+                for(let forum of this.subscribedForums){
+                  if(forum.isActive){
+                    this.forumActive.push(forum);
+                  }
+                }
         });
-        alert('¡Ahora estás suscrito en el foro!');
+        
       }
     });
   }
@@ -180,7 +185,7 @@ export class SubCategoriaComponent implements OnInit {
                 console.log('suscribes', response.forums);
                 this.subscribedForums = response.forums;
         });
-        alert('¡Ya no estás suscrito en el foro!');
+        
       }
     });
   }
@@ -195,7 +200,7 @@ export class SubCategoriaComponent implements OnInit {
       console.log('hola', this.CatWFavoriteSubcat);
       this.isFav(this.subcategoryId);
     });
-    alert('¡Ahora estás suscrito en la subcategoría!');
+    
   }
 
   isFav(id: number) {
