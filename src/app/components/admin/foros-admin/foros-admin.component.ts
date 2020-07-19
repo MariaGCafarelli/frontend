@@ -110,10 +110,6 @@ export class ForosAdminComponent implements OnInit {
         }
       });
     });
-
-    this.waveService.getAllCategories().subscribe((response) => {
-      this.categories = response;
-    });
   }
 
   onSubmit(){
@@ -237,10 +233,13 @@ export class ForosAdminComponent implements OnInit {
     });
   }
 
+  isActive(id: number){
+ 
+  }
+
   preUpdate(content: any){
     this.selected = Object.assign({},content);
-    
-    
+       
 }
 
 updatePic(){

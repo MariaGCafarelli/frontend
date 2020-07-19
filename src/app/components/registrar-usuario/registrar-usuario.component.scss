@@ -37,36 +37,6 @@ main {
   }
 }
 
-.espacio {
-  height: 0.5rem;
-}
-
-.logo {
-  position: relative;
-  height: auto;
-  display: flex;
-  width: auto;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-  .img-profile {
-    width: 40vw;
-    height: 40vw;
-    max-width: 20rem;
-    max-height: 20rem;
-    opacity: 0.95;
-    object-fit: cover;
-    object-position: center center;
-    border-radius: 50%;
-    &:hover {
-      opacity: 1;
-    }
-  }
-  z-index: 2;
-}
-
 input {
   align-content: center;
   margin-left: auto;
@@ -100,13 +70,6 @@ mat-label {
   letter-spacing: 0.5px;
 }
 
-.imagen {
-  padding-top: 0.5rem;
-  padding-bottom: 0.6rem;
-  max-width: 60.5%;
-  width: 30rem;
-}
-
 .btn {
   max-width: 100%;
   width: 30rem;
@@ -133,10 +96,6 @@ button {
   width: 30rem;
 }
 
-.top {
-  padding-top: 1rem;
-}
-
 .cuenta {
   max-width: 98%;
   width: 30rem;
@@ -150,26 +109,9 @@ button {
   padding-top: 0.5rem;
 }
 
-.categorias {
-  padding-top: 0.5rem;
-}
-
 .select {
   align-content: center;
   text-align: center;
-}
-
-.row {
-  width: 70%;
-  margin: 0;
-  align-content: center;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.cat {
-  margin-top: 1rem;
 }
 
 .datos {

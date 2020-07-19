@@ -211,7 +211,6 @@ export class ForoComponent implements OnInit {
             this.currentPage !== parseInt(response.meta.totalPages);
           console.log('posts', this.posts);
         });
-        alert('¡Se eliminará el comentario!');
       }
     });
   }

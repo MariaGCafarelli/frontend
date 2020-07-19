@@ -28,21 +28,26 @@
   <mat-form-field appearance="outline">
     <mat-label>Category</mat-label>
     <mat-select (selectionChange)="onChangeCategory($event)">
-      <mat-option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </mat-option>
+      <div *ngFor="let category of categories">
+        <div *ngIf="category.isActive">
+          <mat-option [value]="category.id">
+            {{ category.name }}
+          </mat-option>
+        </div>
+      </div>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="outline" style="margin-bottom: 4em;">
     <mat-label>Subcategory</mat-label>
     <mat-select (selectionChange)="onChangeSubcategory($event)">
-      <mat-option
-        *ngFor="let subcategory of subcategories"
-        [value]="subcategory.id"
-      >
-        {{ subcategory.name }}
-      </mat-option>
+      <div *ngFor="let subcategory of subcategories">
+        <div *ngIf="subcategory.isActive">
+          <mat-option [value]="subcategory.id">
+            {{ subcategory.name }}
+          </mat-option>
+        </div>
+      </div>
     </mat-select>
   </mat-form-field>
 
@@ -76,7 +81,16 @@
           class="ordenar"
         >
           <a routerLink="/foro/{{ foro.id }}"
-            ><img mat-card-avatar [src]="foro.image" alt="User Avatar" style="Object-fit:cover; min-height: 100%; object-position:cover;" />
+            ><img
+              mat-card-avatar
+              [src]="foro.image"
+              alt="User Avatar"
+              style="
+                object-fit: cover;
+                min-height: 100%;
+                object-position: cover;
+              "
+            />
           </a>
           <p style="align-self: center;">{{ foro.title }}</p>
         </div>
@@ -86,7 +100,11 @@
               mat-card-avatar
               src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
               alt="User Avatar"
-              style="Object-fit:cover; min-height: 100%; object-position:cover;"
+              style="
+                object-fit: cover;
+                min-height: 100%;
+                object-position: cover;
+              "
             /> </a
           >{{ foro.title }}
         </ng-template>
