@@ -108,7 +108,7 @@
                   Comentarios
                 </mat-panel-title>
                 <mat-panel-description style="height: auto; overflow: hidden;">
-                  Los comentarios {{ panelOpenState ? "visibles" : "ocultos" }}
+                  Comentarios
                 </mat-panel-description>
               </mat-expansion-panel-header>
 
@@ -253,9 +253,9 @@
               *ngFor="let foro of notSubscribedForumsPosts"
               style="margin-bottom: 1em; margin-top: 5px;"
               class="expantion"
-              style="height: auto; overflow: hidden;"
+              style="height: auto; overflow: hidden; margin-bottom: 1em !important"
             >
-              <mat-accordion multi style="height: auto; overflow: hidden;">
+              <mat-accordion multi style="height: auto; overflow: hidden; margin-bottom: 1em !important;">
                 <mat-expansion-panel hideToggle style="height: auto; overflow: hidden;">
                   <mat-expansion-panel-header style="height: auto; overflow: hidden;">
                     <mat-panel-title>
@@ -304,8 +304,7 @@
                       Comentarios
                     </mat-panel-title>
                     <mat-panel-description>
-                      Los comentarios
-                      {{ panelOpenState ? "visibles" : "ocultos" }}
+                      Comentarios
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <div>
