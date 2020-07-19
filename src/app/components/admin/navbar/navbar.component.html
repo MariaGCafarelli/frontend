@@ -1,3 +1,4 @@
+<div *ngIf="user">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="/admin">Wave</a>
   <button
@@ -40,11 +41,13 @@
       <li class="nav-item">
         <a class="nav-link" href="/admin/usuarios">Usuarios</a>
       </li>
+      <div *ngIf="user.role == 'superadmin'">
       <li class="nav-item">
         <a class="nav-link" href="/admin/registrar-admin"
           >Registrar Administrador</a
         >
       </li>
+    </div>
       <li class="nav-item">
         <a class="nav-link" (click)="logOut()" routerLink="/iniciar-sesion"
           >Cerrar sesión</a
@@ -53,3 +56,4 @@
     </ul>
   </div>
 </nav>
+</div>

@@ -32,10 +32,10 @@
     <mat-tab-group
       mat-stretch-tabs
       animationDuration="1000ms"
-      style="color: black !important;"
+      style="color: black !important; height: auto; overflow: hidden;"
     >
-      <mat-tab label="Foros suscritos">
-        <div class="example-action-buttons" style="text-align: center;">
+      <mat-tab label="Foros suscritos" style="height: auto; overflow: hidden;">
+        <div class="example-action-buttons" style="text-align: center;  height: auto; overflow: hidden;">
           <button
             mat-button
             (click)="accordion.openAll()"
@@ -57,12 +57,13 @@
         </div>
         <div
           *ngFor="let foro of forumsPosts"
-          style="margin-bottom: 1em; margin-top: 5px;"
+          style="margin-bottom: 1em; margin-top: 5px; height: auto; overflow: hidden;"
           class="expantion"
+
         >
-          <mat-accordion multi>
-            <mat-expansion-panel hideToggle>
-              <mat-expansion-panel-header>
+          <mat-accordion multi style="height: auto; overflow: hidden;">
+            <mat-expansion-panel hideToggle style="height: auto; overflow: hidden;">
+              <mat-expansion-panel-header style="height: auto; overflow: hidden;">
                 <mat-panel-title>
                   <a
                     routerLink="/foro/{{ foro.id }}"
@@ -76,7 +77,7 @@
                   /></a>
                 </mat-panel-title>
                 <mat-panel-description
-                  style="display: flex; align-items: center; width: 100%;"
+                  style="display: flex; align-items: center; width: 100%; height: auto; overflow: hidden;"
                   class="ordenar"
                 >
                   <div style="color: rgb(61, 63, 65);">
@@ -100,12 +101,13 @@
             <mat-expansion-panel
               (opened)="panelOpenState = true"
               (closed)="panelOpenState = false"
+              style="height: auto; overflow: hidden;"
             >
               <mat-expansion-panel-header>
-                <mat-panel-title style="color: rgb(61, 63, 65);">
+                <mat-panel-title style="color: rgb(61, 63, 65); height: auto; overflow: hidden;">
                   Comentarios
                 </mat-panel-title>
-                <mat-panel-description>
+                <mat-panel-description style="height: auto; overflow: hidden;">
                   Los comentarios {{ panelOpenState ? "visibles" : "ocultos" }}
                 </mat-panel-description>
               </mat-expansion-panel-header>
@@ -175,11 +177,11 @@
           </mat-accordion>
         </div>
       </mat-tab>
-      <div *ngIf="forumsCreated">
+      <div *ngIf="forumsCreated" style="height: auto; overflow: hidden;">
         <div *ngIf="forumsCreated.length > 0">
-          <mat-tab label="Foros creados por ti">
+          <mat-tab label="Foros creados por ti" style="height: auto; overflow: hidden;">
             <div *ngFor="let foro of forumsCreated" class="contenedor">
-              <mat-card>
+              <mat-card style="height: auto; overflow: hidden;">
                 <div
                   *ngIf="
                     foro.image != null && foro.image != undefined;
@@ -244,17 +246,18 @@
           </mat-tab>
         </div>
       </div>
-      <div *ngIf="notSubscribedForumsPosts">
-        <div *ngIf="notSubscribedForumsPosts.length > 0">
-          <mat-tab label="Foros sin suscripción">
+      <div *ngIf="notSubscribedForumsPosts" style="height: auto; overflow: hidden;">
+        <div *ngIf="notSubscribedForumsPosts.length > 0" style="height: auto; overflow: hidden;">
+          <mat-tab label="Foros sin suscripción" style="height: auto; overflow: hidden;">
             <div
               *ngFor="let foro of notSubscribedForumsPosts"
               style="margin-bottom: 1em; margin-top: 5px;"
               class="expantion"
+              style="height: auto; overflow: hidden;"
             >
-              <mat-accordion multi>
-                <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header>
+              <mat-accordion multi style="height: auto; overflow: hidden;">
+                <mat-expansion-panel hideToggle style="height: auto; overflow: hidden;">
+                  <mat-expansion-panel-header style="height: auto; overflow: hidden;">
                     <mat-panel-title>
                       <a
                         routerLink="/foro/{{ foro.id }}"
@@ -269,7 +272,7 @@
                       </a>
                     </mat-panel-title>
                     <mat-panel-description
-                      style="display: flex; align-items: center; width: 100%;"
+                      style="display: flex; align-items: center; width: 100%; height: auto; overflow: hidden;"
                       class="ordenar"
                     >
                       <div style="color: rgb(61, 63, 65);">
@@ -294,8 +297,9 @@
                 <mat-expansion-panel
                   (opened)="panelOpenState = true"
                   (closed)="panelOpenState = false"
+                  style="height: auto; overflow: hidden;"
                 >
-                  <mat-expansion-panel-header>
+                  <mat-expansion-panel-header style="height: auto; overflow: hidden;">
                     <mat-panel-title style="color: rgb(61, 63, 65);">
                       Comentarios
                     </mat-panel-title>
@@ -307,7 +311,7 @@
                   <div>
                     <div
                       *ngFor="let com of foro.posts"
-                      style="margin-bottom: 10px;"
+                      style="margin-bottom: 10px; height: auto; overflow: hidden;"
                     >
                       <div class="ordenar">
                         <div
