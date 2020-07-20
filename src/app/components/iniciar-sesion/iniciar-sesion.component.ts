@@ -66,7 +66,7 @@ export class IniciarSesionComponent implements OnInit {
         if((data.user.role=='normal'||data.user.role=='premium')){
         this.router.navigate(['/home']);
         this.spinner.hide();
-        }if(data.user.role=='admin'){
+        }if(data.user.role=='admin' ||data.user.role=='superadmin' ){
           this.router.navigate(['/admin']);
           this.spinner.hide();
         }
