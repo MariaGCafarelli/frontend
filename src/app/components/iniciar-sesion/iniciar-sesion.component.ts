@@ -63,10 +63,10 @@ export class IniciarSesionComponent implements OnInit {
 
       .subscribe(data=>{ 
         console.log(data);
-        if((data.user.role=='normal'||data.user.role=='premium')){
+        if((data.user.role=='normal'|| data.user.role=='premium')){
         this.router.navigate(['/home']);
         this.spinner.hide();
-        }if(data.user.role=='admin' ||data.user.role=='superadmin' ){
+        }if(data.user.role=='admin' || data.user.role=='superadmin'){
           this.router.navigate(['/admin']);
           this.spinner.hide();
         }

@@ -69,9 +69,6 @@ export class ForosAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.waveService.getAllForumsAdmin().subscribe((response) => {
-      this.categories = response;
-    });
 
     this.searchTextModelChangeSubscription = this.searchTextModelChanged
       .pipe(debounceTime(350), distinctUntilChanged())
@@ -86,6 +83,7 @@ export class ForosAdminComponent implements OnInit {
           .subscribe(
             (response) => {
               this.forums = response.items;
+              console.log("foros",this.forums)
               this.currentPage = parseInt(response.meta.currentPage);
               this.nextPage =
                 this.currentPage !== parseInt(response.meta.totalPages);
@@ -96,18 +94,13 @@ export class ForosAdminComponent implements OnInit {
     // Carga todos los Foros
     this.waveService.getAllForums({}).subscribe((response) => {
       this.forums = response.items;
+      console.log("foros",this.forums)
       this.currentPage = parseInt(response.meta.currentPage);
       this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
       this.waveService.getForumsPostsByUser().subscribe((res) => {
         this.myforums = res.forums;
         console.log(this.myforums);
-        let vart;
-        for (let entry of this.forums) {
-          vart = this.myforums.find((ob) => ob.id == entry.id);
-          if (vart == null) {
-            this.notMyforums.push(entry);
-          }
-        }
+        
       });
     });
   }

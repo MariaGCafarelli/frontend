@@ -62,6 +62,7 @@
 </mat-form-field>
 
 <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
+  <div *ngIf="foro.subCategory.isActive">
   <mat-card>
     <mat-card-header>
       <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
@@ -114,6 +115,7 @@
       </button>
     </mat-card-actions>
   </mat-card>
+</div>
 </div>
 <button
   *ngIf="nextPage"
