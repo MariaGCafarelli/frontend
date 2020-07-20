@@ -13,6 +13,7 @@
   style="margin-left: auto; margin-right: auto; margin-top: 2em;"
   class="acordion"
 >
+<div *ngIf="cat.isActive">
   <mat-accordion>
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header style="height: auto !important;">
@@ -117,6 +118,7 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+</div>
 </div>
 
 <!-- Modal Editar o Agregar-->

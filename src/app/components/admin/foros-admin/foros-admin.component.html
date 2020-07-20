@@ -7,13 +7,16 @@
   [fullScreen]="true"
   ><p style="color: white;">Wave...</p>
 </ngx-spinner>
-<h4 style=" margin-left: 5%; display: inline">Foros</h4>              <mat-icon data-toggle="modal" data-target="#exampleModal" style="margin-top: 3%;    margin-bottom: 3%;
-margin-left: 2%;">
+<h4 style="margin-left: 3%; display: inline;">Foros</h4>
+<mat-icon
+  data-toggle="modal"
+  data-target="#exampleModal"
+  style="margin-top: 3%; margin-bottom: 2em; margin-left: 2%;"
+>
   add
 </mat-icon>
 
 <div class="parent">
-
   <mat-form-field appearance="outline">
     <mat-label>Encuentra el foro que buscas</mat-label>
     <input
@@ -32,74 +35,85 @@ margin-left: 2%;">
 <mat-form-field appearance="outline">
   <mat-label>Category</mat-label>
   <mat-select (selectionChange)="onChangeCategory($event)">
-    <mat-option *ngFor="let category of categories" [value]="category.id">
+    <div *ngFor="let category of categories">
+      <div *ngIf="category.isActive">
+    <mat-option [value]="category.id">
       {{ category.name }}
     </mat-option>
+  </div>
+  </div>
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="outline" style="margin-bottom: 4em;">
+<mat-form-field appearance="outline" style="margin-bottom: 2em;">
   <mat-label>Subcategory</mat-label>
   <mat-select (selectionChange)="onChangeSubcategory($event)">
+    <div *ngFor="let subcategory of subcategories">
+      <div *ngIf="subcategory.isActive">
     <mat-option
-      *ngFor="let subcategory of subcategories"
+      
       [value]="subcategory.id"
     >
       {{ subcategory.name }}
     </mat-option>
+  </div>
+</div>
   </mat-select>
 </mat-form-field>
 
 <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
-  
-    <mat-card>
-      <mat-card-header>
-      
-        <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
-        
-        <mat-card-title >{{ foro.title }}  </mat-card-title>
-        <mat-card-subtitle><p style="display: inline;">
-                    
-          <a href="admin/foro/{{foro.id}}/comentarios" style="display: inline;">Comentarios del foro</a>
-        </p></mat-card-subtitle>
-        
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
 
-      </mat-card-header>
+      <mat-card-title>{{ foro.title }} </mat-card-title>
+      <mat-card-subtitle
+        ><p style="display: inline;">
+          <a
+            href="admin/foro/{{ foro.id }}/comentarios"
+            style="display: inline;"
+            >Comentarios del foro</a
+          >
+        </p></mat-card-subtitle
+      >
+    </mat-card-header>
 
-      <mat-card-actions>
-        <button
+    <mat-card-actions>
+      <button
+        type="button"
+        (click)="preUpdate(foro)"
+        data-toggle="modal"
+        data-target="#exampleModal"
+        class="btn btn-primary"
+      >
+        <mat-icon> create </mat-icon>
+      </button>
+
+      <div *ngIf="foro.isActive; else activo" style="display: inline;">
+        <a class="btn btn-primary" (click)="changeStatus(foro.id)"
+          ><mat-icon> close </mat-icon></a
+        >
+      </div>
+      <ng-template #activo
+        ><button
           type="button"
-          (click)="preUpdate(foro)"
-          data-toggle="modal"
-          data-target="#exampleModal"
+          (click)="changeStatus(foro.id)"
           class="btn btn-primary"
         >
-          <mat-icon> create </mat-icon>
+          <mat-icon> check </mat-icon>
         </button>
-
-        <div
-          *ngIf="foro.isActive; else activo"
-          style="display: inline;"
-        >
-          <a class="btn btn-primary" (click)="changeStatus(foro.id)"><mat-icon> close </mat-icon></a>
-        </div>
-        <ng-template #activo
-          ><button type="button" (click)="changeStatus(foro.id)" class="btn btn-primary">
-            <mat-icon> check </mat-icon>
-          </button>
-        </ng-template>
-        <button
-          (click)="preUpdate(foro)"
-          type="button"
-          data-toggle="modal"
-          data-target="#exampleModal2"
-          class="btn btn-primary"
-        >
-          <mat-icon> cloud_download </mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  
+      </ng-template>
+      <button
+        (click)="preUpdate(foro)"
+        type="button"
+        data-toggle="modal"
+        data-target="#exampleModal2"
+        class="btn btn-primary"
+      >
+        <mat-icon> cloud_download </mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 <button
   *ngIf="nextPage"
@@ -111,12 +125,10 @@ margin-left: 2%;">
   Mas Foros
 </button>
 
-
-
 <!-- Modal Editar o Agregar-->
 <div
   class="modal fade"
-  data-backdrop="static" 
+  data-backdrop="static"
   data-keyboard="false"
   id="exampleModal"
   tabindex="-1"
@@ -191,7 +203,6 @@ margin-left: 2%;">
                       style="margin-left: 27, 5%;"
                       (click)="onSubmit()"
                       [disabled]="foroForm.invalid"
-                      
                     >
                       continuar
                     </button>
@@ -275,8 +286,8 @@ margin-left: 2%;">
 
                     <hr class="my-4" />
                     <button
-                    #btnClose2
-                    (click)="reset()"
+                      #btnClose2
+                      (click)="reset()"
                       class="btn btn1 btn-primary"
                       data-dismiss="modal"
                       style="margin-left: 27, 5%;"

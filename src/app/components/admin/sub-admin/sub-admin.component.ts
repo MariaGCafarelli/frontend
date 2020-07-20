@@ -62,8 +62,7 @@ export class SubAdminComponent implements OnInit {
     this.waveService.getSubcategoriesWCategories().subscribe((response) => {
       this.subCategories = response;
       console.log('subcategorias', response);      
-    });
-    
+    });   
   }
 
   onSubmit(){

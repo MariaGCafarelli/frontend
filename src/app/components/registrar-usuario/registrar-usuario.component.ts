@@ -10,7 +10,7 @@ import {
   RequiredValidator,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -65,7 +65,6 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   constructor(
     private spinner: NgxSpinnerService,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
     private waveService: WaveServiceService
