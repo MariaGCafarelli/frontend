@@ -25,14 +25,11 @@ export class CategoriasComponent implements OnInit {
       this.categories = response.items;
       this.currentPage = parseInt(response.meta.currentPage);
       this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
-      console.log('categorias', this.categories);
 
       this.waveService.getFavoriteSubCategories().subscribe((response) => {
-        console.log(response)
+        console.log(response);
         this.favoriteCategories = response.categories;
-        console.log('favorite', this.favoriteCategories);
       });
-
     });
 
     this.previousUrl = this.waveService.getPreviousUrl();
@@ -48,30 +45,34 @@ export class CategoriasComponent implements OnInit {
       });
   }
 
-  agregarFavorito(subcategoriaId) {
+  agregarFavorito(category, subcategoriaId) {
     console.log(subcategoriaId);
     this.waveService
       .saveFavoriteSubCategoria(subcategoriaId)
-      .subscribe((response) => console.log(response));
-      this.waveService.getFavoriteSubCategories().subscribe((response) => {
-        console.log(response)
-        this.favoriteCategories = response.categories;
-        console.log('favorite', this.favoriteCategories);
+      .subscribe((response) => {
+        if (response) {
+          this.waveService.getFavoriteSubCategories().subscribe((response) => {
+            console.log(response);
+            this.favoriteCategories = response.categories;
+            console.log('favorite', this.favoriteCategories);
+          });
+          console.log(response);
+        }
       });
-    alert('¡Ahora estás suscrito en la subcategoría!');
   }
 
-  isFav(idCat: number, idSub: number){
-    if(this.favoriteCategories){
-      for(let entry of this.favoriteCategories){
-        if(entry.id == idCat){
-          for(let sub of entry.subCategories){
-            if(sub.id == idSub){
+  isFav(idCat: number, idSub: number) {
+    if (this.favoriteCategories) {
+      for (let entry of this.favoriteCategories) {
+        if (entry.id == idCat) {
+          for (let sub of entry.subCategories) {
+            if (sub.id == idSub) {
               return true;
             }
           }
         }
       }
-    }return false;
+    }
+    return false;
   }
 }

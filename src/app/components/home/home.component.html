@@ -4,8 +4,8 @@
   <h3><strong>¡Hola! Bienvenido de vuelta</strong></h3>
   <h6>Accede rápido a tu contenido preferido</h6>
   <div class="carousel">
-    <div *ngFor="let cat of categoriesFav" class="para-sobrevivir">
-      
+    <div *ngFor="let cat of favoriteCategories" class="para-sobrevivir">
+      <div *ngIf="cat.isActive">
       <mat-card class="example-card">
         <a routerLink="/categoria/{{ cat.id }}"
           ><img
@@ -48,6 +48,7 @@
         </mat-chip-list>
       
       </mat-card>
+    </div>
     
   </div>
   </div>

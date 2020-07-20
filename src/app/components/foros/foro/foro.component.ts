@@ -149,7 +149,7 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  agregarFavorito(subcategoriaId) {
+  agregarFavorito(subcategoriaId: number) {
     console.log(subcategoriaId);
     this.waveService
       .saveFavoriteSubCategoria(subcategoriaId)
@@ -157,7 +157,7 @@ export class ForoComponent implements OnInit {
   }
 
   likeForo(id: number) {
-    this.agregarFavorito(this.Foro.subCategory.id);
+    
     
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
@@ -183,6 +183,11 @@ export class ForoComponent implements OnInit {
       if (res) {
         this.suscrito = false;
         // console.log(res);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          // console.log(response);
+          this.Foro = response.forum;
+          console.log(response);
+          });
       }
     });
   }

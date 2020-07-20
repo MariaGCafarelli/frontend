@@ -27,7 +27,7 @@
               >
                 {{ sub.name }}
               <div *ngIf="!isFav(cat.id, sub.id)">
-                <mat-icon matChipRemove (click)="agregarFavorito(sub.id)"
+                <mat-icon matChipRemove (click)="agregarFavorito(cat.id, sub.id)"
                   >favorite</mat-icon
                 ></div>
               </mat-chip>
