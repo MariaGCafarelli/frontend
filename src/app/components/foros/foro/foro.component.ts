@@ -30,19 +30,21 @@ export class ForoComponent implements OnInit {
   colorIcon: number;
   postForm: FormGroup;
   previousUrl: string;
-  nospace = /^$|\s+/
-  readonly  VAPID_PUBLIC_KEY  = "BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as";
+  nospace = /^$|\s+/;
+  readonly VAPID_PUBLIC_KEY =
+    'BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as';
   createFormGroup() {
     return new FormGroup({
       text: new FormControl('', [
         Validators.required,
         Validators.maxLength(255),
-        Validators.pattern(this.nospace)
+        Validators.pattern(this.nospace),
       ]),
     });
   }
 
-  constructor(private swPush: SwPush,
+  constructor(
+    private swPush: SwPush,
     private waveService: WaveServiceService,
     private postService: Postservice,
     private route: ActivatedRoute,
@@ -55,41 +57,39 @@ export class ForoComponent implements OnInit {
   ngOnInit(): void {
     this.waveService.getCurrentUser().subscribe((userResponse) => {
       this.user = userResponse.user;
-      console.log(this.user);
+      //console.log(this.user);
       this.foroId = this.route.snapshot.params['id'];
       this.waveService.getForumsById(this.foroId).subscribe((response) => {
         // console.log(response);
         this.Foro = response.forum;
-        console.log(response);
+        //console.log(response);
         this.waveService.getPostByForumId(this.foroId).subscribe((response) => {
           this.posts = response.items;
           this.currentPage = parseInt(response.meta.currentPage);
           this.nextPage =
             this.currentPage !== parseInt(response.meta.totalPages);
-          console.log('posts', this.posts);
+          //console.log('posts', this.posts);
           //this.postId = this.posts[this.posts.length - 1].id;
-          
-              this.postService
-                .receivePosts(this.foroId)
-                .subscribe((message: any) => {
-                  if (message.user.email !== this.user.email) {
-                    this.areThereNewPosts = true;
-                  } else {
-                    this.waveService
-                      .getPostByForumId(this.foroId)
-                      .subscribe((response) => {
-                        this.posts = response.items;
-                        console.log('posts', this.posts);
-                        this.currentPage = parseInt(response.meta.currentPage);
-                        this.nextPage =
-                          this.currentPage !==
-                          parseInt(response.meta.totalPages);
-                        this.postId = this.posts[this.posts.length - 1].id;
-                        window.scrollTo({ top: 0 });
-                      });
-                  }
-                });
-            
+
+          this.postService
+            .receivePosts(this.foroId)
+            .subscribe((message: any) => {
+              if (message.user.email !== this.user.email) {
+                this.areThereNewPosts = true;
+              } else {
+                this.waveService
+                  .getPostByForumId(this.foroId)
+                  .subscribe((response) => {
+                    this.posts = response.items;
+                    console.log('posts', this.posts);
+                    this.currentPage = parseInt(response.meta.currentPage);
+                    this.nextPage =
+                      this.currentPage !== parseInt(response.meta.totalPages);
+                    this.postId = this.posts[this.posts.length - 1].id;
+                    window.scrollTo({ top: 0 });
+                  });
+              }
+            });
         });
       });
       this.previousUrl = this.waveService.getPreviousUrl();
@@ -157,18 +157,21 @@ export class ForoComponent implements OnInit {
   }
 
   likeForo(id: number) {
-    this.agregarFavorito(this.Foro.subCategory.id);
-    
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.suscrito = true;
-        this. swPush . requestSubscription ( {
-          serverPublicKey : this . VAPID_PUBLIC_KEY
-      } )
-      . then ( sub  => console.log(sub)
-        // this . waveService . addPushSubscriber ( sub ) . subscribe ( ) 
-         )
-      //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
+        this.agregarFavorito(this.Foro.subCategory.id);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          console.log(res);
+          this.Foro = response.forum;
+        });
+        //this. swPush . requestSubscription ( {
+        //serverPublicKey : this . VAPID_PUBLIC_KEY
+        //} )
+        //. then ( sub  => console.log(sub)
+        // this . waveService . addPushSubscriber ( sub ) . subscribe ( )
+        //)
+        //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
         // console.log(res);
       }
     });
@@ -182,10 +185,9 @@ export class ForoComponent implements OnInit {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
         this.waveService.getForumsById(this.foroId).subscribe((response) => {
-          // console.log(response);
-          this.Foro = response.forum;
           console.log(response);
-          });
+          this.Foro = response.forum;
+        });
       }
     });
   }
@@ -198,7 +200,7 @@ export class ForoComponent implements OnInit {
           this.currentPage = parseInt(response.meta.currentPage);
           this.nextPage =
             this.currentPage !== parseInt(response.meta.totalPages);
-          console.log('posts', this.posts);
+          //console.log('posts', this.posts);
         });
       }
     });
