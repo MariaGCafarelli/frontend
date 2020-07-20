@@ -149,15 +149,15 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  agregarFavorito(subcategoriaId: number) {
-    console.log(subcategoriaId);
+  agregarFavorito(subcategoryId: number) {
+    console.log(subcategoryId);
     this.waveService
-      .saveFavoriteSubCategoria(subcategoriaId)
+      .saveFavoriteSubCategoria(subcategoryId)
       .subscribe((response) => console.log(response));
   }
 
   likeForo(id: number) {
-    
+    this.agregarFavorito(this.Foro.subCategory.id);
     
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
