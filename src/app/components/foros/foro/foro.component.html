@@ -9,7 +9,7 @@
       </a>
     </div>
 
-    <div *ngIf="suscrito; else suscribete">
+    <div *ngIf="Foro.isLiked; else suscribete">
       <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike">
         Dejar de estar suscrito
       </button>
@@ -31,15 +31,15 @@
     "
   />
 
-  <div *ngIf="Foro.users">
+  
     <h2>
       {{ Foro.title
       }}
     </h2>
-    <h6><small style="color: grey !important; font-size: 0.7rem;">
-      {{ Foro.users.length }} suscriptores</small
+    <h6><small style="color: grey !important; font-size: 0.7rem;">{{Foro.subscribers}} 
+      {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }} </small
     ></h6>
-  </div>
+  
   <h6>¡Comentarios!</h6>
 
   <div class="comentario">

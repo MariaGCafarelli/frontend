@@ -60,7 +60,7 @@ export class ForoComponent implements OnInit {
       this.waveService.getForumsById(this.foroId).subscribe((response) => {
         // console.log(response);
         this.Foro = response.forum;
-        console.log(this.Foro);
+        console.log(response);
         this.waveService.getPostByForumId(this.foroId).subscribe((response) => {
           this.posts = response.items;
           this.currentPage = parseInt(response.meta.currentPage);
@@ -68,21 +68,7 @@ export class ForoComponent implements OnInit {
             this.currentPage !== parseInt(response.meta.totalPages);
           console.log('posts', this.posts);
           //this.postId = this.posts[this.posts.length - 1].id;
-          this.waveService
-            .getFavoritesForums(this.Foro.subCategory.id)
-            .subscribe((res) => {
-              if (res) {
-                // console.log(res);
-                this.forosFav = res.forums;
-                console.log('foros fav', this.forosFav);
-
-                let bool = this.forosFav.find((ob) => ob.id == this.foroId);
-                if (bool != null) {
-                  this.suscrito = true;
-                } else {
-                  this.suscrito = false;
-                }
-              }
+          
               this.postService
                 .receivePosts(this.foroId)
                 .subscribe((message: any) => {
@@ -103,7 +89,7 @@ export class ForoComponent implements OnInit {
                       });
                   }
                 });
-            });
+            
         });
       });
       this.previousUrl = this.waveService.getPreviousUrl();

@@ -52,10 +52,10 @@ export class IniciarSesionComponent implements OnInit {
       this.waveService.loginUser(this.loginForm.value.usuario, this.loginForm.value.contra)
       .subscribe(data=>{ 
         console.log(data);
-        if((data.user.role=='normal'||data.user.role=='premium')){
+        if((data.user.role=='normal'|| data.user.role=='premium')){
         this.router.navigate(['/home']);
         this.spinner.hide();
-        }if(data.user.role=='admin'){
+        }if(data.user.role=='admin' || data.user.role=='superadmin'){
           this.router.navigate(['/admin']);
           this.spinner.hide();
         }
