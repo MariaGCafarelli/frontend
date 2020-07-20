@@ -74,7 +74,7 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService
       .getSubCategoryById(this.subcategoryId)
       .subscribe((response) => {
-        this.subcategory = response;
+        this.subcategory = response.subcategory;
         console.log('content', this.subcategory);
 
         this.filteredForums = this.myControl.valueChanges.pipe(
@@ -83,7 +83,7 @@ export class SubCategoriaComponent implements OnInit {
         );
 
         this.waveService
-          .getForumsBySubcategory(this.subcategoryId)
+          .getForumsBySubcategory(this.subcategoryId) //este ya no se usara
           .subscribe((response) => {
             this.favoriteForums = response.items;
             this.currentPage = parseInt(response.meta.currentPage);
@@ -92,32 +92,21 @@ export class SubCategoriaComponent implements OnInit {
             console.log('foro fav', this.favoriteForums);
 
             this.waveService
-              .getFavoritesForums(this.subcategoryId)
+              .getFavoritesForums(this.subcategoryId) //este servicio trae favoritos y no favoritos
               .subscribe((response) => {
-                console.log('suscribes', response.forums);
-                this.subscribedForums = response.forums;
-                for(let forum of this.subscribedForums){
+                console.log('suscribes', response);
+                this.subscribedForums = response.favoriteForums;
+                if(this.subscribedForums){
+                if(this.subscribedForums.length > 0 ){
+                for(let forum of this.subscribedForums){ //esto es para poder comprobar si existen foros activos favoritos y que no aparezca el titulo solo
                   if(forum.isActive){
                     this.forumActive.push(forum);
                   }
-                }
+                }}}
+
                 this.waveService.getAllForums({}).subscribe((response) => {
                   this.forums = response.forums;
 
-                  this.waveService
-                    .getFavoriteSubCategories()
-                    .subscribe((response) => {
-                      this.CatWFavoriteSubcat = response.categories;
-                      console.log('hola', this.CatWFavoriteSubcat);
-
-                      //let aja: [] = response;
-                      //let bool = this.CatWFavoriteSubcat.find(
-                      //(id) => id.id == this.categoryId
-                      //);
-                      //console.log(bool);
-                    });
-                  //});
-                  //});
                 });
               });
           });
@@ -159,17 +148,6 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         console.log(res);
-        this.waveService
-              .getFavoritesForums(this.subcategoryId)
-              .subscribe((response) => {
-                console.log('suscribes', response.forums);
-                this.subscribedForums = response.forums;
-                for(let forum of this.subscribedForums){
-                  if(forum.isActive){
-                    this.forumActive.push(forum);
-                  }
-                }
-        });
         
       }
     });
@@ -179,12 +157,6 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
         console.log(res);
-        this.waveService
-              .getFavoritesForums(this.subcategoryId)
-              .subscribe((response) => {
-                console.log('suscribes', response.forums);
-                this.subscribedForums = response.forums;
-        });
         
       }
     });
@@ -195,39 +167,14 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService
       .saveFavoriteSubCategoria(this.subcategoryId)
       .subscribe((response) => console.log(response));
-    this.waveService.getFavoriteSubCategories().subscribe((response) => {
-      this.CatWFavoriteSubcat = response.categories;
-      console.log('hola', this.CatWFavoriteSubcat);
-      this.isFav(this.subcategoryId);
-    });
+      this.waveService
+      .getSubCategoryById(this.subcategoryId)
+      .subscribe((response) => {
+        this.subcategory = response.subcategory;
+        console.log('content', this.subcategory);});
     
   }
 
-  isFav(id: number) {
-    
-    if (this.CatWFavoriteSubcat) {
-      for (let entry of this.CatWFavoriteSubcat) {
-        if (entry.id == this.subcategory.category.id) {
-          for (let sub of entry.subCategories) {
-            if (sub.id == id) {
-              return true;
-            }
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  isSuscribed(id: number){
-    if(this.subscribedForums){
-      for(let entry of this.subscribedForums){
-        if(entry.id == id){
-          return true;
-        }
-      }
-    }return false;
-  }
 
   get text() {
     return this.forumForm.get('text');

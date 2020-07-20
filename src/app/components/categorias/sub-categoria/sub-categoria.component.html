@@ -55,7 +55,7 @@
   </mat-card>
 
 
-<div *ngIf="isFav(subcategoryId)">
+<div *ngIf="subcategory.isLiked; else notLiked">
   <a
     class="btn btn-primary abajo"
     style="color: white;"
@@ -65,11 +65,11 @@
     crear foro
   </a>
 </div>
-<div *ngIf="!isFav(subcategoryId)">
+<ng-template #notLiked>
   <button class="btn btn-primary abajo" (click)="agregarFavorito()">
     suscribirse
   </button>
-</div>
+</ng-template>
 
 <div *ngIf="forumActive.length > 0">
   <hr />
@@ -130,7 +130,7 @@
 <div></div>
 
 <div *ngFor="let foro of favoriteForums" class="foros">
-  <div *ngIf="!isSuscribed(foro.id) && foro.isActive">
+  <div *ngIf=" foro.isActive">
   <mat-card class="foros1" style="text-align: right; padding-top: 4px !important"
       >       
      <mat-card-actions  style="padding:0 !important; margin:0 !important">
