@@ -181,8 +181,6 @@ export class ForoComponent implements OnInit {
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
-        this.suscrito = false;
-        // console.log(res);
         this.waveService.getForumsById(this.foroId).subscribe((response) => {
           // console.log(response);
           this.Foro = response.forum;

@@ -45,7 +45,7 @@ export class CategoriasComponent implements OnInit {
       });
   }
 
-  agregarFavorito(category, subcategoriaId) {
+  agregarFavorito(subcategoriaId) {
     console.log(subcategoriaId);
     this.waveService
       .saveFavoriteSubCategoria(subcategoriaId)
