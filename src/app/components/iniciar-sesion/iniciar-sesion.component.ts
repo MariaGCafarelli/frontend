@@ -11,6 +11,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./iniciar-sesion.component.scss'],
 })
 export class IniciarSesionComponent implements OnInit {
+
+  /**
+   * Menor Tengo que hacer algo en cada uno?
+   */
+
   //expresion regular para validar email
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   //
@@ -60,7 +65,6 @@ export class IniciarSesionComponent implements OnInit {
           this.spinner.hide();
         }
       },
-      
       error => {
         this.spinner.hide();
         console.log(error);
@@ -71,6 +75,11 @@ export class IniciarSesionComponent implements OnInit {
       alert('Usuario no válido, vuela a intentar');
     }
   }
+
+  
+       /** 
+        *  Menor Tengo que hacer algo en cada uno? Parte 2
+       */
 
   get usuario() {
     return this.loginForm.get('usuario');

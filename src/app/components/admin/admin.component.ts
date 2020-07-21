@@ -5,7 +5,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
+/**
+ * Prueba 1
+ *
+ * fsafafasd
+ */
 export class AdminComponent implements OnInit {
+
+  /**
+ * Prueba 2
+ *
+ * fsafafasd
+ */
 
   constructor() { }
 
