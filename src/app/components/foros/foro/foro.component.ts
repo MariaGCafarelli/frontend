@@ -30,9 +30,9 @@ export class ForoComponent implements OnInit {
   colorIcon: number;
   postForm: FormGroup;
   previousUrl: string;
-  nospace = /^$|\s+/;
-  readonly VAPID_PUBLIC_KEY =
-    'BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as';
+  nospace = /^$|\s+/
+  readonly  VAPID_PUBLIC_KEY  = "BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as";
+  selectedP: string;
   createFormGroup() {
     return new FormGroup({
       text: new FormControl('', [
@@ -43,8 +43,15 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  constructor(
-    private swPush: SwPush,
+  capturePic(pic: string){
+    this.selectedP = pic;
+  }
+
+  resetP(){
+    this.selectedP='';
+  }
+
+  constructor(private swPush: SwPush,
     private waveService: WaveServiceService,
     private postService: Postservice,
     private route: ActivatedRoute,
@@ -92,8 +99,11 @@ export class ForoComponent implements OnInit {
             });
         });
       });
-      this.previousUrl = this.waveService.getPreviousUrl();
     });
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   refreshPost() {
@@ -129,6 +139,7 @@ export class ForoComponent implements OnInit {
   }
 
   postCom() {
+    if(this.postForm.value.text.trim()!=''){
     this.postService.sendPost({
       text: this.postForm.value.text,
       foroId: this.foroId,
@@ -136,6 +147,9 @@ export class ForoComponent implements OnInit {
     });
     this.postForm.reset();
     this.btnClose.nativeElement.click();
+  }else{
+    alert("Por favor ingrese un comentario")
+  }
   }
 
   putDislikePost(id: number) {
@@ -173,6 +187,12 @@ export class ForoComponent implements OnInit {
         //)
         //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
         // console.log(res);
+        this.swPush.requestSubscription({
+          serverPublicKey: this.VAPID_PUBLIC_KEY
+      })
+      .then(sub => this.waveService.addPushSubscriber(sub.toJSON()).subscribe())
+      .catch(err => console.error("Could not subscribe to notifications", err));
+         console.log(res);
       }
     });
   }

@@ -32,6 +32,9 @@ export class SubCategoriaComponent implements OnInit {
   comment;
   previousUrl: string;
   forumActive: any[] = [];
+  notSuscribedForums: any[] = [];
+  currentPage2: number = 1 ;
+  nextPage2: boolean= false;
 
   createFormGroup() {
     return new FormGroup({
@@ -82,45 +85,61 @@ export class SubCategoriaComponent implements OnInit {
           map((value) => this._filter(value))
         );
 
-        this.waveService
-          .getForumsBySubcategory(this.subcategoryId) //este ya no se usara
-          .subscribe((response) => {
-            this.favoriteForums = response.items;
-            this.currentPage = parseInt(response.meta.currentPage);
-            this.nextPage =
-              this.currentPage !== parseInt(response.meta.totalPages);
-            console.log('foro fav', this.favoriteForums);
-
             this.waveService
-              .getFavoritesForums(this.subcategoryId) //este servicio trae favoritos y no favoritos
+              .getFavoritesForums(this.subcategoryId, this.currentPage, this.currentPage2) //este servicio trae favoritos y no favoritos
               .subscribe((response) => {
                 console.log('suscribes', response);
-                this.subscribedForums = response.favoriteForums;
-                if(this.subscribedForums){
-                if(this.subscribedForums.length > 0 ){
-                for(let forum of this.subscribedForums){ //esto es para poder comprobar si existen foros activos favoritos y que no aparezca el titulo solo
-                  if(forum.isActive){
-                    this.forumActive.push(forum);
-                  }
-                }}}
+                this.subscribedForums = response.favoriteForums.items;
+                this.currentPage = parseInt(response.favoriteForums.meta.currentPage);
+                this.nextPage =
+              this.currentPage !== parseInt(response.favoriteForums.meta.totalPages);
+
+               // if(this.subscribedForums){
+               // if(this.subscribedForums.length > 0 ){
+               // for(let forum of this.subscribedForums){ //esto es para poder comprobar si existen foros activos favoritos y que no aparezca el titulo solo
+                //  if(forum.isActive){
+               //     this.forumActive.push(forum);
+               //   }
+               // }}}
+               
+                this.notSuscribedForums = response.notFavoriteForums.items;
+                this.currentPage2 = parseInt(response.notFavoriteForums.meta.currentPage);
+                this.nextPage2 =
+              this.currentPage2 !== parseInt(response.notFavoriteForums.meta.totalPages);
+
+
 
                 this.waveService.getAllForums({}).subscribe((response) => {
                   this.forums = response.forums;
 
                 });
               });
-          });
+          
       });
-      this.previousUrl = this.waveService.getPreviousUrl();
+     
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   traerMasForos() {
     this.waveService
-      .getForumsBySubcategory(this.subcategoryId, this.currentPage + 1)
+      .getFavoritesForums(this.subcategoryId, this.currentPage + 1, this.currentPage2)
       .subscribe((response) => {
-        this.favoriteForums = this.favoriteForums.concat(response.items);
-        this.currentPage = parseInt(response.meta.currentPage);
-        this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
+        this.subscribedForums = this.subscribedForums.concat(response.favoriteForums.items);
+        this.currentPage = parseInt(response.favoriteForums.meta.currentPage);
+        this.nextPage = this.currentPage !== parseInt(response.favoriteForums.meta.totalPages);
+      });
+  }
+
+  traerMasForosN() {
+    this.waveService
+      .getFavoritesForums(this.subcategoryId, this.currentPage, this.currentPage2 + 1)
+      .subscribe((response) => {
+        this.notSuscribedForums = this.notSuscribedForums.concat(response.notFavoriteForums.items);
+        this.currentPage2 = parseInt(response.notFavoriteForums.meta.currentPage);
+        this.nextPage = this.currentPage !== parseInt(response.notFavoriteForums.meta.totalPages);
       });
   }
 

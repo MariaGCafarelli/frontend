@@ -3,9 +3,9 @@
 <div class="separador"></div>
 
 <div style="padding-top: 5.4em; margin-left: 5%;" *ngIf="subcategory.category">
-  <a routerLink="{{ previousUrl }}" style="color: grey;">
+  <span (click)="getBack()" style="color: grey;">
     <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
-  </a>
+  </span>
 </div>
 
 <form class="example-form">
@@ -71,14 +71,14 @@
   </button>
 </ng-template>
 
-<div *ngIf="forumActive.length > 0">
+<div *ngIf="subscribedForums">
   <hr />
   <h4>Ya estas suscrito en estos foros</h4>
   <br />
 
   <div></div>
 
-  <div *ngFor="let foro of forumActive" class="foros">
+  <div *ngFor="let foro of subscribedForums" class="foros">
     
     <div *ngIf="foro.isActive">
       
@@ -114,6 +114,14 @@
             <p style="align-self: center;">
               {{ foro.title }}
             </p>
+            <button
+           *ngIf="nextPage"
+          (click)="traerMasForos()"
+           type="button"
+           class="btn btn-mas"
+            >
+          Traer mas foros
+          </button>
           </div>
         </ng-template></a
         >
@@ -122,14 +130,14 @@
   </div>
 </div>
 
-<div *ngIf="favoriteForums && favoriteForums.length > 0">
+<div *ngIf="notSuscribedForums">
 <hr />
 <h4>También puedes participar en estos foros</h4>
 <br />
 
 <div></div>
 
-<div *ngFor="let foro of favoriteForums" class="foros">
+<div *ngFor="let foro of notSuscribedForums" class="foros">
   <div *ngIf=" foro.isActive">
   <mat-card class="foros1" style="text-align: right; padding-top: 4px !important"
       >       
@@ -162,19 +170,23 @@
           <p style="align-self: center;">{{ foro.title }}</p>
         </div>
       </ng-template>
+      
       </a
   >
-    </mat-card></div>
+    </mat-card>
+    <button
+    *ngIf="nextPage2"
+   (click)="traerMasForosN()"
+    type="button"
+    class="btn btn-mas"
+     >
+   Traer mas foros
+   </button>
+  </div>
+</div>
 </div>
 
-<button
-  *ngIf="nextPage"
-  (click)="traerMasForos()"
-  type="button"
-  class="btn btn-mas"
->
-  Traer mas foros
-</button>
+
 
 <div
   class="modal fade"
@@ -233,4 +245,4 @@
     </div>
   </div>
 </div>
-</div>
+
