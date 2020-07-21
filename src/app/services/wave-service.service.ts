@@ -524,4 +524,15 @@ export class WaveServiceService {
       title,
     });
   }
+
+  // CRUD Usuarios
+
+  getRegularUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readNormalUsers`);
+  }
+
+  getAdminUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readAdminUsers`);
+  }
+
 }

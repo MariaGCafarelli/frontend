@@ -44,6 +44,7 @@ import { SubAdminComponent } from './components/admin/sub-admin/sub-admin.compon
 import { ForosAdminComponent } from './components/admin/foros-admin/foros-admin.component';
 import { ComentariosComponent } from './components/admin/foros-admin/comentarios/comentarios.component';
 import { UsuariosAdminComponent } from './components/admin/usuarios-admin/usuarios-admin.component';
+import { AdminCrudComponent } from './components/admin/usuarios-admin/admin-crud/admin-crud.component';
 
 const config: SocketIoConfig = {
   url: 'https://wave-service.herokuapp.com',
@@ -83,6 +84,7 @@ const config: SocketIoConfig = {
     ForosAdminComponent,
     ComentariosComponent,
     UsuariosAdminComponent,
+    AdminCrudComponent,
   ],
   imports: [
     BrowserModule,
