@@ -273,9 +273,10 @@ export class WaveServiceService {
     return this.http.get(`${this.url}/category/favorites`);
   }
 
-  getFavoritesForums(idSubCategory: number): Observable<any> {
+  getFavoritesForums(idSubCategory: number, currentPage: number, currentPage2:number): Observable<any> {
     return this.http.get(
-      `${this.url}/forum/favorites/sub-category/${idSubCategory}`
+      `${this.url}/forum/favorites/sub-category/
+      ${idSubCategory}?pageFavorites=${currentPage}&pageNotFavorites=${currentPage2}`
     );
   }
 
@@ -524,6 +525,19 @@ export class WaveServiceService {
   updateForum(id: number, title: string): Observable<any> {
     return this.http.post(`${this.url}/forum/update/${id}`, {
       title,
+    });
+  }
+
+  addPushSubscriber ( sub:any ){
+    let endpoint= sub.endpoint;
+    let encriptionKey = sub.keys.p256dh;
+    let authSecret = sub.keys.auth
+    console.log(endpoint, encriptionKey, authSecret);
+
+    return this.http.post(`${this.url}/subscriber/new`, {
+      endpoint,
+      encriptionKey,
+      authSecret
     });
   }
 }

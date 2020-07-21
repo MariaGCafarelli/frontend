@@ -178,14 +178,12 @@ export class ForoComponent implements OnInit {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.suscrito = true;
-        this. swPush . requestSubscription ( {
-          serverPublicKey : this . VAPID_PUBLIC_KEY
-      } )
-      . then ( sub  => console.log(sub)
-        // this . waveService . addPushSubscriber ( sub ) . subscribe ( ) 
-         )
-      //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
-        // console.log(res);
+        this.swPush.requestSubscription({
+          serverPublicKey: this.VAPID_PUBLIC_KEY
+      })
+      .then(sub => this.waveService.addPushSubscriber(sub.toJSON()).subscribe())
+      .catch(err => console.error("Could not subscribe to notifications", err));
+         console.log(res);
       }
     });
   }
