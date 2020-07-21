@@ -534,7 +534,7 @@ export class WaveServiceService {
     let authSecret = sub.keys.auth
     console.log(endpoint, encriptionKey, authSecret);
 
-    return this.http.post(`${this.url}/subscriber/new`, {
+    return this.http.put(`${this.url}/subscriber/new`, {
       endpoint,
       encriptionKey,
       authSecret
