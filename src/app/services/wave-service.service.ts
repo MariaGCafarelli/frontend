@@ -544,10 +544,38 @@ export class WaveServiceService {
     let authSecret = sub.keys.auth
     console.log(endpoint, encriptionKey, authSecret);
 
-    return this.http.post(`${this.url}/subscriber/new`, {
+    return this.http.put(`${this.url}/subscriber/new`, {
       endpoint,
       encriptionKey,
       authSecret
     });
   }
+
+  /* Crud Users */ 
+  getAdmins(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readAdminUsers?page=${currentPage}`);
+  }
+
+  getNormalUsers(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readNormalUsers?page=${currentPage}`);
+  }
+
+  editProfile(firstname: string, lastname:string, username: string): Observable<any>{
+    return this.http.patch(`${this.url}/user/profile/edit`, {
+      firstname,
+      lastname,
+      username
+    });
+  }
+
+  statusAdmin(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/superadmin/activate/admin`, {email});
+  }
+
+  statusNormal(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/admin/activate/normal`, {email});
+  }
+
+
+
 }

@@ -15,20 +15,28 @@
         ></div>
       
       <div *ngIf="foro.isActive; else activo" style="display: inline;">
-        <a class="btn btn-primary" 
+        <a class="btn btn-primary" (click)="estadoUser(foro.email)"
           ><mat-icon> close </mat-icon></a
+        
         >
       </div>
       <ng-template #activo
         ><button
           type="button"
-          
+          (click)="estadoUser(foro.email)"
           class="btn btn-primary"
         >
           <mat-icon> check </mat-icon>
         </button>
       </ng-template>
+      
 
     </mat-card>
+    
 
+  </div>
+  <div  style="display: inline;" *ngIf="nextPage">
+    <a class="btn btn-primary" (click)="traerMasUsers()"
+      ><mat-icon> more </mat-icon></a
+    >
   </div>
