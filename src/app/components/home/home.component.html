@@ -39,7 +39,9 @@
           <div *ngFor="let sub of cat.subCategories">
             <div *ngIf="sub.isActive">
             <a 
-              ><mat-chip style="background-color:#e98167" selected routerLink="/sub-categoria/{{ sub.id }}"
+              ><mat-chip style="background-color:#ffb295; color: black;
+              
+              font-weight: bold" selected routerLink="/sub-categoria/{{ sub.id }}"
                 >{{ sub.name }}
                 <mat-icon (click)="dislikesubC(sub.id)" routerLink="/home"  matChipRemove>thumb_down</mat-icon></mat-chip
               ></a

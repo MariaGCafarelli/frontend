@@ -7,7 +7,7 @@
   <span (click)="getBack()" style="color: grey;">
     <mat-icon
       class="volver"
-      style="font-size: 2em; margin-left: 10%;"
+      style="font-size: 2em; margin-left: 5%;"
       >keyboard_backspace</mat-icon
     >
   </span>
@@ -38,7 +38,7 @@
 
 
   <mat-card class="example-card container head">
-    <mat-card-title class="top" style="line-height: 2em !important">{{ subcategory.name }}</mat-card-title>
+    <mat-card-title class="top" style="line-height: 2em !important; margin-bottom: 0 !important;">{{ subcategory.name }}</mat-card-title>
     <img
       mat-card-image
       [src]="subcategory.image"
