@@ -37,15 +37,18 @@
   </form>
 
 
-  <mat-card class="example-card container head">
+  <mat-card class="example-card container head extra">
     <mat-card-title class="top" style="line-height: 2em !important; margin-bottom: 0 !important;">{{ subcategory.name }}</mat-card-title>
+    <div class="web">
+      <div class="imagen-web">
     <img
       mat-card-image
       [src]="subcategory.image"
       class="encabezado"
-      style="object-fit: cover; object-position: cover;     height: auto;"
+      style="object-fit: cover; object-position: cover; margin-top: 0!important; height: auto;"
     />
-
+  </div>
+  <div class="contenido-web">
     <strong>
       <mat-card-content>
         <p>
@@ -58,6 +61,8 @@
         </p>
       </mat-card-content>
     </strong>
+  </div>
+    </div>
   </mat-card>
 
   <div *ngIf="subcategory.isLiked; else notLiked">
@@ -66,19 +71,20 @@
       style="color: white;"
       data-toggle="modal"
       data-target="#exampleModal"
+      style="margin-top:1.5em"
     >
       crear foro
     </a>
   </div>
   <ng-template #notLiked>
-    <button class="btn btn-primary abajo" (click)="agregarFavorito()">
+    <button class="btn btn-primary abajo" (click)="agregarFavorito()" style="margin-top:1.5em">
       suscribirse
     </button>
   </ng-template>
 
 
   <div *ngIf="subscribedForums.length > 0">
-    <hr />
+    
     <h4>Ya estas suscrito en estos foros</h4>
     <br />
 

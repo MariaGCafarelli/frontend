@@ -72,15 +72,18 @@ h6,
 }
 
 .btn {
-  width: 30%;
+  width: 35%;
   margin-left: 70%;
   font-style: normal;
   font-family: "Poiret One";
   letter-spacing: 3px;
-  border: 0.8px solid white;
+  border: none;
+  color: black;
+  font-weight: bold;
   background: #74b4bc;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
+
 
 button {
   margin-top: 0.3rem;
@@ -115,9 +118,10 @@ button {
 button.suscribir {
   width: 40%;
   margin-left: 0 !important;
-  background-color: #fec2a3;
-  color: white;
-  border-color: white;
+  background-color: #ffb295;
+  color: black;
+  font-weight: bold;
+  border-color: transparent;
   padding: 0;
   padding-top: 3.5px;
   margin-top: 0 !important;
@@ -129,9 +133,10 @@ button.suscribir {
 button.dislike {
   width: 104%;
   margin-left: 0 !important;
-  background-color: grey;
-  color: white;
-  border-color: white;
+  background-color: #91afab;
+  color: black;
+  font-weight: bold;
+  border-color: transparent;
   padding: 0;
   padding-top: 3.5px;
   margin-top: 0 !important;
@@ -158,9 +163,9 @@ button.abajo {
   width: 12%;
   border-radius: 100px;
   padding-top: 9.5px;
-  background-color: #74b4bc;
-  color: white;
-  border-color: white;
+  background-color: #c2e1dd;
+  color: black;
+  border-color:transparent;
 }
 
 button.btn-mas{

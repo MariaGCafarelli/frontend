@@ -21,7 +21,10 @@
             <div *ngFor="let sub of cat.subCategories">
               <div *ngIf="sub.isActive">
               <mat-chip
-                style="background-color: #e98167;"
+                style="    background-color: #ffb295;
+                color: black;
+                font-weight: bold;
+                letter-spacing: 1.2px;"
                 selected
                 routerLink="/sub-categoria/{{ sub.id }}"
               >

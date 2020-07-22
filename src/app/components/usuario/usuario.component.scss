@@ -92,7 +92,7 @@ h6.titulo-foro {
 
 mat-icon.like {
   margin-left: 13px;
-  color: orange;
+  color: #ca8267;
 }
 
 mat-icon.dislike {
@@ -193,6 +193,10 @@ img.mat-card-avatar{
   border:none;
   background: #ffb295;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+input{
+  margin-top: 0.7em;
 }
 
 .ordenar {
@@ -367,7 +371,9 @@ mat-divider {
   color: white;
 }
 
-
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color:#ffb295 !important;
+}
 
 ::ng-deep mat-card-avatar{
   
