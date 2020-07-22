@@ -94,7 +94,7 @@
                   <div>
                     <mat-icon
                       [inline]="true"
-                      style="color: #5cbcc4; cursor: pointer;"
+                      style="color: #91afab; cursor: pointer;"
                       (click)="dislikeForo(foro.id)"
                       >thumb_down</mat-icon
                     >
@@ -115,7 +115,7 @@
                   Comentarios
                 </mat-panel-description>
               </mat-expansion-panel-header>
-
+              <div *ngIf="foro.posts.length > 0; else sinPost">
               <ng-template matExpansionPanelContent>
                 <div
                   *ngFor="let com of foro.posts"
@@ -155,6 +155,7 @@
                   </div>
                 </div>
               </ng-template>
+            </div>
               <ng-template #sinPost>
                 <div class="ordenar">
                   <div
@@ -170,7 +171,7 @@
                       (click)="dislikeForo(foro.id)"
                       [inline]="true"
                       class="like"
-                      style="color: #00acee; cursor: pointer;"
+                      style="color: #91afab; cursor: pointer;"
                     >
                       thumb_down
                     </mat-icon>
@@ -289,7 +290,7 @@
                       <div>
                         <mat-icon
                           [inline]="true"
-                          style="color: #5cbcc4; cursor: pointer;"
+                          style="color: #91afab; cursor: pointer;"
                           (click)="likeForo(foro.id)"
                           >thumb_up</mat-icon
                         >
