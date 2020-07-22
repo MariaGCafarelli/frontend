@@ -20,14 +20,14 @@
               Introduzca su nueva contraseña
             </mat-error>
             <mat-error *ngIf="contra.errors.minlength">
-              7 caracteres mínimo
+              8 caracteres mínimo
             </mat-error>
             <mat-error *ngIf="contra.errors.maxlength">
-              10 caracteres máximo
+              30 caracteres máximo
             </mat-error>
             <mat-error *ngIf="contra.errors.pattern">
-              Debe tener al menos una Mayúscula, una Minúscula y  un
-              dígito
+              Debe tener al menos una Mayúscula, una Minúscula,  un 
+              dígito, un caracter especial y no con tener espacios
             </mat-error>
           </div>
           <mat-form-field appearance="outline">

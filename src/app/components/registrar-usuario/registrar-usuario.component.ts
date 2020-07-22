@@ -89,8 +89,8 @@ export class RegistrarUsuarioComponent implements OnInit {
         ]),
         contra: new FormControl('', [
           Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(10),
+          Validators.minLength(8),
+          Validators.maxLength(30),
           Validators.pattern(this.passwordPattern)
         ]),
         validContra: new FormControl(''),
