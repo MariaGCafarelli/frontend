@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
-<h4 style=" margin-left: 5%; margin-top:3%">Usuarios</h4>
+<h4 style=" margin-left: 5%; margin-top:3%">Administradores</h4>
 
-<div *ngFor="let foro of users" class="contenedor">
-    
+<div *ngFor="let foro of admins" class="contenedor">
+    <div *ngIf="foro.role == 'admin'">
     <mat-card style="margin-top:2em">
       
         <div style="display:inline">
-        <mat-card-title style="font-size: inherit;">{{ foro.firstName }} {{foro.lastName}} - {{foro.role}}</mat-card-title>
+        <mat-card-title >{{ foro.firstName }} {{foro.lastName}}</mat-card-title>
         <mat-card-subtitle style="display:inline"
           ><p style="display: inline;">
             User: {{ foro.userName }}
@@ -30,5 +30,5 @@
       </ng-template>
 
     </mat-card>
-
+</div>
   </div>

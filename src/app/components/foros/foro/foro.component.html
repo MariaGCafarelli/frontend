@@ -36,7 +36,7 @@
       {{ Foro.title
       }}
     </h2>
-    <h6><small style="color: grey !important; font-size: 0.7rem;">{{Foro.subscribers}} 
+    <h6><small style="color: grey !important; font-size: 0.95rem;">{{Foro.subscribers}} 
       {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }} </small
     ></h6>
   
@@ -158,7 +158,7 @@
     </ng-template>
   </div>
 
-  <div *ngIf="suscrito">
+  <div *ngIf="Foro.isLiked">
     <button
       class="btn btn-primary abajo"
       data-toggle="modal"
@@ -251,17 +251,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <img src="{{ selectedP }}">
+      <div class="modal-body" style="text-align: center;">
+        <img src="{{ selectedP }}" style="border-radius: 10px; margin-top: 0 !important;">
       </div>
-      <div class="modal-footer">
-        <button
-        (click)="resetP()"
-        data-dismiss="modal"
-        >
-          Cerrar
-        </button>
-      </div>
+      
     </div>
   </div>
 </div>

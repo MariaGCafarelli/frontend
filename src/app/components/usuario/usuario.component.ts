@@ -15,6 +15,7 @@ export class UsuarioComponent implements OnInit {
   notSubscribedForumsPosts: [];
   forumsCreated: [];
   profilePick: string;
+  files: File[] = [];
   panelOpenState = false;
   public payPalConfig?: IPayPalConfig;
   public total: number = 20;
@@ -100,18 +101,17 @@ export class UsuarioComponent implements OnInit {
       },
     };
     this.waveService.getCurrentUser().subscribe((response) => {
-      console.log(response);
+      
       this.user = response.user;
     });
     //console.log(this.user);
     this.waveService.getForumsPostsByUser().subscribe((res) => {
       this.forumsPosts = res.forums;
-      console.log(this.forumsPosts);
+      
     });
 
     this.waveService.getForumCreated().subscribe((res) => {
       this.forumsCreated = res.forums;
-      console.log('foros creados', this.forumsCreated);
     });
 
     this.waveService.getNotSubscribedByUser().subscribe((res) => {
@@ -124,16 +124,25 @@ export class UsuarioComponent implements OnInit {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
 
-        console.log(res);
+        
       }
     });
+  }
+
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
   likeForo(id: number) {
@@ -141,14 +150,11 @@ export class UsuarioComponent implements OnInit {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
-        console.log(res);
-        alert('¡Ahora estás suscrito en el foro!');
       }
     });
   }
@@ -158,14 +164,11 @@ export class UsuarioComponent implements OnInit {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
-        alert('Dejarás de estar suscrito al foro');
-        // console.log(res);
       }
     });
   }

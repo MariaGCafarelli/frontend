@@ -33,8 +33,8 @@ export class SubCategoriaComponent implements OnInit {
   previousUrl: string;
   forumActive: any[] = [];
   notSuscribedForums: any[] = [];
-  currentPage2: number = 1 ;
-  nextPage2: boolean= false;
+  currentPage2: number = 1;
+  nextPage2: boolean = false;
 
   createFormGroup() {
     return new FormGroup({
@@ -85,61 +85,77 @@ export class SubCategoriaComponent implements OnInit {
           map((value) => this._filter(value))
         );
 
-            this.waveService
-              .getFavoritesForums(this.subcategoryId, this.currentPage, this.currentPage2) //este servicio trae favoritos y no favoritos
-              .subscribe((response) => {
-                console.log('suscribes', response);
-                this.subscribedForums = response.favoriteForums.items;
-                this.currentPage = parseInt(response.favoriteForums.meta.currentPage);
-                this.nextPage =
-              this.currentPage !== parseInt(response.favoriteForums.meta.totalPages);
-
-               // if(this.subscribedForums){
-               // if(this.subscribedForums.length > 0 ){
-               // for(let forum of this.subscribedForums){ //esto es para poder comprobar si existen foros activos favoritos y que no aparezca el titulo solo
-                //  if(forum.isActive){
-               //     this.forumActive.push(forum);
-               //   }
-               // }}}
-               
-                this.notSuscribedForums = response.notFavoriteForums.items;
-                this.currentPage2 = parseInt(response.notFavoriteForums.meta.currentPage);
-                this.nextPage2 =
-              this.currentPage2 !== parseInt(response.notFavoriteForums.meta.totalPages);
+        this.waveService
+          .getFavoritesForums(
+            this.subcategoryId,
+            this.currentPage,
+            this.currentPage2
+          ) //este servicio trae favoritos y no favoritos
+          .subscribe((response) => {
+            console.log('suscribes', response);
+            this.subscribedForums = response.favoriteForums.items;
+            this.currentPage = parseInt(
+              response.favoriteForums.meta.currentPage
+            );
+            this.nextPage =
+              this.currentPage !==
+              parseInt(response.favoriteForums.meta.totalPages);
 
 
+            this.notSuscribedForums = response.notFavoriteForums.items;
+            this.currentPage2 = parseInt(
+              response.notFavoriteForums.meta.currentPage
+            );
+            this.nextPage2 =
+              this.currentPage2 !==
+              parseInt(response.notFavoriteForums.meta.totalPages);
 
-                this.waveService.getAllForums({}).subscribe((response) => {
-                  this.forums = response.forums;
-
-                });
-              });
-          
+            this.waveService.getAllForums({}).subscribe((response) => {
+              this.forums = response.forums;
+            });
+          });
       });
-     
   }
 
-  getBack(){
+  getBack() {
     this.waveService.getPreviousUrl();
   }
 
   traerMasForos() {
     this.waveService
-      .getFavoritesForums(this.subcategoryId, this.currentPage + 1, this.currentPage2)
+      .getFavoritesForums(
+        this.subcategoryId,
+        this.currentPage + 1,
+        this.currentPage2
+      )
       .subscribe((response) => {
-        this.subscribedForums = this.subscribedForums.concat(response.favoriteForums.items);
+        this.subscribedForums = this.subscribedForums.concat(
+          response.favoriteForums.items
+        );
         this.currentPage = parseInt(response.favoriteForums.meta.currentPage);
-        this.nextPage = this.currentPage !== parseInt(response.favoriteForums.meta.totalPages);
+        this.nextPage =
+          this.currentPage !==
+          parseInt(response.favoriteForums.meta.totalPages);
       });
   }
 
   traerMasForosN() {
     this.waveService
-      .getFavoritesForums(this.subcategoryId, this.currentPage, this.currentPage2 + 1)
+      .getFavoritesForums(
+        this.subcategoryId,
+        this.currentPage,
+        this.currentPage2 + 1
+      )
       .subscribe((response) => {
-        this.notSuscribedForums = this.notSuscribedForums.concat(response.notFavoriteForums.items);
-        this.currentPage2 = parseInt(response.notFavoriteForums.meta.currentPage);
-        this.nextPage = this.currentPage !== parseInt(response.notFavoriteForums.meta.totalPages);
+        this.notSuscribedForums = this.notSuscribedForums.concat(
+          response.notFavoriteForums.items
+        );
+        this.currentPage2 = parseInt(
+          response.notFavoriteForums.meta.currentPage
+        );
+        this.nextPage =
+          this.currentPage !==
+          parseInt(response.notFavoriteForums.meta.totalPages);
       });
   }
 
@@ -167,7 +183,31 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         console.log(res);
-        
+        this.waveService
+        .getFavoritesForums(
+          this.subcategoryId,
+          this.currentPage,
+          this.currentPage2
+        ) //este servicio trae favoritos y no favoritos
+        .subscribe((response) => {
+          console.log('suscribes', response);
+          this.subscribedForums = response.favoriteForums.items;
+          this.currentPage = parseInt(
+            response.favoriteForums.meta.currentPage
+          );
+          this.nextPage =
+            this.currentPage !==
+            parseInt(response.favoriteForums.meta.totalPages);
+
+
+          this.notSuscribedForums = response.notFavoriteForums.items;
+          this.currentPage2 = parseInt(
+            response.notFavoriteForums.meta.currentPage
+          );
+          this.nextPage2 =
+            this.currentPage2 !==
+            parseInt(response.notFavoriteForums.meta.totalPages);
+          });
       }
     });
   }
@@ -176,7 +216,31 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
         console.log(res);
-        
+        this.waveService
+        .getFavoritesForums(
+          this.subcategoryId,
+          this.currentPage,
+          this.currentPage2
+        ) //este servicio trae favoritos y no favoritos
+        .subscribe((response) => {
+          console.log('suscribes', response);
+          this.subscribedForums = response.favoriteForums.items;
+          this.currentPage = parseInt(
+            response.favoriteForums.meta.currentPage
+          );
+          this.nextPage =
+            this.currentPage !==
+            parseInt(response.favoriteForums.meta.totalPages);
+
+
+          this.notSuscribedForums = response.notFavoriteForums.items;
+          this.currentPage2 = parseInt(
+            response.notFavoriteForums.meta.currentPage
+          );
+          this.nextPage2 =
+            this.currentPage2 !==
+            parseInt(response.notFavoriteForums.meta.totalPages);
+          });
       }
     });
   }
@@ -186,14 +250,13 @@ export class SubCategoriaComponent implements OnInit {
     this.waveService
       .saveFavoriteSubCategoria(this.subcategoryId)
       .subscribe((response) => console.log(response));
-      this.waveService
+    this.waveService
       .getSubCategoryById(this.subcategoryId)
       .subscribe((response) => {
         this.subcategory = response.subcategory;
-        console.log('content', this.subcategory);});
-    
+        console.log('content', this.subcategory);
+      });
   }
-
 
   get text() {
     return this.forumForm.get('text');

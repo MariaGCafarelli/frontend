@@ -64,7 +64,7 @@ export class ForoComponent implements OnInit {
   ngOnInit(): void {
     this.waveService.getCurrentUser().subscribe((userResponse) => {
       this.user = userResponse.user;
-      console.log(this.user);
+      //console.log(this.user);
       this.foroId = this.route.snapshot.params['id'];
     });
     
@@ -170,19 +170,22 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  agregarFavorito(subcategoriaId) {
-    console.log(subcategoriaId);
+  agregarFavorito(subcategoryId: number) {
+    console.log(subcategoryId);
     this.waveService
-      .saveFavoriteSubCategoria(subcategoriaId)
+      .saveFavoriteSubCategoria(subcategoryId)
       .subscribe((response) => console.log(response));
   }
 
   likeForo(id: number) {
-    this.agregarFavorito(this.Foro.subCategory.id);
-    
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.suscrito = true;
+        this.agregarFavorito(this.Foro.subCategory.id);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          console.log(res);
+          this.Foro = response.forum;
+        });
         this.swPush.requestSubscription({
           serverPublicKey: this.VAPID_PUBLIC_KEY
       })
@@ -202,8 +205,10 @@ export class ForoComponent implements OnInit {
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
-        this.suscrito = false;
-        // console.log(res);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          console.log(response);
+          this.Foro = response.forum;
+        });
       }
     });
   }
@@ -216,7 +221,7 @@ export class ForoComponent implements OnInit {
           this.currentPage = parseInt(response.meta.currentPage);
           this.nextPage =
             this.currentPage !== parseInt(response.meta.totalPages);
-          console.log('posts', this.posts);
+          //console.log('posts', this.posts);
         });
       }
     });

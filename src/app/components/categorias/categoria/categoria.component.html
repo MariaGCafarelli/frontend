@@ -24,7 +24,7 @@
 
 <div
   *ngIf="categoryById.contentCategories"
-  style="width: 95% !important; margin-left: auto; margin-right: auto;"
+  style="width: 95% !important; max-width:1050px; margin-left: auto; margin-right: auto;"
 >
   <mat-accordion>
     <mat-expansion-panel hideToggle>
@@ -82,7 +82,7 @@
 <br />
 <h4>Podría interesarte</h4>
 <div>
-  <div class="row card-list">
+  <div class="row card-list" style="max-width: 1350px;">
     <div
       class="col-md-3 col-6 card-container"
       *ngFor="let sub of subActive; index as i"

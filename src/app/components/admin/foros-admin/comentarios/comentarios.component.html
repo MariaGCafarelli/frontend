@@ -53,14 +53,21 @@
                         <p class="p">
                           {{ com.text }}
                         </p>
-                        <mat-icon
-                          (click)="onDelete(com.id)"
-                          [inline]="true"
-                          class="like"
-                          style="cursor: pointer; color: red; margin-right: 7px;"
-                        >
-                          delete
-                        </mat-icon>
+                        <div *ngIf="com.isActive; else activo" style="display: inline;">
+                          <a class="btn btn-primary" 
+                            ><mat-icon> close </mat-icon></a
+                          >
+                        </div>
+                        <ng-template #activo
+                          ><button
+                            type="button"
+                            
+                            class="btn btn-primary"
+                          >
+                            <mat-icon> check </mat-icon>
+                          </button>
+                        </ng-template>
+                        
                       </div>
                     </li>
                   </ul>

@@ -2,6 +2,7 @@
   min-height: 100%;
   margin-bottom: 3em;
 }
+
 .carousel {
   width: 93%;
   margin: auto;
@@ -12,10 +13,6 @@
   height: 2.5em;
   padding-top: 3%;
   padding-left: 4%;
-}
-
-.picsum-img-wrapper {
-  height: 100%;
 }
 
 img.cat {
@@ -29,30 +26,6 @@ img.cat {
   position: relative;
   text-align: center;
   color: white;
-}
-
-.centered {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.6rem !important;
-  letter-spacing: 2px;
-}
-
-h4.categorias {
-  font-family: "Roboto", sans-serif;
-  text-align: center;
-  font-weight: bolder;
-  color: #484a4c;
-  letter-spacing: 2px;
-  margin: auto;
-  text-transform: lowercase;
-}
-
-h4,
-.h4 {
-  font-size: 1.1rem !important;
 }
 
 h3,
@@ -107,15 +80,6 @@ a {
 p{
   padding-left: 13px;
   padding-right: 13px;
-}
-
-div.polaroid {
-  width: 95%;
-  background-color: white;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
-  margin: auto;
-  border-radius: 2px;
 }
 
 div.container {

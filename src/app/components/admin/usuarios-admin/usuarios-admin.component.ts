@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-usuarios-admin',
   templateUrl: './usuarios-admin.component.html',
   styleUrls: ['./usuarios-admin.component.scss']
 })
+
 export class UsuariosAdminComponent implements OnInit {
 Admins:any[]=[];
-Users:any[] = []; 
+users:any[] = []; 
 currentPage: number = 1;
 nextPage: boolean;
 currentPage2: number = 1;
@@ -18,8 +22,8 @@ nextPage2: boolean;
 
   ngOnInit(): void {
      this.waveService.getNormalUsers(this.currentPage).subscribe((res)=>{
-       this.Users = res.users.items;
-       console.log(this.Users);
+       this.users = res.users.items;
+       console.log(this.users);
        this.currentPage = parseInt(res.users.meta.currentPage);
        this.nextPage =
        this.currentPage !== parseInt(res.users.meta.totalPages);
@@ -28,7 +32,7 @@ nextPage2: boolean;
      this.waveService.getAdmins(this.currentPage2).subscribe((res)=>{
       console.log(res)
       this.Admins = res.admins.items;
-      console.log(this.Users);
+      console.log(this.users);
        this.currentPage2 = parseInt(res.admins.meta.currentPage);
        this.nextPage2 =
        this.currentPage2 !== parseInt(res.admins.meta.totalPages);
@@ -50,7 +54,7 @@ nextPage2: boolean;
     console.log(res);
     this.waveService.getNormalUsers(this.currentPage).subscribe((res)=>{
       console.log(res)
-      this.Users = res.users.items;
+      this.users = res.users.items;
     })
   })
 }
@@ -59,7 +63,7 @@ traerMasUsers() {
   this.waveService
     .getNormalUsers(this.currentPage + 1)
     .subscribe((response) => {
-      this.Users = this.Users.concat(response.users.items);
+      this.users = this.users.concat(response.users.items);
       this.currentPage = parseInt(response.users.meta.currentPage);
       this.nextPage = this.currentPage !== parseInt(response.users.meta.totalPages);
       
@@ -78,3 +82,7 @@ traerMasAdmins() {
 }
 
 }
+
+
+
+

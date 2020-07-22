@@ -6,10 +6,6 @@
   background: white;
 }
 
-.espacio {
-  height: 1.5em;
-}
-
 .contenido {
   margin-bottom: 1.5em;
 }
@@ -18,7 +14,6 @@ mat-card {
   width: 95%;
   max-height: 20%;
   text-align: center;
-
   font-family: "Poiret One";
   font-size: 220%;
   text-align: center;
@@ -62,20 +57,6 @@ mat-card-content {
   margin: 10px;
 }
 
-.sepaador {
-  height: 4.7em;
-}
-
-::ng-deep .mat-card:not([class*="mat-elevation-z"]) {
-  box-shadow: -1px 4px 8px 3px rgba(0, 0, 0, 0.171),
-    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
-
-::ng-deep.mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
-  background-color: orange;
-  color: #fff;
-  letter-spacing: 1.1px;
-}
 
 
 @media(min-width:740px){
@@ -109,5 +90,17 @@ mat-card-content {
     margin-right: 10px;
   }
 
+}
+
+
+::ng-deep .mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: -1px 4px 8px 3px rgba(0, 0, 0, 0.171),
+    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}
+
+::ng-deep.mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+  background-color: orange;
+  color: #fff;
+  letter-spacing: 1.1px;
 }
 

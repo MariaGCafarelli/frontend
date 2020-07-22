@@ -53,7 +53,7 @@
 
 .datos {
   text-align: center;
-  color: #3d3f41;
+  color: black;
   font-family: "Roboto";
   margin-bottom: 1em;
   h4 {
@@ -176,7 +176,6 @@ button {
 }
 
 img.mat-card-avatar{
-  
   margin-right: 15px !important;
 }
 
@@ -185,6 +184,16 @@ img.mat-card-avatar{
   height: auto !important;
 }
 
+.btn {
+  color: white;
+  width: 7rem;
+  font-style: normal;
+  font-family: "Poiret One";
+  letter-spacing: 3px;
+  border: 0.8px solid white;
+  background: #5cbcc4;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
 
 .ordenar {
   display: flex;
@@ -348,10 +357,6 @@ mat-divider {
     0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
-  box-shadow: -1px 4px 18px 3px rgba(0, 0, 0, 0.171),
-    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
 
 ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 0;
@@ -372,4 +377,8 @@ mat-divider {
 
 ::ng-deep input[type="search"] {
   color: white;
+}
+
+::ng-deep .mat-tab-label, .mat-tab-link {
+  color: black !important;
 }

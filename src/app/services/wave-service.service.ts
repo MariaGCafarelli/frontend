@@ -528,7 +528,17 @@ export class WaveServiceService {
     });
   }
 
-  addPushSubscriber ( sub:any ): Observable<any>{
+  // CRUD Usuarios
+
+  getRegularUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readNormalUsers`);
+  }
+
+  getAdminUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readAdminUsers`);
+  }
+
+  addPushSubscriber ( sub:any ){
     let endpoint= sub.endpoint;
     let encriptionKey = sub.keys.p256dh;
     let authSecret = sub.keys.auth
