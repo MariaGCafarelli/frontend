@@ -131,12 +131,14 @@ button.suscribir {
 }
 
 button.dislike {
-  width: 104%;
+  width: 105%;
   margin-left: 0 !important;
   background-color: #91afab;
   color: black;
   font-weight: bold;
   border-color: transparent;
+  display: flex;
+  align-items: center;
   padding: 0;
   padding-top: 3.5px;
   margin-top: 0 !important;
@@ -303,10 +305,28 @@ mat-icon.volver{
   p{
     max-width: 450px;
   }
+  
 }
 
+
+@media(min-width:675px){
+  .imagen{
+    height: 340px !important;
+  }
+}
 @media(min-width:900px){
   p{
     max-width: 800px;
+  }
+
+  .imagen{
+    height: 395px !important;
+  }
+}
+
+@media(min-width:1000px){
+  .imagen{
+    max-width: 1000px;
+    height: 429px !important;
   }
 }

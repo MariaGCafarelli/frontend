@@ -102,8 +102,10 @@ button {
 button.btn-mas {
   width: 70%;
   margin-left: 15%;
-  background: orange;
+  background: #ffb295;
+  color:black;
   font-weight: bold;
+  border:none;
   margin-bottom: 1em;
 }
 
@@ -206,9 +208,10 @@ div.modal-footer {
   }
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
 .btn{
-  width: 33%;
+  width: 20%;
+  margin-left: 75%;
 }
 }
 
