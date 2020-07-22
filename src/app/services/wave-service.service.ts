@@ -560,12 +560,12 @@ export class WaveServiceService {
     return this.http.get(`${this.url}/user/admin/readNormalUsers?page=${currentPage}`);
   }
 
-  editProfile(firstname: string, lastname:string, username: string): Observable<any>{
-    return this.http.patch(`${this.url}/user/profile/edit`, {
-      firstname,
-      lastname,
-      username
-    });
+  editProfile(firstName: string, lastName:string, userName: string): Observable<any>{
+    return this.http.patch(`${this.url}/user/profile/edit`, { firstName,
+      lastName,
+      userName}
+     
+    );
   }
 
   statusAdmin(email:string): Observable<any>{

@@ -29,7 +29,7 @@
     <div class="datos">
       <h4>{{ user.firstName }} {{ user.lastName }}</h4>
       <h6 style="display: inline;">@{{ user.userName }}</h6> <mat-icon style="cursor: pointer;margin-left: 1%; color: black;" inline="true" data-toggle="modal"
-      data-target="#exampleModal2"
+      data-target="#exampleModal2" (click)="preUpdate()"
       >create</mat-icon
     >
     </div>
@@ -353,6 +353,8 @@
 
 <div
   class="modal fade"
+  data-backdrop="static" 
+  data-keyboard="false"
   id="exampleModal"
   tabindex="-1"
   role="dialog"
@@ -394,6 +396,8 @@
 
 <div
   class="modal fade"
+  data-backdrop="static" 
+  data-keyboard="false"
   id="exampleModal2"
   tabindex="-1"
   role="dialog"
@@ -418,35 +422,93 @@
       </div>
 
       <div class="modal-body" style="color:black !important; text-align: center;">
-        <form >
-          <mat-form-field style="width: 80%; box-shadow: none;">
-            <mat-label style="color:black !important;">Nombre</mat-label>
-            <input
-              
-              matInput
-              name="text"
-              placeholder="Nombre"
-            />
-          </mat-form-field>
-          <mat-form-field  style="width: 80%;">
-            <mat-label style="color:black !important;">Apellido</mat-label>
-            <input
-              
-              matInput
-              name="text"
-              placeholder="Apellido"
-            />
-          </mat-form-field>
-          <mat-form-field  style="width: 80%;">
-            <mat-label style="color:black !important;">Usuario</mat-label>
-            <input
-              
-              matInput
-              name="text"
-              placeholder="Usuario"
-            />
-          </mat-form-field>
-        </form>
+        <form
+                    class="form-signin"
+                    [formGroup]="userForm"
+                  >
+                    <div class="form-label-group">
+                      <label for="inputUserame">Nombre</label>
+                      <input
+                        [(ngModel)]="this.modelUser.firstName"
+                        type="text"
+                        id="inputUserame"
+                        formControlName="firstName"
+                        class="form-control"
+                        placeholder="name"
+                        required
+                        autofocus
+                      />
+                    </div>
+                    <div *ngIf="firstName.invalid && firstName.dirty">
+                      <div *ngIf="firstName.errors.required" class="mat-error">
+                        Nombre es Requerido
+                      </div>
+                    </div>
+
+                    <div class="form-label-group">
+                      <label for="inputEmail">Apellido</label>
+                      <input
+                        [(ngModel)]="this.modelUser.lastName"
+                        formControlName="lastName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Apellido"
+                        required
+                      />
+                    </div>
+                    <div *ngIf="lastName.invalid && lastName.dirty">
+                      <div
+                        *ngIf="lastName.errors.required"
+                        class="mat-error"
+                      >
+                        Apellido es Requerido
+                      </div>
+                      <div *ngIf="lastName.errors.pattern" class="mat-error">
+                        No debe contener numeros
+                      </div>
+                      
+                    </div>
+
+                    <div class="form-label-group">
+                      <label for="inputPassword"
+                        >Username</label
+                      >
+                      <input
+                        [(ngModel)]="this.modelUser.userName"
+                        formControlName="userName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Link"
+                        required
+                      />
+                    </div>
+                    <div *ngIf="userName.invalid && userName.dirty">
+                      <div *ngIf="userName.errors.required" class="mat-error">
+                        Nombre de Usuario Requerido
+                      </div>
+                    </div>
+
+                    <br />
+                    <button
+                      class="btn btn1 btn-primary"
+                      [disabled]="userForm.invalid"
+                      type="submit"
+                      style="margin-left: 27, 5%;"
+                      (click)=" onSubmit()"
+                    >
+                      continuar
+                    </button>
+
+                    <hr class="my-4" />
+                    <button
+                      class="btn btn1 btn-primary"
+                      #btnClose
+                      data-dismiss="modal"
+                      style="margin-left: 27, 5%;"
+                    >
+                      cancelar
+                    </button>
+                  </form>
       </div>
 
       <div class="modal-footer">
@@ -510,12 +572,12 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">
+        <button class="btn" #btnClose2>
           cancelar
         </button>
 
         <button
-          
+          (click)="updatePic()"
           class="btn"
           data-dismiss="modal"
         >

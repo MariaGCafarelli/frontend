@@ -62,11 +62,13 @@ export class ForoComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
 
   ngOnInit(): void {
+    this.foroId = this.route.snapshot.params['id'];
     this.waveService.getCurrentUser().subscribe((userResponse) => {
       this.user = userResponse.user;
       //console.log(this.user);
-      this.foroId = this.route.snapshot.params['id'];
+      
     });
+
     
     this.waveService.getForumsById(this.foroId).subscribe((response) => {
         // console.log(response);
