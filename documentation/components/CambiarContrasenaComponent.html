@@ -206,7 +206,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -311,14 +311,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:20</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:24</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Revisa si las contraseñas colocadas en el formulario son iguales para la sustitución de la Contraseña anterior</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -328,6 +330,7 @@
                                     <td>Name</td>
                                     <td>Type</td>
                                     <td>Optional</td>
+                                    <td>Description</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -342,6 +345,10 @@
                                     </td>
 
 
+                                    <td>
+                                        <p>formulario donde el usuario coloca un Nuevo Password y su Confirmación</p>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -353,7 +360,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>si es false procede, en caso contrario mostrará un mensaje de error</p>
+
                     </div>
                 </td>
             </tr>
@@ -381,8 +389,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:49</a></div>
                 </td>
             </tr>
 
@@ -420,14 +428,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:50</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:56</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>limpia el form de los valores colcoados anteriormente</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -459,14 +469,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="56"
-                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:56</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="66"
+                            class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:66</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Una vez que sea se compruebe que la contraseña cumple con la longitud adecuada y que password sea igual a confirmPassword se procede a cambiarle la contraseña al usuario, cumplido se envia al usuario a la ruta de iniciar-sesion y le sera mostrado un aviso que el cambio fue hecho con exito</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -618,7 +630,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:68</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:78</a></div>
                                 </td>
                             </tr>
 
@@ -640,7 +652,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:72</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/components/cambiar-contrasena/cambiar-contrasena.component.ts:82</a></div>
                                 </td>
                             </tr>
 
@@ -669,7 +681,11 @@ export class CambiarContrasenaComponent implements OnInit {
   token: string;
 
   loginForm: FormGroup;
-
+/**
+ * Revisa si las contraseñas colocadas en el formulario son iguales para la sustitución de la Contraseña anterior
+ * @param group formulario donde el usuario coloca un Nuevo Password y su Confirmación
+ * @returns si es false procede, en caso contrario mostrará un mensaje de error
+ */
   checkPasswords(group: FormGroup) {
     let pass &#x3D; group.controls.contra.value;
     let confirmPass &#x3D; group.controls.contraconf.value;
@@ -699,12 +715,18 @@ export class CambiarContrasenaComponent implements OnInit {
     this.token&#x3D; this.route.snapshot.queryParamMap.get(&#x27;token&#x27;);
   
   }
-
+/**
+ * limpia el form de los valores colcoados anteriormente
+ */
   onResetForm() {
     this.loginForm.reset();
   }
 
-  
+  /**
+   * Una vez que sea se compruebe que la contraseña cumple con la longitud adecuada y que password sea igual a confirmPassword se procede a cambiarle la contraseña al usuario, cumplido se envia al usuario a la ruta de iniciar-sesion y le sera mostrado un aviso que el cambio fue hecho con exito
+   *  
+   * 
+   */
 
   onSaveForm(){
    if(this.loginForm.valid){

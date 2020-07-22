@@ -118,7 +118,10 @@ export class UsuarioComponent implements OnInit {
       this.notSubscribedForumsPosts = res.forums;
     });
   }
-
+/**
+ * 
+ * @param id 
+ */
   onDelete(id: number) {
     this.waveService.DeletePost(id).subscribe((res) => {
       if (res) {
@@ -135,7 +138,10 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
-
+/**
+ * Recibe un id de un foro que el usuario desee estar suscrito para recibir y compartir información sobre este
+ * @param id id del foro que desea estar suscrito
+ */
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
@@ -152,7 +158,10 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
-
+/**
+ * 
+ * @param id 
+ */
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
@@ -169,6 +178,12 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
+  /**
+   * Condicional:
+   * true: el usuario ha pagado la suscripción premium, recibe una noficación del sistema para saber que su pago fue procesado, acto siguiente el usuario pasa de ser "Normal" a "Premium"
+   * false: el pago del usuario no pudo ser procesado
+   * 
+   */
   premiumTrue() {
     if (this.token) {
       this.waveService.becomePremium().subscribe((data) => {

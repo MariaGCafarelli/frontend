@@ -12,11 +12,6 @@ import { Component, OnInit } from '@angular/core';
  */
 export class AdminComponent implements OnInit {
 
-  /**
- * Prueba 2
- *
- * fsafafasd
- */
 
   constructor() { }
 

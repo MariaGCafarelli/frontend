@@ -16,7 +16,11 @@ export class CambiarContrasenaComponent implements OnInit {
   token: string;
 
   loginForm: FormGroup;
-
+/**
+ * Revisa si las contraseñas colocadas en el formulario son iguales para la sustitución de la Contraseña anterior
+ * @param group formulario donde el usuario coloca un Nuevo Password y la Confirmación de este
+ * @returns si es false procede, en caso contrario mostrará un mensaje de error
+ */
   checkPasswords(group: FormGroup) {
     let pass = group.controls.contra.value;
     let confirmPass = group.controls.contraconf.value;
@@ -46,12 +50,18 @@ export class CambiarContrasenaComponent implements OnInit {
     this.token= this.route.snapshot.queryParamMap.get('token');
   
   }
-
+/**
+ * limpia el form de los valores colcoados anteriormente
+ */
   onResetForm() {
     this.loginForm.reset();
   }
 
-  
+  /**
+   * Una vez que sea se compruebe que la contraseña cumple con la longitud adecuada y que password sea igual a confirmPassword se procede a cambiarle la contraseña al usuario, cumplido se envia al usuario a la ruta de iniciar-sesion y le sera mostrado un aviso que el cambio fue hecho con exito
+   *  
+   * 
+   */
 
   onSaveForm(){
    if(this.loginForm.valid){
