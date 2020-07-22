@@ -158,6 +158,10 @@ export class UsuarioComponent implements OnInit {
       this.notSubscribedForumsPosts = res.forums;
     });
   }
+/**
+ * Recibe el id de un post verifica que este fue hecho por el usuario y lo elimina de la base de datos  
+ * @param id post que el usuario desea eliminar
+ */
 
   preUpdate(){
     this.modelUser = Object.assign({},this.user);
@@ -203,7 +207,10 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
-
+/**
+ * 
+ * @param id 
+ */
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
@@ -217,6 +224,12 @@ export class UsuarioComponent implements OnInit {
       }
     });
   }
+  /**
+   * Condicional:
+   * true: el usuario ha pagado la suscripción premium, recibe una noficación del sistema para saber que su pago fue procesado, acto siguiente el usuario pasa de ser "Normal" a "Premium"
+   * false: el pago del usuario no pudo ser procesado
+   * 
+   */
   premiumTrue() {
     if (this.token) {
       this.waveService.becomePremium().subscribe((data) => {
