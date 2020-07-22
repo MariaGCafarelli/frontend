@@ -98,7 +98,7 @@ const config: SocketIoConfig = {
     NgbModule,
     NgxSpinnerModule,
     NgxDropzoneModule,
-    ServiceWorkerModule.register('custom-service-worker.js', {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
     SocketIoModule.forRoot(config),
