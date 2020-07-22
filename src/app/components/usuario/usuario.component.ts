@@ -119,8 +119,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 /**
- * 
- * @param id 
+ * Recibe el id de un post verifica que este fue hecho por el usuario y lo elimina de la base de datos  
+ * @param id post que el usuario desea eliminar
  */
   onDelete(id: number) {
     this.waveService.DeletePost(id).subscribe((res) => {
@@ -139,8 +139,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 /**
- * Recibe un id de un foro que el usuario desee estar suscrito para recibir y compartir información sobre este
- * @param id id del foro que desea estar suscrito
+ * Recibe el id de un foro que el usuario desee estar suscrito para recibir y compartir información
+ * @param id foro que el usuario desea estar suscrito
  */
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {

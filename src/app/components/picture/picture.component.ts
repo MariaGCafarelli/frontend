@@ -13,6 +13,10 @@ export class PictureComponent implements OnInit {
   file:any;
   im= false;
 
+  /**
+   * Transforma la imagen montada por el usuario en string64
+   * @param file imagen que desea montar el usuario
+   */
   handleFileInput(file: FileList) {
     console.log(file);
     this.fileToUpload = file.item(0);
@@ -26,7 +30,11 @@ export class PictureComponent implements OnInit {
     reader.readAsDataURL(this.fileToUpload);
     console.log(reader.result);
   }
-
+  /**
+   * Condicional:
+   * compara si fileToUpload es distinto a null, de ser asi se procede a montar la imagen en la base, muestra el spinner hasta que este proceso finalice
+   * sino mostrara un alerta al usuario que no ha seleccionado una imagen
+   */
   onUpload() {
     if (this.fileToUpload != null) {
       this.spinner.show();

@@ -14,7 +14,10 @@ export class PictureForoComponent implements OnInit {
   file: any;
   id: number;
   im= false;
-
+/**
+ * Transforma la imagen montada por el usuario en string64
+ * @param file imagen que desea montar el usuario
+ */
   handleFileInput(file: FileList) {
     
     this.fileToUpload = file.item(0);
@@ -38,7 +41,11 @@ export class PictureForoComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
   }
-
+  /**
+   * Condicional:
+   * compara si fileToUpload es distinto a null, de ser asi se procede a montar la imagen en la base, muestra el spinner hasta que este proceso finalice
+   * sino mostrara un alerta al usuario que no ha seleccionado una imagen
+   */
   onUpload() {
     if (this.fileToUpload != null) {
       this.spinner.show();
