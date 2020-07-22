@@ -4,6 +4,8 @@ import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { catchError } from 'rxjs/operators'; 
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -29,7 +31,8 @@ export class IniciarSesionComponent implements OnInit {
       ]),
       contra: new FormControl('', [
         Validators.required,
-        Validators.minLength(7),
+        Validators.minLength(8),
+        Validators.maxLength(30),
       ]),
     });
   }
@@ -54,13 +57,21 @@ export class IniciarSesionComponent implements OnInit {
   onSaveForm() {
     if (this.loginForm.valid) {
       this.spinner.show();
-      this.waveService.loginUser(this.loginForm.value.usuario, this.loginForm.value.contra)
+      this.waveService.loginUser(this.loginForm.value.usuario, this.loginForm.value.contra).pipe(
+        catchError(err => {
+          this.spinner.hide();
+          console.log(err);
+          alert(err.error.message)
+          return throwError("Error thrown from catchError");} )  
+
+      )
+
       .subscribe(data=>{ 
         console.log(data);
-        if((data.user.role=='normal'||data.user.role=='premium')){
+        if((data.user.role=='normal'|| data.user.role=='premium')){
         this.router.navigate(['/home']);
         this.spinner.hide();
-        }if(data.user.role=='admin'){
+        }if(data.user.role=='admin' || data.user.role=='superadmin'){
           this.router.navigate(['/admin']);
           this.spinner.hide();
         }

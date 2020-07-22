@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
   canActivate() {
     let role = this.service.getCurrentRole();
     if (role) {
-      if (role == 'admin') {
+      if (role == 'admin' || role=='superadmin') {
         return true;
       } else {
         this.rout.navigate(['/home']);

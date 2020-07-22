@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -208,6 +210,12 @@ export class RegistrarUsuarioComponent implements OnInit {
               this.registerForm.value.fecha,
               this.registerForm.value.contra,
               this.registerForm.value.tipoCuenta
+            ).pipe(
+              catchError(err => {
+                this.spinner.hide();
+                console.log(err);
+                alert(err.error.message)
+                return throwError("Error thrown from catchError");} )
             )
             .subscribe((data) => {
               console.log(data);

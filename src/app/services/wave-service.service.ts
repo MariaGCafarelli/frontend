@@ -11,6 +11,7 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { map, tap, catchError, retry } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
 import { RespI } from '../model/resp-i';
+import { Location } from '@angular/common'
 
 @Injectable({
   providedIn: 'root',
@@ -46,7 +47,8 @@ export class WaveServiceService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private loc: Location
   ) {
     this.currentUrl = this.router.url;
     router.events.subscribe((event) => {
@@ -58,7 +60,7 @@ export class WaveServiceService {
   }
 
   public getPreviousUrl() {
-    return this.previousUrl;
+    this.loc.back();
   }
 
   headers: HttpHeaders = new HttpHeaders({
@@ -271,9 +273,10 @@ export class WaveServiceService {
     return this.http.get(`${this.url}/category/favorites`);
   }
 
-  getFavoritesForums(idSubCategory: number): Observable<any> {
+  getFavoritesForums(idSubCategory: number, currentPage: number, currentPage2:number): Observable<any> {
     return this.http.get(
-      `${this.url}/forum/favorites/sub-category/${idSubCategory}`
+      `${this.url}/forum/favorites/sub-category/
+      ${idSubCategory}?pageFavorites=${currentPage}&pageNotFavorites=${currentPage2}`
     );
   }
 
@@ -524,4 +527,55 @@ export class WaveServiceService {
       title,
     });
   }
+
+  // CRUD Usuarios
+
+  getRegularUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readNormalUsers`);
+  }
+
+  getAdminUsers(): Observable<any> {
+    return this.http.get(`${this.url}/user/admin/readAdminUsers`);
+  }
+
+  addPushSubscriber ( sub:any ){
+    let endpoint= sub.endpoint;
+    let encriptionKey = sub.keys.p256dh;
+    let authSecret = sub.keys.auth
+    console.log(endpoint, encriptionKey, authSecret);
+
+    return this.http.put(`${this.url}/subscriber/new`, {
+      endpoint,
+      encriptionKey,
+      authSecret
+    });
+  }
+
+  /* Crud Users */ 
+  getAdmins(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readAdminUsers?page=${currentPage}`);
+  }
+
+  getNormalUsers(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readNormalUsers?page=${currentPage}`);
+  }
+
+  editProfile(firstName: string, lastName:string, userName: string): Observable<any>{
+    return this.http.patch(`${this.url}/user/profile/edit`, { firstName,
+      lastName,
+      userName}
+     
+    );
+  }
+
+  statusAdmin(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/superadmin/activate/admin`, {email});
+  }
+
+  statusNormal(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/admin/activate/normal`, {email});
+  }
+
+
+
 }

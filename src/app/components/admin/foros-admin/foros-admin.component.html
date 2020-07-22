@@ -62,15 +62,15 @@
 </mat-form-field>
 
 <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
+  <div *ngIf="foro.subCategory.isActive">
   <mat-card>
     <mat-card-header>
       <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
 
-      <mat-card-title>{{ foro.title }} </mat-card-title>
+      <mat-card-title style="font-size: inherit;">{{ foro.title }} </mat-card-title>
       <mat-card-subtitle
         ><p style="display: inline;">
           <a
-            href="admin/foro/{{ foro.id }}/comentarios"
             style="display: inline;"
             >Comentarios del foro</a
           >
@@ -114,6 +114,7 @@
       </button>
     </mat-card-actions>
   </mat-card>
+</div>
 </div>
 <button
   *ngIf="nextPage"

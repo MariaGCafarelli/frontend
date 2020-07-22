@@ -32,14 +32,23 @@ export class ForoComponent implements OnInit {
   previousUrl: string;
   nospace = /^$|\s+/
   readonly  VAPID_PUBLIC_KEY  = "BBhlu3acwvyKzAoGjCFFmPvcjp22i275SExmGcnxNEalSaKYz5XzhpH-fZy123SUaSU1tFpXSh5Jyi-aV3Ju5as";
+  selectedP: string;
   createFormGroup() {
     return new FormGroup({
       text: new FormControl('', [
         Validators.required,
-        Validators.maxLength(255),
-        Validators.pattern(this.nospace)
+        Validators.maxLength(255)
+        
       ]),
     });
+  }
+
+  capturePic(pic: string){
+    this.selectedP = pic;
+  }
+
+  resetP(){
+    this.selectedP='';
   }
 
   constructor(private swPush: SwPush,
@@ -53,37 +62,30 @@ export class ForoComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
 
   ngOnInit(): void {
+    this.foroId = this.route.snapshot.params['id'];
     this.waveService.getCurrentUser().subscribe((userResponse) => {
       this.user = userResponse.user;
-      console.log(this.user);
-      this.foroId = this.route.snapshot.params['id'];
-      this.waveService.getForumsById(this.foroId).subscribe((response) => {
+      //console.log(this.user);
+      
+    });
+
+    
+    this.waveService.getForumsById(this.foroId).subscribe((response) => {
         // console.log(response);
         this.Foro = response.forum;
-        console.log(this.Foro);
-        this.waveService.getPostByForumId(this.foroId).subscribe((response) => {
-          this.posts = response.items;
-          this.currentPage = parseInt(response.meta.currentPage);
-          this.nextPage =
-            this.currentPage !== parseInt(response.meta.totalPages);
-          console.log('posts', this.posts);
-          //this.postId = this.posts[this.posts.length - 1].id;
-          this.waveService
-            .getFavoritesForums(this.Foro.subCategory.id)
-            .subscribe((res) => {
-              if (res) {
-                // console.log(res);
-                this.forosFav = res.forums;
-                console.log('foros fav', this.forosFav);
+        console.log(response);
+      });
 
-                let bool = this.forosFav.find((ob) => ob.id == this.foroId);
-                if (bool != null) {
-                  this.suscrito = true;
-                } else {
-                  this.suscrito = false;
-                }
-              }
-              this.postService
+    this.waveService.getPostByForumId(this.foroId).subscribe((response) => {
+    this.posts = response.items;
+    this.currentPage = parseInt(response.meta.currentPage);
+    this.nextPage =
+    this.currentPage !== parseInt(response.meta.totalPages);
+    console.log('posts', this.posts);
+          //this.postId = this.posts[this.posts.length - 1].id;
+        });     
+              
+    this.postService
                 .receivePosts(this.foroId)
                 .subscribe((message: any) => {
                   if (message.user.email !== this.user.email) {
@@ -102,12 +104,15 @@ export class ForoComponent implements OnInit {
                         window.scrollTo({ top: 0 });
                       });
                   }
-                });
-            });
-        });
-      });
-      this.previousUrl = this.waveService.getPreviousUrl();
     });
+            
+       
+     
+   
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   refreshPost() {
@@ -143,6 +148,7 @@ export class ForoComponent implements OnInit {
   }
 
   postCom() {
+    if(this.postForm.value.text.trim()!=''){
     this.postService.sendPost({
       text: this.postForm.value.text,
       foroId: this.foroId,
@@ -150,6 +156,9 @@ export class ForoComponent implements OnInit {
     });
     this.postForm.reset();
     this.btnClose.nativeElement.click();
+  }else{
+    alert("Por favor ingrese un comentario")
+  }
   }
 
   putDislikePost(id: number) {
@@ -163,27 +172,30 @@ export class ForoComponent implements OnInit {
     });
   }
 
-  agregarFavorito(subcategoriaId) {
-    console.log(subcategoriaId);
+  agregarFavorito(subcategoryId: number) {
+    console.log(subcategoryId);
     this.waveService
-      .saveFavoriteSubCategoria(subcategoriaId)
+      .saveFavoriteSubCategoria(subcategoryId)
       .subscribe((response) => console.log(response));
   }
 
   likeForo(id: number) {
-    this.agregarFavorito(this.Foro.subCategory.id);
-    
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.suscrito = true;
-        this. swPush . requestSubscription ( {
-          serverPublicKey : this . VAPID_PUBLIC_KEY
-      } )
-      . then ( sub  => console.log(sub)
-        // this . waveService . addPushSubscriber ( sub ) . subscribe ( ) 
-         )
-      //. catch ( err  =>  console . error ( "No se pudo suscribir a las notificaciones" ,  err ) ) ;
-        // console.log(res);
+        this.agregarFavorito(this.Foro.subCategory.id);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          console.log(res);
+          this.Foro = response.forum;
+        });
+        this.swPush.requestSubscription({
+          serverPublicKey: this.VAPID_PUBLIC_KEY
+      })
+      .then(sub => this.waveService.addPushSubscriber(sub.toJSON()).subscribe((res)=>{
+        console.log(res);
+      }))
+      .catch(err => console.error("Could not subscribe to notifications", err));
+         console.log(res);
       }
     });
   }
@@ -195,8 +207,10 @@ export class ForoComponent implements OnInit {
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
-        this.suscrito = false;
-        // console.log(res);
+        this.waveService.getForumsById(this.foroId).subscribe((response) => {
+          console.log(response);
+          this.Foro = response.forum;
+        });
       }
     });
   }
@@ -209,7 +223,7 @@ export class ForoComponent implements OnInit {
           this.currentPage = parseInt(response.meta.currentPage);
           this.nextPage =
             this.currentPage !== parseInt(response.meta.totalPages);
-          console.log('posts', this.posts);
+          //console.log('posts', this.posts);
         });
       }
     });

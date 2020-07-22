@@ -1,16 +1,7 @@
-.mat-expansion-panel-header {
-  padding: 24px;
-  height: auto !important;
-}
-
 .mat-card-avatar {
   height: 3.5em;
   width: 3.5em;
   border: 2px solid #e5e7e8;
-}
-.acordion {
-  width: 95% !important;
-  font-family: "Roboto";
 }
 .btn {
   width: 15%;
@@ -68,8 +59,3 @@
   margin-bottom: 1em;
 }
 
-@media (min-width: 900px) {
-  .acordion {
-    width: 70% !important;
-  }
-}

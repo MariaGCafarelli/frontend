@@ -25,7 +25,7 @@
           Categorías
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/admin/categorias">Categorías</a>
+          <a class="dropdown-item" href="/admin">Categorías</a>
           <a class="dropdown-item" href="/admin/contenido-recomendado"
             >Contenido recomendado</a
           >
@@ -38,8 +38,22 @@
         <a class="nav-link" href="/admin/foros">Foros</a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/usuarios">Usuarios</a>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Usuarios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/admin/usuarios">Usuarios</a>
+          <a class="dropdown-item" href="/admin/usuarios-admin"
+            >Administradores</a
+          >
+        </div>
       </li>
       <div *ngIf="user.role == 'superadmin'">
       <li class="nav-item">

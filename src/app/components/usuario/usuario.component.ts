@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { MatAccordion } from '@angular/material/expansion';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-usuario',
@@ -15,18 +17,56 @@ export class UsuarioComponent implements OnInit {
   notSubscribedForumsPosts: [];
   forumsCreated: [];
   profilePick: string;
+  files: File[] = [];
+  userForm: FormGroup;
   panelOpenState = false;
   public payPalConfig?: IPayPalConfig;
   public total: number = 20;
   public token: string;
+  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
+  modelUser: User={
+    firstName: null,
+    lastName: null,
+    userName: null,
+    email: null,
+    role:null,
+    image:null,
+    birthday: null,
+    isActive: null
+
+
+  }
+  
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
+  @ViewChild('btnClose') btnClose: ElementRef;
+  @ViewChild('btnClose2') btnClose2: ElementRef;
+
+  createFormGroup() {
+    return new FormGroup({
+      firstName: new FormControl('', [
+        Validators.required,
+        Validators.pattern(this.onlyletters) 
+      ]),
+      lastName: new FormControl('', [
+        Validators.required,
+        Validators.pattern(this.onlyletters)
+        
+      ]),
+      userName: new FormControl('', [
+        Validators.required
+        
+      ]),
+    });
+  }
 
   constructor(
     private waveService: WaveServiceService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.userForm = this.createFormGroup();
+  }
 
   ngOnInit(): void {
     this.payPalConfig = {
@@ -100,18 +140,18 @@ export class UsuarioComponent implements OnInit {
       },
     };
     this.waveService.getCurrentUser().subscribe((response) => {
-      console.log(response);
+      
       this.user = response.user;
+      console.log(this.user)
     });
     //console.log(this.user);
     this.waveService.getForumsPostsByUser().subscribe((res) => {
       this.forumsPosts = res.forums;
-      console.log(this.forumsPosts);
+      
     });
 
     this.waveService.getForumCreated().subscribe((res) => {
       this.forumsCreated = res.forums;
-      console.log('foros creados', this.forumsCreated);
     });
 
     this.waveService.getNotSubscribedByUser().subscribe((res) => {
@@ -122,39 +162,48 @@ export class UsuarioComponent implements OnInit {
  * Recibe el id de un post verifica que este fue hecho por el usuario y lo elimina de la base de datos  
  * @param id post que el usuario desea eliminar
  */
+
+  preUpdate(){
+    this.modelUser = Object.assign({},this.user);
+    
+    
+}
   onDelete(id: number) {
     this.waveService.DeletePost(id).subscribe((res) => {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
 
-        console.log(res);
+        
       }
     });
   }
-/**
- * Recibe el id de un foro que el usuario desee estar suscrito para recibir y compartir información
- * @param id foro que el usuario desea estar suscrito
- */
+
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
-        console.log(res);
-        alert('¡Ahora estás suscrito en el foro!');
       }
     });
   }
@@ -167,14 +216,11 @@ export class UsuarioComponent implements OnInit {
       if (res) {
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.forumsPosts = res.forums;
-          console.log(this.forumsPosts);
 
           this.waveService.getNotSubscribedByUser().subscribe((res) => {
             this.notSubscribedForumsPosts = res.forums;
           });
         });
-        alert('Dejarás de estar suscrito al foro');
-        // console.log(res);
       }
     });
   }
@@ -195,4 +241,55 @@ export class UsuarioComponent implements OnInit {
       alert('No se proceso el pago pagado');
     }
   }
+
+  editarPerfil(){
+
+  }
+
+  onSubmit(){
+   
+      if(this.userForm.valid){
+      this.waveService.editProfile(this.modelUser.firstName, 
+        this.modelUser.lastName,
+        this.modelUser.userName).subscribe((res)=>{
+        console.log(res);
+        this.userForm.reset();
+        this.user=res.user
+      this.btnClose.nativeElement.click();
+      })
+      
+    }else{
+      alert("Uno o mas datos son inválidos")
+    }
+    
+  }
+
+  updatePic(){
+    if(this.files.length>0){
+     
+    this.waveService.uploadPicture( this.files[0]).subscribe
+    ((res)=>{
+     if(res){
+     console.log(res);
+     this.user.image = res.imageUrl
+     this.files = [];
+     this.btnClose2.nativeElement.click();
+  }}
+  )}else{
+    alert("Debe seleccionar una imagen");
+  }
+}
+
+get firstName() {
+  return this.userForm.get('firstName');
+}
+
+get lastName() {
+  return this.userForm.get('lastName');
+}
+
+get userName() {
+  return this.userForm.get('userName');
+}
+  ;
 }

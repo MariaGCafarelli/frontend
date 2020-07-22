@@ -1,180 +1,229 @@
 <app-menu></app-menu>
 
-<div class="separador"></div>
+<div style="padding-top: 5em;"></div>
 
-<div style="padding-top: 5.4em; margin-left: 5%;" *ngIf="subcategory.category">
-  <a routerLink="{{ previousUrl }}" style="color: grey;">
-    <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
-  </a>
-</div>
+<div>
 
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="outline">
-    <mat-label>Encuentra el foro que buscas</mat-label>
-    <input
-      type="text"
-      placeholder="Busca un foro"
-      aria-label="Number"
-      matInput
-      [formControl]="myControl"
-      [matAutocomplete]="auto"
+  <span (click)="getBack()" style="color: grey;">
+    <mat-icon
+      class="volver"
+      style="font-size: 2em; margin-left: 5%;"
+      >keyboard_backspace</mat-icon
+    >
+  </span>
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Encuentra el foro que buscas</mat-label>
+      <input
+        type="text"
+        placeholder="Busca un foro"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let option of filteredForums | async"
+          [value]="option.title"
+          ><a routerLink="/foro/{{ option.id }}" style="color: black;">
+            {{ option.title }}
+          </a>
+        </mat-option>
+      </mat-autocomplete>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+
+
+  <mat-card class="example-card container head extra">
+    <mat-card-title class="top" style="line-height: 2em !important; margin-bottom: 0 !important;">{{ subcategory.name }}</mat-card-title>
+    <div class="web">
+      <div class="imagen-web">
+    <img
+      mat-card-image
+      [src]="subcategory.image"
+      class="encabezado"
+      style="object-fit: cover; object-position: cover; margin-top: 0!important; height: auto;"
     />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let option of filteredForums | async"
-        [value]="option.title"
-        ><a routerLink="/foro/{{ option.id }}" style="color: black;">
-          {{ option.title }}
-        </a>
-      </mat-option>
-    </mat-autocomplete>
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</form>
-
-
-  <mat-card class="example-card container head">
-    <mat-card-title class="top">{{ subcategory.name }}</mat-card-title>
-    <img mat-card-image [src]="subcategory.image" class="encabezado" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
-
+  </div>
+  <div class="contenido-web">
     <strong>
       <mat-card-content>
-        
         <p>
           {{ subcategory.text }}
         </p>
         <br />
         <p>
           Consigue más en:
-          <a href="{{ subcategory.link }}"
-            >Contenido extra</a
-          >
+          <a href="{{ subcategory.link }}">Contenido extra</a>
         </p>
       </mat-card-content>
     </strong>
+  </div>
+    </div>
   </mat-card>
 
+  <div *ngIf="subcategory.isLiked; else notLiked">
+    <a
+      class="btn btn-primary abajo"
+      style="color: white;"
+      data-toggle="modal"
+      data-target="#exampleModal"
+      style="margin-top:1.5em"
+    >
+      crear foro
+    </a>
+  </div>
+  <ng-template #notLiked>
+    <button class="btn btn-primary abajo" (click)="agregarFavorito()" style="margin-top:1.5em">
+      suscribirse
+    </button>
+  </ng-template>
 
-<div *ngIf="isFav(subcategoryId)">
-  <a
-    class="btn btn-primary abajo"
-    style="color: white;"
-    data-toggle="modal"
-    data-target="#exampleModal"
-  >
-    crear foro
-  </a>
-</div>
-<div *ngIf="!isFav(subcategoryId)">
-  <button class="btn btn-primary abajo" (click)="agregarFavorito()">
-    suscribirse
-  </button>
-</div>
 
-<div *ngIf="forumActive.length > 0">
-  <hr />
-  <h4>Ya estas suscrito en estos foros</h4>
-  <br />
-
-  <div></div>
-
-  <div *ngFor="let foro of forumActive" class="foros">
+  <div *ngIf="subscribedForums.length > 0">
     
-    <div *ngIf="foro.isActive">
-      
-      <mat-card class="foros1" style="text-align: right; padding-top: 4px !important">
-        <mat-card-actions style="padding:0 !important; margin:0 !important">
-          <mat-icon
-            (click)="dislikeForo(foro.id)"
-            class="agregar"
-            [inline]="true"
-            style="cursor: pointer; color: red;"
-            >favorite</mat-icon
+    <h4>Ya estas suscrito en estos foros</h4>
+    <br />
+
+    <div></div>
+
+    <div *ngFor="let foro of subscribedForums" class="foros">
+      <div *ngIf="foro.isActive">
+        <mat-card
+          class="foros1"
+          style="text-align: right; padding-top: 4px !important;"
+        >
+          <mat-card-actions
+            style="padding: 0 !important; margin: 0 !important;"
           >
-        </mat-card-actions>
-        <a routerLink="/foro/{{ foro.id }}"
-      >
-        <div
-          *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
-          class="ordenar"
-        >
-          <img mat-card-avatar [src]="foro.image" alt="User Avatar" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
-          <p style="align-self: center;">
-            {{ foro.title }}
-          </p>
-        </div>
-        <ng-template #sinFoto>
-          <div class="ordenar">
-            <img
-              mat-card-avatar
-              src="https://mustdonewzealand.co.nz/wp-content/uploads/2013/08/white-300x225.jpg"
-              alt="User Avatar"
-              style="Object-fit:cover; min-height: 100%; object-position:cover;"
-            />
-            <p style="align-self: center;">
-              {{ foro.title }}
-            </p>
-          </div>
-        </ng-template></a
-        >
-      </mat-card>
+            <mat-icon
+              (click)="dislikeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red;"
+              >favorite</mat-icon
+            >
+          </mat-card-actions>
+          <a routerLink="/foro/{{ foro.id }}">
+            <div
+              *ngIf="
+                foro.image != null && foro.image != undefined;
+                else sinFoto
+              "
+              class="ordenar"
+            >
+              <img
+                mat-card-avatar
+                [src]="foro.image"
+                alt="User Avatar"
+                style="
+                  object-fit: cover;
+                  min-height: 100%;
+                  object-position: cover;
+                "
+              />
+              <p style="align-self: center;">
+                {{ foro.title }}
+              </p>
+            </div>
+            <ng-template #sinFoto>
+              <div class="ordenar">
+                <img
+                  mat-card-avatar
+                  src="https://mustdonewzealand.co.nz/wp-content/uploads/2013/08/white-300x225.jpg"
+                  alt="User Avatar"
+                  style="
+                    object-fit: cover;
+                    min-height: 100%;
+                    object-position: cover;
+                  "
+                />
+                <p style="align-self: center;">
+                  {{ foro.title }}
+                </p>
+                <button
+                  *ngIf="nextPage"
+                  (click)="traerMasForos()"
+                  type="button"
+                  class="btn btn-mas"
+                >
+                  Traer mas foros
+                </button>
+              </div>
+            </ng-template></a
+          >
+        </mat-card>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="notSuscribedForums">
+    <hr />
+    <h4>También puedes participar en estos foros</h4>
+    <br />
+
+    <div></div>
+
+    <div *ngFor="let foro of notSuscribedForums" class="foros">
+      <div *ngIf="foro.isActive">
+        <mat-card
+          class="foros1"
+          style="text-align: right; padding-top: 4px !important;"
+        >
+          <mat-card-actions
+            style="padding: 0 !important; margin: 0 !important;"
+          >
+            <mat-icon
+              (click)="likeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red;"
+              >favorite_border</mat-icon
+            >
+          </mat-card-actions>
+          <a routerLink="/foro/{{ foro.id }}">
+            <div
+              *ngIf="
+                foro.image != null && foro.image != undefined;
+                else sinFoto
+              "
+              class="ordenar"
+            >
+              <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
+              <p style="align-self: center;">{{ foro.title }}</p>
+            </div>
+            <ng-template #sinFoto>
+              <div class="ordenar">
+                <img
+                  mat-card-avatar
+                  src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
+                  alt="User Avatar"
+                  style="
+                    object-fit: cover;
+                    min-height: 100%;
+                    object-position: cover;
+                  "
+                />
+                <p style="align-self: center;">{{ foro.title }}</p>
+              </div>
+            </ng-template>
+          </a>
+        </mat-card>
+        <button
+          *ngIf="nextPage2"
+          (click)="traerMasForosN()"
+          type="button"
+          class="btn btn-mas"
+        >
+          Traer mas foros
+        </button>
+      </div>
+    </div>
   </div>
 </div>
-
-<div *ngIf="favoriteForums && favoriteForums.length > 0">
-<hr />
-<h4>También puedes participar en estos foros</h4>
-<br />
-
-<div></div>
-
-<div *ngFor="let foro of favoriteForums" class="foros">
-  <div *ngIf="!isSuscribed(foro.id) && foro.isActive">
-  <mat-card class="foros1" style="text-align: right; padding-top: 4px !important"
-      >       
-     <mat-card-actions  style="padding:0 !important; margin:0 !important">
-        <mat-icon
-          (click)="likeForo(foro.id)"
-          class="agregar"
-          [inline]="true"
-          style="cursor: pointer; color: red;"
-          >favorite_border</mat-icon
-        >
-      </mat-card-actions>
-      <a routerLink="/foro/{{ foro.id }}"
-    >
-      <div
-        *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
-        class="ordenar"
-      >
-        <img mat-card-avatar [src]="foro.image" alt="User Avatar" />
-        <p style="align-self: center;">{{ foro.title }}</p>
-      </div>
-      <ng-template #sinFoto>
-        <div class="ordenar">
-          <img
-            mat-card-avatar
-            src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-            alt="User Avatar"
-            style="Object-fit:cover; min-height: 100%; object-position:cover;"
-          />
-          <p style="align-self: center;">{{ foro.title }}</p>
-        </div>
-      </ng-template>
-      </a
-  >
-    </mat-card></div>
-</div>
-
-<button
-  *ngIf="nextPage"
-  (click)="traerMasForos()"
-  type="button"
-  class="btn btn-mas"
->
-  Traer mas foros
-</button>
 
 <div
   class="modal fade"
@@ -232,5 +281,4 @@
       </div>
     </div>
   </div>
-</div>
 </div>

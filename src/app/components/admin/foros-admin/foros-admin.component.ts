@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ForosAdminComponent implements OnInit {
   categories: any[] = [];
+  subcategoryId: number;
   files: File[] = [];
   panelOpenState = false;
   panelOpenState2 = false;
@@ -43,7 +44,7 @@ export class ForosAdminComponent implements OnInit {
     image: null,
     subcategory: null
   };
-  subcategoryId: number;
+ 
   
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
@@ -69,9 +70,6 @@ export class ForosAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.waveService.getAllForumsAdmin().subscribe((response) => {
-      this.categories = response;
-    });
 
     this.searchTextModelChangeSubscription = this.searchTextModelChanged
       .pipe(debounceTime(350), distinctUntilChanged())
@@ -100,14 +98,7 @@ export class ForosAdminComponent implements OnInit {
       this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
       this.waveService.getForumsPostsByUser().subscribe((res) => {
         this.myforums = res.forums;
-        console.log(this.myforums);
-        let vart;
-        for (let entry of this.forums) {
-          vart = this.myforums.find((ob) => ob.id == entry.id);
-          if (vart == null) {
-            this.notMyforums.push(entry);
-          }
-        }
+        
       });
     });
   }
@@ -122,7 +113,7 @@ export class ForosAdminComponent implements OnInit {
         subscribe((res)=>{
           console.log(res);
           this.waveService.updatePicForum(res.forum.id, this.files).subscribe((res)=>{
-              console.log(res);
+             
               this.foroForm.reset();
               this.waveService.getAllForums({}).subscribe((response) => {
                 this.forums = response.items;
@@ -149,7 +140,7 @@ export class ForosAdminComponent implements OnInit {
           )
           .subscribe((res) => {
             if (res) {
-              console.log(res);
+              
                 this.waveService.getAllForums({}).subscribe((response) => {
                   this.forums = response.items;
                   this.spinner.hide();
@@ -179,7 +170,7 @@ export class ForosAdminComponent implements OnInit {
         searchTerm: this.searchTermText,
       })
       .subscribe((response) => {
-        console.log(response);
+        
         this.forums = response.items;
         this.currentPage = parseInt(response.meta.currentPage);
         this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
@@ -200,7 +191,7 @@ export class ForosAdminComponent implements OnInit {
         searchTerm: this.searchTermText,
       })
       .subscribe((response) => {
-        console.log(response);
+        
         this.forums = response.items;
         this.currentPage = parseInt(response.meta.currentPage);
         this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
@@ -225,7 +216,7 @@ export class ForosAdminComponent implements OnInit {
   changeStatus(id: number) {
     this.spinner.show();
     this.waveService.statusForo(id).subscribe((data) => {
-      console.log(data);
+      
       this.waveService.getAllForums({}).subscribe((response) => {
         this.forums = response.items;
         this.spinner.hide();
@@ -290,10 +281,8 @@ reset(){
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.myforums = res.forums;
-          console.log(this.myforums);
         });
       }
     });
@@ -302,10 +291,8 @@ reset(){
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.myforums = res.forums;
-          console.log(this.myforums);
         });
         
       }

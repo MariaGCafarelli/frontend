@@ -2,16 +2,16 @@
 <div class="fondo">
   <div class="opciones">
     <div *ngIf="Foro.subCategory" style="display: inline;">
-      <a routerLink="{{ previousUrl }}">
+      <span (click)="getBack()">
         <mat-icon class="volver" style="font-size: 2em;"
           >keyboard_backspace</mat-icon
         >
-      </a>
+      </span>
     </div>
 
-    <div *ngIf="suscrito; else suscribete">
+    <div *ngIf="Foro.isLiked; else suscribete">
       <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike">
-        Dejar de estar suscrito
+        Cancelar suscripción
       </button>
     </div>
 
@@ -25,21 +25,22 @@
     src="{{ Foro.image }}"
     style="
       width: 100%;
-      height: 20%;
+      max-height: 450px;
+      object-fit: cover;
       margin-left: 0 !important;
       margin-top: 0 !important;
     "
   />
 
-  <div *ngIf="Foro.users">
+  
     <h2>
       {{ Foro.title
       }}
     </h2>
-    <h6><small style="color: grey !important; font-size: 0.7rem;">
-      {{ Foro.users.length }} suscriptores</small
+    <h6><small style="color: grey !important; font-size: 0.95rem;">{{Foro.subscribers}} 
+      {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }} </small
     ></h6>
-  </div>
+  
   <h6>¡Comentarios!</h6>
 
   <div class="comentario">
@@ -61,14 +62,16 @@
 
                   <ul class="media-list">
                     <li class="media">
-                      <div *ngIf="com.user.image != null; else sinFoto">
+                      <a (click)="capturePic(com.user.image)" data-toggle="modal"
+                      data-target="#exampleModal2"
+                       *ngIf="com.user.image != null; else sinFoto">
                         <img
                           src="{{ com.user.image }}"
                           alt=""
                           class="img-circle"
                           style="Object-fit:cover; min-height: 100%; object-position:cover;"
                         />
-                      </div>
+                    </a>
 
                       <ng-template #sinFoto>
                         <img
@@ -156,7 +159,7 @@
     </ng-template>
   </div>
 
-  <div *ngIf="suscrito">
+  <div *ngIf="Foro.isLiked">
     <button
       class="btn btn-primary abajo"
       data-toggle="modal"
@@ -183,6 +186,7 @@
         <button
           type="button"
           class="close"
+          #btnClose
           data-dismiss="modal"
           aria-label="Close"
           (click)="reset()"
@@ -206,18 +210,13 @@
             <mat-error *ngIf="text.errors.maxlength">
               255 caracteres máximo
             </mat-error>
-            <mat-error *ngIf="text.errors.pattern">
-              No deje el campo vacío
-            </mat-error>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button
-          [disabled]="postForm.invalid"
-          data-dismiss="modal"
+          [disabled]="postForm.invalid || this.postForm.value.text.trim()==''"
           (click)="postCom()"
-          #btnClose
           type="button"
           class="btn btn-primary enviar"
           type="submit"
@@ -225,6 +224,37 @@
           publicar
         </button>
       </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Foto del Usuario</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="resetP()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img src="{{ selectedP }}" style="border-radius: 10px; margin-top: 0 !important;">
+      </div>
+      
     </div>
   </div>
 </div>
