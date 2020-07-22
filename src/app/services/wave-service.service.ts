@@ -528,7 +528,7 @@ export class WaveServiceService {
     });
   }
 
-  addPushSubscriber ( sub:any ){
+  addPushSubscriber ( sub:any ): Observable<any>{
     let endpoint= sub.endpoint;
     let encriptionKey = sub.keys.p256dh;
     let authSecret = sub.keys.auth
@@ -540,4 +540,32 @@ export class WaveServiceService {
       authSecret
     });
   }
+
+  /* Crud Users */ 
+  getAdmins(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readAdminUsers?page=${currentPage}`);
+  }
+
+  getNormalUsers(currentPage: number = 1): Observable<any>{
+    return this.http.get(`${this.url}/user/admin/readNormalUsers?page=${currentPage}`);
+  }
+
+  editProfile(firstname: string, lastname:string, username: string): Observable<any>{
+    return this.http.patch(`${this.url}/user/profile/edit`, {
+      firstname,
+      lastname,
+      username
+    });
+  }
+
+  statusAdmin(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/superadmin/activate/admin`, {email});
+  }
+
+  statusNormal(email:string): Observable<any>{
+    return this.http.patch(`${this.url}/user/admin/activate/normal`, {email});
+  }
+
+
+
 }
