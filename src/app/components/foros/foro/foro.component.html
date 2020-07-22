@@ -185,6 +185,7 @@
         <button
           type="button"
           class="close"
+          #btnClose
           data-dismiss="modal"
           aria-label="Close"
           (click)="reset()"
@@ -214,9 +215,7 @@
       <div class="modal-footer">
         <button
           [disabled]="postForm.invalid || this.postForm.value.text.trim()==''"
-          data-dismiss="modal"
           (click)="postCom()"
-          #btnClose
           type="button"
           class="btn btn-primary enviar"
           type="submit"
