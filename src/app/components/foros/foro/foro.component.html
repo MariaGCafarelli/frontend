@@ -11,7 +11,7 @@
 
     <div *ngIf="Foro.isLiked; else suscribete">
       <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike">
-        Dejar de estar suscrito
+        Cancelar suscripción
       </button>
     </div>
 
@@ -25,7 +25,8 @@
     src="{{ Foro.image }}"
     style="
       width: 100%;
-      height: 20%;
+      max-height: 450px;
+      object-fit: cover;
       margin-left: 0 !important;
       margin-top: 0 !important;
     "
