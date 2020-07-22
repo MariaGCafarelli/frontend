@@ -70,9 +70,9 @@ const routes: Routes = [
   },
   { path: 'foros', component: ForosComponent, canActivate: [AuthGuard] },
   { path: 'foro/:id', component: ForoComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  //{ path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
   {
-    path: 'admin/categorias',
+    path: 'admin',
     component: CategoriasAdminComponent,
     canActivate: [AdminGuard],
   },

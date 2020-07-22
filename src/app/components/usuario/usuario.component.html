@@ -17,17 +17,21 @@
       >
         ¡Hazte Premium!<mat-icon
           [inline]="true"
-          style="margin-left: 4.5%; color: yellow; width: 15px;"
+          style="cursor: pointer; margin-left: 4.5%; color: yellow; width: 15px;"
           >star</mat-icon
         >
       </button>
     </ng-template>
     <div class="logo">
-      <img class="img-profile" src="{{ user.image }}" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
+      <img class="img-profile" src="{{ user.image }}" style="cursor: pointer; Object-fit:cover; min-height: 100%; object-position:cover;" data-toggle="modal"
+      data-target="#exampleModal3"/>
     </div>
     <div class="datos">
       <h4>{{ user.firstName }} {{ user.lastName }}</h4>
-      <h6>@{{ user.userName }}</h6>
+      <h6 style="display: inline;">@{{ user.userName }}</h6> <mat-icon style="cursor: pointer;margin-left: 1%; color: black;" inline="true" data-toggle="modal"
+      data-target="#exampleModal2"
+      >create</mat-icon
+    >
     </div>
     <mat-tab-group
       mat-stretch-tabs
@@ -90,7 +94,7 @@
                   <div>
                     <mat-icon
                       [inline]="true"
-                      style="color: #5cbcc4;"
+                      style="color: #5cbcc4; cursor: pointer;"
                       (click)="dislikeForo(foro.id)"
                       >thumb_down</mat-icon
                     >
@@ -131,7 +135,7 @@
                             align-items: center;
                           "
                         >
-                          <mat-icon [inline]="true" style="color: #5cbcc4;"
+                          <mat-icon [inline]="true" style="color: #5cbcc4; cursor: pointer;"
                             >arrow_right</mat-icon
                           >
                           {{ com.text }}
@@ -166,7 +170,7 @@
                       (click)="dislikeForo(foro.id)"
                       [inline]="true"
                       class="like"
-                      style="color: #00acee;"
+                      style="color: #00acee; cursor: pointer;"
                     >
                       thumb_down
                     </mat-icon>
@@ -234,7 +238,7 @@
                     ¡Cambiar imagen!
                     <mat-icon
                       class="agregar"
-                      style="color: orange; margin-left: 5px; width: 15px;"
+                      style="color: orange; margin-left: 5px; width: 15px; cursor: pointer;"
                       [inline]="true"
                       routerLink="/picture-foro/{{ foro.id }}"
                       >cloud_download</mat-icon
@@ -285,7 +289,7 @@
                       <div>
                         <mat-icon
                           [inline]="true"
-                          style="color: #5cbcc4;"
+                          style="color: #5cbcc4; cursor: pointer;"
                           (click)="likeForo(foro.id)"
                           >thumb_up</mat-icon
                         >
@@ -318,7 +322,7 @@
                           class="tamano"
                         >
                           <p class="p" style="display: inline;">
-                            <mat-icon [inline]="true" style="color: #5cbcc4;"
+                            <mat-icon [inline]="true" style="color: #5cbcc4; cursor: pointer;"
                               >arrow_right</mat-icon
                             >
                             {{ com.text }}
@@ -379,6 +383,140 @@
           class="btn btn-primary enviar"
           type="submit>"
           (click)="premiumTrue()"
+          data-dismiss="modal"
+        >
+          continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>¡Modifica tu información!</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" style="color:black !important; text-align: center;">
+        <form >
+          <mat-form-field appearance="outline" style="width: 80%; box-shadow: none;">
+            <mat-label style="color:black !important;">Nombre</mat-label>
+            <input
+              
+              matInput
+              name="text"
+              placeholder="Nombre"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 80%;">
+            <mat-label style="color:black !important;">Apellido</mat-label>
+            <input
+              
+              matInput
+              name="text"
+              placeholder="Apellido"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 80%;">
+            <mat-label style="color:black !important;">Usuario</mat-label>
+            <input
+              
+              matInput
+              name="text"
+              placeholder="Usuario"
+            />
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">
+          cancelar
+        </button>
+
+        <button
+          
+          class="btn"
+          data-dismiss="modal"
+        >
+          continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>¡Cambiar foto de perfil!</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" style="color:black !important; text-align: center;">
+        <form >
+
+          <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Drop it</ngx-dropzone-label>
+            <ngx-dropzone-preview
+              *ngFor="let f of files"
+              [removable]="true"
+              (removed)="onRemove(f)"
+            >
+              <ngx-dropzone-label>archivo</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">
+          cancelar
+        </button>
+
+        <button
+          
+          class="btn"
           data-dismiss="modal"
         >
           continuar

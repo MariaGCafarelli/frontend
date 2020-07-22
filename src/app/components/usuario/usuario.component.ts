@@ -15,6 +15,7 @@ export class UsuarioComponent implements OnInit {
   notSubscribedForumsPosts: [];
   forumsCreated: [];
   profilePick: string;
+  files: File[] = [];
   panelOpenState = false;
   public payPalConfig?: IPayPalConfig;
   public total: number = 20;
@@ -134,6 +135,16 @@ export class UsuarioComponent implements OnInit {
         console.log(res);
       }
     });
+  }
+
+  onSelect(event) {
+    console.log(event);
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
   likeForo(id: number) {

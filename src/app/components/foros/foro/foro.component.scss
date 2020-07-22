@@ -49,17 +49,6 @@ img {
   margin-top: 10px !important;
 }
 
-h4 {
-  font-family: Roboto, sans-serif;
-  text-align: left;
-  color: black;
-  padding-top: 5%;
-
-  width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .comentario {
   width: 91%;
   margin-left: auto;
@@ -251,10 +240,6 @@ div.p {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-}
-
-div.p:hover {
-  overflow: visible;
 }
 
 mat-icon.volver{

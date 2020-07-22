@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ForosAdminComponent implements OnInit {
   categories: any[] = [];
+  subcategoryId: number;
   files: File[] = [];
   panelOpenState = false;
   panelOpenState2 = false;
@@ -43,7 +44,7 @@ export class ForosAdminComponent implements OnInit {
     image: null,
     subcategory: null
   };
-  subcategoryId: number;
+ 
   
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
