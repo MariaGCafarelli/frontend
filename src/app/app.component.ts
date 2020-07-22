@@ -17,8 +17,18 @@ export class AppComponent {
     this.swPush.notificationClicks.subscribe(({ action, notification }) => {
       console.log(action, notification);
       if (action === 'REDIRECT') {
-        this.router.navigate(['/iniciar-sesion/foro/91']);
+        this.router.navigate([`/foro/${notification.data.foro}`]);
       }
     });
+  }
+  private async subscribeToPush() {
+    try {
+      const sub = await this.swPush.requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      });
+      // TODO: Send to server.
+    } catch (err) {
+      console.error('Could not subscribe due to:', err);
+    }
   }
 }
