@@ -10,7 +10,7 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
   styleUrls: ['./cambiar-contrasena.component.scss']
 })
 export class CambiarContrasenaComponent implements OnInit {
-  private   Pattern: any = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])/;
+  private   Pattern: any = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/;
   //
   user: any; 
   token: string;
@@ -35,8 +35,8 @@ export class CambiarContrasenaComponent implements OnInit {
        
         contra: new FormControl('', [
           Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(10),
+          Validators.minLength(8),
+          Validators.maxLength(30),
           Validators.pattern(this.Pattern)
         ]),
         contraconf: new FormControl(''),
