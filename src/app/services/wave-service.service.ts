@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AbstractJsEmitterVisitor } from '@angular/compiler/src/output/abstract_js_emitter';
 import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
+  HttpClient
 } from '@angular/common/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { map, tap, catchError, retry } from 'rxjs/operators';
-import { isNullOrUndefined } from 'util';
-import { RespI } from '../model/resp-i';
+import { Observable, BehaviorSubject } from 'rxjs';
+import {tap} from 'rxjs/operators';
 import { Location } from '@angular/common'
 
 @Injectable({
@@ -26,23 +21,6 @@ export class WaveServiceService {
   private previousUrl: string;
   private currentUrl: string;
   private authSubject = new BehaviorSubject(false);
-
-  //
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
-      );
-    }
-    // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
-  }
-  //
 
   constructor(
     private http: HttpClient,
@@ -63,12 +41,10 @@ export class WaveServiceService {
     this.loc.back();
   }
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'aplication/json',
-  });
 
-  //metodo del servicio que hace http request y espera la respuesta de tipo RespI
-  //que es una interfaz hubicada en la carpeta model, en caso de existir la respuesta llama al metodo que guarda el token en un cookie
+  /*Metodo del servicio que hace http request para verificar el auth del email y password suministrados,
+   en caso de existir la respuesta llama al metodo que guarda el token en una cookie
+  */
   loginUser(email: String, password: String): Observable<any> {
     return this.http
       .post<any>(`${this.url}/user/login`, { email, password })
@@ -84,6 +60,10 @@ export class WaveServiceService {
         })
       );
   }
+
+  /*Metodo del servicio que hace http request para registrar un usuario nuevo con sus datos,
+   en caso de no haber error llama al metodo que guarda el token en una cookie
+  */
 
   registerUser(
     firstName: string,
@@ -117,22 +97,34 @@ export class WaveServiceService {
       );
   }
 
+   /*Metodo del servicio que hace http request para recuperar el usuario 
+  */
   getCurrentUser(): Observable<any> {
     return this.http.get(`${this.url}/user/current`);
   }
 
+  /*Metodo del servicio que recupera el role que se encuentra guardado en una cookie 
+  */
   getCurrentRole(): string {
     return this.cookieService.get('userRole');
   }
 
+  /*Metodo del servicio recibe el role para guardarla en una cookie
+  */
   setCurrentRole(role): void {
     this.cookieService.set('userRole', role);
   }
 
+  /*Metodo del servicio que hace http request para obtener los foros 
+  */
   getAllForumsAdmin(): Observable<any> {
     return this.http.get(`${this.url}/category/admin/all/subcategories/forums`);
   }
 
+  
+/*Metodo del servicio que hace http request para registrar un admin nuevo, solo podra hacerse con un
+ usuario superadmin 
+  */
   registerAdmin(
     firstName: string,
     lastName: string,
@@ -161,6 +153,10 @@ export class WaveServiceService {
       );
   }
 
+  /*recibe como parametro un file que manda en el body del http request,
+  del cual recibe como respuesta la url de la imagen guardada en la base de datos... para si guardarla 
+  en una cookie mediante el metodo savePick()*/ 
+
   uploadPicture(file: File): Observable<any> {
     const fd = new FormData();
     fd.append('file', file, file.name);
@@ -175,6 +171,9 @@ export class WaveServiceService {
     );
   }
 
+  /*recibe como parametro un file que manda en el body del http request,
+  del cual recibe como respuesta la url de la imagen guardada en la base de datos*/
+
   uploadPictureForo(file: File, idForum: number): Observable<any> {
     const fd = new FormData();
     fd.append('file', file, file.name);
@@ -188,16 +187,20 @@ export class WaveServiceService {
       })
     );
   }
-
+ 
+  /* recibe la url de la imagen como parametro para guardarlo en una cookie */
   private savePick(url: string) {
     this.cookieService.set('ProfilePick', url);
   }
 
+   /* recibe el token de auth por JWT como parametro para guardarlo en una cookie */
   private saveToken(token: string): void {
     this.cookieService.set('currentToken', token);
 
     this.token = token;
   }
+
+  /*Elimina todos los datos guardados en cookies para no permitir navegar por la app*/
 
   logOutUser(): void {
     this.cookieService.delete('currentToken');
@@ -206,32 +209,45 @@ export class WaveServiceService {
     this.token = null;
   }
 
+  /*Recupera y retorna el token JWT desde una cookie */
+
   getToken() {
     this.token = this.cookieService.get('currentToken');
     return this.token;
   }
 
+  /*Recupera y retorna la foto de perfil desde una cookie */
   getPic() {
     this.picture = this.cookieService.get('ProfilePick');
     return this.picture;
   }
 
+  /*Elimina todos los datos guardados en cookies para no permitir navegar por la app (caso admins)*/
   logOut() {
     this.cookieService.delete('userRole');
     this.cookieService.delete('currentToken');
   }
 
+  /**Retorna todas las categorias recuperadas de la base de datos mediante una peticion http*/
   getAllCategories(): Observable<any> {
     return this.http.get(`${this.url}/category/all`);
   }
 
+  /**Retorna todas las categorias con su contenido recuperadas desde la base de datos mediante una peticion http*/
   getAllCategoriesContent(): Observable<any> {
     return this.http.get(`${this.url}/category/all/content`);
   }
 
+  /**Retorna todas las subcategorias por el id de la categoria recibida como parametro,
+   *  recuperadas desde la base de datos mediante una peticion http*/
   getSubcategoryByCategory(idCategory: number): Observable<any> {
     return this.http.get(`${this.url}/sub-category/category/${idCategory}`);
   }
+
+  /**Retorna todos los foros, recuperados desde la base de datos mediante una peticion http,
+   * paginandolos y filtrandolos por los parametros recibidos
+   * 
+  */
 
   getAllForums({
     selectedIdCategory = null,
@@ -248,6 +264,11 @@ export class WaveServiceService {
     );
   }
 
+  /**Retorna todos los foros de la subcategoria identificada por el id recibido como parametro,
+   *  recuperados desde la base de datos mediante una peticion http,
+   * paginados en el back.
+  */
+
   getForumsBySubcategory(
     idSubcategory: number,
     currentPage: number = 1
@@ -257,21 +278,42 @@ export class WaveServiceService {
     );
   }
 
+  /**Retorna el foro identificado por el id recibido como parametro,
+   *  recuperado desde la base de datos mediante una peticion http al backend.
+  */
+
   getForumsById(idForum: number): Observable<any> {
     return this.http.get(`${this.url}/forum/${idForum}`);
   }
 
+  
+  /**Retorna la categoria identificada por el id recibido como parametro,
+   *  recuperada desde la base de datos mediante una peticion http al backend.
+  */
   getCategoryById(idCategory: number): Observable<any> {
     return this.http.get(`${this.url}/category/${idCategory}`);
   }
+
+  /**Retorna la subcategoria identificada por el id recibido como parametro,
+   *  recuperada desde la base de datos mediante una peticion http al backend.
+  */
 
   getSubCategoryById(idSubCategory: number): Observable<any> {
     return this.http.get(`${this.url}/sub-category/${idSubCategory}`);
   }
 
+  /**Retorna las subcategorias a las que el usuario le dio like,
+   *  recuperadas desde la base de datos mediante una peticion http al backend.
+  */
+
   getFavoriteSubCategories(): Observable<any> {
     return this.http.get(`${this.url}/category/favorites`);
   }
+
+  
+  /**Retorna los foros a los que el usuario le dio like,
+   *  recuperados desde la base de datos mediante una peticion http al backend.
+  */
 
   getFavoritesForums(idSubCategory: number, currentPage: number, currentPage2:number): Observable<any> {
     return this.http.get(
@@ -280,15 +322,25 @@ export class WaveServiceService {
     );
   }
 
+  /**Retorna las categorias paginadas con sus respectivas subcategorias,
+   *  recuperadas desde el backend mediante una peticion http.
+  */
+
   getCategoriesWSubcategories(currentPage: number = 1): Observable<any> {
     return this.http.get(
       `${this.url}/category/all/with/subcategories?page=${currentPage}`
     );
   }
 
+  /**Retorna las categorias paginadas con sus respectivas subcategorias,
+   *  recuperadas desde la base de datos mediante una peticion http al backend.
+  */
   getSubcategoriesWCategories(): Observable<any> {
     return this.http.get(`${this.url}/category/admin/all/subcategories`);
   }
+  /**Recibe como parametro el id de la subcategoria que se quiere añadir como favorita0y la manda en el body
+   * de un http request para que el backend la registre en la base de datos
+  */
 
   saveFavoriteSubCategoria(subcategoryId: any) {
     return this.http.patch(`${this.url}/sub-category/add/favorite`, [
@@ -296,28 +348,48 @@ export class WaveServiceService {
     ]);
   }
 
+  /**Recibe como parametro el id de la subcategoria que se quiere eliminar de la lista de 
+   * favoritos y la manda en el body
+   * de un http request para que el backend haga lo correspondiente en la base de datos
+  */
+
   dislikeSubcategorie(id: number) {
     return this.http.patch(`${this.url}/sub-category/dislike/${id}`, []);
   }
 
-  // Servicios de los Posts
+  /* Retorna todos los posts paginados del foro identificado por el id recibido como parametro */
   getPostByForumId(idForum: number, currentPage: number = 1): Observable<any> {
     return this.http.get(
       `${this.url}/post/all/forum/${idForum}?page=${currentPage}`
     );
   }
 
+
+ /**Retorna los ultimos posts realizados en el foro identificado por el id recibido*/
   getLatestPosts(idPost: number): Observable<any> {
     return this.http.get(`${this.url}/post/latest/${idPost}`);
   }
+
+  /**Recibe como parametro el id del post al que el user quiere darle like, y lo manda al back anexado al endpoint
+   * para que quede registrado en la base de datos
+   */
 
   likePost(idPost: number): Observable<any> {
     return this.http.patch(`${this.url}/post/like/${idPost}`, []);
   }
 
+  
+  /**Recibe como parametro el id del post al que el user quiere darle dislike, y lo manda al back anexado al endpoint
+   * para que quede registrado en la base de datos
+   */
+
   dislikePost(idPost: number): Observable<any> {
     return this.http.patch(`${this.url}/post/dislike/${idPost}`, []);
   }
+
+  /**Recibe como parametro el id del foro y el texto que se quiero postear, manda el id anexado al endpoint
+   * y el texto en el body de la peticion http, para que quede registrado en la base de datos
+   */
 
   postComment(text: string, idForum: number) {
     return this.http.post(`${this.url}/post/publish/forum/${idForum}`, {
@@ -325,35 +397,50 @@ export class WaveServiceService {
     });
   }
 
+  /**Recibe como parametro el id del post al que el user quiere eliminar, y lo manda al back anexado al endpoint
+   * para que se elimine en la base de datos
+   */
   DeletePost(idPost: number) {
     alert('Se eliminará el comentario del foro');
     return this.http.delete(`${this.url}/post/delete/${idPost}`);
   }
 
-  // Servicios de los Forums
+ /**Recibe como parametro el id del foro al que el user quiere darle like, y lo manda al back anexado al endpoint
+   * para que quede registrado en la base de datos
+   */
 
   likeForum(idForum: number): Observable<any> {
     return this.http.patch(`${this.url}/forum/like/${idForum}`, []);
   }
-
+  
+  /**Recibe como parametro el id del foro al que el user ya no quiere suscribirse, y lo manda al back anexado al endpoint
+   * para que quede registrado en la base de datos
+   */
   dislikeForum(idForum: number): Observable<any> {
     return this.http.patch(`${this.url}/forum/dislike/${idForum}`, []);
   }
 
+  /**Recibe como parametro el id de la subcategoria en donde se quiere crear un foro, y el titulo del mismo, manda el id anexado al endpoint
+   * y el titulo del foro en el body, para que este ultimo quede registrado en la base de datos
+   */
   createForum(idSub: number, title: string) {
     return this.http.post(`${this.url}/forum/create/${idSub}`, { title });
   }
-  //Servicios User
+  /*Retorna los posts creados por el user*/
   getForumsPostsByUser(): Observable<any> {
     return this.http.get(`${this.url}/forum/user/posts`);
   }
+  
+  /*Retorna los posts creados por el user en los foros a los que no esta suscrito*/
   getNotSubscribedByUser(): Observable<any> {
     return this.http.get(`${this.url}/forum/user/notSubscribe/posts`);
   }
+
+  /*Retorna los foros creados por el user*/
   getForumCreated(): Observable<any> {
     return this.http.get(`${this.url}/forum/created/user`);
   }
-
+  /*indica al back que cambie el role del user de normal a premium, luego guarda en una cookie el nuevo role*/
   becomePremium(): Observable<any> {
     return this.http.patch(`${this.url}/user/premium/activate`, []).pipe(
       tap((res: any) => {
@@ -366,16 +453,21 @@ export class WaveServiceService {
       })
     );
   }
-  //Servicios content category
 
+
+  /**Retorna todos los contenidos de las categorias */
   getAllContentCategory(): Observable<any> {
     return this.http.get(`${this.url}/content-category/all`);
   }
-
+  
+  /**Retorna el contenido de categoria identificado por el id recibido como parametro */
   getContentCategory(id: number): Observable<any> {
     return this.http.get(`${this.url}/content-category/category/${id}`);
   }
 
+  /**Crea contenido en la categoria identificada por el id recibido como parametro, mandando en el body 
+   * de la peticion http los datos necesario para ese fin
+   */
   CreateContent(
     id: number,
     title: string,
@@ -388,6 +480,10 @@ export class WaveServiceService {
     );
   }
 
+  /**recibe como parametros el id del content category y el file de la imagen que se quiere anexar al mismo para
+   * enviarlos al back mediante una peticion http para que quede registrado en la base de datos
+   */
+
   SavePicContent(id: number, files: File[]) {
     console.log(files[0]);
     let file = files[0];
@@ -399,6 +495,7 @@ export class WaveServiceService {
     );
   }
 
+  /**Cambia el estado de activo a inactivo, o viceversa, del contenido de categoria identificado por el id recibido como parametro */
   statusContent(id: number): Observable<any> {
     return this.http.patch(
       `${this.url}/content-category/change/status/${id}`,
@@ -406,6 +503,9 @@ export class WaveServiceService {
     );
   }
 
+  /**Edita o actualiza el contenido de categoria identificado por el id recibido como parametro, con los nuevos datos
+   * recibidos, mandandolos al backend mediante una peticion http
+   */
   updateContent(
     id: number,
     title: string,
@@ -420,6 +520,7 @@ export class WaveServiceService {
     });
   }
 
+  /**Actualiza la foto del contenido de categoria identificada por el id recibido, con un nuevo file */
   updatePicContent(id: number, files: File[]) {
     console.log(files[0]);
     let file = files[0];
@@ -431,23 +532,35 @@ export class WaveServiceService {
     );
   }
 
-  //recuperar password
+  /**recibe un email como parametro, y lo pasa al back en el body de una peticion htttp para que desde alli se envie un correo 
+   * con el link de recuperacion de contraseña
+   */
 
   generateLink(email: string): Observable<any> {
     return this.http.post(`${this.url}/user/generate/passwordURL`, { email });
   }
 
+  /**Recibe como parametro el token recuperado del query string recibido en el link enviado desde el backend al 
+   * usuario ademas de la nueva contraseña para terminar el proceso de recuperacion de la misma
+   */
   resetPassword(token, password): Observable<any> {
     return this.http.post(`${this.url}/user/reset/password?token=${token}`, {
       password,
     });
   }
 
-  //CRUD category
+ /**Recibe como parametro los datos necesarios para la creacion de una categoria y retorna la respuesta 
+  * del back a la peticion http
+  */
 
   CreateCategory(name: string, text: string): Observable<any> {
     return this.http.post(`${this.url}/category/admin/create`, { name, text });
   }
+
+  
+  /**Edita o actualiza la categoria identificada por el id recibido como parametro, con los nuevos datos
+   * recibidos, mandandolos al backend mediante una peticion http para registrarlo en la base de datos
+   */
 
   updateCategory(id: number, name: string, text: string): Observable<any> {
     return this.http.post(`${this.url}/category/update/${id}`, {
@@ -455,7 +568,7 @@ export class WaveServiceService {
       text,
     });
   }
-
+    /**Actualiza la foto de la categoria identificada por el id recibidocomo parametro, con un nuevo file */
   updatePicCategory(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
@@ -463,13 +576,14 @@ export class WaveServiceService {
     fd.append('file', file, file.name);
     return this.http.post(`${this.url}/category/photo/upload/${id}`, fd);
   }
-
+  /**Cambia el estado de activo a inactivo, o viceversa, de la categoria identificada por el id recibido como parametro */
   stateCategory(id: number): Observable<any> {
     return this.http.patch(`${this.url}/category/change/status/${id}`, []);
   }
 
-  //CRUD subcategory
-
+ /**Recibe como parametro los datos necesarios para la creacion de una subcategoria y retorna la respuesta 
+  * del back a la peticion http
+  */
   CreateSubCategory(
     name: string,
     text: string,
@@ -482,6 +596,9 @@ export class WaveServiceService {
     });
   }
 
+  /**Actualiza la foto de la subcategoria identificada por el id recibido como parametro,
+   *  con un nuevo file */
+
   updatePicSubCategory(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
@@ -490,9 +607,14 @@ export class WaveServiceService {
     return this.http.post(`${this.url}/sub-category/photo/upload/${id}`, fd);
   }
 
+  /**Cambia el estado de activo a inactivo, o viceversa, de la subcategoria identificada por el id recibido como parametro */
   stateSubCategory(id: number): Observable<any> {
     return this.http.patch(`${this.url}/sub-category/change/status/${id}`, []);
   }
+
+  /**Edita o actualiza la subcategoria identificada por el id recibido como parametro, con los nuevos datos
+   * recibidos, mandandolos al backend mediante una peticion http para registrarlo en la base de datos
+   */
 
   updateSubcategory(id: number, name: string, text: string): Observable<any> {
     return this.http.post(`${this.url}/sub-category/update/${id}`, {
@@ -501,12 +623,16 @@ export class WaveServiceService {
     });
   }
 
-  //CRUD foros
-
+  
+  /**Cambia el estado de activo a inactivo, o viceversa, del foro identificado por el id recibido 
+   * como parametro */
   statusForo(id: number): Observable<any> {
     return this.http.patch(`${this.url}/forum/change/status/${id}`, []);
   }
 
+  /**Recibe como parametro los datos necesarios para la creacion de un foro y retorna la respuesta 
+  * del back a la peticion http, que esta protegida por un guard y que solo puese ser usado por admins
+  */
   createForumByAdmin(subcategory: number, title: string): Observable<any> {
     return this.http.post(`${this.url}/forum/admin/create`, {
       subcategory,
@@ -514,6 +640,8 @@ export class WaveServiceService {
     });
   }
 
+  /**Actualiza la foto del foro identificado por el id recibido como parametro,
+   *  con un nuevo file */
   updatePicForum(id: number, files: File[]): Observable<any> {
     console.log(files[0]);
     let file = files[0];
@@ -521,22 +649,19 @@ export class WaveServiceService {
     fd.append('file', file, file.name);
     return this.http.post(`${this.url}/forum/photo/upload/${id}`, fd);
   }
-
+  /**Edita o actualiza el foro identificado por el id recibido como parametro, con el nuevo texto
+   * recibido, mandandolo al backend mediante una peticion http para registrarlo en la base de datos
+   */
   updateForum(id: number, title: string): Observable<any> {
     return this.http.post(`${this.url}/forum/update/${id}`, {
       title,
     });
   }
 
-  // CRUD Usuarios
 
-  getRegularUsers(): Observable<any> {
-    return this.http.get(`${this.url}/user/admin/readNormalUsers`);
-  }
-
-  getAdminUsers(): Observable<any> {
-    return this.http.get(`${this.url}/user/admin/readAdminUsers`);
-  }
+  /**Recibe como parametro un subscription object que se manda al backend mediante una peticion 
+   * para enviarle push notifications
+   */
 
   addPushSubscriber ( sub:any ){
     let endpoint= sub.endpoint;
@@ -551,15 +676,22 @@ export class WaveServiceService {
     });
   }
 
-  /* Crud Users */ 
+  /**Devuelve todos los usuarios normales y premium registrados en la base de datos de forma paginada
+   * mediante una peticion http al backend */
   getAdmins(currentPage: number = 1): Observable<any>{
     return this.http.get(`${this.url}/user/admin/readAdminUsers?page=${currentPage}`);
   }
 
+  /**Devuelve todos los usuarios admins y superadmins registrados en la base de datos de forma paginada 
+   * mediante una peticion http al backend */
   getNormalUsers(currentPage: number = 1): Observable<any>{
     return this.http.get(`${this.url}/user/admin/readNormalUsers?page=${currentPage}`);
   }
 
+
+  /**Edita o actualiza el user, con los nuevos datos recibidos como parametros
+   *, mandandolos al backend mediante una peticion http para registrarlo en la base de datos
+   */
   editProfile(firstName: string, lastName:string, userName: string): Observable<any>{
     return this.http.patch(`${this.url}/user/profile/edit`, { firstName,
       lastName,
@@ -568,10 +700,14 @@ export class WaveServiceService {
     );
   }
 
+  /**Cambia el estado de activo a inactivo, o viceversa, del user (admin) identificado por el email recibido 
+   * como parametro */
   statusAdmin(email:string): Observable<any>{
     return this.http.patch(`${this.url}/user/superadmin/activate/admin`, {email});
   }
 
+  /**Cambia el estado de activo a inactivo, o viceversa, del user (normal o premium) identificado por el email recibido 
+   * como parametro */
   statusNormal(email:string): Observable<any>{
     return this.http.patch(`${this.url}/user/admin/activate/normal`, {email});
   }
