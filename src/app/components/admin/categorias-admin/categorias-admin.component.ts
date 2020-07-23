@@ -23,6 +23,11 @@ export class CategoriasAdminComponent implements OnInit {
   };
   categories: any;
 
+  /**
+   * Metodo que da formato al form group nombrando sus form controls y
+   *  las validaciones a las que se someten
+   * @returns FormGroup
+   */
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('', [
@@ -52,16 +57,30 @@ export class CategoriasAdminComponent implements OnInit {
     });
   }
 
+  /**Metodo que recibe y maneja el evento que ocurre al seleccionar un archivo,
+   * y mete este archivo al files array
+   * @returns void
+   */
   onSelect(event) {
     console.log(event);
     this.files.push(...event.addedFiles);
   }
 
+   /**Metodo que recibe y maneja el evento que ocurre al eliminar un archivo 
+   * un archivo del drop area,
+   * y elimina este archivo del files array
+   * @returns void
+   */
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+   /**Metodo que recibe el id de la categoria seleccionada para cambiar su estado
+   * de activo a inactivo, o viceversa, y lo manda al servicio para hacer lo correspondiente,
+   * tambien actualiza el arreglo existente
+   * @returns void
+   */
   changeStatus(id: number) {
     this.spinner.show();
     this.waveService.stateCategory(id).subscribe((data) => {
@@ -71,6 +90,8 @@ export class CategoriasAdminComponent implements OnInit {
       });
     });
   }
+
+
   reset(){
     this.CategoryForm.reset();
     this.files=[];
@@ -82,12 +103,23 @@ export class CategoriasAdminComponent implements OnInit {
     };
   }
 
+  /**Recibe un objeto seleccionado en el html como parametro
+   *  y asigna sus valores al selected
+   * @param content
+   * @returns void
+   * 
+    */
   preUpdate(content: any){
     this.selected = Object.assign({},content);
     
     
 }
 
+ /**
+   * metodo que manda al servicio los datos necesarios para asignar una imagen
+   * a la categoria seleccionada
+   * @returns void
+   */
 updatePic(){
   if(this.files.length>0){
   this.waveService.updatePicCategory(this.selected.id, this.files).subscribe
@@ -105,6 +137,11 @@ this.btnClose2.nativeElement.click();
 }
 }
 
+  /**
+   * metodo que envia los datos pertinentes al servicio para registrar 
+   * una categoria nueva
+   * @returns void
+   */
   onSubmit(){
   
   if(!this.selected.id){
@@ -163,10 +200,18 @@ this.btnClose2.nativeElement.click();
   }
   }
 
+   /** 
+  *  getters para obtener un child control de name dado el nombre
+  * @returns AbstractControl
+  */
   get name() {
     return this.CategoryForm.get('name');
   }
 
+   /** 
+  *  getters para obtener un child control de text dado el nombre
+  * @returns AbstractControl
+  */
   get text() {
     return this.CategoryForm.get('text');
   }
