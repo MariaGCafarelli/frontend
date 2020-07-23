@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 export class LostPasswordComponent implements OnInit {
 
   private   emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //
+  // Validador
   
 /**
- *  formato al formgroup, asigna nombre a sus campos y las validaciones pertinentes
+ *  Funcion que otorga formato al formgroup, asigna nombre a sus campos y las validaciones pertinentes
  */
   createFormGroup (){
     return new FormGroup({
@@ -25,6 +25,9 @@ export class LostPasswordComponent implements OnInit {
     })
   }
 
+  /**
+   * Formulario
+   */
   loginForm: FormGroup;
 
 
@@ -32,13 +35,16 @@ export class LostPasswordComponent implements OnInit {
     this.loginForm = this.createFormGroup();
   }
 
-
+  /**
+   * Servicio de inicio
+   */
   ngOnInit() {
   
   }
 
  /**
-  * Envia Correo al usuario para cambiar la contraseña olvidada, notifica cuando este enviado, y redirecciona al usuario a la pagina de inicio
+  * Funcion que envia Correo al usuario para cambiar la contraseña olvidada, notifica cuando este enviado, y redirecciona al usuario a la pagina de inicio
+  * @returns void
   */
   onSaveForm(){
     this.waveService.generateLink(this.loginForm.value.usuario).subscribe((res)=>{
@@ -48,6 +54,10 @@ export class LostPasswordComponent implements OnInit {
     })
   }
 
+  /**
+   * Función que trae el Usuario
+   * @returns void
+   */
   get usuario(){
     return this.loginForm.get('usuario')
   };

@@ -130,8 +130,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="28"
+                            class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:28</a></div>
                 </td>
             </tr>
 
@@ -184,7 +184,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>boolean</p>
+
                     </div>
                 </td>
             </tr>
@@ -220,6 +221,13 @@ import { catchError } from &#x27;rxjs/operators&#x27;;
 import { throwError } from &#x27;rxjs&#x27;;
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
+  
+  /**
+   * 
+   * @param control 
+   * @param form 
+   * @returns boolean
+   */
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
@@ -235,9 +243,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return invalidCtrl || invalidParent;
   }
 }
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+
 
 @Component({
   selector: &#x27;app-registrar-usuario&#x27;,
@@ -376,25 +382,27 @@ export class RegistrarUsuarioComponent implements OnInit {
     };
   }
 
+  /**
+  *Metodo cambia el background 
+  @returns void
+   */
   cambiarBack(){
     this.background &#x3D; !this.background;
     console.log(this.background)
   }
 
-  agregarCategoria() {
-    const categoriaFormGroup &#x3D; this.formBuilder.group({
-      Categoria: &#x27;&#x27;,
-    });
-    this.categorias.push(categoriaFormGroup);
-  }
-
-  removerCategoria(indice) {
-    this.categorias.removeAt(indice);
-  }
-
+ /**
+  * metodo que resetea el form
+  * @returns void
+  */
   onResetForm() {
     this.registerForm.reset();
   }
+
+  /**
+   * metodo que envia los datos pertinentes al servicio para registrar un usuario nuevo
+   * @returns void
+   */
 
   onSaveForm() {
     if (this.registerForm.valid) {
@@ -422,10 +430,6 @@ export class RegistrarUsuarioComponent implements OnInit {
             .subscribe((data) &#x3D;&gt; {
               console.log(data);
               this.router.navigate([&#x27;/picture&#x27;]);
-              this.spinner.hide();
-            },
-            (error)&#x3D;&gt;{
-              alert(&quot;El usuario ya se encuentra registrado&quot;);
               this.spinner.hide();
             });
         } else {
@@ -460,6 +464,12 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
   }
 
+  /**
+   * metodo validator asincrono que devueve un error notSame en true si las contraseñas no son iguales
+   * @param group 
+   * @returns boolean
+   */
+
   checkPasswords(group: FormGroup) {
     let pass &#x3D; group.controls.contra.value;
     let confirmPass &#x3D; group.controls.validContra.value;
@@ -467,42 +477,79 @@ export class RegistrarUsuarioComponent implements OnInit {
     return pass &#x3D;&#x3D;&#x3D; confirmPass ? null : { notSame: true };
   }
 
+   /** 
+        *  getters para obtener un child control de nombres dado el nombre
+        * @returns AbstractControl
+       */
+
   get nombres() {
     return this.registerForm.get(&#x27;nombres&#x27;);
   }
+   /** 
+        *  getters para obtener un child control de apellidos dado el nombre
+        * @returns AbstractControl
+       */
 
   get apellidos() {
     return this.registerForm.get(&#x27;apellidos&#x27;);
   }
 
+   /** 
+        *  getters para obtener un child control de fecha dado el nombre
+        * @returns AbstractControl
+       */
+
   get fecha() {
     return this.registerForm.get(&#x27;fecha&#x27;);
   }
+
+   /** 
+        *  getters para obtener un child control de usuario dado el nombre
+        * @returns AbstractControl
+       */
 
   get usuario() {
     return this.registerForm.get(&#x27;usuario&#x27;);
   }
 
+   /** 
+        *  getters para obtener un child control de correo dado el nombre
+        * @returns AbstractControl
+       */
   get correo() {
     return this.registerForm.get(&#x27;correo&#x27;);
   }
+   /** 
+        *  getters para obtener un child control de contra dado el nombre
+        * @returns AbstractControl
+       */
 
   get contra() {
     return this.registerForm.get(&#x27;contra&#x27;);
   }
 
+   /** 
+        *  getters para obtener un child control de validContra dado el nombre
+        * @returns AbstractControl
+       */
   get validContra() {
     return this.registerForm.get(&#x27;validContra&#x27;);
   }
 
-  get categorias() {
-    return this.registerForm.get(&#x27;categorias&#x27;) as FormArray;
-  }
-
+   /** 
+        *  getters para obtener un child control de tipoCuenta dado el nombre
+        * @returns AbstractControl
+       */
   get tipoCuenta() {
     return this.registerForm.get(&#x27;tipoCuenta&#x27;);
   }
- 
+
+
+ /**
+  * Metodo que maneja el evento al seleccionar una foto y le da valor al file
+  * @param file 
+  * @returns void
+  */
   handleFileInput(file: FileList) {
     this.fileToUpload &#x3D; file.item(0);
     console.log(this.fileToUpload)

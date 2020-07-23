@@ -72,7 +72,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ContenidoRecomendadoComponent } from &#x27;./../components/admin/categorias/contenido-recomendado/contenido-recomendado.component&#x27;;
 import { AdminComponent } from &#x27;./../components/admin/admin.component&#x27;;
-import { CrearForoComponent } from &#x27;./../components/foros/crear-foro/crear-foro.component&#x27;;
 import { CategoriaComponent } from &#x27;./../components/categorias/categoria/categoria.component&#x27;;
 import { InicioComponent } from &#x27;./../components/inicio/inicio.component&#x27;;
 import { RegistrarUsuarioComponent } from &#x27;./../components/registrar-usuario/registrar-usuario.component&#x27;;
@@ -87,7 +86,6 @@ import { ForoComponent } from &#x27;../components/foros/foro/foro.component&#x27
 import { SubCategoriaComponent } from &#x27;../components/categorias/sub-categoria/sub-categoria.component&#x27;;
 import { CategoriasComponent } from &#x27;../components/categorias/categorias.component&#x27;;
 import { AuthGuard } from &#x27;../guards/auth.guard&#x27;;
-import { FavoritasComponent } from &#x27;../components/favoritas/favoritas.component&#x27;;
 import { PictureComponent } from &#x27;../components/picture/picture.component&#x27;;
 import { UsuarioComponent } from &#x27;../components/usuario/usuario.component&#x27;;
 import { PictureForoComponent } from &#x27;../components/picture-foro/picture-foro.component&#x27;;
@@ -106,14 +104,9 @@ const routes: Routes &#x3D; [
   { path: &#x27;iniciar-sesion&#x27;, component: IniciarSesionComponent },
   { path: &#x27;reset/password&#x27;, component: CambiarContrasenaComponent },
   { path: &#x27;registrar-usuario&#x27;, component: RegistrarUsuarioComponent },
-  { path: &#x27;favoritas&#x27;, component: FavoritasComponent },
   { path: &#x27;home&#x27;, component: HomeComponent, canActivate: [AuthGuard] },
   { path: &#x27;picture&#x27;, component: PictureComponent, canActivate: [AuthGuard] },
-  {
-    path: &#x27;crear-foro&#x27;,
-    component: CrearForoComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: &#x27;picture-foro/:id&#x27;,
     component: PictureForoComponent,
