@@ -641,9 +641,11 @@ export class CategoriaComponent implements OnInit {
         <pre class="line-numbers"><code class="language-html">&lt;app-menu&gt;&lt;/app-menu&gt;
 &lt;div class&#x3D;&quot;separador&quot; style&#x3D;&quot;color: transparent;&quot;&gt;cargando contenid extra&lt;/div&gt;
 
-&lt;div style&#x3D;&quot; margin-left: 5%;&quot;&gt;
+&lt;div style&#x3D;&quot;margin-left: 5%;&quot;&gt;
   &lt;span (click)&#x3D;&quot;getBack()&quot; style&#x3D;&quot;color: grey;&quot;&gt;
-    &lt;mat-icon class&#x3D;&quot;volver&quot; style&#x3D;&quot;font-size:2em ;&quot;&gt;keyboard_backspace&lt;/mat-icon&gt;
+    &lt;mat-icon class&#x3D;&quot;volver&quot; style&#x3D;&quot;font-size: 2em;&quot;
+      &gt;keyboard_backspace&lt;/mat-icon
+    &gt;
   &lt;/span&gt;
 &lt;/div&gt;
 
@@ -654,9 +656,9 @@ export class CategoriaComponent implements OnInit {
   &lt;/div&gt;
 
   &lt;mat-card-content&gt;
-    &lt;mat-card-title style&#x3D;&quot;text-align: justify;&quot;
-      &gt;{{ categoryById.text }}&lt;/mat-card-title
-    &gt;
+    &lt;mat-card-title style&#x3D;&quot;text-align: justify;&quot;&gt;{{
+      categoryById.text
+    }}&lt;/mat-card-title&gt;
   &lt;/mat-card-content&gt;
 &lt;/mat-card&gt;
 
@@ -664,7 +666,12 @@ export class CategoriaComponent implements OnInit {
 
 &lt;div
   *ngIf&#x3D;&quot;categoryById.contentCategories&quot;
-  style&#x3D;&quot;width: 95% !important; max-width:1050px; margin-left: auto; margin-right: auto;&quot;
+  style&#x3D;&quot;
+    width: 95% !important;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+  &quot;
 &gt;
   &lt;mat-accordion&gt;
     &lt;mat-expansion-panel hideToggle&gt;
@@ -696,23 +703,23 @@ export class CategoriaComponent implements OnInit {
       &lt;/mat-expansion-panel-header&gt;
       &lt;div *ngFor&#x3D;&quot;let com of categoryById.contentCategories&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;com.isActive&quot;&gt;
-        &lt;mat-card class&#x3D;&quot;example-card container head&quot;&gt;
-          &lt;img mat-card-image [src]&#x3D;&quot;com.imagen&quot; class&#x3D;&quot;encabezado&quot; /&gt;
+          &lt;mat-card class&#x3D;&quot;example-card container head&quot;&gt;
+            &lt;img mat-card-image [src]&#x3D;&quot;com.imagen&quot; class&#x3D;&quot;encabezado&quot; /&gt;
 
-          &lt;mat-card-content&gt;
-            &lt;mat-card-title style&#x3D;&quot;justify-content: left;&quot;
-              &gt;&lt;strong&gt; {{ com.title }}&lt;/strong&gt;&lt;/mat-card-title
-            &gt;
-            &lt;p&gt;
-              {{ com.text }}
-            &lt;/p&gt;
-            &lt;br /&gt;
-            &lt;p&gt;
-              Consigue más en:
-              &lt;a href&#x3D;&quot;{{ com.link }}&quot;&gt;Contenido extra&lt;/a&gt;
-            &lt;/p&gt;
-          &lt;/mat-card-content&gt;
-        &lt;/mat-card&gt;
+            &lt;mat-card-content&gt;
+              &lt;mat-card-title style&#x3D;&quot;justify-content: left;&quot;
+                &gt;&lt;strong&gt; {{ com.title }}&lt;/strong&gt;&lt;/mat-card-title
+              &gt;
+              &lt;p&gt;
+                {{ com.text }}
+              &lt;/p&gt;
+              &lt;br /&gt;
+              &lt;p&gt;
+                Consigue más en:
+                &lt;a href&#x3D;&quot;{{ com.link }}&quot;&gt;Contenido extra&lt;/a&gt;
+              &lt;/p&gt;
+            &lt;/mat-card-content&gt;
+          &lt;/mat-card&gt;
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/mat-expansion-panel&gt;
@@ -727,19 +734,26 @@ export class CategoriaComponent implements OnInit {
       class&#x3D;&quot;col-md-3 col-6 card-container&quot;
       *ngFor&#x3D;&quot;let sub of subActive; index as i&quot;
     &gt;
-    
       &lt;a routerLink&#x3D;&quot;/sub-categoria/{{ sub.id }}&quot;&gt;
         &lt;mat-card&gt;
-          &lt;img mat-card-image src&#x3D;&quot;{{ sub.image }}&quot; class&#x3D;&quot;mat-card-image&quot; style&#x3D;&quot;Object-fit:cover; min-height: 100%; object-position:cover;&quot;/&gt;
-          &lt;mat-card-content class&#x3D;&quot;card&quot; style&#x3D;&quot;display: flex;
-          align-items: center;&quot;&gt;
-            &lt;mat-card-footer 
-              &gt;&lt;p style&#x3D;&quot;margin-bottom: 0 !important;&quot;&gt;{{ sub.name }}&lt;/p&gt;&lt;/mat-card-footer
+          &lt;img
+            mat-card-image
+            src&#x3D;&quot;{{ sub.image }}&quot;
+            class&#x3D;&quot;mat-card-image&quot;
+            style&#x3D;&quot;object-fit: cover; min-height: 100%; object-position: cover;&quot;
+          /&gt;
+          &lt;mat-card-content
+            class&#x3D;&quot;card&quot;
+            style&#x3D;&quot;display: flex; align-items: center;&quot;
+          &gt;
+            &lt;mat-card-footer
+              &gt;&lt;p style&#x3D;&quot;margin-bottom: 0 !important;&quot;&gt;
+                {{ sub.name }}
+              &lt;/p&gt;&lt;/mat-card-footer
             &gt;
           &lt;/mat-card-content&gt;
         &lt;/mat-card&gt;
       &lt;/a&gt;
-    
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -946,8 +960,8 @@ mat-card-content {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-menu></app-menu><div class="separador" style="color: transparent;">cargando contenid extra</div><div style=" margin-left: 5%;">  <span (click)="getBack()" style="color: grey;">    <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>  </span></div><mat-card class="example-card container head">  <img mat-card-image [src]="categoryById.image" class="encabezado" />  <div class="centered">    {{ categoryById.name }}  </div>  <mat-card-content>    <mat-card-title style="text-align: justify;"      >{{ categoryById.text }}</mat-card-title    >  </mat-card-content></mat-card><br /><div  *ngIf="categoryById.contentCategories"  style="width: 95% !important; max-width:1050px; margin-left: auto; margin-right: auto;">  <mat-accordion>    <mat-expansion-panel hideToggle>      <mat-expansion-panel-header style="height: auto !important;">        <mat-panel-title>          ¡Contenido recomendado!        </mat-panel-title>        <mat-panel-description style="text-align: justify;">          Aquí podrás conseguir todas las recomendaciones Wave que tenemos para          ti        </mat-panel-description>      </mat-expansion-panel-header>    </mat-expansion-panel>    <mat-expansion-panel      (opened)="panelOpenState = true"      (closed)="panelOpenState = false"    >      <mat-expansion-panel-header>        <mat-panel-title>          Contenido        </mat-panel-title>        <mat-panel-description>          {{            panelOpenState              ? "Ocultar contenido"              : "Despliega todo lo que tenemos para ti"          }}        </mat-panel-description>      </mat-expansion-panel-header>      <div *ngFor="let com of categoryById.contentCategories">        <div *ngIf="com.isActive">        <mat-card class="example-card container head">          <img mat-card-image [src]="com.imagen" class="encabezado" />          <mat-card-content>            <mat-card-title style="justify-content: left;"              ><strong> {{ com.title }}</strong></mat-card-title            >            <p>              {{ com.text }}            </p>            <br />            <p>              Consigue más en:              <a href="{{ com.link }}">Contenido extra</a>            </p>          </mat-card-content>        </mat-card>        </div>      </div>    </mat-expansion-panel>  </mat-accordion></div><br /><h4>Podría interesarte</h4><div>  <div class="row card-list" style="max-width: 1350px;">    <div      class="col-md-3 col-6 card-container"      *ngFor="let sub of subActive; index as i"    >          <a routerLink="/sub-categoria/{{ sub.id }}">        <mat-card>          <img mat-card-image src="{{ sub.image }}" class="mat-card-image" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>          <mat-card-content class="card" style="display: flex;          align-items: center;">            <mat-card-footer               ><p style="margin-bottom: 0 !important;">{{ sub.name }}</p></mat-card-footer            >          </mat-card-content>        </mat-card>      </a>        </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+        var COMPONENT_TEMPLATE = '<div><app-menu></app-menu><div class="separador" style="color: transparent;">cargando contenid extra</div><div style="margin-left: 5%;">  <span (click)="getBack()" style="color: grey;">    <mat-icon class="volver" style="font-size: 2em;"      >keyboard_backspace</mat-icon    >  </span></div><mat-card class="example-card container head">  <img mat-card-image [src]="categoryById.image" class="encabezado" />  <div class="centered">    {{ categoryById.name }}  </div>  <mat-card-content>    <mat-card-title style="text-align: justify;">{{      categoryById.text    }}</mat-card-title>  </mat-card-content></mat-card><br /><div  *ngIf="categoryById.contentCategories"  style="    width: 95% !important;    max-width: 1050px;    margin-left: auto;    margin-right: auto;  ">  <mat-accordion>    <mat-expansion-panel hideToggle>      <mat-expansion-panel-header style="height: auto !important;">        <mat-panel-title>          ¡Contenido recomendado!        </mat-panel-title>        <mat-panel-description style="text-align: justify;">          Aquí podrás conseguir todas las recomendaciones Wave que tenemos para          ti        </mat-panel-description>      </mat-expansion-panel-header>    </mat-expansion-panel>    <mat-expansion-panel      (opened)="panelOpenState = true"      (closed)="panelOpenState = false"    >      <mat-expansion-panel-header>        <mat-panel-title>          Contenido        </mat-panel-title>        <mat-panel-description>          {{            panelOpenState              ? "Ocultar contenido"              : "Despliega todo lo que tenemos para ti"          }}        </mat-panel-description>      </mat-expansion-panel-header>      <div *ngFor="let com of categoryById.contentCategories">        <div *ngIf="com.isActive">          <mat-card class="example-card container head">            <img mat-card-image [src]="com.imagen" class="encabezado" />            <mat-card-content>              <mat-card-title style="justify-content: left;"                ><strong> {{ com.title }}</strong></mat-card-title              >              <p>                {{ com.text }}              </p>              <br />              <p>                Consigue más en:                <a href="{{ com.link }}">Contenido extra</a>              </p>            </mat-card-content>          </mat-card>        </div>      </div>    </mat-expansion-panel>  </mat-accordion></div><br /><h4>Podría interesarte</h4><div>  <div class="row card-list" style="max-width: 1350px;">    <div      class="col-md-3 col-6 card-container"      *ngFor="let sub of subActive; index as i"    >      <a routerLink="/sub-categoria/{{ sub.id }}">        <mat-card>          <img            mat-card-image            src="{{ sub.image }}"            class="mat-card-image"            style="object-fit: cover; min-height: 100%; object-position: cover;"          />          <mat-card-content            class="card"            style="display: flex; align-items: center;"          >            <mat-card-footer              ><p style="margin-bottom: 0 !important;">                {{ sub.name }}              </p></mat-card-footer            >          </mat-card-content>        </mat-card>      </a>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CategoriaComponent'};
 </script>

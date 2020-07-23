@@ -287,14 +287,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:42</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Función que Recibe como parametro un email y le cambia el status que tenga Activo a Inactivo o al contrario</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -329,7 +331,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>void</p>
+
                     </div>
                 </td>
             </tr>
@@ -357,17 +360,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:23</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:27</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que da Inicio a Variables</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
 
                     </div>
                 </td>
@@ -396,17 +407,25 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="56"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/admin-crud/admin-crud.component.ts:56</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Función que Muestra más resultados al administrador</p>
+</div>
 
+                    <div>
+                    </div>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
 
                     </div>
                 </td>
@@ -527,9 +546,9 @@ import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
   styleUrls: [&#x27;./admin-crud.component.scss&#x27;]
 })
 export class AdminCrudComponent implements OnInit { 
-  Admins:any[]&#x3D;[];
-  currentPage2: number &#x3D; 1;
-nextPage2: boolean;
+  Admins:any[]&#x3D;[]; // Arreglo de usuarios Admins
+  currentPage2: number &#x3D; 1; // numero de pagina
+  nextPage2: boolean; // Booleado para traer más elementos
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -538,16 +557,25 @@ nextPage2: boolean;
     private router: Router
   ) { }
 
+  /**
+   * Servicio que da Inicio a Variables
+   * @returns void
+   */
   ngOnInit(): void {
     this.waveService.getAdmins(this.currentPage2).subscribe((res)&#x3D;&gt;{
       console.log(res)
       this.Admins &#x3D; res.admins.items;
        this.currentPage2 &#x3D; parseInt(res.admins.meta.currentPage);
-       this.nextPage2 &#x3D;
+       this.nextPage2 &#x3D; 
        this.currentPage2 !&#x3D;&#x3D; parseInt(res.admins.meta.totalPages);
     })
   }
 
+  /**
+   * Función que Recibe como parametro un email y le cambia el status que tenga Activo a Inactivo o al contrario
+   * @param email 
+   * @returns void
+   */
   estadoAdmin(email: string){
     this.waveService.statusAdmin(email).subscribe((res)&#x3D;&gt;{
       
@@ -558,6 +586,10 @@ nextPage2: boolean;
     })
  }
 
+ /**
+  * Función que Muestra más resultados al administrador
+  * @returns void
+  */
  traerMasAdmins() {
   this.waveService
     .getAdmins(this.currentPage2 + 1)
@@ -709,7 +741,7 @@ nextPage2: boolean;
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><app-navbar></app-navbar><h4 style=" margin-left: 5%; margin-top:3%">Administradores</h4><div *ngFor="let foro of Admins" class="contenedor">    <div *ngIf="foro.role == \'admin\'">    <mat-card style="margin-top:2em">              <div style="display:inline">        <mat-card-title >{{ foro.firstName }} {{foro.lastName}}</mat-card-title>        <mat-card-subtitle style="display:inline"          ><p style="display: inline;">            User: {{ foro.userName }}          </p></mat-card-subtitle        ></div>            <div *ngIf="foro.isActive; else activo" style="display: inline;">        <a class="btn btn-primary" (click)="estadoAdmin(foro.email)"          ><mat-icon> close </mat-icon></a        >      </div>      <ng-template #activo        ><button          type="button"          (click)="estadoAdmin(foro.email)"          class="btn btn-primary"        >          <mat-icon> check </mat-icon>        </button>      </ng-template>    </mat-card></div>  </div>  <div  style="display: inline;" *ngIf="nextPage2">    <a class="btn btn-primary" (click)="traerMasAdmins()"      ><mat-icon> more </mat-icon></a    >  </div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AdminCrudComponent'};
 </script>
