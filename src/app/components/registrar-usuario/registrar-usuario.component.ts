@@ -6,8 +6,7 @@ import {
   NgForm,
   Validators,
   FormBuilder,
-  FormArray,
-  RequiredValidator,
+  FormArray
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
@@ -32,9 +31,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 
     return invalidCtrl || invalidParent;
   }
-}
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
 }
 
 @Component({
@@ -179,16 +175,6 @@ export class RegistrarUsuarioComponent implements OnInit {
     console.log(this.background)
   }
 
-  agregarCategoria() {
-    const categoriaFormGroup = this.formBuilder.group({
-      Categoria: '',
-    });
-    this.categorias.push(categoriaFormGroup);
-  }
-
-  removerCategoria(indice) {
-    this.categorias.removeAt(indice);
-  }
 
   onResetForm() {
     this.registerForm.reset();
@@ -221,10 +207,6 @@ export class RegistrarUsuarioComponent implements OnInit {
               console.log(data);
               this.router.navigate(['/picture']);
               this.spinner.hide();
-            },
-            (error)=>{
-              alert("El usuario ya se encuentra registrado");
-              this.spinner.hide();
             });
         } else {
           alert('Debe pagar primero para obtener su cuenta Premium');
@@ -241,14 +223,16 @@ export class RegistrarUsuarioComponent implements OnInit {
             this.registerForm.value.fecha,
             this.registerForm.value.contra,
             this.registerForm.value.tipoCuenta
+          ).pipe(
+            catchError(err => {
+              this.spinner.hide();
+              console.log(err);
+              alert(err.error.message)
+              return throwError("Error thrown from catchError");} )
           )
           .subscribe((data) => {
             console.log(data);
             this.router.navigate(['/picture']);
-            this.spinner.hide();
-          },
-          (error)=>{
-            alert("El usuario ya se encuentra registrado");
             this.spinner.hide();
           });
       }
