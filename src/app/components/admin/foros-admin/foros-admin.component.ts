@@ -51,7 +51,11 @@ export class ForosAdminComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
   @ViewChild('btnClose2') btnClose2: ElementRef;
  
-
+  /**
+   * Metodo que da formato al form group nombrando sus form controls y
+   *  las validaciones a las que se someten
+   * @returns FormGroup
+   */
   createFormGroup() {
     return new FormGroup({
       title: new FormControl('', [
@@ -102,6 +106,12 @@ export class ForosAdminComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * metodo que envia los datos pertinentes al servicio para registrar 
+   * un foro nuevo
+   * @returns void
+   */
 
   onSubmit(){
   
@@ -157,11 +167,18 @@ export class ForosAdminComponent implements OnInit {
   }
 
 
+  /**Captura el id de la subcategoria seleccionada para crearle unforo
+   * desde el archivo html
+   * @returns void
+   */
   catchId(id) {
     this.subcategoryId = id;
   }
 
-  
+  /**metodo que recibe un objetivo para filtrar los foros 
+   * por la categoria seleccionada
+   * @returns void
+   */
   onChangeCategory(target) {
     this.selectedIdCategory = target.value;
     this.waveService
@@ -182,6 +199,10 @@ export class ForosAdminComponent implements OnInit {
       });
   }
 
+  /**metodo que recibe un objetivo para filtrar los foros 
+   * por la subcategoria seleccionada
+   * @returns void
+   */
   onChangeSubcategory(target) {
     this.selectedIdSubcategory = target.value;
     this.waveService
@@ -198,6 +219,10 @@ export class ForosAdminComponent implements OnInit {
       });
   }
 
+  /**metodo que trae y añade al array existente el siguiente grupo de 
+   * foros paginados en el backend
+   * @returns void
+   *  */
   traerMasForos() {
     this.waveService
       .getAllForums({
@@ -213,6 +238,11 @@ export class ForosAdminComponent implements OnInit {
       });
   }
   
+  /**Metodo que recibe el id del foro seleccionado para cambiar su estado
+   * de activo a inactivo, o viceversa, y lo manda al servicio para hacer lo correspondiente,
+   * tambien actualiza el arreglo existente
+   * @returns void
+   */
   changeStatus(id: number) {
     this.spinner.show();
     this.waveService.statusForo(id).subscribe((data) => {
@@ -224,15 +254,22 @@ export class ForosAdminComponent implements OnInit {
     });
   }
 
-  isActive(id: number){
- 
-  }
-
+  /**Recibe un objeto seleccionado en el html como parametro
+   *  y asigna sus valores al selected
+   * @param content
+   * @returns void
+   * 
+    */
   preUpdate(content: any){
     this.selected = Object.assign({},content);
        
 }
 
+/**
+   * metodo que manda al servicio los datos necesarios para asignar una imagen
+   * al foro seleccionado
+   * @returns void
+   */
 updatePic(){
   if(this.files.length>0){
     this.spinner.show()
@@ -252,6 +289,10 @@ updatePic(){
 }
 }
 
+/**Metodo que resetea el form y todos los datos necesarios para que no se 
+   * repitan valores.
+   * @returns void
+   */
 reset(){
   this.foroForm.reset();
   this.files=[];
@@ -262,51 +303,35 @@ reset(){
   };
 }
 
+/**Metodo que recibe y maneja el evento que ocurre al seleccionar un archivo,
+   * y mete este archivo al files array
+   * @returns void
+   */
   onSelect(event) {
     console.log(event);
     this.files.push(...event.addedFiles);
   }
 
+  /**Metodo que recibe y maneja el evento que ocurre al eliminar un archivo 
+   * un archivo del srop area,
+   * y elimina este archivo del files array
+   * @returns void
+   */
   onRemove(event) {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+  /** 
+        *  getters para obtener un child control de title dado el nombre
+        * @returns AbstractControl
+       */
   get title() {
     return this.foroForm.get('title');
   }
 
 
 
-  likeForo(id: number) {
-    this.waveService.likeForum(id).subscribe((res) => {
-      if (res) {
-        this.waveService.getForumsPostsByUser().subscribe((res) => {
-          this.myforums = res.forums;
-        });
-      }
-    });
-  }
-
-  dislikeForo(id: number) {
-    this.waveService.dislikeForum(id).subscribe((res) => {
-      if (res) {
-        this.waveService.getForumsPostsByUser().subscribe((res) => {
-          this.myforums = res.forums;
-        });
-        
-      }
-    });
-  }
-
-  isFav(id: number) {
-    let vart;
-    if (this.myforums) {
-      vart = this.myforums.find((ob) => ob.id == id);
-      if (vart == null) {
-        return false;
-      }
-      return true;
-    }
-  }
 }
+        
+      
