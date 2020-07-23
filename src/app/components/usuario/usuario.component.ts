@@ -123,7 +123,6 @@ export class UsuarioComponent implements OnInit {
     };
     this.waveService.getCurrentUser().subscribe((response) => {
       this.user = response.user;
-      console.log(this.user);
     });
     //console.log(this.user);
     this.waveService.getForumsPostsByUser().subscribe((res) => {

@@ -10,7 +10,7 @@
 </div>
 
 <mat-card class="example-card container head">
-  <img mat-card-image [src]="categoryById.image" class="encabezado" />
+  <img mat-card-image [src]="categoryById.image" alt="img" class="encabezado" />
   <div class="centered">
     {{ categoryById.name }}
   </div>
@@ -64,7 +64,7 @@
       <div *ngFor="let com of categoryById.contentCategories">
         <div *ngIf="com.isActive">
           <mat-card class="example-card container head">
-            <img mat-card-image [src]="com.imagen" class="encabezado" />
+            <img mat-card-image [src]="com.imagen" alt="img" class="encabezado" />
 
             <mat-card-content>
               <mat-card-title style="justify-content: left;"
@@ -100,6 +100,7 @@
             mat-card-image
             src="{{ sub.image }}"
             class="mat-card-image"
+            alt="img"
             style="object-fit: cover; min-height: 100%; object-position: cover;"
           />
           <mat-card-content

@@ -40,6 +40,7 @@
           mat-card-image
           [src]="subcategory.image"
           class="encabezado"
+          alt="Avatar"
           style="
             object-fit: cover;
             object-position: cover;
@@ -110,7 +111,8 @@
               (click)="dislikeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"     
+              
               >favorite</mat-icon
             >
           </mat-card-actions>
@@ -187,7 +189,7 @@
               (click)="likeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
               >favorite_border</mat-icon
             >
           </mat-card-actions>
