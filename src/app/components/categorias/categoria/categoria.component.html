@@ -1,22 +1,24 @@
 <app-menu></app-menu>
 <div class="separador" style="color: transparent;">cargando contenid extra</div>
 
-<div style=" margin-left: 5%;">
+<div style="margin-left: 5%;">
   <span (click)="getBack()" style="color: grey;">
-    <mat-icon class="volver" style="font-size:2em ;">keyboard_backspace</mat-icon>
+    <mat-icon class="volver" style="font-size: 2em;"
+      >keyboard_backspace</mat-icon
+    >
   </span>
 </div>
 
 <mat-card class="example-card container head">
-  <img mat-card-image [src]="categoryById.image" class="encabezado" />
+  <img mat-card-image [src]="categoryById.image" alt="img" class="encabezado" />
   <div class="centered">
     {{ categoryById.name }}
   </div>
 
   <mat-card-content>
-    <mat-card-title style="text-align: justify;"
-      >{{ categoryById.text }}</mat-card-title
-    >
+    <mat-card-title style="text-align: justify;">{{
+      categoryById.text
+    }}</mat-card-title>
   </mat-card-content>
 </mat-card>
 
@@ -24,7 +26,12 @@
 
 <div
   *ngIf="categoryById.contentCategories"
-  style="width: 95% !important; max-width:1050px; margin-left: auto; margin-right: auto;"
+  style="
+    width: 95% !important;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+  "
 >
   <mat-accordion>
     <mat-expansion-panel hideToggle>
@@ -56,23 +63,23 @@
       </mat-expansion-panel-header>
       <div *ngFor="let com of categoryById.contentCategories">
         <div *ngIf="com.isActive">
-        <mat-card class="example-card container head">
-          <img mat-card-image [src]="com.imagen" class="encabezado" />
+          <mat-card class="example-card container head">
+            <img mat-card-image [src]="com.imagen" alt="img" class="encabezado" />
 
-          <mat-card-content>
-            <mat-card-title style="justify-content: left;"
-              ><strong> {{ com.title }}</strong></mat-card-title
-            >
-            <p>
-              {{ com.text }}
-            </p>
-            <br />
-            <p>
-              Consigue más en:
-              <a href="{{ com.link }}">Contenido extra</a>
-            </p>
-          </mat-card-content>
-        </mat-card>
+            <mat-card-content>
+              <mat-card-title style="justify-content: left;"
+                ><strong> {{ com.title }}</strong></mat-card-title
+              >
+              <p>
+                {{ com.text }}
+              </p>
+              <br />
+              <p>
+                Consigue más en:
+                <a href="{{ com.link }}">Contenido extra</a>
+              </p>
+            </mat-card-content>
+          </mat-card>
         </div>
       </div>
     </mat-expansion-panel>
@@ -87,19 +94,27 @@
       class="col-md-3 col-6 card-container"
       *ngFor="let sub of subActive; index as i"
     >
-    
       <a routerLink="/sub-categoria/{{ sub.id }}">
         <mat-card>
-          <img mat-card-image src="{{ sub.image }}" class="mat-card-image" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
-          <mat-card-content class="card" style="display: flex;
-          align-items: center;">
-            <mat-card-footer 
-              ><p style="margin-bottom: 0 !important;">{{ sub.name }}</p></mat-card-footer
+          <img
+            mat-card-image
+            src="{{ sub.image }}"
+            class="mat-card-image"
+            alt="img"
+            style="object-fit: cover; min-height: 100%; object-position: cover;"
+          />
+          <mat-card-content
+            class="card"
+            style="display: flex; align-items: center;"
+          >
+            <mat-card-footer
+              ><p style="margin-bottom: 0 !important;">
+                {{ sub.name }}
+              </p></mat-card-footer
             >
           </mat-card-content>
         </mat-card>
       </a>
-    
     </div>
   </div>
 </div>

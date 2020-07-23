@@ -21,14 +21,12 @@ import { SubCategoriaComponent } from './components/categorias/sub-categoria/sub
 import { NgxPayPalModule } from 'ngx-paypal';
 import { CategoriaComponent } from './components/categorias/categoria/categoria.component';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
-import { FavoritasComponent } from './components/favoritas/favoritas.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForoFilterPipe } from './pipes/foro-filter.pipe';
 import { PictureComponent } from './components/picture/picture.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { CrearForoComponent } from './components/foros/crear-foro/crear-foro.component';
 import { PictureForoComponent } from './components/picture-foro/picture-foro.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
@@ -67,11 +65,9 @@ const config: SocketIoConfig = {
     ForoComponent,
     CategoriasComponent,
     CategoriaComponent,
-    FavoritasComponent,
     ForoFilterPipe,
     PictureComponent,
     UsuarioComponent,
-    CrearForoComponent,
     PictureForoComponent,
     DateAgoPipe,
     AdminComponent,

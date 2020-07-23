@@ -111,7 +111,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -187,7 +187,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -215,7 +215,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/registrar-usuario/registrar-usuario.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -250,6 +250,8 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { WaveServiceService } from &#x27;src/app/services/wave-service.service&#x27;;
 import { IPayPalConfig, ICreateOrderRequest } from &#x27;ngx-paypal&#x27;;
 import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { catchError } from &#x27;rxjs/operators&#x27;;
+import { throwError } from &#x27;rxjs&#x27;;
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -323,8 +325,8 @@ export class RegistrarUsuarioComponent implements OnInit {
         ]),
         contra: new FormControl(&#x27;&#x27;, [
           Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(10),
+          Validators.minLength(8),
+          Validators.maxLength(30),
           Validators.pattern(this.passwordPattern)
         ]),
         validContra: new FormControl(&#x27;&#x27;),
@@ -444,6 +446,12 @@ export class RegistrarUsuarioComponent implements OnInit {
               this.registerForm.value.fecha,
               this.registerForm.value.contra,
               this.registerForm.value.tipoCuenta
+            ).pipe(
+              catchError(err &#x3D;&gt; {
+                this.spinner.hide();
+                console.log(err);
+                alert(err.error.message)
+                return throwError(&quot;Error thrown from catchError&quot;);} )
             )
             .subscribe((data) &#x3D;&gt; {
               console.log(data);

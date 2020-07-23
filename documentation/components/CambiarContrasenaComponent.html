@@ -346,7 +346,7 @@
 
 
                                     <td>
-                                        <p>formulario donde el usuario coloca un Nuevo Password y su Confirmación</p>
+                                        <p>formulario donde el usuario coloca un Nuevo Password y la Confirmación de este</p>
 
                                     </td>
                                 </tr>
@@ -542,7 +542,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>/^(?&#x3D;\w*\d)(?&#x3D;\w*[A-Z])(?&#x3D;\w*[a-z])/</code>
+                            <i>Default value : </i><code>/^(?&#x3D;.*[a-z])(?&#x3D;.*[A-Z])(?&#x3D;.*\d)(?&#x3D;.*[$@$!%*?&amp;])[A-Za-z\d$@$!%*?&amp;]/</code>
                         </td>
                     </tr>
                         <tr>
@@ -675,7 +675,7 @@ import {ActivatedRoute, Route, Router} from &#x27;@angular/router&#x27;;
   styleUrls: [&#x27;./cambiar-contrasena.component.scss&#x27;]
 })
 export class CambiarContrasenaComponent implements OnInit {
-  private   Pattern: any &#x3D; /^(?&#x3D;\w*\d)(?&#x3D;\w*[A-Z])(?&#x3D;\w*[a-z])/;
+  private   Pattern: any &#x3D; /^(?&#x3D;.*[a-z])(?&#x3D;.*[A-Z])(?&#x3D;.*\d)(?&#x3D;.*[$@$!%*?&amp;])[A-Za-z\d$@$!%*?&amp;]/;
   //
   user: any; 
   token: string;
@@ -683,7 +683,7 @@ export class CambiarContrasenaComponent implements OnInit {
   loginForm: FormGroup;
 /**
  * Revisa si las contraseñas colocadas en el formulario son iguales para la sustitución de la Contraseña anterior
- * @param group formulario donde el usuario coloca un Nuevo Password y su Confirmación
+ * @param group formulario donde el usuario coloca un Nuevo Password y la Confirmación de este
  * @returns si es false procede, en caso contrario mostrará un mensaje de error
  */
   checkPasswords(group: FormGroup) {
@@ -700,8 +700,8 @@ export class CambiarContrasenaComponent implements OnInit {
        
         contra: new FormControl(&#x27;&#x27;, [
           Validators.required,
-          Validators.minLength(7),
-          Validators.maxLength(10),
+          Validators.minLength(8),
+          Validators.maxLength(30),
           Validators.pattern(this.Pattern)
         ]),
         contraconf: new FormControl(&#x27;&#x27;),
@@ -775,14 +775,14 @@ export class CambiarContrasenaComponent implements OnInit {
               Introduzca su nueva contraseña
             &lt;/mat-error&gt;
             &lt;mat-error *ngIf&#x3D;&quot;contra.errors.minlength&quot;&gt;
-              7 caracteres mínimo
+              8 caracteres mínimo
             &lt;/mat-error&gt;
             &lt;mat-error *ngIf&#x3D;&quot;contra.errors.maxlength&quot;&gt;
-              10 caracteres máximo
+              30 caracteres máximo
             &lt;/mat-error&gt;
             &lt;mat-error *ngIf&#x3D;&quot;contra.errors.pattern&quot;&gt;
-              Debe tener al menos una Mayúscula, una Minúscula y  un
-              dígito
+              Debe tener al menos una Mayúscula, una Minúscula,  un 
+              dígito, un caracter especial y no con tener espacios
             &lt;/mat-error&gt;
           &lt;/div&gt;
           &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
@@ -1046,8 +1046,8 @@ select:-webkit-autofill {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="fondo">  <div class="form">        <form [formGroup]="loginForm">      <h1>Cambiar contraseña</h1>      <label class="info"        >Introduce la nueva contraseña</label      >              <div class="formulario">          <mat-form-field appearance="outline">            <mat-label              >Nueva Contraseña</mat-label            >            <input type="password" matInput placeholder="Contraseña" formControlName="contra" />          </mat-form-field>          <div *ngIf="contra.invalid && (contra.dirty || contra.touched)">            <mat-error *ngIf="contra.errors.required">              Introduzca su nueva contraseña            </mat-error>            <mat-error *ngIf="contra.errors.minlength">              7 caracteres mínimo            </mat-error>            <mat-error *ngIf="contra.errors.maxlength">              10 caracteres máximo            </mat-error>            <mat-error *ngIf="contra.errors.pattern">              Debe tener al menos una Mayúscula, una Minúscula y  un              dígito            </mat-error>          </div>          <mat-form-field appearance="outline">            <mat-label              >Repetir contraseña</mat-label            >            <input type="password" formControlName="contraconf" matInput placeholder="Repetir Contraseña" />          </mat-form-field>          <mat-error          *ngIf="loginForm.hasError(\'notSame\') && contraconf.dirty"        >          Contraseñas no coinciden        </mat-error>                  </div>        <div class="boton">                    <a             ><button              type="button"              class="btn btn-primary segundo"              (click)="onSaveForm()"              [disabled]="loginForm.invalid"            >              continuar            </button></a          >        </div>            </form>    </div>  </div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+        var COMPONENT_TEMPLATE = '<div><div class="fondo">  <div class="form">        <form [formGroup]="loginForm">      <h1>Cambiar contraseña</h1>      <label class="info"        >Introduce la nueva contraseña</label      >              <div class="formulario">          <mat-form-field appearance="outline">            <mat-label              >Nueva Contraseña</mat-label            >            <input type="password" matInput placeholder="Contraseña" formControlName="contra" />          </mat-form-field>          <div *ngIf="contra.invalid && (contra.dirty || contra.touched)">            <mat-error *ngIf="contra.errors.required">              Introduzca su nueva contraseña            </mat-error>            <mat-error *ngIf="contra.errors.minlength">              8 caracteres mínimo            </mat-error>            <mat-error *ngIf="contra.errors.maxlength">              30 caracteres máximo            </mat-error>            <mat-error *ngIf="contra.errors.pattern">              Debe tener al menos una Mayúscula, una Minúscula,  un               dígito, un caracter especial y no con tener espacios            </mat-error>          </div>          <mat-form-field appearance="outline">            <mat-label              >Repetir contraseña</mat-label            >            <input type="password" formControlName="contraconf" matInput placeholder="Repetir Contraseña" />          </mat-form-field>          <mat-error          *ngIf="loginForm.hasError(\'notSame\') && contraconf.dirty"        >          Contraseñas no coinciden        </mat-error>                  </div>        <div class="boton">                    <a             ><button              type="button"              class="btn btn-primary segundo"              (click)="onSaveForm()"              [disabled]="loginForm.invalid"            >              continuar            </button></a          >        </div>            </form>    </div>  </div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CambiarContrasenaComponent'};
 </script>

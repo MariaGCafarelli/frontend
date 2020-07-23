@@ -343,25 +343,23 @@ import { WaveServiceService } from &#x27;src/app/services/wave-service.service&#
 @Component({
   selector: &#x27;app-navbar&#x27;,
   templateUrl: &#x27;./navbar.component.html&#x27;,
-  styleUrls: [&#x27;./navbar.component.scss&#x27;]
+  styleUrls: [&#x27;./navbar.component.scss&#x27;],
 })
 export class NavbarComponent implements OnInit {
   user: any;
 
-  constructor(private service: WaveServiceService) { }
+  constructor(private service: WaveServiceService) {}
 
   ngOnInit(): void {
     this.service.getCurrentUser().subscribe((response) &#x3D;&gt; {
-      console.log(response);
+      //console.log(response);
       this.user &#x3D; response.user;
     });
   }
 
-  logOut(){
+  logOut() {
     this.service.logOutUser();
-
   }
-
 }
 </code></pre>
     </div>
@@ -394,7 +392,7 @@ export class NavbarComponent implements OnInit {
           Categorías
         &lt;/a&gt;
         &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;navbarDropdownMenuLink&quot;&gt;
-          &lt;a class&#x3D;&quot;dropdown-item&quot; href&#x3D;&quot;/admin/categorias&quot;&gt;Categorías&lt;/a&gt;
+          &lt;a class&#x3D;&quot;dropdown-item&quot; href&#x3D;&quot;/admin&quot;&gt;Categorías&lt;/a&gt;
           &lt;a class&#x3D;&quot;dropdown-item&quot; href&#x3D;&quot;/admin/contenido-recomendado&quot;
             &gt;Contenido recomendado&lt;/a
           &gt;
@@ -407,8 +405,22 @@ export class NavbarComponent implements OnInit {
         &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;/admin/foros&quot;&gt;Foros&lt;/a&gt;
       &lt;/li&gt;
 
-      &lt;li class&#x3D;&quot;nav-item&quot;&gt;
-        &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;/admin/usuarios&quot;&gt;Usuarios&lt;/a&gt;
+      &lt;li class&#x3D;&quot;nav-item dropdown&quot;&gt;
+        &lt;a
+          class&#x3D;&quot;nav-link dropdown-toggle&quot;
+          id&#x3D;&quot;navbarDropdownMenuLink&quot;
+          data-toggle&#x3D;&quot;dropdown&quot;
+          aria-haspopup&#x3D;&quot;true&quot;
+          aria-expanded&#x3D;&quot;false&quot;
+        &gt;
+          Usuarios
+        &lt;/a&gt;
+        &lt;div class&#x3D;&quot;dropdown-menu&quot; aria-labelledby&#x3D;&quot;navbarDropdownMenuLink&quot;&gt;
+          &lt;a class&#x3D;&quot;dropdown-item&quot; href&#x3D;&quot;/admin/usuarios&quot;&gt;Usuarios&lt;/a&gt;
+          &lt;a class&#x3D;&quot;dropdown-item&quot; href&#x3D;&quot;/admin/usuarios-admin&quot;
+            &gt;Administradores&lt;/a
+          &gt;
+        &lt;/div&gt;
       &lt;/li&gt;
       &lt;div *ngIf&#x3D;&quot;user.role &#x3D;&#x3D; &#x27;superadmin&#x27;&quot;&gt;
       &lt;li class&#x3D;&quot;nav-item&quot;&gt;
@@ -461,8 +473,8 @@ export class NavbarComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div *ngIf="user"><nav class="navbar navbar-expand-lg navbar-light bg-light">  <a class="navbar-brand" href="/admin">Wave</a>  <button    class="navbar-toggler"    type="button"    data-toggle="collapse"    data-target="#navbarNavDropdown"    aria-controls="navbarNavDropdown"    aria-expanded="false"    aria-label="Toggle navigation"  >    <span class="navbar-toggler-icon"></span>  </button>  <div class="collapse navbar-collapse" id="navbarNavDropdown">    <ul class="navbar-nav">      <li class="nav-item dropdown">        <a          class="nav-link dropdown-toggle"          id="navbarDropdownMenuLink"          data-toggle="dropdown"          aria-haspopup="true"          aria-expanded="false"        >          Categorías        </a>        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          <a class="dropdown-item" href="/admin/categorias">Categorías</a>          <a class="dropdown-item" href="/admin/contenido-recomendado"            >Contenido recomendado</a          >        </div>      </li>      <li class="nav-item">        <a class="nav-link" href="/admin/subcategorias">Subcategorías</a>      </li>      <li class="nav-item">        <a class="nav-link" href="/admin/foros">Foros</a>      </li>      <li class="nav-item">        <a class="nav-link" href="/admin/usuarios">Usuarios</a>      </li>      <div *ngIf="user.role == \'superadmin\'">      <li class="nav-item">        <a class="nav-link" href="/admin/registrar-admin"          >Registrar Administrador</a        >      </li>    </div>      <li class="nav-item">        <a class="nav-link" (click)="logOut()" routerLink="/iniciar-sesion"          >Cerrar sesión</a        >      </li>    </ul>  </div></nav></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+        var COMPONENT_TEMPLATE = '<div><div *ngIf="user"><nav class="navbar navbar-expand-lg navbar-light bg-light">  <a class="navbar-brand" href="/admin">Wave</a>  <button    class="navbar-toggler"    type="button"    data-toggle="collapse"    data-target="#navbarNavDropdown"    aria-controls="navbarNavDropdown"    aria-expanded="false"    aria-label="Toggle navigation"  >    <span class="navbar-toggler-icon"></span>  </button>  <div class="collapse navbar-collapse" id="navbarNavDropdown">    <ul class="navbar-nav">      <li class="nav-item dropdown">        <a          class="nav-link dropdown-toggle"          id="navbarDropdownMenuLink"          data-toggle="dropdown"          aria-haspopup="true"          aria-expanded="false"        >          Categorías        </a>        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          <a class="dropdown-item" href="/admin">Categorías</a>          <a class="dropdown-item" href="/admin/contenido-recomendado"            >Contenido recomendado</a          >        </div>      </li>      <li class="nav-item">        <a class="nav-link" href="/admin/subcategorias">Subcategorías</a>      </li>      <li class="nav-item">        <a class="nav-link" href="/admin/foros">Foros</a>      </li>      <li class="nav-item dropdown">        <a          class="nav-link dropdown-toggle"          id="navbarDropdownMenuLink"          data-toggle="dropdown"          aria-haspopup="true"          aria-expanded="false"        >          Usuarios        </a>        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">          <a class="dropdown-item" href="/admin/usuarios">Usuarios</a>          <a class="dropdown-item" href="/admin/usuarios-admin"            >Administradores</a          >        </div>      </li>      <div *ngIf="user.role == \'superadmin\'">      <li class="nav-item">        <a class="nav-link" href="/admin/registrar-admin"          >Registrar Administrador</a        >      </li>    </div>      <li class="nav-item">        <a class="nav-link" (click)="logOut()" routerLink="/iniciar-sesion"          >Cerrar sesión</a        >      </li>    </ul>  </div></nav></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
 </script>

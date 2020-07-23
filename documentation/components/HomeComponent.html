@@ -135,12 +135,6 @@
                             <li>
                                 <a href="#favoriteCategories">favoriteCategories</a>
                             </li>
-                            <li>
-                                <a href="#showNavigationArrows">showNavigationArrows</a>
-                            </li>
-                            <li>
-                                <a href="#showNavigationIndicators">showNavigationIndicators</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -182,7 +176,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/home/home.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/home/home.component.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -275,14 +269,17 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">src/app/components/home/home.component.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/components/home/home.component.ts:36</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Funcion que usa el servicio que elimina una subcategoria a las favoritas del ususario,
+actualiza el arreglo de categorias favoritas</p>
+</div>
 
                     <div class="io-description">
                         <b>Parameters :</b>
@@ -317,7 +314,8 @@
 
                     </div>
                     <div class="io-description">
-                        
+                        <p>void</p>
+
                     </div>
                 </td>
             </tr>
@@ -345,8 +343,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/components/home/home.component.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="20"
+                            class="link-to-prism">src/app/components/home/home.component.ts:20</a></div>
                 </td>
             </tr>
 
@@ -388,7 +386,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/home/home.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/components/home/home.component.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -415,59 +413,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/components/home/home.component.ts:14</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showNavigationArrows"></a>
-                        <span class="name">
-                            <b>
-                            showNavigationArrows</b>
-                            <a href="#showNavigationArrows"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>true</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/home/home.component.ts:16</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="showNavigationIndicators"></a>
-                        <span class="name">
-                            <b>
-                            showNavigationIndicators</b>
-                            <a href="#showNavigationIndicators"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/home/home.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/home/home.component.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -484,8 +430,6 @@
 import { WaveServiceService } from &#x27;src/app/services/wave-service.service&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 
-
-
 @Component({
   selector: &#x27;app-home&#x27;,
   templateUrl: &#x27;./home.component.html&#x27;,
@@ -495,97 +439,109 @@ export class HomeComponent implements OnInit {
   categories: any;
   favoriteCategories: any;
 
-  showNavigationArrows &#x3D; true;
-  showNavigationIndicators &#x3D; false;
-
   constructor(
     private waveService: WaveServiceService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    /**
+     * Servicio que trae todos las Subcategorias favortias del ususario
+     * en un arreglo, agrupadas por categoria
+     * Inicializa el arreglo de categorias favoritas
+     */
     this.waveService.getFavoriteSubCategories().subscribe((response) &#x3D;&gt; {
-      console.log(response)
       this.favoriteCategories &#x3D; response.categories;
-      console.log(&#x27;favorite&#x27;, this.favoriteCategories);
     });
   }
 
-  dislikesubC(id: number){
-    this.waveService.dislikeSubcategorie(id).subscribe((res)&#x3D;&gt;{
-      if(res){
-        alert(&quot;Se cancelará su suscripción a los foros de la subcategoría&quot;)
+  /**
+   * Funcion que usa el servicio que elimina una subcategoria a las favoritas del ususario,
+   * actualiza el arreglo de categorias favoritas
+   * @return void
+   */
+  dislikesubC(id: number) {
+    this.waveService.dislikeSubcategorie(id).subscribe((res) &#x3D;&gt; {
+      if (res) {
+        alert(&#x27;Se cancelará su suscripción a los foros de la subcategoría&#x27;);
         this.waveService.getFavoriteSubCategories().subscribe((response) &#x3D;&gt; {
-          console.log(response)
           this.favoriteCategories &#x3D; response.categories;
-          console.log(&#x27;favorite&#x27;, this.favoriteCategories);
         });
-        console.log(res);
-      };
+      }
     });
   }
-    
 }
-
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">
-&lt;app-menu&gt;&lt;/app-menu&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;app-menu&gt;&lt;/app-menu&gt;
 &lt;div class&#x3D;&quot;fondo&quot;&gt;
   &lt;h3&gt;&lt;strong&gt;¡Hola! Bienvenido de vuelta&lt;/strong&gt;&lt;/h3&gt;
   &lt;h6&gt;Accede rápido a tu contenido preferido&lt;/h6&gt;
   &lt;div class&#x3D;&quot;carousel&quot;&gt;
     &lt;div *ngFor&#x3D;&quot;let cat of favoriteCategories&quot; class&#x3D;&quot;para-sobrevivir&quot;&gt;
       &lt;div *ngIf&#x3D;&quot;cat.isActive&quot;&gt;
-      &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
-        &lt;a routerLink&#x3D;&quot;/categoria/{{ cat.id }}&quot;
-          &gt;&lt;img
-            mat-card-image
-            [src]&#x3D;&quot;cat.image&quot;
-            alt&#x3D;&quot;5 Terre&quot;
-            style&#x3D;&quot;width: 100%;&quot;
-            class&#x3D;&quot;cat&quot;
-          /&gt;
-          
+        &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
+          &lt;a routerLink&#x3D;&quot;/categoria/{{ cat.id }}&quot;
+            &gt;&lt;img
+              mat-card-image
+              [src]&#x3D;&quot;cat.image&quot;
+              alt&#x3D;&quot;5 Terre&quot;
+              style&#x3D;&quot;width: 100%;&quot;
+              class&#x3D;&quot;cat&quot;
+            /&gt;
+
+            &lt;mat-card-header&gt;
+              &lt;mat-card-title class&#x3D;&quot;titulo&quot;
+                &gt;&lt;strong&gt;{{ cat.name }}&lt;/strong&gt;&lt;/mat-card-title
+              &gt;
+              &lt;br /&gt;
+              &lt;mat-card-subtitle style&#x3D;&quot;font-style: italic;&quot;
+                &gt;Para ver recomendaciones, ve a
+                {{ cat.name }}&lt;/mat-card-subtitle
+              &gt;
+            &lt;/mat-card-header&gt;
+            &lt;mat-card-content&gt;
+              &lt;p&gt;
+                {{ cat.text }}
+              &lt;/p&gt;
+            &lt;/mat-card-content&gt;
+          &lt;/a&gt;
+          &lt;mat-divider&gt;&lt;/mat-divider&gt;
           &lt;mat-card-header&gt;
-            &lt;mat-card-title class&#x3D;&quot;titulo&quot;
-              &gt;&lt;strong&gt;{{ cat.name }}&lt;/strong&gt;&lt;/mat-card-title
-            &gt;
-            &lt;br /&gt;
-            &lt;mat-card-subtitle style&#x3D;&quot;font-style: italic;&quot;&gt;Para ver recomendaciones, ve a {{cat.name}}&lt;/mat-card-subtitle&gt;
+            &lt;mat-card-title
+              &gt;&lt;strong&gt;Tu contenido favorito en {{ cat.name }}&lt;/strong&gt;
+            &lt;/mat-card-title&gt;
           &lt;/mat-card-header&gt;
-          &lt;mat-card-content&gt;
-            &lt;p&gt;
-              {{ cat.text }}
-            &lt;/p&gt;
-          &lt;/mat-card-content&gt;
-        &lt;/a&gt;
-        &lt;mat-divider&gt;&lt;/mat-divider&gt;
-        &lt;mat-card-header&gt;
-          &lt;mat-card-title
-            &gt;&lt;strong&gt;Tu contenido favorito en {{ cat.name }}&lt;/strong&gt;
-          &lt;/mat-card-title&gt;
-        &lt;/mat-card-header&gt;
-        &lt;mat-chip-list aria-label&#x3D;&quot;Fish selection&quot;&gt;
-          &lt;div *ngFor&#x3D;&quot;let sub of cat.subCategories&quot;&gt;
-            &lt;a 
-              &gt;&lt;mat-chip style&#x3D;&quot;background-color:#e98167&quot; selected routerLink&#x3D;&quot;/sub-categoria/{{ sub.id }}&quot;
-                &gt;{{ sub.name }}
-                &lt;mat-icon (click)&#x3D;&quot;dislikesubC(sub.id)&quot; routerLink&#x3D;&quot;/home&quot;  matChipRemove&gt;thumb_down&lt;/mat-icon&gt;&lt;/mat-chip
-              &gt;&lt;/a
-            &gt;
-          &lt;/div&gt;
-        &lt;/mat-chip-list&gt;
-      
-      &lt;/mat-card&gt;
+          &lt;mat-chip-list aria-label&#x3D;&quot;Fish selection&quot;&gt;
+            &lt;div *ngFor&#x3D;&quot;let sub of cat.subCategories&quot;&gt;
+              &lt;div *ngIf&#x3D;&quot;sub.isActive&quot;&gt;
+                &lt;a
+                  &gt;&lt;mat-chip
+                    style&#x3D;&quot;
+                      background-color: #ffb295;
+                      color: black;
+
+                      font-weight: bold;
+                    &quot;
+                    selected
+                    routerLink&#x3D;&quot;/sub-categoria/{{ sub.id }}&quot;
+                    &gt;{{ sub.name }}
+                    &lt;mat-icon (click)&#x3D;&quot;dislikesubC(sub.id)&quot; matChipRemove
+                      &gt;thumb_down&lt;/mat-icon
+                    &gt;&lt;/mat-chip
+                  &gt;&lt;/a
+                &gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/mat-chip-list&gt;
+        &lt;/mat-card&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;/div&gt;
 &lt;/div&gt;
-
 </code></pre>
     </div>
 
@@ -597,6 +553,7 @@ export class HomeComponent implements OnInit {
   min-height: 100%;
   margin-bottom: 3em;
 }
+
 .carousel {
   width: 93%;
   margin: auto;
@@ -607,10 +564,6 @@ export class HomeComponent implements OnInit {
   height: 2.5em;
   padding-top: 3%;
   padding-left: 4%;
-}
-
-.picsum-img-wrapper {
-  height: 100%;
 }
 
 img.cat {
@@ -624,30 +577,6 @@ img.cat {
   position: relative;
   text-align: center;
   color: white;
-}
-
-.centered {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.6rem !important;
-  letter-spacing: 2px;
-}
-
-h4.categorias {
-  font-family: &quot;Roboto&quot;, sans-serif;
-  text-align: center;
-  font-weight: bolder;
-  color: #484a4c;
-  letter-spacing: 2px;
-  margin: auto;
-  text-transform: lowercase;
-}
-
-h4,
-.h4 {
-  font-size: 1.1rem !important;
 }
 
 h3,
@@ -702,15 +631,6 @@ a {
 p{
   padding-left: 13px;
   padding-right: 13px;
-}
-
-div.polaroid {
-  width: 95%;
-  background-color: white;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 25px;
-  margin: auto;
-  border-radius: 2px;
 }
 
 div.container {
@@ -811,8 +731,8 @@ div.container {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-menu></app-menu><div class="fondo">  <h3><strong>¡Hola! Bienvenido de vuelta</strong></h3>  <h6>Accede rápido a tu contenido preferido</h6>  <div class="carousel">    <div *ngFor="let cat of favoriteCategories" class="para-sobrevivir">      <div *ngIf="cat.isActive">      <mat-card class="example-card">        <a routerLink="/categoria/{{ cat.id }}"          ><img            mat-card-image            [src]="cat.image"            alt="5 Terre"            style="width: 100%;"            class="cat"          />                    <mat-card-header>            <mat-card-title class="titulo"              ><strong>{{ cat.name }}</strong></mat-card-title            >            <br />            <mat-card-subtitle style="font-style: italic;">Para ver recomendaciones, ve a {{cat.name}}</mat-card-subtitle>          </mat-card-header>          <mat-card-content>            <p>              {{ cat.text }}            </p>          </mat-card-content>        </a>        <mat-divider></mat-divider>        <mat-card-header>          <mat-card-title            ><strong>Tu contenido favorito en {{ cat.name }}</strong>          </mat-card-title>        </mat-card-header>        <mat-chip-list aria-label="Fish selection">          <div *ngFor="let sub of cat.subCategories">            <a               ><mat-chip style="background-color:#e98167" selected routerLink="/sub-categoria/{{ sub.id }}"                >{{ sub.name }}                <mat-icon (click)="dislikesubC(sub.id)" routerLink="/home"  matChipRemove>thumb_down</mat-icon></mat-chip              ></a            >          </div>        </mat-chip-list>            </mat-card>    </div>  </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+        var COMPONENT_TEMPLATE = '<div><app-menu></app-menu><div class="fondo">  <h3><strong>¡Hola! Bienvenido de vuelta</strong></h3>  <h6>Accede rápido a tu contenido preferido</h6>  <div class="carousel">    <div *ngFor="let cat of favoriteCategories" class="para-sobrevivir">      <div *ngIf="cat.isActive">        <mat-card class="example-card">          <a routerLink="/categoria/{{ cat.id }}"            ><img              mat-card-image              [src]="cat.image"              alt="5 Terre"              style="width: 100%;"              class="cat"            />            <mat-card-header>              <mat-card-title class="titulo"                ><strong>{{ cat.name }}</strong></mat-card-title              >              <br />              <mat-card-subtitle style="font-style: italic;"                >Para ver recomendaciones, ve a                {{ cat.name }}</mat-card-subtitle              >            </mat-card-header>            <mat-card-content>              <p>                {{ cat.text }}              </p>            </mat-card-content>          </a>          <mat-divider></mat-divider>          <mat-card-header>            <mat-card-title              ><strong>Tu contenido favorito en {{ cat.name }}</strong>            </mat-card-title>          </mat-card-header>          <mat-chip-list aria-label="Fish selection">            <div *ngFor="let sub of cat.subCategories">              <div *ngIf="sub.isActive">                <a                  ><mat-chip                    style="                      background-color: #ffb295;                      color: black;                      font-weight: bold;                    "                    selected                    routerLink="/sub-categoria/{{ sub.id }}"                    >{{ sub.name }}                    <mat-icon (click)="dislikesubC(sub.id)" matChipRemove                      >thumb_down</mat-icon                    ></mat-chip                  ></a                >              </div>            </div>          </mat-chip-list>        </mat-card>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
 </script>

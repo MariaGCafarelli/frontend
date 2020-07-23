@@ -28,12 +28,13 @@
 
 mat-icon{
     height: 100%;
-    font-size: 0.7em;
 }
 
 .search{
     margin-left: 1%;
-    font-size: 0.6em;
+    font-size: 0.7em;
+    display: flex;
+    align-content: center;
 }
 
 input{

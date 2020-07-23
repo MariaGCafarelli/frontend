@@ -3,11 +3,8 @@
 <div style="padding-top: 5em;"></div>
 
 <div>
-
   <span (click)="getBack()" style="color: grey;">
-    <mat-icon
-      class="volver"
-      style="font-size: 2em; margin-left: 5%;"
+    <mat-icon class="volver" style="font-size: 2em; margin-left: 5%;"
       >keyboard_backspace</mat-icon
     >
   </span>
@@ -36,33 +33,41 @@
     </mat-form-field>
   </form>
 
-
   <mat-card class="example-card container head extra">
-    
     <div class="web">
       <div class="imagen-web">
-    <img
-      mat-card-image
-      [src]="subcategory.image"
-      class="encabezado"
-      style="object-fit: cover; object-position: cover; margin-top: 0!important; height: auto;"
-    />
-  </div>
-  <div class="contenido-web">
-    <mat-card-title class="top" style="line-height: 2em !important; margin-bottom: 0 !important;">{{ subcategory.name }}</mat-card-title>
-    <strong>
-      <mat-card-content>
-        <p>
-          {{ subcategory.text }}
-        </p>
-        <br />
-        <p>
-          Consigue más en:
-          <a href="{{ subcategory.link }}">Contenido extra</a>
-        </p>
-      </mat-card-content>
-    </strong>
-  </div>
+        <img
+          mat-card-image
+          [src]="subcategory.image"
+          class="encabezado"
+          alt="Avatar"
+          style="
+            object-fit: cover;
+            object-position: cover;
+            margin-top: 0 !important;
+            height: auto;
+          "
+        />
+      </div>
+      <div class="contenido-web">
+        <mat-card-title
+          class="top"
+          style="line-height: 2em !important; margin-bottom: 0 !important;"
+          >{{ subcategory.name }}</mat-card-title
+        >
+        <strong>
+          <mat-card-content>
+            <p>
+              {{ subcategory.text }}
+            </p>
+            <br />
+            <p>
+              Consigue más en:
+              <a href="{{ subcategory.link }}">Contenido extra</a>
+            </p>
+          </mat-card-content>
+        </strong>
+      </div>
     </div>
   </mat-card>
 
@@ -72,20 +77,22 @@
       style="color: white;"
       data-toggle="modal"
       data-target="#exampleModal"
-      style="margin-top:1.5em"
+      style="margin-top: 1.5em;"
     >
       crear foro
     </a>
   </div>
   <ng-template #notLiked>
-    <button class="btn btn-primary abajo" (click)="agregarFavorito()" style="margin-top:1.5em">
+    <button
+      class="btn btn-primary abajo"
+      (click)="agregarFavorito()"
+      style="margin-top: 1.5em;"
+    >
       suscribirse
     </button>
   </ng-template>
 
-
   <div *ngIf="subscribedForums.length > 0">
-    
     <h4>Ya estas suscrito en estos foros</h4>
     <br />
 
@@ -104,7 +111,8 @@
               (click)="dislikeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"     
+              
               >favorite</mat-icon
             >
           </mat-card-actions>
@@ -181,7 +189,7 @@
               (click)="likeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
               >favorite_border</mat-icon
             >
           </mat-card-actions>

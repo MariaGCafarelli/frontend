@@ -12,7 +12,7 @@
       <div *ngIf="cat.isActive">
       <mat-card class="example-card container para-sobrevivir">
         <a routerLink="/categoria/{{ cat.id }}">
-          <img mat-card-image src="{{ cat.image }}" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
+          <img mat-card-image src="{{ cat.image }}" alt="img" style="Object-fit:cover; min-height: 100%; object-position:cover;"/>
         </a>
         <div class="centered">{{ cat.name }}</div>
         <mat-divider></mat-divider>
@@ -24,7 +24,8 @@
                 style="    background-color: #ffb295;
                 color: black;
                 font-weight: bold;
-                letter-spacing: 1.2px;"
+                letter-spacing: 1.2px;
+                "
                 selected
                 routerLink="/sub-categoria/{{ sub.id }}"
               >

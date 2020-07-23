@@ -9,9 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./admin-crud.component.scss']
 })
 export class AdminCrudComponent implements OnInit { 
-  Admins:any[]=[];
-  currentPage2: number = 1;
-nextPage2: boolean;
+  Admins:any[]=[]; // Arreglo de usuarios Admins
+  currentPage2: number = 1; // numero de pagina
+  nextPage2: boolean; // Booleado para traer más elementos
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -20,16 +20,25 @@ nextPage2: boolean;
     private router: Router
   ) { }
 
+  /**
+   * Servicio que da Inicio a Variables
+   * @returns void
+   */
   ngOnInit(): void {
     this.waveService.getAdmins(this.currentPage2).subscribe((res)=>{
       console.log(res)
       this.Admins = res.admins.items;
        this.currentPage2 = parseInt(res.admins.meta.currentPage);
-       this.nextPage2 =
+       this.nextPage2 = 
        this.currentPage2 !== parseInt(res.admins.meta.totalPages);
     })
   }
 
+  /**
+   * Función que Recibe como parametro un email y le cambia el status que tenga Activo a Inactivo o al contrario
+   * @param email 
+   * @returns void
+   */
   estadoAdmin(email: string){
     this.waveService.statusAdmin(email).subscribe((res)=>{
       
@@ -40,6 +49,10 @@ nextPage2: boolean;
     })
  }
 
+ /**
+  * Función que Muestra más resultados al administrador
+  * @returns void
+  */
  traerMasAdmins() {
   this.waveService
     .getAdmins(this.currentPage2 + 1)

@@ -27,10 +27,10 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Category</mat-label>
-    <mat-select (selectionChange)="onChangeCategory($event)">
+    <mat-select (selectionChange)="onChangeCategory($event)" aria-label="selection">
       <div *ngFor="let category of categories">
         <div *ngIf="category.isActive">
-          <mat-option [value]="category.id">
+          <mat-option [value]="category.id" aria-label="selection">
             {{ category.name }}
           </mat-option>
         </div>
@@ -38,12 +38,12 @@
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field appearance="outline" style="margin-bottom: 4em;">
+  <mat-form-field appearance="outline" style="margin-bottom: 4em;" aria-label="selection">
     <mat-label>Subcategory</mat-label>
     <mat-select (selectionChange)="onChangeSubcategory($event)">
       <div *ngFor="let subcategory of subcategories">
         <div *ngIf="subcategory.isActive">
-          <mat-option [value]="subcategory.id">
+          <mat-option [value]="subcategory.id" aria-label="selection">
             {{ subcategory.name }}
           </mat-option>
         </div>
@@ -60,7 +60,7 @@
               (click)="likeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
               >favorite_border</mat-icon
             >
           </mat-card-actions>
@@ -71,7 +71,7 @@
               (click)="dislikeForo(foro.id)"
               class="agregar"
               [inline]="true"
-              style="cursor: pointer; color: red;"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
               >favorite</mat-icon
             >
           </mat-card-actions>
@@ -84,7 +84,7 @@
             ><img
               mat-card-avatar
               [src]="foro.image"
-              alt="User Avatar"
+              alt="Avatar"
               style="
                 object-fit: cover;
                 min-height: 100%;
@@ -99,7 +99,7 @@
             ><img
               mat-card-avatar
               src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-              alt="User Avatar"
+              alt="Avatar"
               style="
                 object-fit: cover;
                 min-height: 100%;
