@@ -9,8 +9,8 @@
       </span>
     </div>
 
-    <div *ngIf="Foro.isLiked; else suscribete">
-      <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike">
+    <div *ngIf="Foro.isLiked; else suscribete" style="display: inherit;">
+      <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike" style="display: inherit;">
         Cancelar suscripción
       </button>
     </div>
@@ -21,16 +21,17 @@
       </button>
     </ng-template>
   </div>
+  <div style="text-align: center;">
   <img
+    class="imagen"
     src="{{ Foro.image }}"
     style="
       width: 100%;
-      max-height: 450px;
-      object-fit: cover;
+      height: 250px;
       margin-left: 0 !important;
       margin-top: 0 !important;
     "
-  />
+  /></div>
 
   
     <h2>
