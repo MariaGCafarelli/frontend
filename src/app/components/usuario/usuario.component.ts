@@ -12,19 +12,19 @@ import { User } from 'src/app/model/user';
   styleUrls: ['./usuario.component.scss'],
 })
 export class UsuarioComponent implements OnInit {
-  user: any;
-  forumsPosts: [];
-  notSubscribedForumsPosts: [];
-  forumsCreated: [];
-  profilePick: string;
-  files: File[] = [];
-  userForm: FormGroup;
-  panelOpenState = false;
-  public payPalConfig?: IPayPalConfig;
-  public total: number = 20;
-  public token: string;
-  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
-  modelUser: User={
+  user: any; // Objeto de tipo usuario
+  forumsPosts: []; // Arreglo de Foros comentados suscritos
+  notSubscribedForumsPosts: []; // Arreglo de foros comentados no suscritos
+  forumsCreated: []; // Arreglo de foros creados
+  profilePick: string; // 
+  files: File[] = []; // Arreglo de tipo file
+  userForm: FormGroup; // Formulario 
+  panelOpenState = false; // 
+  public payPalConfig?: IPayPalConfig; // Configuración de Paypal
+  public total: number = 20; // Cant max por pagina
+  public token: string; // access token del usuario
+  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/; // Validador de uso de letras
+  modelUser: User={ 
     firstName: null,
     lastName: null,
     userName: null,
@@ -33,15 +33,18 @@ export class UsuarioComponent implements OnInit {
     image:null,
     birthday: null,
     isActive: null
-
-
-  }
+  } // Modal de Registro
   
 
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @ViewChild('btnClose') btnClose: ElementRef;
   @ViewChild('btnClose2') btnClose2: ElementRef;
 
+  /**
+   * Formulario de Creación de Usuario
+   * @returns void
+   * 
+   */
   createFormGroup() {
     return new FormGroup({
       firstName: new FormControl('', [
@@ -68,6 +71,10 @@ export class UsuarioComponent implements OnInit {
     this.userForm = this.createFormGroup();
   }
 
+  /**
+   * Servicio que coloca un valor inicial a cada array
+   * @returns void
+   */
   ngOnInit(): void {
     this.payPalConfig = {
       currency: 'USD',
@@ -158,16 +165,22 @@ export class UsuarioComponent implements OnInit {
       this.notSubscribedForumsPosts = res.forums;
     });
   }
-/**
- * Recibe el id de un post verifica que este fue hecho por el usuario y lo elimina de la base de datos  
- * @param id post que el usuario desea eliminar
- */
 
+  /**
+   * Funcion que coloca valor al selected para que se reflejen en el form, ya que los inputs estan ligados a dicho form
+   * @returns void
+   */
   preUpdate(){
     this.modelUser = Object.assign({},this.user);
     
     
 }
+
+/**
+ * Funcion que recibe el id de un post verifica que este fue hecho por el usuario y lo elimina de la base de datos  
+ * @param id post que el usuario desea eliminar
+ * @returns void
+ */
   onDelete(id: number) {
     this.waveService.DeletePost(id).subscribe((res) => {
       if (res) {
@@ -194,6 +207,11 @@ export class UsuarioComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+/**
+ * funcion que recibe un id foro como parametro para dejar de estar suscrito
+ * @param id id del foro que el usuario desea suscribirse
+ * @returns void
+ */
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
@@ -208,8 +226,9 @@ export class UsuarioComponent implements OnInit {
     });
   }
 /**
- * 
- * @param id 
+ * funcion que recibe un id foro como parametro para dejar de estar suscrito
+ * @param id id del foro que el usuario desea dejar de estar suscrito
+ * @returns void
  */
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
@@ -225,9 +244,10 @@ export class UsuarioComponent implements OnInit {
     });
   }
   /**
-   * Condicional:
-   * true: el usuario ha pagado la suscripción premium, recibe una noficación del sistema para saber que su pago fue procesado, acto siguiente el usuario pasa de ser "Normal" a "Premium"
-   * false: el pago del usuario no pudo ser procesado
+   * Funcion que contiene un condicional
+   * if: el usuario ha pagado la suscripción premium, recibe una noficación del sistema para saber que su pago fue procesado, acto siguiente el usuario pasa de ser "Normal" a "Premium"
+   * else: el pago del usuario no pudo ser procesado
+   * @returns void
    * 
    */
   premiumTrue() {
@@ -242,10 +262,12 @@ export class UsuarioComponent implements OnInit {
     }
   }
 
-  editarPerfil(){
-
-  }
-
+  /**
+   * Funcion que contiene un codicional
+   * if: el usuario es registrado en wave
+   * else: el usuario no cumplio con los requerimientos propuestos
+   * @returns void
+   */
   onSubmit(){
    
       if(this.userForm.valid){
@@ -264,6 +286,10 @@ export class UsuarioComponent implements OnInit {
     
   }
 
+  /**
+   * Modificar foto de perfil
+   * @returns void
+   */
   updatePic(){
     if(this.files.length>0){
      
@@ -280,14 +306,25 @@ export class UsuarioComponent implements OnInit {
   }
 }
 
+/**
+ * Funcion que trae el firstName
+ * @returns void
+ */
 get firstName() {
   return this.userForm.get('firstName');
 }
 
+/**
+ * Funcion que trae el firstName
+ * @returns void
+ */
 get lastName() {
   return this.userForm.get('lastName');
 }
-
+ /**
+ * Funcion que trae el firstName
+ * @returns void
+ */
 get userName() {
   return this.userForm.get('userName');
 }

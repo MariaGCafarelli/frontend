@@ -199,6 +199,9 @@
                                 <a href="#dislikeForo">dislikeForo</a>
                             </li>
                             <li>
+                                <a href="#getBack">getBack</a>
+                            </li>
+                            <li>
                                 <a href="#isFav">isFav</a>
                             </li>
                             <li>
@@ -332,8 +335,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="147"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:147</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="149"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:149</a></div>
                 </td>
             </tr>
 
@@ -384,6 +387,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getBack"></a>
+                    <span class="name">
+                        <b>
+                            getBack
+                        </b>
+                        <a href="#getBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getBack()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="82"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:82</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isFav"></a>
                     <span class="name">
                         <b>
@@ -402,8 +444,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="160"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:160</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:162</a></div>
                 </td>
             </tr>
 
@@ -472,8 +514,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="135"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:135</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="137"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:137</a></div>
                 </td>
             </tr>
 
@@ -581,8 +623,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="84"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:84</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="86"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:86</a></div>
                 </td>
             </tr>
 
@@ -647,8 +689,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="104"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:104</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:106</a></div>
                 </td>
             </tr>
 
@@ -713,8 +755,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/components/foros/foros.component.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/app/components/foros/foros.component.ts:122</a></div>
                 </td>
             </tr>
 
@@ -1333,11 +1375,13 @@ export class ForosComponent implements OnInit {
       });
     });
 
-    this.previousUrl &#x3D; this.waveService.getPreviousUrl();
-
     this.waveService.getAllCategories().subscribe((response) &#x3D;&gt; {
       this.categories &#x3D; response;
     });
+  }
+
+  getBack(){
+    this.waveService.getPreviousUrl();
   }
 
   onChangeCategory(target) {
@@ -1436,11 +1480,11 @@ export class ForosComponent implements OnInit {
 
   &lt;div class&#x3D;&quot;parent&quot;&gt;
     &lt;div style&#x3D;&quot;margin-left: 5%;&quot;&gt;
-      &lt;a routerLink&#x3D;&quot;{{ previousUrl }}&quot; style&#x3D;&quot;color: #484a4c;&quot;&gt;
+      &lt;span (click)&#x3D;&quot;getBack()&quot; style&#x3D;&quot;color: #484a4c;&quot;&gt;
         &lt;mat-icon class&#x3D;&quot;volver&quot; style&#x3D;&quot;font-size: 2em;&quot;
           &gt;keyboard_backspace&lt;/mat-icon
         &gt;
-      &lt;/a&gt;
+      &lt;/span&gt;
     &lt;/div&gt;
 
     &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
@@ -1636,27 +1680,20 @@ input {
   color: black;
 }
 
-.btn {
-  width: 40%;
-  font-style: normal;
-  font-family: &quot;Poiret One&quot;;
-  font-weight: bold;
-  letter-spacing: 3px;
-  border: 0.8px solid white;
-  background: #74b4bc;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-  margin-left: 54.5%;
-}
-
 button {
   margin-bottom: 0.9rem;
 }
 
 button.btn-mas {
-  width: 70%;
-  margin-left: 15%;
-  background: orange;
+  color: black;
   font-weight: bold;
+  width: 60%;
+  font-family: &quot;Poiret One&quot;;
+  letter-spacing: 3px;
+  border:none;
+  background: #c2e1dd;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  margin-left: 20%;
 }
 
 mat-card-actions {
@@ -1737,10 +1774,10 @@ mat-card-actions {
 }
 
 ::ng-deep mat-label {
-  color:#484a4c;
+  color:black;
 }
 ::ng-deep input[type&#x3D;&quot;search&quot;] {
-  color: #484a4c;
+  color: black;
 }
 </code></pre>
     </div>
@@ -1770,8 +1807,8 @@ mat-card-actions {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="fondo">  <app-menu></app-menu>  <div class="parent">    <div style="margin-left: 5%;">      <a routerLink="{{ previousUrl }}" style="color: #484a4c;">        <mat-icon class="volver" style="font-size: 2em;"          >keyboard_backspace</mat-icon        >      </a>    </div>    <mat-form-field appearance="outline">      <mat-label>Encuentra el foro que buscas</mat-label>      <input        type="search"        aria-label="Number"        matInput        placeholder="Busca un foro"        [ngModel]="searchText"        (ngModelChange)="searchTextModelChanged.next($event)"      />      <mat-icon matSuffix style="color: #484a4c;">search</mat-icon>    </mat-form-field>  </div>  <mat-form-field appearance="outline">    <mat-label>Category</mat-label>    <mat-select (selectionChange)="onChangeCategory($event)">      <div *ngFor="let category of categories">        <div *ngIf="category.isActive">          <mat-option [value]="category.id">            {{ category.name }}          </mat-option>        </div>      </div>    </mat-select>  </mat-form-field>  <mat-form-field appearance="outline" style="margin-bottom: 4em;">    <mat-label>Subcategory</mat-label>    <mat-select (selectionChange)="onChangeSubcategory($event)">      <div *ngFor="let subcategory of subcategories">        <div *ngIf="subcategory.isActive">          <mat-option [value]="subcategory.id">            {{ subcategory.name }}          </mat-option>        </div>      </div>    </mat-select>  </mat-form-field>  <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">    <div *ngIf="foro.isActive">      <mat-card>        <div *ngIf="!isFav(foro.id); else notSuscribed">          <mat-card-actions>            <mat-icon              (click)="likeForo(foro.id)"              class="agregar"              [inline]="true"              style="cursor: pointer; color: red;"              >favorite_border</mat-icon            >          </mat-card-actions>        </div>        <ng-template #notSuscribed>          <mat-card-actions>            <mat-icon              (click)="dislikeForo(foro.id)"              class="agregar"              [inline]="true"              style="cursor: pointer; color: red;"              >favorite</mat-icon            >          </mat-card-actions>        </ng-template>        <div          *ngIf="foro.image != null && foro.image != undefined; else sinFoto"          class="ordenar"        >          <a routerLink="/foro/{{ foro.id }}"            ><img              mat-card-avatar              [src]="foro.image"              alt="User Avatar"              style="                object-fit: cover;                min-height: 100%;                object-position: cover;              "            />          </a>          <p style="align-self: center;">{{ foro.title }}</p>        </div>        <ng-template #sinFoto>          <a routerLink="/foro/{{ foro.id }}"            ><img              mat-card-avatar              src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"              alt="User Avatar"              style="                object-fit: cover;                min-height: 100%;                object-position: cover;              "            /> </a          >{{ foro.title }}        </ng-template>      </mat-card>    </div>  </div>  <button    *ngIf="nextPage"    (click)="traerMasForos()"    type="button"    class="btn btn-mas"  >    Mas Foros  </button></div></div>'
-    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+        var COMPONENT_TEMPLATE = '<div><div class="fondo">  <app-menu></app-menu>  <div class="parent">    <div style="margin-left: 5%;">      <span (click)="getBack()" style="color: #484a4c;">        <mat-icon class="volver" style="font-size: 2em;"          >keyboard_backspace</mat-icon        >      </span>    </div>    <mat-form-field appearance="outline">      <mat-label>Encuentra el foro que buscas</mat-label>      <input        type="search"        aria-label="Number"        matInput        placeholder="Busca un foro"        [ngModel]="searchText"        (ngModelChange)="searchTextModelChanged.next($event)"      />      <mat-icon matSuffix style="color: #484a4c;">search</mat-icon>    </mat-form-field>  </div>  <mat-form-field appearance="outline">    <mat-label>Category</mat-label>    <mat-select (selectionChange)="onChangeCategory($event)">      <div *ngFor="let category of categories">        <div *ngIf="category.isActive">          <mat-option [value]="category.id">            {{ category.name }}          </mat-option>        </div>      </div>    </mat-select>  </mat-form-field>  <mat-form-field appearance="outline" style="margin-bottom: 4em;">    <mat-label>Subcategory</mat-label>    <mat-select (selectionChange)="onChangeSubcategory($event)">      <div *ngFor="let subcategory of subcategories">        <div *ngIf="subcategory.isActive">          <mat-option [value]="subcategory.id">            {{ subcategory.name }}          </mat-option>        </div>      </div>    </mat-select>  </mat-form-field>  <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">    <div *ngIf="foro.isActive">      <mat-card>        <div *ngIf="!isFav(foro.id); else notSuscribed">          <mat-card-actions>            <mat-icon              (click)="likeForo(foro.id)"              class="agregar"              [inline]="true"              style="cursor: pointer; color: red;"              >favorite_border</mat-icon            >          </mat-card-actions>        </div>        <ng-template #notSuscribed>          <mat-card-actions>            <mat-icon              (click)="dislikeForo(foro.id)"              class="agregar"              [inline]="true"              style="cursor: pointer; color: red;"              >favorite</mat-icon            >          </mat-card-actions>        </ng-template>        <div          *ngIf="foro.image != null && foro.image != undefined; else sinFoto"          class="ordenar"        >          <a routerLink="/foro/{{ foro.id }}"            ><img              mat-card-avatar              [src]="foro.image"              alt="User Avatar"              style="                object-fit: cover;                min-height: 100%;                object-position: cover;              "            />          </a>          <p style="align-self: center;">{{ foro.title }}</p>        </div>        <ng-template #sinFoto>          <a routerLink="/foro/{{ foro.id }}"            ><img              mat-card-avatar              src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"              alt="User Avatar"              style="                object-fit: cover;                min-height: 100%;                object-position: cover;              "            /> </a          >{{ foro.title }}        </ng-template>      </mat-card>    </div>  </div>  <button    *ngIf="nextPage"    (click)="traerMasForos()"    type="button"    class="btn btn-mas"  >    Mas Foros  </button></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ForosComponent'};
 </script>

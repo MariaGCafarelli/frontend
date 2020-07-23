@@ -99,6 +99,7 @@ import { SubAdminComponent } from &#x27;../components/admin/sub-admin/sub-admin.
 import { ForosAdminComponent } from &#x27;../components/admin/foros-admin/foros-admin.component&#x27;;
 import { ComentariosComponent } from &#x27;../components/admin/foros-admin/comentarios/comentarios.component&#x27;;
 import { UsuariosAdminComponent } from &#x27;../components/admin/usuarios-admin/usuarios-admin.component&#x27;;
+import { AdminCrudComponent } from &#x27;../components/admin/usuarios-admin/admin-crud/admin-crud.component&#x27;;
 
 const routes: Routes &#x3D; [
   { path: &#x27;inicio&#x27;, component: InicioComponent },
@@ -141,9 +142,9 @@ const routes: Routes &#x3D; [
   },
   { path: &#x27;foros&#x27;, component: ForosComponent, canActivate: [AuthGuard] },
   { path: &#x27;foro/:id&#x27;, component: ForoComponent, canActivate: [AuthGuard] },
-  { path: &#x27;admin&#x27;, component: AdminComponent, canActivate: [AdminGuard] },
+  //{ path: &#x27;admin&#x27;, component: AdminComponent, canActivate: [AdminGuard] },
   {
-    path: &#x27;admin/categorias&#x27;,
+    path: &#x27;admin&#x27;,
     component: CategoriasAdminComponent,
     canActivate: [AdminGuard],
   },
@@ -182,6 +183,11 @@ const routes: Routes &#x3D; [
   {
     path: &#x27;admin/usuarios&#x27;,
     component: UsuariosAdminComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: &#x27;admin/usuarios-admin&#x27;,
+    component: AdminCrudComponent,
     canActivate: [AdminGuard],
   },
   {

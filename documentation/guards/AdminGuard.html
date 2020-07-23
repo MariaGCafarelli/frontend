@@ -222,7 +222,7 @@ export class AdminGuard implements CanActivate {
   canActivate() {
     let role &#x3D; this.service.getCurrentRole();
     if (role) {
-      if (role &#x3D;&#x3D; &#x27;admin&#x27;) {
+      if (role &#x3D;&#x3D; &#x27;admin&#x27; || role&#x3D;&#x3D;&#x27;superadmin&#x27;) {
         return true;
       } else {
         this.rout.navigate([&#x27;/home&#x27;]);

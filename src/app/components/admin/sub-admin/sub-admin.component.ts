@@ -12,18 +12,18 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./sub-admin.component.scss']
 })
 export class SubAdminComponent implements OnInit {
-  subCategories: any[] = [];
-  files: File[] = [];
-  panelOpenState = false;
+  subCategories: any[] = []; // Arreglo de tipo subcategoria
+  files: File[] = []; // Arreglo de tipo file
+  panelOpenState = false; //
   public selected:SubCategory = {
     id: null,
     name: null,
     text: null,
     category:null,
     imagen:null   
-  };
-  subCategoryForm: FormGroup;
-  idCategory:number;
+  }; // subcategoria seleccionada
+  subCategoryForm: FormGroup; // Formulario de subcategoria
+  idCategory:number; // Id de Categoria
 
   
 
@@ -31,7 +31,10 @@ export class SubAdminComponent implements OnInit {
   @ViewChild('btnClose') btnClose: ElementRef;
   @ViewChild('btnClose2') btnClose2: ElementRef;
   
-
+/**
+ * Formulario de Creación de un Objeto
+ * @returns void
+ */
   createFormGroup() {
     return new FormGroup({
       name: new FormControl('', [
@@ -57,7 +60,10 @@ export class SubAdminComponent implements OnInit {
     this.idCategory = id;
   }
 
-
+/**
+ * Servicio que trae las Categorias con sus subcategorias paginadas
+ * @returns void
+ */
   ngOnInit(): void {
     this.waveService.getSubcategoriesWCategories().subscribe((response) => {
       this.subCategories = response;
@@ -65,6 +71,10 @@ export class SubAdminComponent implements OnInit {
     });   
   }
 
+  /**
+   * Funcion para Crear una Subcategoria
+   * @returns void
+   */
   onSubmit(){
     if (!this.selected.id) {
       if (this.subCategoryForm.valid) {
@@ -123,11 +133,8 @@ export class SubAdminComponent implements OnInit {
       }
       this.subCategoryForm.reset();
     }
-
-
-
-
   }
+
 
   onSelect(event) {
     console.log(event);
@@ -138,10 +145,21 @@ export class SubAdminComponent implements OnInit {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
+
+    /**
+     * Funcion que coloca valor al selected para que se refleje en el form
+     * @returns void
+     * @param event 
+     */
   preUpdate(content: any){
     this.selected = Object.assign({},content);   
 }
 
+/**
+ * Funcion que tiene como parametros el id de una subcategoria y cambia el estado que tenga de activo a inactivo o viceversa
+ * @param id id de subcategoria
+ * @returns void
+ */
   changeStatus(id: number) {
     this.spinner.show();
     this.waveService.stateSubCategory(id).subscribe((data) => {
@@ -153,6 +171,10 @@ export class SubAdminComponent implements OnInit {
     });
   }
 
+  /**
+   * Funcion que reinicia el formulario de Subcategoria
+   * @returns void
+   */
   reset(){
     this.subCategoryForm.reset();
     this.files=[];
@@ -164,6 +186,10 @@ export class SubAdminComponent implements OnInit {
     };
   }
 
+  /**
+   * Función que cambia la foto de subcategoria, en caso de no haber colocado ninguna saldra una notificación al usuario
+   * @returns void
+   */
   updatePic(){
     if(this.files.length>0){
       this.spinner.show();
@@ -183,10 +209,18 @@ export class SubAdminComponent implements OnInit {
   }
 }
 
+ /**
+ * Funcion que trae el name
+ * @returns void
+ */
 get name() {
   return this.subCategoryForm.get('name');
 }
 
+ /**
+ * Funcion que trae el text
+ * @returns void
+ */
 get text() {
   return this.subCategoryForm.get('text');
 }
