@@ -17,7 +17,10 @@ export class AppComponent {
     this.swPush.notificationClicks.subscribe(({ action, notification }) => {
       console.log(action, notification);
       if (action === 'REDIRECT') {
-        this.router.navigate([`/foro/${notification.data.foro}`]);
+        window.open(
+          `https://waveapp-f4960.firebaseapp.com/foro/${notification.data.foro}`,
+          '_blank'
+        );
       }
     });
   }

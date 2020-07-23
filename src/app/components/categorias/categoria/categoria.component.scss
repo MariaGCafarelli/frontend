@@ -125,6 +125,15 @@ mat-card-content {
   height: 5%;
 }
 
+@media (max-width: 450px){
+  .mat-card-content.card{
+    height: 5.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.9em;
+  }
+}
+
 @media (min-width: 758px) {
   .centered {
     top: 180px;
