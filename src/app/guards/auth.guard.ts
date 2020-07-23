@@ -12,6 +12,12 @@ import { WaveServiceService } from '../services/wave-service.service';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * Clase encargada de proteger las rutas segun el tipo de usuario,
+ * si el role del usuario actual no corresponde con 'normal' o 'premium'
+ * es redirigido al iniciar sesion o al panel de administrador
+ */
 export class AuthGuard implements CanActivate {
   constructor(private service: WaveServiceService, private rout: Router) {}
   canActivate() {

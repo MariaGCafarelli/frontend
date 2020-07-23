@@ -20,9 +20,8 @@ import { throwError } from 'rxjs';
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   
   /**
-   * 
-   * @param control 
-   * @param form 
+   * @param control
+   * @param form
    * @returns boolean
    */
   isErrorState(
@@ -41,7 +40,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
-
 @Component({
   selector: 'app-registrar-usuario',
   templateUrl: './registrar-usuario.component.html',
@@ -50,7 +48,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class RegistrarUsuarioComponent implements OnInit {
   imageUrl: string = '../../../assets/icon/usuario.png';
   fileToUpload: File = null;
-  background: boolean = false;
+  registerForm: FormGroup;
+  matcher = new MyErrorStateMatcher();
 
   public payPalConfig?: IPayPalConfig;
   public total: number = 20;
@@ -58,15 +57,12 @@ export class RegistrarUsuarioComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
+  //expresion regular para validar email
   private emailPattern: any = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   private passwordPattern: any = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]/;
-  private onlyletters: any= /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
+  private onlyletters: any = /^[ñA-Za-z _]*[ñA-Za-z][ñA-Za-z _]*$/;
 
   @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
-
-  registerForm: FormGroup;
-
-  matcher = new MyErrorStateMatcher();
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -81,12 +77,18 @@ export class RegistrarUsuarioComponent implements OnInit {
     this.maxDate = new Date(currentYear, currentMonth, currentDay);
     this.registerForm = this.formBuilder.group(
       {
-        nombres: new FormControl('', [Validators.required, Validators.pattern(this.onlyletters)]),
-        apellidos: new FormControl('', [Validators.required, Validators.pattern(this.onlyletters)]),
+        nombres: new FormControl('', [
+          Validators.required,
+          Validators.pattern(this.onlyletters),
+        ]),
+        apellidos: new FormControl('', [
+          Validators.required,
+          Validators.pattern(this.onlyletters),
+        ]),
         fecha: new FormControl('', [Validators.required]),
         correo: new FormControl('', [
           Validators.required,
-          Validators.pattern(this.emailPattern)
+          Validators.pattern(this.emailPattern),
         ]),
         usuario: new FormControl('', [
           Validators.required,
@@ -96,7 +98,7 @@ export class RegistrarUsuarioComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
           Validators.maxLength(30),
-          Validators.pattern(this.passwordPattern)
+          Validators.pattern(this.passwordPattern),
         ]),
         validContra: new FormControl(''),
         categorias: this.formBuilder.array([]),
@@ -107,6 +109,10 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
+    /**
+     * Se inicializa plugin de pago por paypal
+     */
     this.payPalConfig = {
       currency: 'USD',
       clientId: 'sb',
@@ -180,34 +186,24 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   /**
-  *Metodo cambia el background 
-  @returns void
+   * Metodo de vacia los campos del formulario
+   * @returns void
    */
-  cambiarBack(){
-    this.background = !this.background;
-    console.log(this.background)
-  }
-
- /**
-  * metodo que resetea el form
-  * @returns void
-  */
   onResetForm() {
     this.registerForm.reset();
   }
 
   /**
-   * metodo que envia los datos pertinentes al servicio para registrar un usuario nuevo
+   * Funcion que envia los datos pertinentes al servicio para registrar un usuario nuevo
    * @returns void
    */
 
   onSaveForm() {
     if (this.registerForm.valid) {
-      
       if (this.registerForm.value.tipoCuenta == 'Premium') {
         if (this.token) {
           this.spinner.show();
-          console.log(this.registerForm.value)
+          console.log(this.registerForm.value);
           this.waveService
             .registerUser(
               this.registerForm.value.nombres,
@@ -217,12 +213,14 @@ export class RegistrarUsuarioComponent implements OnInit {
               this.registerForm.value.fecha,
               this.registerForm.value.contra,
               this.registerForm.value.tipoCuenta
-            ).pipe(
-              catchError(err => {
+            )
+            .pipe(
+              catchError((err) => {
                 this.spinner.hide();
                 console.log(err);
-                alert(err.error.message)
-                return throwError("Error thrown from catchError");} )
+                alert(err.error.message);
+                return throwError('Error thrown from catchError');
+              })
             )
             .subscribe((data) => {
               console.log(data);
@@ -234,7 +232,7 @@ export class RegistrarUsuarioComponent implements OnInit {
         }
       } else {
         this.spinner.show();
-        console.log(this.registerForm.value)
+        console.log(this.registerForm.value);
         this.waveService
           .registerUser(
             this.registerForm.value.nombres,
@@ -245,15 +243,17 @@ export class RegistrarUsuarioComponent implements OnInit {
             this.registerForm.value.contra,
             this.registerForm.value.tipoCuenta
           )
-          .subscribe((data) => {
-            console.log(data);
-            this.router.navigate(['/picture']);
-            this.spinner.hide();
-          },
-          (error)=>{
-            alert("El usuario ya se encuentra registrado");
-            this.spinner.hide();
-          });
+          .subscribe(
+            (data) => {
+              console.log(data);
+              this.router.navigate(['/picture']);
+              this.spinner.hide();
+            },
+            (error) => {
+              alert('El usuario ya se encuentra registrado');
+              this.spinner.hide();
+            }
+          );
       }
     } else {
       alert('Datos Erroneos');
@@ -262,8 +262,8 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
 
   /**
-   * metodo validator asincrono que devueve un error notSame en true si las contraseñas no son iguales
-   * @param group 
+   * Metodo validator asincrono que devueve un error notSame en true si las contraseñas no son iguales
+   * @param group
    * @returns boolean
    */
 
@@ -274,89 +274,85 @@ export class RegistrarUsuarioComponent implements OnInit {
     return pass === confirmPass ? null : { notSame: true };
   }
 
-   /** 
-        *  getters para obtener un child control de nombres dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de nombres dado el nombre
+   * @returns AbstractControl
+   */
 
   get nombres() {
     return this.registerForm.get('nombres');
   }
-   /** 
-        *  getters para obtener un child control de apellidos dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de apellidos dado el nombre
+   * @returns AbstractControl
+   */
 
   get apellidos() {
     return this.registerForm.get('apellidos');
   }
 
-   /** 
-        *  getters para obtener un child control de fecha dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de fecha dado el nombre
+   * @returns AbstractControl
+   */
 
   get fecha() {
     return this.registerForm.get('fecha');
   }
 
-   /** 
-        *  getters para obtener un child control de usuario dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de usuario dado el nombre
+   * @returns AbstractControl
+   */
 
   get usuario() {
     return this.registerForm.get('usuario');
   }
 
-   /** 
-        *  getters para obtener un child control de correo dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de correo dado el nombre
+   * @returns AbstractControl
+   */
   get correo() {
     return this.registerForm.get('correo');
   }
-   /** 
-        *  getters para obtener un child control de contra dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de contra dado el nombre
+   * @returns AbstractControl
+   */
 
   get contra() {
     return this.registerForm.get('contra');
   }
 
-   /** 
-        *  getters para obtener un child control de validContra dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de validContra dado el nombre
+   * @returns AbstractControl
+   */
   get validContra() {
     return this.registerForm.get('validContra');
   }
 
-   /** 
-        *  getters para obtener un child control de tipoCuenta dado el nombre
-        * @returns AbstractControl
-       */
+  /**
+   *  getters para obtener un child control de tipoCuenta dado el nombre
+   * @returns AbstractControl
+   */
   get tipoCuenta() {
     return this.registerForm.get('tipoCuenta');
   }
 
-
- /**
-  * Metodo que maneja el evento al seleccionar una foto y le da valor al file
-  * @param file 
-  * @returns void
-  */
+  /**
+   * Metodo que maneja el evento al seleccionar una foto y le da valor al file
+   * @param file
+   * @returns void
+   */
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
-    console.log(this.fileToUpload)
+    console.log(this.fileToUpload);
     var reader = new FileReader();
     reader.onloadend = (event: any) => {
       this.imageUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
   }
-
-  
-
 }
