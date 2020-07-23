@@ -18,6 +18,13 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
+  
+  /**
+   * 
+   * @param control 
+   * @param form 
+   * @returns boolean
+   */
   isErrorState(
     control: FormControl | null,
     form: FormGroupDirective | NgForm | null
@@ -33,9 +40,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return invalidCtrl || invalidParent;
   }
 }
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -174,25 +179,27 @@ export class RegistrarUsuarioComponent implements OnInit {
     };
   }
 
+  /**
+  *Metodo cambia el background 
+  @returns void
+   */
   cambiarBack(){
     this.background = !this.background;
     console.log(this.background)
   }
 
-  agregarCategoria() {
-    const categoriaFormGroup = this.formBuilder.group({
-      Categoria: '',
-    });
-    this.categorias.push(categoriaFormGroup);
-  }
-
-  removerCategoria(indice) {
-    this.categorias.removeAt(indice);
-  }
-
+ /**
+  * metodo que resetea el form
+  * @returns void
+  */
   onResetForm() {
     this.registerForm.reset();
   }
+
+  /**
+   * metodo que envia los datos pertinentes al servicio para registrar un usuario nuevo
+   * @returns void
+   */
 
   onSaveForm() {
     if (this.registerForm.valid) {
@@ -220,10 +227,6 @@ export class RegistrarUsuarioComponent implements OnInit {
             .subscribe((data) => {
               console.log(data);
               this.router.navigate(['/picture']);
-              this.spinner.hide();
-            },
-            (error)=>{
-              alert("El usuario ya se encuentra registrado");
               this.spinner.hide();
             });
         } else {
@@ -258,6 +261,12 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
   }
 
+  /**
+   * metodo validator asincrono que devueve un error notSame en true si las contraseñas no son iguales
+   * @param group 
+   * @returns boolean
+   */
+
   checkPasswords(group: FormGroup) {
     let pass = group.controls.contra.value;
     let confirmPass = group.controls.validContra.value;
@@ -265,42 +274,79 @@ export class RegistrarUsuarioComponent implements OnInit {
     return pass === confirmPass ? null : { notSame: true };
   }
 
+   /** 
+        *  getters para obtener un child control de nombres dado el nombre
+        * @returns AbstractControl
+       */
+
   get nombres() {
     return this.registerForm.get('nombres');
   }
+   /** 
+        *  getters para obtener un child control de apellidos dado el nombre
+        * @returns AbstractControl
+       */
 
   get apellidos() {
     return this.registerForm.get('apellidos');
   }
 
+   /** 
+        *  getters para obtener un child control de fecha dado el nombre
+        * @returns AbstractControl
+       */
+
   get fecha() {
     return this.registerForm.get('fecha');
   }
+
+   /** 
+        *  getters para obtener un child control de usuario dado el nombre
+        * @returns AbstractControl
+       */
 
   get usuario() {
     return this.registerForm.get('usuario');
   }
 
+   /** 
+        *  getters para obtener un child control de correo dado el nombre
+        * @returns AbstractControl
+       */
   get correo() {
     return this.registerForm.get('correo');
   }
+   /** 
+        *  getters para obtener un child control de contra dado el nombre
+        * @returns AbstractControl
+       */
 
   get contra() {
     return this.registerForm.get('contra');
   }
 
+   /** 
+        *  getters para obtener un child control de validContra dado el nombre
+        * @returns AbstractControl
+       */
   get validContra() {
     return this.registerForm.get('validContra');
   }
 
-  get categorias() {
-    return this.registerForm.get('categorias') as FormArray;
-  }
-
+   /** 
+        *  getters para obtener un child control de tipoCuenta dado el nombre
+        * @returns AbstractControl
+       */
   get tipoCuenta() {
     return this.registerForm.get('tipoCuenta');
   }
- 
+
+
+ /**
+  * Metodo que maneja el evento al seleccionar una foto y le da valor al file
+  * @param file 
+  * @returns void
+  */
   handleFileInput(file: FileList) {
     this.fileToUpload = file.item(0);
     console.log(this.fileToUpload)

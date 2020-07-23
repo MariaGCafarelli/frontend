@@ -23,6 +23,13 @@ export class IniciarSesionComponent implements OnInit {
   //
   user: User;
 
+
+  /**
+   * Metodo que da formato al form group nombrando sus form controls y
+   *  las validaciones a las que se someten
+   * @returns FormGroup
+   */
+
   createFormGroup() {
     return new FormGroup({
       usuario: new FormControl('', [
@@ -49,11 +56,17 @@ export class IniciarSesionComponent implements OnInit {
 
   ngOnInit() {}
 
+  /**Servicio que resetea el form
+   * @returns void
+   */
   onResetForm() {
     this.loginForm.reset();
   }
 
-  //metodo del submit que llama al del servicio pasandole el usuario y la contraseña
+  /**
+   * Servicio que manda los datos requeridos para el auth
+   * @returns void
+   */
   onSaveForm() {
     if (this.loginForm.valid) {
       this.spinner.show();
@@ -89,12 +102,18 @@ export class IniciarSesionComponent implements OnInit {
 
   
        /** 
-        *  Menor Tengo que hacer algo en cada uno? Parte 2
+        *  getters para obtener un child control de usuario dado el nombre
+        * @returns AbstractControl
        */
 
   get usuario() {
     return this.loginForm.get('usuario');
   }
+
+        /** 
+        *  getters para obtener un child control de contra dado el nombre
+        * @returns AbstractControl
+       */
 
   get contra() {
     return this.loginForm.get('contra');
