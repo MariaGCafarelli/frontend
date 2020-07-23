@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
@@ -10,21 +10,20 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./foros.component.scss'],
 })
 export class ForosComponent implements OnInit {
-  forums: any[] = [];
-  filteredForums: Observable<string[]>;
-  filterForum = '';
-  myControl = new FormControl();
-  currentPage: number = 1;
+  forums: any[] = []; //Arreglo con objetos de tipo Foro
+  filteredForums: Observable<string[]>; //Arreglo con objetos de tipo foro filtrados
+  filterForum = ''; //Espacio en blanco para input
+  myControl = new FormControl(); //Formulario validaciones
+  currentPage: number = 1; //Pagina actual de la paginacion de foros
   nextPage: boolean = false;
-  myforums: any;
-  notMyforums: any[] = [];
-  currentUrl: string;
-  previousUrl: string;
-  categories: any[];
-  subcategories: any[];
-  selectedIdCategory: number;
-  selectedIdSubcategory: number;
-  searchTermText: string;
+  myforums: any; //Arreglo con objetos de tipo foro suscritos del ususario
+  notMyforums: any[] = []; //Arreglo con ojetos de tipo foros no suscritos del ususario
+  previousUrl: string; //Ruta anterior
+  categories: any[]; //Arreglo con objetos de tipo categoria
+  subcategories: any[]; //Arreglo con objetos de tipo subcateforia
+  selectedIdCategory: number; //Id de la categoria en select
+  selectedIdSubcategory: number; //Id de la subcategoria en select
+  searchTermText: string; //String del input de usuario
   searchText: string;
   searchTextModelChanged: Subject<string> = new Subject<string>();
   searchTextModelChangeSubscription: Subscription;
@@ -36,6 +35,10 @@ export class ForosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    /**
+     * Servicio que trae todos los foros paginados, inicializa
+     * arreglo forums con el resultado de la busqueda
+     */
     this.searchTextModelChangeSubscription = this.searchTextModelChanged
       .pipe(debounceTime(350), distinctUntilChanged())
       .subscribe((newText) => {
@@ -56,33 +59,34 @@ export class ForosComponent implements OnInit {
             (err) => console.log(err)
           );
       });
-    // Carga todos los Foros
+
+    /**
+     * Servicio que trae todos los foros, inicializa
+     * arreglo myforums con los foros y su paginacion
+     */
     this.waveService.getAllForums({}).subscribe((response) => {
       this.forums = response.items;
       this.currentPage = parseInt(response.meta.currentPage);
       this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
       this.waveService.getForumsPostsByUser().subscribe((res) => {
         this.myforums = res.forums;
-        console.log(this.myforums);
-        let vart;
-        for (let entry of this.forums) {
-          vart = this.myforums.find((ob) => ob.id == entry.id);
-          if (vart == null) {
-            this.notMyforums.push(entry);
-          }
-        }
       });
-    });
-
-    this.waveService.getAllCategories().subscribe((response) => {
-      this.categories = response;
     });
   }
 
-  getBack(){
+  /**
+   * Funcion que trae la ultima ruta almacenada del location de la aplicacion
+   * @return void
+   */
+  getBack() {
     this.waveService.getPreviousUrl();
   }
 
+  /**
+   * Funcion que actualiza arreglos de foros, subcategorias y categorias
+   * segun el texto ingresado por el ususario
+   * @return void
+   */
   onChangeCategory(target) {
     this.selectedIdCategory = target.value;
     this.waveService
@@ -91,7 +95,6 @@ export class ForosComponent implements OnInit {
         searchTerm: this.searchTermText,
       })
       .subscribe((response) => {
-        console.log(response);
         this.forums = response.items;
         this.currentPage = parseInt(response.meta.currentPage);
         this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
@@ -103,6 +106,11 @@ export class ForosComponent implements OnInit {
       });
   }
 
+  /**
+   * Funcion que actualiza arreglos de foros y subcategorias
+   * segun el texto ingresado por el ususario
+   * @return void
+   */
   onChangeSubcategory(target) {
     this.selectedIdSubcategory = target.value;
     this.waveService
@@ -112,13 +120,18 @@ export class ForosComponent implements OnInit {
         searchTerm: this.searchTermText,
       })
       .subscribe((response) => {
-        console.log(response);
         this.forums = response.items;
         this.currentPage = parseInt(response.meta.currentPage);
         this.nextPage = this.currentPage !== parseInt(response.meta.totalPages);
       });
   }
 
+  /**
+   * Funcion que trae el siguiente grupo de foros segun
+   * la paginación actual, actualiza el arreglo de forums y
+   * las paginas
+   * @return void
+   */
   traerMasForos() {
     this.waveService
       .getAllForums({
@@ -134,31 +147,44 @@ export class ForosComponent implements OnInit {
       });
   }
 
+  /**
+   * Funcion que usa el servicio que agrega un foro a los favoritos del usuario,
+   * actualiza los arreglos de foros favoritos
+   * @param id id del foro
+   * @return void
+   */
   likeForo(id: number) {
     this.waveService.likeForum(id).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.myforums = res.forums;
-          console.log(this.myforums);
         });
       }
     });
   }
 
+  /**
+   * Funcion que usa el servicio que agrega un foro a los no favoritos del usuario,
+   * actualiza los arreglos de foros favoritos
+   * @param id id del foro
+   * @return void
+   */
   dislikeForo(id: number) {
     this.waveService.dislikeForum(id).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.waveService.getForumsPostsByUser().subscribe((res) => {
           this.myforums = res.forums;
-          console.log(this.myforums);
         });
-        
       }
     });
   }
 
+  /**
+   * Funcion que recorre el arreglo de foros faritos del ususario y verifica
+   * si el id seleccionado pertenece al arreglo
+   * @param id id del foro
+   * @return true si el foro es favoriro, false de lo contrario
+   */
   isFav(id: number) {
     let vart;
     if (this.myforums) {

@@ -10,7 +10,11 @@
     </div>
 
     <div *ngIf="Foro.isLiked; else suscribete" style="display: inherit;">
-      <button (click)="dislikeForo(foroId)" class="btn btn-primary dislike" style="display: inherit;">
+      <button
+        (click)="dislikeForo(foroId)"
+        class="btn btn-primary dislike"
+        style="display: inherit;"
+      >
         Cancelar suscripción
       </button>
     </div>
@@ -22,26 +26,28 @@
     </ng-template>
   </div>
   <div style="text-align: center;">
-  <img
-    class="imagen"
-    src="{{ Foro.image }}"
-    style="
-      width: 100%;
-      height: 250px;
-      margin-left: 0 !important;
-      margin-top: 0 !important;
-    "
-  /></div>
+    <img
+      class="imagen"
+      src="{{ Foro.image }}"
+      style="
+        width: 100%;
+        height: 250px;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+      "
+    />
+  </div>
 
-  
-    <h2>
-      {{ Foro.title
-      }}
-    </h2>
-    <h6><small style="color: grey !important; font-size: 0.95rem;">{{Foro.subscribers}} 
-      {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }} </small
-    ></h6>
-  
+  <h2>
+    {{ Foro.title }}
+  </h2>
+  <h6>
+    <small style="color: grey !important; font-size: 0.95rem;"
+      >{{ Foro.subscribers }}
+      {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }}
+    </small>
+  </h6>
+
   <h6>¡Comentarios!</h6>
 
   <div class="comentario">
@@ -63,23 +69,35 @@
 
                   <ul class="media-list">
                     <li class="media">
-                      <a (click)="capturePic(com.user.image)" data-toggle="modal"
-                      data-target="#exampleModal2"
-                       *ngIf="com.user.image != null; else sinFoto">
+                      <a
+                        (click)="capturePic(com.user.image)"
+                        data-toggle="modal"
+                        data-target="#exampleModal2"
+                        *ngIf="com.user.image != null; else sinFoto"
+                      >
                         <img
                           src="{{ com.user.image }}"
                           alt=""
                           class="img-circle"
-                          style="Object-fit:cover; min-height: 100%; object-position:cover;"
+                          style="
+                            object-fit: cover;
+                            min-height: 100%;
+                            object-position: cover;
+                          "
                         />
-                    </a>
+                      </a>
 
                       <ng-template #sinFoto>
                         <img
                           src="https://iestpdesaguadero.edu.pe/wp-content/uploads/2016/11/78-786420_icono-usuario-joven-transparent-user-png-png-download.png"
                           alt=""
                           class="img-circle"
-                          style="Object-fit:cover; width:100%; min-height: 100%; object-position:cover;"
+                          style="
+                            object-fit: cover;
+                            width: 100%;
+                            min-height: 100%;
+                            object-position: cover;
+                          "
                         />
                       </ng-template>
 
@@ -216,7 +234,7 @@
       </div>
       <div class="modal-footer">
         <button
-          [disabled]="postForm.invalid || this.postForm.value.text.trim()==''"
+          [disabled]="postForm.invalid || this.postForm.value.text.trim() == ''"
           (click)="postCom()"
           type="button"
           class="btn btn-primary enviar"
@@ -253,9 +271,11 @@
         </button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <img src="{{ selectedP }}" style="border-radius: 10px; margin-top: 0 !important;">
+        <img
+          src="{{ selectedP }}"
+          style="border-radius: 10px; margin-top: 0 !important;"
+        />
       </div>
-      
     </div>
   </div>
 </div>

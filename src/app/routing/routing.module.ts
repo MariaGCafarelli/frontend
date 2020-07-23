@@ -1,6 +1,5 @@
 import { ContenidoRecomendadoComponent } from './../components/admin/categorias/contenido-recomendado/contenido-recomendado.component';
 import { AdminComponent } from './../components/admin/admin.component';
-import { CrearForoComponent } from './../components/foros/crear-foro/crear-foro.component';
 import { CategoriaComponent } from './../components/categorias/categoria/categoria.component';
 import { InicioComponent } from './../components/inicio/inicio.component';
 import { RegistrarUsuarioComponent } from './../components/registrar-usuario/registrar-usuario.component';
@@ -15,7 +14,6 @@ import { ForoComponent } from '../components/foros/foro/foro.component';
 import { SubCategoriaComponent } from '../components/categorias/sub-categoria/sub-categoria.component';
 import { CategoriasComponent } from '../components/categorias/categorias.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { FavoritasComponent } from '../components/favoritas/favoritas.component';
 import { PictureComponent } from '../components/picture/picture.component';
 import { UsuarioComponent } from '../components/usuario/usuario.component';
 import { PictureForoComponent } from '../components/picture-foro/picture-foro.component';
@@ -34,14 +32,9 @@ const routes: Routes = [
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
   { path: 'reset/password', component: CambiarContrasenaComponent },
   { path: 'registrar-usuario', component: RegistrarUsuarioComponent },
-  { path: 'favoritas', component: FavoritasComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'picture', component: PictureComponent, canActivate: [AuthGuard] },
-  {
-    path: 'crear-foro',
-    component: CrearForoComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'picture-foro/:id',
     component: PictureForoComponent,
