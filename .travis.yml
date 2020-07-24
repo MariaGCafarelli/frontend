@@ -10,8 +10,6 @@ branches:
     - master
 notifications:
   email: false
-before_script:
-  - npm run compodoc
 script:
   - npm run build-travis
 after_success:
