@@ -1,4 +1,10 @@
-<ngx-spinner bdColor = "rgba(10,57,158,0.8)" size = "large" color = "#6be7db" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white" > Wave... </p>
+<ngx-spinner
+  bdColor="rgba(10,57,158,0.8)"
+  size="large"
+  color="#6be7db"
+  type="ball-scale-multiple"
+  [fullScreen]="true"
+  ><p style="color: white;">Wave...</p>
 </ngx-spinner>
 <main>
   <div class="bg"></div>
@@ -13,7 +19,7 @@
           <input matInput placeholder="Nombre" formControlName="nombres" />
         </mat-form-field>
         <mat-error
-          *ngIf="nombres.errors.required && (nombres.dirty || nombres.touched)"
+          *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)"
         >
           Por favor introduzca su nombre
         </mat-error>
@@ -24,29 +30,35 @@
             nombres.errors.pattern
           "
         >
-         Por favor Introduzca datos válidos.
+          Por favor Introduzca datos válidos.
         </mat-error>
         <mat-form-field appearance="outline">
           <mat-label>Apellidos</mat-label>
           <input matInput placeholder="Apellidos" formControlName="apellidos" />
         </mat-form-field>
         <mat-error
-          *ngIf="apellidos.errors.required && (apellidos.dirty || apellidos.touched)"
+          *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)"
         >
           Por favor introduzca al menos un apellido
         </mat-error>
         <mat-error
           *ngIf="
-          apellidos.invalid &&
+            apellidos.invalid &&
             (apellidos.dirty || apellidos.touched) &&
             apellidos.errors.pattern
           "
         >
-         Por favor Introduzca datos válidos.
+          Por favor Introduzca datos válidos.
         </mat-error>
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Fecha de nacimiento</mat-label>
-          <input matInput  [min]="minDate" [max]="maxDate" [matDatepicker]="picker" formControlName="fecha" />
+          <input
+            matInput
+            [min]="minDate"
+            [max]="maxDate"
+            [matDatepicker]="picker"
+            formControlName="fecha"
+          />
           <mat-datepicker-toggle matSuffix [for]="picker" appearance="outline">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>
@@ -106,8 +118,8 @@
             10 caracteres máximo
           </mat-error>
           <mat-error *ngIf="contra.errors.pattern">
-            Debe tener al menos una Mayúscula, una Minúscula,  un 
-            dígito, un caracter especial y no con tener espacios
+            Debe tener al menos una Mayúscula, una Minúscula, un dígito, un
+            caracter especial y no con tener espacios
           </mat-error>
         </div>
         <mat-form-field appearance="outline">
