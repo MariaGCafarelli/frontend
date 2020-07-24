@@ -19,7 +19,7 @@
           <input matInput placeholder="Nombre" formControlName="nombres" />
         </mat-form-field>
         <mat-error
-          *ngIf="nombres.errors.required && (nombres.dirty || nombres.touched)"
+          *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)"
         >
           Por favor introduzca su nombre
         </mat-error>
@@ -37,9 +37,7 @@
           <input matInput placeholder="Apellidos" formControlName="apellidos" />
         </mat-form-field>
         <mat-error
-          *ngIf="
-            apellidos.errors.required && (apellidos.dirty || apellidos.touched)
-          "
+          *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)"
         >
           Por favor introduzca al menos un apellido
         </mat-error>
