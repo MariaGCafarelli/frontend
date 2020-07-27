@@ -1,0 +1,792 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-wave documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">front-wave documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>CrearForoComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/foros/crear-foro/crear-foro.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-crear-foro</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./crear-foro.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./crear-foro.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#CatWFavoriteSubcat">CatWFavoriteSubcat</a>
+                            </li>
+                            <li>
+                                <a href="#seleccionado">seleccionado</a>
+                            </li>
+                            <li>
+                                <a href="#text">text</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#crearForo">crearForo</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSaveForm">onSaveForm</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(service: <a href="../injectables/WaveServiceService.html">WaveServiceService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>service</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WaveServiceService.html" target="_self" >WaveServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="crearForo"></a>
+                    <span class="name">
+                        <b>
+                            crearForo
+                        </b>
+                        <a href="#crearForo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>crearForo(idSubcategory, title)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:24</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>idSubcategory</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>title</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="17"
+                            class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:17</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSaveForm"></a>
+                    <span class="name">
+                        <b>
+                            onSaveForm
+                        </b>
+                        <a href="#onSaveForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSaveForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:33</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="CatWFavoriteSubcat"></a>
+                        <span class="name">
+                            <b>
+                            CatWFavoriteSubcat</b>
+                            <a href="#CatWFavoriteSubcat"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="seleccionado"></a>
+                        <span class="name">
+                            <b>
+                            seleccionado</b>
+                            <a href="#seleccionado"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:12</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="text"></a>
+                        <span class="name">
+                            <b>
+                            text</b>
+                            <a href="#text"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/components/foros/crear-foro/crear-foro.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { WaveServiceService } from &#x27;src/app/services/wave-service.service&#x27;;
+import { Router, ActivatedRoute } from &#x27;@angular/router&#x27;;
+
+@Component({
+  selector: &#x27;app-crear-foro&#x27;,
+  templateUrl: &#x27;./crear-foro.component.html&#x27;,
+  styleUrls: [&#x27;./crear-foro.component.scss&#x27;]
+})
+export class CrearForoComponent implements OnInit {
+  CatWFavoriteSubcat: [];
+  seleccionado;
+  text;
+
+  constructor(private service :WaveServiceService, private router: Router) { }
+
+  ngOnInit(): void {
+    this.service.getFavoriteSubCategories().subscribe((res)&#x3D;&gt;{
+      this.CatWFavoriteSubcat &#x3D; res.categories;
+      console.log(this.CatWFavoriteSubcat);
+    })
+  }
+
+  crearForo(idSubcategory, title){
+    this.service.createForum(idSubcategory, title).subscribe((response)&#x3D;&gt;{
+      if(response){
+        alert(&quot;foro creado&quot;)
+        this.router.navigate([&#x27;/foros&#x27;]);
+      }
+    })
+  }
+
+  onSaveForm(){
+  this.crearForo(this.seleccionado, this.text);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-menu&gt;&lt;/app-menu&gt;
+&lt;div class&#x3D;&quot;fondo&quot;&gt;
+  &lt;form (ngSubmit)&#x3D;&quot;onSaveForm()&quot;&gt;
+    &lt;div class&#x3D;&quot;form&quot;&gt;
+      &lt;mat-label class&#x3D;&quot;datos&quot;&gt;Introduzca el nombre del foro:&lt;/mat-label&gt;
+
+      &lt;div &gt;
+        &lt;mat-form-field appearance&#x3D;&quot;outline&quot;&gt;
+        &lt;input matInput [(ngModel)]&#x3D;&quot;text&quot; name&#x3D;&quot;text&quot;  placeholder&#x3D;&quot;Nombre&quot; /&gt;
+      &lt;/mat-form-field&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group cuentas&quot;&gt;
+        &lt;mat-label class&#x3D;&quot;datos&quot;&gt;Entre tus categorías favortias, ¿dónde crearás el foro? &lt;/mat-label&gt;
+        &lt;div *ngFor &#x3D; &quot;let aja of CatWFavoriteSubcat&quot;&gt; 
+          &lt;mat-label class&#x3D;&quot;datos&quot;&gt;{{aja.name}}: &lt;/mat-label&gt;
+        &lt;select [(ngModel)]&#x3D;&quot;seleccionado&quot;
+          class&#x3D;&quot;form-control cuenta&quot;
+          id&#x3D;&quot;sel1&quot;
+          name&#x3D;&quot;first&quot;
+          aria-placeholder&#x3D;&quot;aja.name&quot;
+        &gt; 
+               &lt;option *ngFor &#x3D; &quot;let ok of aja.subCategories&quot; value&#x3D;&quot;{{ok.id}}&quot;&gt;{{ok.name}}&lt;/option&gt;
+          
+          
+         
+        &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary primero&quot;&gt;continuar&lt;/button&gt;
+      &lt;/div&gt;
+      
+      
+    &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./crear-foro.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.fondo {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    background-image: url(&quot;/assets/img/back4.jpg&quot;);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+  
+    form {
+      position: relative;
+      z-index: 2;
+      width: 80%;
+      margin:auto;
+      text-align: center;
+    }
+  }
+
+  input {
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin-top: 1em;
+    text-align: left;
+  }
+  
+  mat-label {
+    text-align: center;
+    color: #34839c;
+    letter-spacing: 0.5px;
+  }
+
+  mat-label.datos {
+    font-size: large;
+    margin-bottom: 2%;
+    font-family: &quot;Montserrat Alternates&quot;, sans-serif;
+
+    line-height: 1em;
+    color: #f4f4f4;
+  }
+
+  input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  &amp;,
+  &amp;:hover,
+  &amp;:focus,
+  &amp;:active {
+    transition: all 5000s ease-in-out 0s;
+    transition-property: background-color, color !important;
+  }
+}
+
+/* input color class */
+::ng-deep input.mat-input-element {
+  color: #484a4c;
+}
+
+/* Change label color on focused */
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #50d0fb !important;
+}
+
+/* underline border color on focused */
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple {
+  background-color: #50d0fb !important;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #50d0fb !important;
+  background: white;
+  border-radius: 5px;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  color: #50d0fb !important;
+  background: white;
+  border-radius: 4px;
+}
+
+//mat-input focused color
+::ng-deep
+  .mat-form-field-appearance-outline.mat-focused
+  .mat-form-field-outline-thick {
+  color: #50d0fb !important;
+}
+
+// mat-input error outline color
+::ng-deep
+  .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+  .mat-form-field-outline-thick {
+  color: red !important;
+  opacity: 0.8 !important;
+}
+
+// mat-input carent color
+::ng-deep .mat-input-element {
+  caret-color: red !important;
+}
+
+// mat-input error carent color
+::ng-deep .mat-form-field-invalid .mat-input-element,
+.mat-warn .mat-input-element {
+  caret-color: red !important;
+}
+
+// mat-label normal state style
+::ng-deep .mat-form-field-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: red !important;
+}
+
+// mat-label error style
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: red !important;
+}
+
+::ng-deep .mat-input-wrapper {
+  background: blue !important;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-menu></app-menu><div class="fondo">  <form (ngSubmit)="onSaveForm()">    <div class="form">      <mat-label class="datos">Introduzca el nombre del foro:</mat-label>      <div >        <mat-form-field appearance="outline">        <input matInput [(ngModel)]="text" name="text"  placeholder="Nombre" />      </mat-form-field>      </div>      <div class="form-group cuentas">        <mat-label class="datos">Entre tus categorías favortias, ¿dónde crearás el foro? </mat-label>        <div *ngFor = "let aja of CatWFavoriteSubcat">           <mat-label class="datos">{{aja.name}}: </mat-label>        <select [(ngModel)]="seleccionado"          class="form-control cuenta"          id="sel1"          name="first"          aria-placeholder="aja.name"        >                <option *ngFor = "let ok of aja.subCategories" value="{{ok.id}}">{{ok.name}}</option>                                     </select>      </div>      </div>      <div>        <button type="submit" class="btn btn-primary primero">continuar</button>      </div>                </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'CrearForoComponent', 'selector': 'app-crear-foro'},{'name': 'FavoritasComponent', 'selector': 'app-favoritas'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CrearForoComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CrearForoComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

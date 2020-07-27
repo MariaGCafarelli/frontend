@@ -21,14 +21,12 @@ import { SubCategoriaComponent } from './components/categorias/sub-categoria/sub
 import { NgxPayPalModule } from 'ngx-paypal';
 import { CategoriaComponent } from './components/categorias/categoria/categoria.component';
 import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
-import { FavoritasComponent } from './components/favoritas/favoritas.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ForoFilterPipe } from './pipes/foro-filter.pipe';
 import { PictureComponent } from './components/picture/picture.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { CrearForoComponent } from './components/foros/crear-foro/crear-foro.component';
 import { PictureForoComponent } from './components/picture-foro/picture-foro.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
@@ -38,6 +36,13 @@ import { NavbarComponent } from './components/admin/navbar/navbar.component';
 import { ContenidoRecomendadoComponent } from './components/admin/categorias/contenido-recomendado/contenido-recomendado.component';
 import { CategoriasAdminComponent } from './components/admin/categorias-admin/categorias-admin.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { RegistrarAdminComponent } from './components/admin/registrar-admin/registrar-admin.component';
+import { LostPasswordComponent } from './components/lost-password/lost-password.component';
+import { SubAdminComponent } from './components/admin/sub-admin/sub-admin.component';
+import { ForosAdminComponent } from './components/admin/foros-admin/foros-admin.component';
+import { ComentariosComponent } from './components/admin/foros-admin/comentarios/comentarios.component';
+import { UsuariosAdminComponent } from './components/admin/usuarios-admin/usuarios-admin.component';
+import { AdminCrudComponent } from './components/admin/usuarios-admin/admin-crud/admin-crud.component';
 
 const config: SocketIoConfig = {
   url: 'https://wave-service.herokuapp.com',
@@ -60,17 +65,22 @@ const config: SocketIoConfig = {
     ForoComponent,
     CategoriasComponent,
     CategoriaComponent,
-    FavoritasComponent,
     ForoFilterPipe,
     PictureComponent,
     UsuarioComponent,
-    CrearForoComponent,
     PictureForoComponent,
     DateAgoPipe,
     AdminComponent,
     NavbarComponent,
     ContenidoRecomendadoComponent,
     CategoriasAdminComponent,
+    RegistrarAdminComponent,
+    LostPasswordComponent,
+    SubAdminComponent,
+    ForosAdminComponent,
+    ComentariosComponent,
+    UsuariosAdminComponent,
+    AdminCrudComponent,
   ],
   imports: [
     BrowserModule,

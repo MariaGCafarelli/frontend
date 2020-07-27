@@ -3,9 +3,14 @@
     <br />
     <mat-label class="datos">Seleccione una imagen para su foro</mat-label>
     <br />
-    <span
-      >
-      <ngx-spinner bdColor = "rgba(10,57,158,0.8)" size = "large" color = "#6be7db" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white" > Wave... </p>
+    <span>
+      <ngx-spinner
+        bdColor="rgba(10,57,158,0.8)"
+        size="large"
+        color="#6be7db"
+        type="ball-scale-multiple"
+        [fullScreen]="true"
+        ><p style="color: white;">Wave...</p>
       </ngx-spinner>
       <input
         appearance="outline"
@@ -21,12 +26,7 @@
     <button type="button" (click)="onUpload()" class="btn">
       subir
     </button>
-    <button
-      type="submit" 
-      class="btn" 
-      data-dismiss="modal" 
-      (click)="aja()"
-    >
+    <button type="submit" class="btn" data-dismiss="modal" (click)="aja()">
       Continuar sin subir Foto
     </button>
     <br />

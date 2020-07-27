@@ -1,0 +1,92 @@
+<app-navbar></app-navbar>
+
+<h4 style=" margin-left: 5%; margin-top:3%">Comentarios en "{{Foro.title}}"</h4>
+
+<div class="comentario">
+    <hr />
+
+
+    <div *ngIf="posts.length > 0; else sinPost">
+      <div *ngFor="let com of posts">
+        <div class="row flex-row-reverse bootstrap snippets">
+          <div class="col-md-12 col-md-offset-2 col-sm-12">
+            <div class="comment-wrapper">
+              <div class="panel panel-info">
+                <div class="panel-body">
+                  <div class="clearfix"></div>
+
+                  <ul class="media-list">
+                    <li class="media">
+                      <div *ngIf="com.user.image != null; else sinFoto">
+                        <img
+                          src="{{ com.user.image }}"
+                          alt=""
+                          class="img-circle"
+                        />
+                      </div>
+
+                      <ng-template #sinFoto>
+                        <img
+                          src="https://iestpdesaguadero.edu.pe/wp-content/uploads/2016/11/78-786420_icono-usuario-joven-transparent-user-png-png-download.png"
+                          alt=""
+                          class="img-circle"
+                        />
+                      </ng-template>
+
+                      <div class="media-body" style="text-align: right;">
+                        <div class="ordenar">
+                          <div style="display: inline;">
+                            <strong class="text-success"
+                              >{{ com.user.userName }}
+                            </strong>
+                            <time class="ml-3" class="text-success">{{
+                              com.date | dateAgo
+                            }}</time>
+                          </div>
+
+                          <div style="display: inline;">
+                            
+                            <time class="text-success" style="margin-right: 7px">Número de likes: {{ com.likes }}</time>
+                          </div>
+                        </div>
+
+                        <p class="p">
+                          {{ com.text }}
+                        </p>
+                        <div *ngIf="com.isActive; else activo" style="display: inline;">
+                          <a class="btn btn-primary" 
+                            ><mat-icon> close </mat-icon></a
+                          >
+                        </div>
+                        <ng-template #activo
+                          ><button
+                            type="button"
+                            
+                            class="btn btn-primary"
+                          >
+                            <mat-icon> check </mat-icon>
+                          </button>
+                        </ng-template>
+                        
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        *ngIf="nextPage"
+        (click)="traerMasComentarios()"
+        type="button"
+        class="btn btn-mas"
+      >
+        Mas Comentarios
+      </button>
+    </div>
+    <ng-template #sinPost>
+      <h6>Este foro no tiene comentarios</h6>
+    </ng-template>
+  </div>

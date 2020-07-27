@@ -16,6 +16,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -37,9 +39,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatTooltipModule,
     MatTabsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
       ],
   exports: [ 
+    MatPaginatorModule,
+    MatTableModule,
     MatFormFieldModule,
     MatSelectModule ,
     MatMenuModule,

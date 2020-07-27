@@ -2,6 +2,14 @@
   <app-menu></app-menu>
 
   <div class="parent">
+    <div style="margin-left: 5%;">
+      <span (click)="getBack()" style="color: #484a4c;">
+        <mat-icon class="volver" style="font-size: 2em;"
+          >keyboard_backspace</mat-icon
+        >
+      </span>
+    </div>
+
     <mat-form-field appearance="outline">
       <mat-label>Encuentra el foro que buscas</mat-label>
       <input
@@ -9,50 +17,99 @@
         aria-label="Number"
         matInput
         placeholder="Busca un foro"
-        [formControl]="myControl"
-        [matAutocomplete]="auto"
-        [(ngModel)]="filterForum"
+        [ngModel]="searchText"
+        (ngModelChange)="searchTextModelChanged.next($event)"
       />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let option of filteredForums | async"
-          [value]="option.title"
-        >
-          {{ option.title }}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-icon matSuffix style="color: white;">search</mat-icon>
+
+      <mat-icon matSuffix style="color: #484a4c;">search</mat-icon>
     </mat-form-field>
   </div>
 
-  <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
-    <mat-card>
-      <div
-        *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
-        class="ordenar"
-      >
-        <a routerLink="/foro/{{ foro.id }}"
-          ><img mat-card-avatar [src]="foro.image" alt="User Avatar" />
-        </a>
-        <p style="align-self: center;">{{ foro.title }}</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Category</mat-label>
+    <mat-select (selectionChange)="onChangeCategory($event)" aria-label="selection">
+      <div *ngFor="let category of categories">
+        <div *ngIf="category.isActive">
+          <mat-option [value]="category.id" aria-label="selection">
+            {{ category.name }}
+          </mat-option>
+        </div>
       </div>
-      <ng-template #sinFoto>
-        <a routerLink="/foro/{{ foro.id }}"
-          ><img
-            mat-card-avatar
-            src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
-            alt="User Avatar"
-          /> </a
-        >{{ foro.title }}
-      </ng-template>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-card-actions>
-        ¡Suscríbete!
-        <mat-icon (click)="likeForo(foro.id)" class="agregar" [inline]="true" style="cursor: pointer;"
-          >thumb_up</mat-icon
+  <mat-form-field appearance="outline" style="margin-bottom: 4em;" aria-label="selection">
+    <mat-label>Subcategory</mat-label>
+    <mat-select (selectionChange)="onChangeSubcategory($event)">
+      <div *ngFor="let subcategory of subcategories">
+        <div *ngIf="subcategory.isActive">
+          <mat-option [value]="subcategory.id" aria-label="selection">
+            {{ subcategory.name }}
+          </mat-option>
+        </div>
+      </div>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngFor="let foro of forums | foroFilter: filterForum" class="contenedor">
+    <div *ngIf="foro.isActive">
+      <mat-card>
+        <div *ngIf="!isFav(foro.id); else notSuscribed">
+          <mat-card-actions>
+            <mat-icon
+              (click)="likeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
+              >favorite_border</mat-icon
+            >
+          </mat-card-actions>
+        </div>
+        <ng-template #notSuscribed>
+          <mat-card-actions>
+            <mat-icon
+              (click)="dislikeForo(foro.id)"
+              class="agregar"
+              [inline]="true"
+              style="cursor: pointer; color: red; font-size: 1.5em;"
+              >favorite</mat-icon
+            >
+          </mat-card-actions>
+        </ng-template>
+        <div
+          *ngIf="foro.image != null && foro.image != undefined; else sinFoto"
+          class="ordenar"
         >
-      </mat-card-actions></mat-card
-    >
+          <a routerLink="/foro/{{ foro.id }}"
+            ><img
+              mat-card-avatar
+              [src]="foro.image"
+              alt="Avatar"
+              style="
+                object-fit: cover;
+                min-height: 100%;
+                object-position: cover;
+              "
+            />
+          </a>
+          <p style="align-self: center;">{{ foro.title }}</p>
+        </div>
+        <ng-template #sinFoto>
+          <a routerLink="/foro/{{ foro.id }}"
+            ><img
+              mat-card-avatar
+              src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
+              alt="Avatar"
+              style="
+                object-fit: cover;
+                min-height: 100%;
+                object-position: cover;
+              "
+            /> </a
+          >{{ foro.title }}
+        </ng-template>
+      </mat-card>
+    </div>
   </div>
   <button
     *ngIf="nextPage"

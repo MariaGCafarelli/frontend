@@ -53,7 +53,7 @@
 
 .datos {
   text-align: center;
-  color: #3d3f41;
+  color: black;
   font-family: "Roboto";
   margin-bottom: 1em;
   h4 {
@@ -92,7 +92,7 @@ h6.titulo-foro {
 
 mat-icon.like {
   margin-left: 13px;
-  color: orange;
+  color: #ca8267;
 }
 
 mat-icon.dislike {
@@ -161,12 +161,12 @@ time {
 }
 
 .btn1 {
-  width: 30%;
+  width: 40%;
   margin-right: 5px;
   font-style: normal;
   font-family: "Poiret One";
   letter-spacing: 3px;
-  border: 0.8px solid white;
+  border: none;
   background: #5cbcc4;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
@@ -176,7 +176,6 @@ button {
 }
 
 img.mat-card-avatar{
-  
   margin-right: 15px !important;
 }
 
@@ -185,6 +184,20 @@ img.mat-card-avatar{
   height: auto !important;
 }
 
+.btn {
+  color: black;
+  font-weight: bold;
+  width: 8.5rem;
+  font-family: "Poiret One";
+  letter-spacing: 3px;
+  border:none;
+  background: #ffb295;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+input{
+  margin-top: 0.7em;
+}
 
 .ordenar {
   display: flex;
@@ -348,10 +361,6 @@ mat-divider {
     0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper {
-  box-shadow: -1px 4px 18px 3px rgba(0, 0, 0, 0.171),
-    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
-}
 
 ::ng-deep .mat-form-field-wrapper {
   padding-bottom: 0;
@@ -362,7 +371,9 @@ mat-divider {
   color: white;
 }
 
-
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color:#ffb295 !important;
+}
 
 ::ng-deep mat-card-avatar{
   
@@ -372,4 +383,8 @@ mat-divider {
 
 ::ng-deep input[type="search"] {
   color: white;
+}
+
+::ng-deep .mat-tab-label, .mat-tab-link {
+  color: black !important;
 }

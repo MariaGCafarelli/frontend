@@ -13,19 +13,20 @@ mat-card-content {
   text-align: left;
 }
 
-form {
-  padding-top: 5em;
-}
-
 p {
   text-align: justify !important;
+  margin-bottom: 0;
+}
+
+a {
+  color: black;
 }
 
 .encabezado {
   width: 100%;
   margin: 0;
   opacity: 0.9;
-  height: 11em;
+  max-height: 530px;
 }
 
 img {
@@ -33,7 +34,7 @@ img {
   max-height: 10.3;
 }
 
-img.mat-card-avatar{  
+img.mat-card-avatar {
   border: 2px solid #e5e7e8;
 }
 
@@ -50,8 +51,8 @@ h4 {
   font-family: Roboto, sans-serif;
   text-align: left;
   color: black;
-  padding-top: 5%;
-  width: 85%;
+  padding-top: 2em;
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -64,22 +65,10 @@ h4 {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.568);
 }
 
-.ordenar{
-  display: flex;  
-}
-p{
-  text-align: justify;
-  margin-bottom: 0;
+.ordenar {
+  display: flex;
 }
 
-input[type="file"] {
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  background-color: transparent;
-  width: 40%;
-  height: 100px;
-}
 
 label {
   font-weight: 600;
@@ -93,43 +82,30 @@ label {
   text-align: center;
 }
 
-.cargar {
-  width: 3rem;
-  height: 3rem;
-  color: white;
-  background: linear-gradient(
-    0deg,
-    rgba(253, 187, 45, 1) 0%,
-    rgba(116, 180, 188, 1) 100%
-  );
-
-  padding-top: 11px;
-  padding-left: 1px;
-  border-radius: 100px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-}
 
 .btn {
-  width: 40%;
-  margin-left: 55%;
-  font-style: normal;
-  font-family: "Poiret One";
+  color: black;
   font-weight: bold;
+  width: 40%;
+  font-family: "Poiret One";
   letter-spacing: 3px;
-  border: 0.8px solid white;
-  background: #74b4bc;
+  border:none;
+  background: #ffb295;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  margin-left: 55%;
 }
 
 button {
   margin-bottom: 0.5rem;
 }
 
-button.btn-mas{
+button.btn-mas {
   width: 70%;
   margin-left: 15%;
-  background: orange;
+  background: #ffb295;
+  color:black;
   font-weight: bold;
+  border:none;
   margin-bottom: 1em;
 }
 
@@ -154,18 +130,6 @@ hr {
   box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.5);
 }
 
-@media (min-width: 600px) {
-  .centered {
-    font-size: 52%;
-  }
-}
-
-@media (max-width: 330px) {
-  .centered {
-    font-size: 27%;
-  }
-}
-
 .mat-card {
   width: 90%;
   margin: auto;
@@ -181,7 +145,7 @@ hr {
 mat-form-field {
   width: 90%;
   margin-left: 5%;
-  margin-top: 5%;
+  margin-top: 1em;
 }
 
 input {
@@ -190,31 +154,25 @@ input {
   font-family: "Roboto", sans-serif;
 }
 
-h4 {
-  text-align: left;
-  color: black;
-  font-family: Roboto, sans-serif;
-}
-
 .foros1 {
   margin-bottom: 2em;
   font-family: Roboto, sans-serif !important;
 }
 
-div.modal-body{
+div.modal-body {
   text-align: center;
-  form{
-    padding-top:0;
+  form {
+    padding-top: 0;
   }
-  mat-form-field{
+  mat-form-field {
     width: 90%;
     margin-left: 0;
   }
 }
 
-div.modal-footer{
+div.modal-footer {
   text-align: right;
-  .btn{
+  .btn {
     margin-left: 1%;
     width: 47%;
   }
@@ -222,8 +180,39 @@ div.modal-footer{
 
 @media (min-width: 768px) {
   .encabezado {
-    height: 14em;
+    max-height: 700px;
+    
   }
+  .mat-card.head{
+    max-width: 700px;
+  }
+  .web{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    align-content: center;
+  }
+  .imagen-web{
+    width: 50%;
+  }
+  .contenido.web{
+   
+    align-items: center;
+    align-content: center;
+    display: inline;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 800px) {
+.btn{
+  width: 20%;
+  margin-left: 75%;
+}
 }
 
 ::ng-deep.mat-menu-content:not(:empty) {
