@@ -1,110 +1,168 @@
-.head{
-    width: 90%;
-    height: 40%;
-    text-align: center;
-    font-family: 'Montserrat Alternates', sans-serif;
-    color: #ecf1f1;
-    font-size: 250%;    
-    text-align: center;    
-    font-weight: bolder;
-    color: #123a42;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
+.head {
+  width: 95%;
+  font-family: "Poiret One";
+  font-size: 250%;
+  text-align: left;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.separador {
+  height: 5em;
+}
+
+.encabezado {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+img.mat-card-image {
+  margin: 0;
+  opacity: 0.9;
+  height: 232px;
 }
 
 .encabezado{
-    width: 100%;
-    height: 100%;
-    margin:0;
-    opacity: 0.45;    
-    box-shadow: 0px 4px 4px black;
+  height: 232px;
 }
 
-img.mat-card-image{
-    margin: 0;
+.mat-expansion-panel-header {
+  padding: 24px;
+  height: auto !important;
 }
 
-.container{
-    margin-top:3%;
-    position: relative;
+.title{
+  background-color: rgba(7, 0, 0, 0.075);
 }
 
-.centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: 9px;
+.container {
+  margin-top: 4%;
+  position: relative;
 }
 
-
-.p{
-    width: 90%;
-    margin-top:5%;
-    text-align: justify;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Poiret One';
-    font-weight: bold;
-    color: #34839c;
-    font-size: large;
-    letter-spacing: 1px;
+.centered {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 2.5px;
+  font-family: Roboto, sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 90%;
+  text-align: center;
+  color: #f4f4f4;
+  text-shadow: 2px 2px 8px rgb(54, 54, 54), 2px 2px 8px #363636;
 }
 
-h4{
-    font-family: 'Montserrat Alternates', sans-serif;
-    font-weight: normal;
-    text-align: center;
-    color: #1a5f6c
+.p {
+  width: 90%;
+  margin-top: 5%;
+  text-align: justify !important;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Poiret One";
+  font-size: large;
+  letter-spacing: 1px;
 }
 
-mat-card{
-    padding: 0;    
-    margin-top: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.493);
+h4 {
+  font-family: Roboto, sans-serif;
+  text-align: left;
+  color: black;
+  padding-top: 5%;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+mat-card {
+  padding: 0;
+  margin-top: 8px;
+  max-width: 1050px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.493);
+}
+
+mat-card-content {
+  padding: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  padding: 0 4px;
+}
+.card-container {
+  padding-bottom: 2.5%;
+}
 
 .row {
-    width: 98%;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 4px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5%;
-    padding-bottom: 9%;
-  }
-  
-  /* Create four equal columns that sits next to each other */
-  .column {
-    flex: 25%;
-    padding: 0 4px;
-  }
-  
-  .column img {
-    vertical-align: middle;
-  }
-
-  .reverse{
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
-p{
-    margin:0;
-    height:39px;
-    padding-top: 7px;
-    font-size: large;
-    font-family: 'Montserrat Alternates', sans-serif;
-    color: #1a5f6c
+  display: flex;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.mat-card-footer{
-    margin:0;
-    text-align: center;
-    height: 5%;
-    
+.mat-card-image {
+  height: 90%;
+  width: 100%;
+}
+.column img {
+  vertical-align: middle;
 }
 
+.reverse {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.mat-card-footer {
+  margin: 0;
+  text-align: center;
+  height: 5%;
+}
+
+@media (max-width: 450px){
+  .mat-card-content.card{
+    height: 5.5em;
+    display: flex;
+    align-items: center;
+    margin-top: 0.9em;
+  }
+}
+
+@media (min-width: 758px) {
+  .centered {
+    top: 180px;
+  }
+  img.mat-card-image.encabezado{
+    height: 370px;
+  }
+  .encabezado{
+    height: 370px;
+  }
+  img.mat-card-image{
+    height: 370px;
+  }
+}
+
+@media (min-width: 1100px){
+  img.mat-card-image.encabezado{
+    height: 380px;
+    max-width: 1050px;
+  }
+  .encabezado{
+    height: 385px;
+  }
+  img.mat-card-image{
+    height: 370px;
+  }
+}
+
+::ng-deep .mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: -1px 4px 8px 3px rgba(0, 0, 0, 0.171),
+    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
+}

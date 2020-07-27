@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<h4 style=" margin-left: 5%; margin-top:3%">Administradores</h4>
+
+<div *ngFor="let foro of Admins" class="contenedor">
+    <div *ngIf="foro.role == 'admin'">
+    <mat-card style="margin-top:2em">
+      
+        <div style="display:inline">
+        <mat-card-title >{{ foro.firstName }} {{foro.lastName}}</mat-card-title>
+        <mat-card-subtitle style="display:inline"
+          ><p style="display: inline;">
+            User: {{ foro.userName }}
+          </p></mat-card-subtitle
+        ></div>
+      
+      <div *ngIf="foro.isActive; else activo" style="display: inline;">
+        <a class="btn btn-primary" (click)="estadoAdmin(foro.email)"
+          ><mat-icon> close </mat-icon></a
+        >
+      </div>
+      <ng-template #activo
+        ><button
+          type="button"
+          (click)="estadoAdmin(foro.email)"
+          class="btn btn-primary"
+        >
+          <mat-icon> check </mat-icon>
+        </button>
+      </ng-template>
+
+    </mat-card>
+</div>
+  </div>
+  <div  style="display: inline;" *ngIf="nextPage2">
+    <a class="btn btn-primary" (click)="traerMasAdmins()"
+      ><mat-icon> more </mat-icon></a
+    >
+  </div>

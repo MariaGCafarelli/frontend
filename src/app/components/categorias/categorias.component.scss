@@ -1,56 +1,121 @@
-
-.fondo{
-    padding:0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
+.fondo {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
 }
 
-.espacio{
-    height: 5%;
+.contenido {
+  margin-bottom: 1.5em;
+}
+
+mat-card {
+  width: 95%;
+  max-height: 20%;
+  text-align: center;
+  font-family: "Poiret One";
+  font-size: 220%;
+  text-align: center;
+  line-height: initial;
+  color: #f4f4f4;
+  text-shadow: 2px 2px 8px rgb(54, 54, 54), 2px 2px 8px #363636;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  margin-top: 7%;
+  padding-bottom: 10px;
+}
+
+img {
+  width: 100%;
+  margin: 0;
+  opacity: 0.9;
+}
+
+img.mat-card-image {
+  margin: 0;
+  height: 5.9em;
+}
+
+.container {
+  position: relative;
+}
+
+.centered {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  font-family: Roboto, sans-serif;
+  font-weight: none;
+}
+
+mat-card-content {
+  text-shadow: none;
+  margin: 10px;
+}
+
+.btn-mas{
+  color: black;
+  font-weight: bold;
+  width: 60%;
+  font-family: "Poiret One";
+  letter-spacing: 3px;
+  border:none;
+  background: #c2e1dd;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  margin-left: 20%;
 }
 
 
-mat-card{
-    width: 70%;
-    height: 20%;
-    text-align: center;
-    font-family: 'Montserrat Alternates', sans-serif;
-    color: #ecf1f1;
-    font-size: 250%;    
-    text-align: center;    
-    font-weight: bolder;
-    color: #123a42;
+
+@media(min-width:740px){
+  img.mat-card-image {
+      height: 8em;
+    }
+
+  .centered{
+      top: 130px;
+  }
+}
+
+@media(min-width: 650px){
+  img.cat {
+    height: 30%;
+    height: 21em;
+  }
+  .carousel{
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: space-around;
     margin-left: auto;
     margin-right: auto;
-    padding: 0;
-    margin-top: 7%;
+  }
+  .para-sobrevivir{
+    width: 350px;
+    margin-right: 10px;
+  }
+
 }
 
-img{
-    width: 100%;
-    height: 100%;
-    margin:0;
-    opacity: 0.45;
+::ng-deep .mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-chip-remove {
+  opacity: 1.4;
 }
 
-img.mat-card-image{
-    margin: 0;
-    box-shadow: 0px 4px 4px black;
+::ng-deep .mat-card:not([class*="mat-elevation-z"]) {
+  box-shadow: -1px 4px 8px 3px rgba(0, 0, 0, 0.171),
+    0px -1px 4px 0px rgba(0, 0, 0, 0.14), 1px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
 
-.container{
-    position: relative;
+::ng-deep.mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+  background-color: orange;
+  color: #fff;
+  letter-spacing: 1.1px;
 }
 
-.centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.caja{  
-    box-shadow: 0px 4px 4px rgba(17, 17, 17, 0.432);
-}

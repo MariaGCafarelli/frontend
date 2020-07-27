@@ -1,44 +1,120 @@
 <app-menu></app-menu>
+<div class="separador" style="color: transparent;">cargando contenid extra</div>
 
-<mat-card class="example-card container head">
-    <img mat-card-image src="{{categorias.encabezado}}" class="encabezado">
-    <div class="centered">Libros</div>
-</mat-card>
-
-<div class="p">
-    <br>
-    <h4>Recomendaciones wave</h4>
-    <h5>Aqui podras conseguir personas con quien compartir la maravillosa aventura de la lectura no olvides visitar la pagina y seguir nutriendo tu lectura</h5>
-    <br>
-    <h4>Subcategorías</h4>
+<div style="margin-left: 5%;">
+  <span (click)="getBack()" style="color: grey;">
+    <mat-icon class="volver" style="font-size: 2em;"
+      >keyboard_backspace</mat-icon
+    >
+  </span>
 </div>
 
+<mat-card class="example-card container head">
+  <img mat-card-image [src]="categoryById.image" alt="img" class="encabezado" />
+  <div class="centered">
+    {{ categoryById.name }}
+  </div>
 
-<div class="row"> 
+  <mat-card-content>
+    <mat-card-title style="text-align: justify;">{{
+      categoryById.text
+    }}</mat-card-title>
+  </mat-card-content>
+</mat-card>
 
-    <div class="column">
-        <div *ngFor="let sub of subcategories">
-            <a routerLink="/sub-categoria/{{sub.id}}/categoria/{{categoryId}}">
-                <mat-card>
-                <img mat-card-image src="{{categorias.imagen}}" style="width:100%">
-                <mat-card-content>
-                    <mat-card-footer><p>{{sub.name}}</p></mat-card-footer>
-                </mat-card-content>        
-            </mat-card></a>
+<br />
+
+<div
+  *ngIf="categoryById.contentCategories"
+  style="
+    width: 95% !important;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+  "
+>
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header style="height: auto !important;">
+        <mat-panel-title>
+          ¡Contenido recomendado!
+        </mat-panel-title>
+        <mat-panel-description style="text-align: justify;">
+          Aquí podrás conseguir todas las recomendaciones Wave que tenemos para
+          ti
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Contenido
+        </mat-panel-title>
+        <mat-panel-description>
+          {{
+            panelOpenState
+              ? "Ocultar contenido"
+              : "Despliega todo lo que tenemos para ti"
+          }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngFor="let com of categoryById.contentCategories">
+        <div *ngIf="com.isActive">
+          <mat-card class="example-card container head">
+            <img mat-card-image [src]="com.imagen" alt="img" class="encabezado" />
+
+            <mat-card-content>
+              <mat-card-title style="justify-content: left;"
+                ><strong> {{ com.title }}</strong></mat-card-title
+              >
+              <p>
+                {{ com.text }}
+              </p>
+              <br />
+              <p>
+                Consigue más en:
+                <a href="{{ com.link }}">Contenido extra</a>
+              </p>
+            </mat-card-content>
+          </mat-card>
         </div>
-    
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
 
-
-   </div>
-    
-    <div class="column reverse">
-        <div *ngFor="let sub of subcategories">
-            <a routerLink="/sub-categoria/{{sub.id}}"><mat-card>
-                <img mat-card-image src="{{categorias.imagen}}" style="width:100%">
-                <mat-card-content>
-                    <mat-card-footer><p>{{sub.name}}</p></mat-card-footer>
-                </mat-card-content>        
-            </mat-card></a>
-        </div>
-    </div> 
+<br />
+<h4>Podría interesarte</h4>
+<div>
+  <div class="row card-list" style="max-width: 1350px;">
+    <div
+      class="col-md-3 col-6 card-container"
+      *ngFor="let sub of subActive; index as i"
+    >
+      <a routerLink="/sub-categoria/{{ sub.id }}">
+        <mat-card>
+          <img
+            mat-card-image
+            src="{{ sub.image }}"
+            class="mat-card-image"
+            alt="img"
+            style="object-fit: cover; min-height: 100%; object-position: cover;"
+          />
+          <mat-card-content
+            class="card"
+            style="display: flex; align-items: center;"
+          >
+            <mat-card-footer
+              ><p style="margin-bottom: 0 !important;">
+                {{ sub.name }}
+              </p></mat-card-footer
+            >
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
+  </div>
 </div>

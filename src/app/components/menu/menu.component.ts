@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  private forums: any[] = [];
+
 
   constructor(
     private waveService: WaveServiceService,
@@ -17,11 +20,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Carga todos los Foros
-    this.waveService.getAllForums().subscribe((response) => {
-      this.forums = response.forums;
-      console.log(this.forums);
-    });
+
   }
 
   logOut() {

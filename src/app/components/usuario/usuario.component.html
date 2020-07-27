@@ -1,0 +1,677 @@
+<app-menu></app-menu>
+
+<div class="fondo">
+  <div *ngIf="user" class="form">
+    <div *ngIf="user.role == 'premium'; else noPremium">
+      <mat-icon style="margin-left: 4.5%; color: yellow; font-size: 2.3em;"
+        >star</mat-icon
+      >
+    </div>
+    <ng-template #noPremium>
+      <button
+        *ngIf="user.role == 'normal'"
+        data-toggle="modal"
+        data-target="#exampleModal"
+        style="width: 46%;"
+        class="btn premium"
+      >
+        ¡Hazte Premium!<mat-icon
+          [inline]="true"
+          style="
+            cursor: pointer;
+            margin-left: 4.5%;
+            color: yellow;
+            width: 15px;
+          "
+          >star</mat-icon
+        >
+      </button>
+    </ng-template>
+    <div class="logo">
+      <img
+        class="img-profile"
+        src="{{ user.image }}"
+        alt="img"
+        style="
+          cursor: pointer;
+          object-fit: cover;
+          min-height: 100%;
+          object-position: cover;
+        "
+        data-toggle="modal"
+        data-target="#exampleModal3"
+      />
+    </div>
+    <div class="datos">
+      <h4>{{ user.firstName }} {{ user.lastName }}</h4>
+      <h6 style="display: inline;">@{{ user.userName }}</h6>
+      <mat-icon
+        style="cursor: pointer; margin-left: 1%; color: black;"
+        inline="true"
+        data-toggle="modal"
+        data-target="#exampleModal2"
+        (click)="preUpdate()"
+        >create</mat-icon
+      >
+    </div>
+    <mat-tab-group
+      mat-stretch-tabs
+      animationDuration="1000ms"
+      style="color: black !important; height: auto; overflow: hidden;"
+    >
+      <mat-tab label="Foros suscritos" style="height: auto; overflow: hidden;">
+        <div
+          class="example-action-buttons"
+          style="text-align: center; height: auto; overflow: hidden;"
+        >
+          <button
+            mat-button
+            (click)="accordion.openAll()"
+            type="button"
+            class="btn btn1 btn-primary btn-sm enviar"
+            style="background-color: #fec2a3;"
+          >
+            mostrar todo
+          </button>
+          <button
+            mat-button
+            (click)="accordion.closeAll()"
+            type="button"
+            class="btn btn1 btn-primary btn-sm enviar"
+            style="background-color: #fec2a3;"
+          >
+            ocultar todo
+          </button>
+        </div>
+        <div
+          *ngFor="let foro of forumsPosts"
+          style="
+            margin-bottom: 1em;
+            margin-top: 5px;
+            height: auto;
+            overflow: hidden;
+          "
+          class="expantion"
+        >
+          <mat-accordion multi style="height: auto; overflow: hidden;">
+            <mat-expansion-panel
+              hideToggle
+              style="height: auto; overflow: hidden;"
+            >
+              <mat-expansion-panel-header
+                style="height: auto; overflow: hidden;"
+              >
+                <mat-panel-title>
+                  <a
+                    routerLink="/foro/{{ foro.id }}"
+                    style="display: flex; width: 100%;"
+                  >
+                    <img
+                      mat-card-avatar
+                      src="{{ foro.image }}"
+                      alt="img"
+                      class="example-header-image"
+                      style="
+                        object-fit: cover;
+                        min-height: 100%;
+                        object-position: cover;
+                      "
+                  /></a>
+                </mat-panel-title>
+                <mat-panel-description
+                  style="
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: auto;
+                    overflow: hidden;
+                  "
+                  class="ordenar"
+                >
+                  <div style="color: rgb(61, 63, 65);">
+                    <a
+                      routerLink="/foro/{{ foro.id }}"
+                      style="display: flex; width: 100%; color: black;"
+                      >{{ foro.title }}</a
+                    >
+                  </div>
+                  <div>
+                    <mat-icon
+                      [inline]="true"
+                      style="color: #91afab; cursor: pointer;"
+                      (click)="dislikeForo(foro.id)"
+                      >thumb_down</mat-icon
+                    >
+                  </div>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+            <mat-expansion-panel
+              (opened)="panelOpenState = true"
+              (closed)="panelOpenState = false"
+              style="height: auto; overflow: hidden;"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title
+                  style="
+                    color: rgb(61, 63, 65);
+                    height: auto;
+                    overflow: hidden;
+                  "
+                >
+                  Comentarios
+                </mat-panel-title>
+                <mat-panel-description style="height: auto; overflow: hidden;">
+                  Comentarios
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngIf="foro.posts.length > 0; else sinPost">
+                <ng-template matExpansionPanelContent>
+                  <div
+                    *ngFor="let com of foro.posts"
+                    style="margin-bottom: 10px;"
+                  >
+                    <div>
+                      <div class="ordenar">
+                        <div
+                          style="width: 75%; word-wrap: break-word;"
+                          class="tamano"
+                        >
+                          <p
+                            class="p"
+                            style="
+                              display: inline;
+                              display: flex;
+                              align-items: center;
+                            "
+                          >
+                            <mat-icon
+                              [inline]="true"
+                              style="color: #5cbcc4; cursor: pointer;"
+                              >arrow_right</mat-icon
+                            >
+                            {{ com.text }}
+                          </p>
+                        </div>
+                        <div style="display: inline; margin-right: 7px;">
+                          <mat-icon
+                            (click)="onDelete(com.id)"
+                            [inline]="true"
+                            class="like"
+                            style="cursor: pointer;"
+                          >
+                            delete
+                          </mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+              <ng-template #sinPost>
+                <div class="ordenar">
+                  <div
+                    style="width: 75%; word-wrap: break-word;"
+                    class="tamano"
+                  >
+                    <p class="p" style="display: inline;">
+                      ¡No tienes comentarios en este foro!
+                    </p>
+                  </div>
+                  <div style="display: inline; margin-right: 7px;">
+                    Cancelar suscripción<mat-icon
+                      (click)="dislikeForo(foro.id)"
+                      [inline]="true"
+                      class="like"
+                      style="color: #91afab; cursor: pointer;"
+                    >
+                      thumb_down
+                    </mat-icon>
+                  </div>
+                </div>
+              </ng-template>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </mat-tab>
+      <div *ngIf="forumsCreated" style="height: auto; overflow: hidden;">
+        <div *ngIf="forumsCreated.length > 0">
+          <mat-tab
+            label="Foros creados por ti"
+            style="height: auto; overflow: hidden;"
+          >
+            <div *ngFor="let foro of forumsCreated" class="contenedor">
+              <mat-card style="height: auto; overflow: hidden;">
+                <div
+                  *ngIf="
+                    foro.image != null && foro.image != undefined;
+                    else sinFoto
+                  "
+                  style="display: flex;"
+                >
+                  <a
+                    routerLink="/foro/{{ foro.id }}"
+                    style="display: flex; color: black;"
+                    ><img
+                      mat-card-avatar
+                      [src]="foro.image"
+                      alt="User Avatar"
+                      style="
+                        align-self: center;
+                        object-fit: cover;
+                        min-height: 100%;
+                        object-position: cover;
+                      "
+                    />
+
+                    <p
+                      style="
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 0;
+                      "
+                    >
+                      {{ foro.title }}
+                    </p>
+                  </a>
+                </div>
+                <ng-template #sinFoto>
+                  <a routerLink="/foro/{{ foro.id }}"
+                    ><img
+                      mat-card-avatar
+                      src="https://www.liberaldictionary.com/wp-content/uploads/2019/02/f-8273.jpg"
+                      alt="Avatar"
+                      style="
+                        object-fit: cover;
+                        min-height: 100%;
+                        object-position: cover;
+                      "
+                    /> </a
+                  >{{ foro.title }}
+                </ng-template>
+
+                <mat-card-actions>
+                  <p
+                    style="
+                      display: flex;
+                      align-items: center;
+                      margin-bottom: 5px;
+                      width: 45%;
+                      margin-left: 55%;
+                    "
+                  >
+                    ¡Cambiar imagen!
+                    <mat-icon
+                      class="agregar"
+                      style="
+                        color: orange;
+                        margin-left: 5px;
+                        width: 15px;
+                        cursor: pointer;
+                      "
+                      [inline]="true"
+                      routerLink="/picture-foro/{{ foro.id }}"
+                      >cloud_download</mat-icon
+                    >
+                  </p>
+                </mat-card-actions></mat-card
+              >
+            </div>
+          </mat-tab>
+        </div>
+      </div>
+      <div
+        *ngIf="notSubscribedForumsPosts"
+        style="height: auto; overflow: hidden;"
+      >
+        <div
+          *ngIf="notSubscribedForumsPosts.length > 0"
+          style="height: auto; overflow: hidden;"
+        >
+          <mat-tab
+            label="Foros sin suscripción"
+            style="height: auto; overflow: hidden;"
+          >
+            <div
+              *ngFor="let foro of notSubscribedForumsPosts"
+              style="margin-bottom: 1em; margin-top: 5px;"
+              class="expantion"
+              style="
+                height: auto;
+                overflow: hidden;
+                margin-bottom: 1em !important;
+              "
+            >
+              <mat-accordion
+                multi
+                style="
+                  height: auto;
+                  overflow: hidden;
+                  margin-bottom: 1em !important;
+                "
+              >
+                <mat-expansion-panel
+                  hideToggle
+                  style="height: auto; overflow: hidden;"
+                >
+                  <mat-expansion-panel-header
+                    style="height: auto; overflow: hidden;"
+                  >
+                    <mat-panel-title>
+                      <a
+                        routerLink="/foro/{{ foro.id }}"
+                        style="display: flex; width: 100%;"
+                      >
+                        <img
+                          mat-card-avatar
+                          src="{{ foro.image }}"
+                          alt="img"
+                          class="example-header-image"
+                          style="
+                            object-fit: cover;
+                            min-height: 100%;
+                            object-position: cover;
+                          "
+                        />
+                      </a>
+                    </mat-panel-title>
+                    <mat-panel-description
+                      style="
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        height: auto;
+                        overflow: hidden;
+                      "
+                      class="ordenar"
+                    >
+                      <div style="color: rgb(61, 63, 65);">
+                        <a
+                          routerLink="/foro/{{ foro.id }}"
+                          style="display: flex; width: 100%; color: black;"
+                          >{{ foro.title }}</a
+                        >
+                      </div>
+                      <div>
+                        <mat-icon
+                          [inline]="true"
+                          style="color: #91afab; cursor: pointer;"
+                          (click)="likeForo(foro.id)"
+                          >thumb_up</mat-icon
+                        >
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p>This is the primary content of the panel.</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel
+                  (opened)="panelOpenState = true"
+                  (closed)="panelOpenState = false"
+                  style="height: auto; overflow: hidden;"
+                >
+                  <mat-expansion-panel-header
+                    style="height: auto; overflow: hidden;"
+                  >
+                    <mat-panel-title style="color: rgb(61, 63, 65);">
+                      Comentarios
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Comentarios
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div>
+                    <div
+                      *ngFor="let com of foro.posts"
+                      style="
+                        margin-bottom: 10px;
+                        height: auto;
+                        overflow: hidden;
+                      "
+                    >
+                      <div class="ordenar">
+                        <div
+                          style="width: 75%; word-wrap: break-word;"
+                          class="tamano"
+                        >
+                          <p class="p" style="display: inline;">
+                            <mat-icon
+                              [inline]="true"
+                              style="color: #5cbcc4; cursor: pointer;"
+                              >arrow_right</mat-icon
+                            >
+                            {{ com.text }}
+                          </p>
+                        </div>
+                        <div style="display: inline; margin-right: 7px;">
+                          <mat-icon
+                            (click)="onDelete(com.id)"
+                            [inline]="true"
+                            class="like"
+                            style="cursor: pointer;"
+                          >
+                            delete
+                          </mat-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </mat-tab>
+        </div>
+      </div>
+    </mat-tab-group>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  data-backdrop="static"
+  data-keyboard="false"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Pago</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary enviar"
+          type="submit>"
+          (click)="premiumTrue()"
+          data-dismiss="modal"
+        >
+          continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  data-backdrop="static"
+  data-keyboard="false"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>¡Modifica tu información!</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div
+        class="modal-body"
+        style="color: black !important; text-align: center;"
+      >
+        <form class="form-signin" [formGroup]="userForm">
+          <div class="form-label-group">
+            <label for="inputUserame">Nombre</label>
+            <input
+              [(ngModel)]="this.modelUser.firstName"
+              type="text"
+              id="inputUserame"
+              formControlName="firstName"
+              class="form-control"
+              placeholder="name"
+              required
+              autofocus
+            />
+          </div>
+          <div *ngIf="firstName.invalid && firstName.dirty">
+            <div *ngIf="firstName.errors.required" class="mat-error">
+              Nombre es Requerido
+            </div>
+          </div>
+
+          <div class="form-label-group">
+            <label for="inputEmail">Apellido</label>
+            <input
+              [(ngModel)]="this.modelUser.lastName"
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              placeholder="Apellido"
+              required
+            />
+          </div>
+          <div *ngIf="lastName.invalid && lastName.dirty">
+            <div *ngIf="lastName.errors.required" class="mat-error">
+              Apellido es Requerido
+            </div>
+            <div *ngIf="lastName.errors.pattern" class="mat-error">
+              No debe contener numeros
+            </div>
+          </div>
+
+          <div class="form-label-group">
+            <label for="inputPassword">Username</label>
+            <input
+              [(ngModel)]="this.modelUser.userName"
+              formControlName="userName"
+              type="text"
+              class="form-control"
+              placeholder="Link"
+              required
+            />
+          </div>
+          <div *ngIf="userName.invalid && userName.dirty">
+            <div *ngIf="userName.errors.required" class="mat-error">
+              Nombre de Usuario Requerido
+            </div>
+          </div>
+
+          <br />
+          <button
+            class="btn btn1 btn-primary"
+            [disabled]="userForm.invalid"
+            type="submit"
+            style="margin-left: 27, 5%;"
+            (click)="onSubmit()"
+          >
+            continuar
+          </button>
+
+          <hr class="my-4" />
+          <button
+            class="btn btn1 btn-primary"
+            #btnClose
+            data-dismiss="modal"
+            style="margin-left: 27, 5%;"
+          >
+            cancelar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>¡Cambiar foto de perfil!</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div
+        class="modal-body"
+        style="color: black !important; text-align: center;"
+      >
+        <form>
+          <ngx-dropzone (change)="onSelect($event)">
+            <ngx-dropzone-label>Drop it</ngx-dropzone-label>
+            <ngx-dropzone-preview
+              *ngFor="let f of files"
+              [removable]="true"
+              (removed)="onRemove(f)"
+            >
+              <ngx-dropzone-label>archivo</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn" #btnClose2>
+          cancelar
+        </button>
+
+        <button (click)="updatePic()" class="btn" data-dismiss="modal">
+          continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

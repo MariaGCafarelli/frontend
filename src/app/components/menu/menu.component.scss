@@ -1,12 +1,18 @@
+.body{
+    position: fixed;
+    z-index:1000;
+    width: 100%;
+}
 
 .menu{
-    background-color:#1a5f6c;
+    background-color: #c2e1dd;
     font-family: 'Montserrat Alternates', sans-serif;
-    color: #ecf1f1;
+    color: black;
     font-size: 180%;
     display: flex;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 4px 8px 0 rgba(168, 165, 165, 0.486);
 }
 
 .titulo{
@@ -15,13 +21,70 @@
 
 .iconos{
     width: 60%;
-    text-align: right;   
+    text-align: right; 
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 mat-icon{
-    margin-left: 4%;
+    height: 100%;
+}
+
+.search{
+    margin-left: 1%;
+    font-size: 0.7em;
+    display: flex;
+    align-content: center;
+}
+
+input{
+    padding:0;
+    font-size: 100%;
+    font-family: 'Montserrat Alternates', sans-serif;
 }
 
 a{
-    color: #ecf1f1;
+    color: black;
 }
+
+button{
+    color:black;
+    background: transparent;
+    border: none;
+    width: 1em;
+    padding: 0;
+    
+}
+
+
+button:focus{
+    outline:none;
+}
+
+button.opciones{
+    color: black;
+    padding-left: 10%;
+}
+
+
+.parent{
+    display:flex;
+}
+
+
+.mat-toolbar .mat-input-element {
+    caret-color: currentColor;
+    width: 2.5em;
+    height: 0.8em;
+    border-radius: 10%;
+    border-color: black;
+}
+
+a.opcion{
+    color:#484a4c;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+    width: 10em;
+}
+

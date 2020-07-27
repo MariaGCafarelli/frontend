@@ -1,0 +1,34 @@
+<div class="fondo">
+  <div class="form">
+    <br />
+    <mat-label class="datos">Seleccione una imagen para su foro</mat-label>
+    <br />
+    <span>
+      <ngx-spinner
+        bdColor="rgba(10,57,158,0.8)"
+        size="large"
+        color="#6be7db"
+        type="ball-scale-multiple"
+        [fullScreen]="true"
+        ><p style="color: white;">Wave...</p>
+      </ngx-spinner>
+      <input
+        appearance="outline"
+        type="file"
+        (ngModel)="(file)"
+        (change)="handleFileInput($event.target.files)"
+    /></span>
+    <label for="mi-archivo"
+      ><mat-icon class="cargar">cloud_download</mat-icon></label
+    >
+    <mat-icon *ngIf="im" class="check">check</mat-icon>
+    <br />
+    <button type="button" (click)="onUpload()" class="btn">
+      subir
+    </button>
+    <button type="submit" class="btn" data-dismiss="modal" (click)="aja()">
+      Continuar sin subir Foto
+    </button>
+    <br />
+  </div>
+</div>

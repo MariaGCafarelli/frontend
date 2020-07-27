@@ -9,6 +9,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -23,9 +32,20 @@ import { MatCardModule } from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
       ],
   exports: [ 
+    MatPaginatorModule,
+    MatTableModule,
     MatFormFieldModule,
     MatSelectModule ,
     MatMenuModule,
@@ -34,7 +54,14 @@ import { MatCardModule } from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

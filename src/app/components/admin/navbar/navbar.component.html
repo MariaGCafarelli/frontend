@@ -1,0 +1,73 @@
+<div *ngIf="user">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/admin">Wave</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Categorías
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/admin">Categorías</a>
+          <a class="dropdown-item" href="/admin/contenido-recomendado"
+            >Contenido recomendado</a
+          >
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/subcategorias">Subcategorías</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/foros">Foros</a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          id="navbarDropdownMenuLink"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Usuarios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/admin/usuarios">Usuarios</a>
+          <a class="dropdown-item" href="/admin/usuarios-admin"
+            >Administradores</a
+          >
+        </div>
+      </li>
+      <div *ngIf="user.role == 'superadmin'">
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/registrar-admin"
+          >Registrar Administrador</a
+        >
+      </li>
+    </div>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logOut()" routerLink="/iniciar-sesion"
+          >Cerrar sesión</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>

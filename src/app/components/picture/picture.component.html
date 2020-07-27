@@ -1,0 +1,30 @@
+<ngx-spinner bdColor = "rgba(10,57,158,0.8)" size = "large" color = "#6be7db" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white" > Wave... </p>
+</ngx-spinner>
+<div class="fondo">
+  <div class="form">
+    <br />
+    <mat-label class="datos">Seleccione su imagen de perfil</mat-label>
+    <br />
+    <span><input
+      appearance="outline"
+      type="file"
+      (ngModel)="(file)"
+      (change)="handleFileInput($event.target.files)"
+    /></span>
+    <label for="mi-archivo"><mat-icon  class="cargar">cloud_download</mat-icon></label>
+    <mat-icon *ngIf="im" class="check">check</mat-icon>
+    <br />
+    <button
+      routerLink="/categorias"
+      type="button"
+      (click)="onUpload()"
+      class="btn"
+    >
+      subir
+    </button>
+    <button routerLink="/categorias" type="button" class="btn">
+      continuar sin subir
+    </button>
+    <br />
+  </div>
+</div>

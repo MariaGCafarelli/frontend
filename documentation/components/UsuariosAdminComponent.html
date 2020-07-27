@@ -1,0 +1,787 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>front-wave documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">front-wave documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>UsuariosAdminComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/admin/usuarios-admin/usuarios-admin.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-usuarios-admin</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./usuarios-admin.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./usuarios-admin.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentPage">currentPage</a>
+                            </li>
+                            <li>
+                                <a href="#nextPage">nextPage</a>
+                            </li>
+                            <li>
+                                <a href="#users">users</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#estadoUser">estadoUser</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#traerMasUsers">traerMasUsers</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(waveService: <a href="../injectables/WaveServiceService.html">WaveServiceService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>waveService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/WaveServiceService.html" target="_self" >WaveServiceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="estadoUser"></a>
+                    <span class="name">
+                        <b>
+                            estadoUser
+                        </b>
+                        <a href="#estadoUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>estadoUser(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="43"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:43</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Funcion que recibe como parametro un email y le cambia el status que tenga Activo a Inactivo o al contrario</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>email</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="25"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:25</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Servicio que inicia las variables</p>
+</div>
+
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="traerMasUsers"></a>
+                    <span class="name">
+                        <b>
+                            traerMasUsers
+                        </b>
+                        <a href="#traerMasUsers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>traerMasUsers()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="57"
+                            class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:57</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Funcion que trae más resultados</p>
+</div>
+
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>void</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="currentPage"></a>
+                        <span class="name">
+                            <b>
+                            currentPage</b>
+                            <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>1</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nextPage"></a>
+                        <span class="name">
+                            <b>
+                            nextPage</b>
+                            <a href="#nextPage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="users"></a>
+                        <span class="name">
+                            <b>
+                            users</b>
+                            <a href="#users"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/components/admin/usuarios-admin/usuarios-admin.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit} from &#x27;@angular/core&#x27;;
+import { NgxSpinnerService } from &#x27;ngx-spinner&#x27;;
+import { WaveServiceService } from &#x27;src/app/services/wave-service.service&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+
+
+@Component({
+  selector: &#x27;app-usuarios-admin&#x27;,
+  templateUrl: &#x27;./usuarios-admin.component.html&#x27;,
+  styleUrls: [&#x27;./usuarios-admin.component.scss&#x27;]
+})
+
+export class UsuariosAdminComponent implements OnInit {
+
+users:any[] &#x3D; []; // Arreglos de objeto usuario
+currentPage: number &#x3D; 1; // numero de pagina
+nextPage: boolean; // Boolean
+
+
+  constructor(private waveService: WaveServiceService) { }
+/**
+ * Servicio que inicia las variables
+ * @returns void
+ */
+  ngOnInit(): void {
+     this.waveService.getNormalUsers(this.currentPage).subscribe((res)&#x3D;&gt;{
+       this.users &#x3D; res.users.items;
+       console.log(this.users);
+       this.currentPage &#x3D; parseInt(res.users.meta.currentPage);
+       this.nextPage &#x3D;
+       this.currentPage !&#x3D;&#x3D; parseInt(res.users.meta.totalPages);
+     })
+
+     
+  }
+
+
+    /**
+   * Funcion que recibe como parametro un email y le cambia el status que tenga Activo a Inactivo o al contrario
+   * @param email 
+   * @returns void
+   */
+ estadoUser(email: string){
+  this.waveService.statusNormal(email).subscribe((res)&#x3D;&gt;{
+    console.log(res);
+    this.waveService.getNormalUsers().subscribe((res)&#x3D;&gt;{
+      console.log(res)
+      this.users &#x3D; res.users.items;
+    })
+  })
+}
+
+/**
+ * Funcion que trae más resultados
+ * @returns void
+ */
+traerMasUsers() {
+  this.waveService
+    .getNormalUsers(this.currentPage + 1)
+    .subscribe((response) &#x3D;&gt; {
+      this.users &#x3D; this.users.concat(response.users.items);
+      this.currentPage &#x3D; parseInt(response.users.meta.currentPage);
+      this.nextPage &#x3D; this.currentPage !&#x3D;&#x3D; parseInt(response.users.meta.totalPages);
+      
+    });
+}
+
+
+
+}
+
+
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-navbar&gt;&lt;/app-navbar&gt;
+
+&lt;h4 style&#x3D;&quot; margin-left: 5%; margin-top:3%&quot;&gt;Usuarios&lt;/h4&gt;
+
+&lt;div *ngFor&#x3D;&quot;let foro of users&quot; class&#x3D;&quot;contenedor&quot;&gt;
+    
+    &lt;mat-card style&#x3D;&quot;margin-top:2em&quot;&gt;
+      
+        &lt;div style&#x3D;&quot;display:inline&quot;&gt;
+        &lt;mat-card-title style&#x3D;&quot;font-size: inherit;&quot;&gt;{{ foro.firstName }} {{foro.lastName}} - {{foro.role}}&lt;/mat-card-title&gt;
+        &lt;mat-card-subtitle style&#x3D;&quot;display:inline&quot;
+          &gt;&lt;p style&#x3D;&quot;display: inline;&quot;&gt;
+            User: {{ foro.userName }}
+          &lt;/p&gt;&lt;/mat-card-subtitle
+        &gt;&lt;/div&gt;
+      
+      &lt;div *ngIf&#x3D;&quot;foro.isActive; else activo&quot; style&#x3D;&quot;display: inline;&quot;&gt;
+        &lt;a class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;estadoUser(foro.email)&quot;
+          &gt;&lt;mat-icon&gt; close &lt;/mat-icon&gt;&lt;/a
+        
+        &gt;
+      &lt;/div&gt;
+      &lt;ng-template #activo
+        &gt;&lt;button
+          type&#x3D;&quot;button&quot;
+          (click)&#x3D;&quot;estadoUser(foro.email)&quot;
+          class&#x3D;&quot;btn btn-primary&quot;
+        &gt;
+          &lt;mat-icon&gt; check &lt;/mat-icon&gt;
+        &lt;/button&gt;
+      &lt;/ng-template&gt;
+      
+
+    &lt;/mat-card&gt;
+    
+
+  &lt;/div&gt;
+  &lt;div  style&#x3D;&quot;display: inline;&quot; *ngIf&#x3D;&quot;nextPage&quot;&gt;
+    &lt;a class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;traerMasUsers()&quot;
+      &gt;&lt;mat-icon&gt; more &lt;/mat-icon&gt;&lt;/a
+    &gt;
+  &lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./usuarios-admin.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.mat-card-avatar {
+    height: 3.5em;
+    width: 3.5em;
+    border: 2px solid #e5e7e8;
+  }
+  .btn {
+    width: 15%;
+    font-style: normal;
+    font-family: &quot;Poiret One&quot;;
+    letter-spacing: 3px;
+    border: none;
+    color: #5cbcc4;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  
+  .btn1 {
+    width: 45%;
+    font-style: normal;
+    font-family: &quot;Poiret One&quot;;
+    letter-spacing: 3px;
+    border: 0.8px solid white;
+    color: white;
+    background: #5cbcc4;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  }
+  
+  .btn2 {
+    width: 45%;
+    margin-left: 22.5%;
+    font-style: normal;
+    font-family: &quot;Poiret One&quot;;
+    letter-spacing: 3px;
+    border: none;
+    color: white;
+    background-color: #5cbcc4;
+    box-shadow: none;
+  }
+  
+  .ordenar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    max-width: 100%;
+  }
+  
+  .mat-form-field {
+    width: 90%;
+    margin-left: 5%;
+  }
+  
+  .mat-card {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 1em;
+  }
+  
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-navbar></app-navbar><h4 style=" margin-left: 5%; margin-top:3%">Usuarios</h4><div *ngFor="let foro of users" class="contenedor">        <mat-card style="margin-top:2em">              <div style="display:inline">        <mat-card-title style="font-size: inherit;">{{ foro.firstName }} {{foro.lastName}} - {{foro.role}}</mat-card-title>        <mat-card-subtitle style="display:inline"          ><p style="display: inline;">            User: {{ foro.userName }}          </p></mat-card-subtitle        ></div>            <div *ngIf="foro.isActive; else activo" style="display: inline;">        <a class="btn btn-primary" (click)="estadoUser(foro.email)"          ><mat-icon> close </mat-icon></a                >      </div>      <ng-template #activo        ><button          type="button"          (click)="estadoUser(foro.email)"          class="btn btn-primary"        >          <mat-icon> check </mat-icon>        </button>      </ng-template>          </mat-card>      </div>  <div  style="display: inline;" *ngIf="nextPage">    <a class="btn btn-primary" (click)="traerMasUsers()"      ><mat-icon> more </mat-icon></a    >  </div></div>'
+    var COMPONENTS = [{'name': 'AdminComponent', 'selector': 'app-admin'},{'name': 'AdminCrudComponent', 'selector': 'app-admin-crud'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CambiarContrasenaComponent', 'selector': 'app-cambiar-contrasena'},{'name': 'CategoriaComponent', 'selector': 'app-categoria'},{'name': 'CategoriasAdminComponent', 'selector': 'app-categorias-admin'},{'name': 'CategoriasComponent', 'selector': 'app-categorias'},{'name': 'ComentariosComponent', 'selector': 'app-comentarios'},{'name': 'ContenidoRecomendadoComponent', 'selector': 'app-contenido-recomendado'},{'name': 'ForoComponent', 'selector': 'app-foro'},{'name': 'ForosAdminComponent', 'selector': 'app-foros-admin'},{'name': 'ForosComponent', 'selector': 'app-foros'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IniciarSesionComponent', 'selector': 'app-iniciar-sesion'},{'name': 'InicioComponent', 'selector': 'app-inicio'},{'name': 'LostPasswordComponent', 'selector': 'app-lost-password'},{'name': 'MenuComponent', 'selector': 'app-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PagoPremiumComponent', 'selector': 'app-pago-premium'},{'name': 'PictureComponent', 'selector': 'app-picture'},{'name': 'PictureForoComponent', 'selector': 'app-picture-foro'},{'name': 'RegistrarAdminComponent', 'selector': 'app-registrar-admin'},{'name': 'RegistrarUsuarioComponent', 'selector': 'app-registrar-usuario'},{'name': 'SubAdminComponent', 'selector': 'app-sub-admin'},{'name': 'SubCategoriaComponent', 'selector': 'app-sub-categoria'},{'name': 'UsuarioComponent', 'selector': 'app-usuario'},{'name': 'UsuariosAdminComponent', 'selector': 'app-usuarios-admin'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UsuariosAdminComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UsuariosAdminComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

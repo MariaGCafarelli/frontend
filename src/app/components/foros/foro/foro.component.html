@@ -1,3 +1,284 @@
 <app-menu></app-menu>
+<div class="fondo">
+  <div class="opciones">
+    <div *ngIf="Foro.subCategory" style="display: inline;">
+      <span (click)="getBack()">
+        <mat-icon class="volver" style="font-size: 2em;"
+          >keyboard_backspace</mat-icon
+        >
+      </span>
+    </div>
 
-<h1>El profesor de john katzenbach</h1>
+    <div *ngIf="Foro.isLiked; else suscribete" style="display: inherit;">
+      <button
+        (click)="dislikeForo(foroId)"
+        class="btn btn-primary dislike"
+        style="display: inherit;"
+      >
+        Cancelar suscripción
+      </button>
+    </div>
+
+    <ng-template #suscribete>
+      <button (click)="likeForo(foroId)" class="btn btn-primary suscribir">
+        ¡Suscríbite!
+      </button>
+    </ng-template>
+  </div>
+  <div style="text-align: center;">
+    <img
+      class="imagen"
+      src="{{ Foro.image }}"
+      alt="imagen"
+      style="
+        width: 100%;
+        height: 250px;
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+      "
+    />
+  </div>
+
+  <h2>
+    {{ Foro.title }}
+  </h2>
+  <h5>
+    <small style="color: grey !important; font-size: 1rem; color: black !important;
+    font-weight: bold;"
+      >{{ Foro.subscribers }}
+      {{ Foro.subscribers > 1 ? "suscriptores" : "suscriptor" }}
+    </small>
+  </h5>
+
+  <h6 style="font-size: 1.3em;">¡Comentarios!</h6>
+
+  <div class="comentario">
+    <hr />
+    <div *ngIf="areThereNewPosts">
+      <button class="btn btn-primary primero" (click)="refreshPost()">
+        nuevos post
+      </button>
+    </div>
+
+    <div *ngIf="posts.length > 0; else sinPost">
+      <div *ngFor="let com of posts">
+        <div class="row flex-row-reverse bootstrap snippets">
+          <div class="col-md-12 col-md-offset-2 col-sm-12">
+            <div class="comment-wrapper">
+              <div class="panel panel-info">
+                <div class="panel-body">
+                  <div class="clearfix"></div>
+
+                  <ul class="media-list">
+                    <li class="media">
+                      <a
+                        (click)="capturePic(com.user.image)"
+                        data-toggle="modal"
+                        data-target="#exampleModal2"
+                        *ngIf="com.user.image != null; else sinFoto"
+                      >
+                        <img
+                          src="{{ com.user.image }}"
+                          alt="User"
+                          class="img-circle"
+                          style="
+                            object-fit: cover;
+                            min-height: 100%;
+                            object-position: cover;
+                          "
+                        />
+                      </a>
+
+                      <ng-template #sinFoto>
+                        <img
+                          src="https://iestpdesaguadero.edu.pe/wp-content/uploads/2016/11/78-786420_icono-usuario-joven-transparent-user-png-png-download.png"
+                          alt="User"
+                          class="img-circle"
+                          style="
+                            object-fit: cover;
+                            width: 100%;
+                            min-height: 100%;
+                            object-position: cover;
+                          "
+                        />
+                      </ng-template>
+
+                      <div class="media-body" style="text-align: right;">
+                        <div class="ordenar">
+                          <div style="display: inline;">
+                            <strong class="text-success" style="font-size: 1.2em; font-weight: normal;"
+                              >{{ com.user.userName }}
+                            </strong>
+                            <time class="ml-3" class="text-success" style="font-weight:bold;">{{
+                              com.date | dateAgo
+                            }}</time>
+                          </div>
+
+                          <div style="display: inline;">
+                            <div
+                              *ngIf="!com.isLiked; else notLike"
+                              style="display: inline;"
+                            >
+                              <mat-icon
+                                (click)="putLikePost(com.id)"
+                                [inline]="true"
+                                class="like"
+                                style="cursor: pointer; color: red; font-size: 1.1em;"
+                              >
+                                favorite_border
+                              </mat-icon>
+                            </div>
+                            <ng-template
+                              #notLike
+                              style="display: inline; font-size: 1em;"
+                            >
+                              <mat-icon
+                                (click)="putDislikePost(com.id)"
+                                [inline]="true"
+                                class="dislike"
+                                style="cursor: pointer; color: red; font-size: 1.1em;"
+                              >
+                                favorite
+                              </mat-icon>
+                            </ng-template>
+                            <time class="text-success">{{ com.likes }}</time>
+                          </div>
+                        </div>
+
+                        <p class="p">
+                          {{ com.text }}
+                        </p>
+                        <mat-icon
+                          *ngIf="user.email == com.user.email"
+                          (click)="onDelete(com.id)"
+                          [inline]="true"
+                          class="like"
+                          style="cursor: pointer; color: black; font-size: 1.2em;"
+                        >
+                          delete
+                        </mat-icon>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        *ngIf="nextPage"
+        (click)="traerMasComentarios()"
+        type="button"
+        class="btn btn-mas"
+      >
+        Mas Comentarios
+      </button>
+    </div>
+    <ng-template #sinPost>
+      <h6>Publica el primer comentario</h6>
+    </ng-template>
+  </div>
+
+  <div *ngIf="Foro.isLiked">
+    <button
+      class="btn btn-primary abajo"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
+      <mat-icon> create </mat-icon>
+    </button>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>¡Agrega tu comentario!</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          #btnClose
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="reset()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="postForm">
+          <textarea
+            formControlName="text"
+            id="input"
+            placeholder="¡Escribe tu comentario aquí!"
+            class="form-control"
+            validator="maxLength(15)"
+          ></textarea>
+          <div *ngIf="text.invalid && text.dirty">
+            <mat-error *ngIf="text.errors.required">
+              Por favor, coloque el mensaje que desea mostrar
+            </mat-error>
+            <mat-error *ngIf="text.errors.maxlength">
+              255 caracteres máximo
+            </mat-error>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          [disabled]="postForm.invalid || this.postForm.value.text.trim() == ''"
+          (click)="postCom()"
+          type="button"
+          class="btn btn-primary enviar"
+          type="submit"
+        >
+          publicar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <strong>Foto del Usuario</strong>
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="resetP()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        <img
+          src="{{ selectedP }}"
+          alt="Perfil"
+          style="border-radius: 10px; margin-top: 0 !important;"
+        />
+      </div>
+    </div>
+  </div>
+</div>

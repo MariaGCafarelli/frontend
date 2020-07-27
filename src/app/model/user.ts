@@ -1,11 +1,12 @@
 export interface User {
-    id: number,
-    firstName: string,
-    lastName: string,
-    username: string,
-    email: string,
-    password: string,
-    birthday: Date,
-    isActive: boolean 
+    id?: number,
+    firstName?: string,
+    lastName?: string,
+    userName?: string,
+    email?: string,
+    image?: string,
+    role?: string,
+    birthday?: Date,
+    isActive?: boolean 
 
 }

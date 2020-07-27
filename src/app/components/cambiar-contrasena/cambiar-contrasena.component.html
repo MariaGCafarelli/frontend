@@ -1,54 +1,63 @@
 <div class="fondo">
-    <h1>Cambiar contraseña</h1>
-    <label class= "info">Introduce la dirección de correo con la que te registraste</label>
-
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSaveForm()">
-        <div class="formulario">
-          
-            <mat-form-field appearance="standard">
-              <mat-label>Introducir Correo</mat-label>
-              <input matInput formControlName="usuario" placeholder="Correo">
-            </mat-form-field>   
-          
-          <div *ngIf="usuario.invalid && usuario.dirty">
-            <div *ngIf="usuario.errors.required">
-              Usuario es Requerido
-            </div>
-            <div *ngIf="usuario.errors.pattern">
-              Debe ser un correo valido
-            </div>    
-          </div>
-
+  <div class="form">
     
+    <form [formGroup]="loginForm">
+      <h1>Cambiar contraseña</h1>
+      <label class="info"
+        >Introduce la nueva contraseña</label
+      >
+
+      
+        <div class="formulario">
+          <mat-form-field appearance="outline">
+            <mat-label
+              >Nueva Contraseña</mat-label
+            >
+            <input type="password" matInput placeholder="Contraseña" formControlName="contra" />
+          </mat-form-field>
+          <div *ngIf="contra.invalid && (contra.dirty || contra.touched)">
+            <mat-error *ngIf="contra.errors.required">
+              Introduzca su nueva contraseña
+            </mat-error>
+            <mat-error *ngIf="contra.errors.minlength">
+              8 caracteres mínimo
+            </mat-error>
+            <mat-error *ngIf="contra.errors.maxlength">
+              30 caracteres máximo
+            </mat-error>
+            <mat-error *ngIf="contra.errors.pattern">
+              Debe tener al menos una Mayúscula, una Minúscula,  un 
+              dígito, un caracter especial y no con tener espacios
+            </mat-error>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label
+              >Repetir contraseña</mat-label
+            >
+            <input type="password" formControlName="contraconf" matInput placeholder="Repetir Contraseña" />
+          </mat-form-field>
+          <mat-error
+          *ngIf="loginForm.hasError('notSame') && contraconf.dirty"
+        >
+          Contraseñas no coinciden
+        </mat-error>
+          
         </div>
         <div class="boton">
-          <button class="btn btn-primary primero" data-toggle="modal" data-target="#exampleModal">enviar</button>
-          <a routerLink="/inicio"><button type="button" class="btn btn-primary segundo" type="submit>" data-dismiss="modal">regresar</button></a>
-
-
-  
-  <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><strong>Importante</strong></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <strong>Se le enviará un correo a la dirección que ingresó con su nueva contraseña</strong>
-              </div>
-              <div class="modal-footer">
-                <a routerLink="/iniciar-sesion"><button type="button" class="btn btn-primary enviar" type="submit>" data-dismiss="modal">continuar</button></a>
-              </div>
-            </div>
-          </div>
+          
+          <a 
+            ><button
+              type="button"
+              class="btn btn-primary segundo"
+              (click)="onSaveForm()"
+              [disabled]="loginForm.invalid"
+            >
+              continuar
+            </button></a
+          >
         </div>
+      
 
-        </div>
-        </form>
-    
-</div>
+      </form>
+    </div>
+  </div>

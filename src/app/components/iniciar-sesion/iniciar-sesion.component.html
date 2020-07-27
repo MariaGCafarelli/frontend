@@ -1,4 +1,7 @@
+<ngx-spinner bdColor = "rgba(10,57,158,0.8)" size = "large" color = "#6be7db" type = "ball-scale-multiple" [fullScreen] = "true"><p style="color: white" > Wave... </p>
+</ngx-spinner>
 <div class="fondo">
+  <div class="form">
     <div class="espacio">
 
     </div>
@@ -11,33 +14,40 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSaveForm()">
     <div class="formulario">
       
-        <mat-form-field appearance="standard">
-          <mat-label>Introducir Correo</mat-label>
-          <input matInput formControlName="usuario" placeholder="Correo">
+        <mat-form-field appearance="outline">
+          
+            <mat-label style="padding-top:3px ;">Introducir Correo</mat-label>
+            <input matInput formControlName="usuario" placeholder="Correo">
+            
+          
         </mat-form-field>   
       
       <div *ngIf="usuario.invalid && usuario.dirty">
-        <div *ngIf="usuario.errors.required">
+        <div *ngIf="usuario.errors.required" class="mat-error">
           Usuario es Requerido
         </div>
-        <div *ngIf="usuario.errors.pattern">
-          Debe ser un correo valido
+        <div *ngIf="usuario.errors.pattern" class="mat-error">
+          Debe ser un correo válido
         </div>    
       </div>
 
 
-      <mat-form-field appearance="standard">
+      <mat-form-field appearance="outline">
         <mat-label>Introducir Contraseña</mat-label>
-        <input matInput formControlName="contra" placeholder="Contraseña">
+        <input type="password" matInput formControlName="contra" placeholder="Contraseña">
+        
       </mat-form-field>
 
 
-      <div *ngIf="contra.invalid && contra.dirty">
+      <div *ngIf="contra.invalid && contra.dirty" class="mat-error">
         <div *ngIf="contra.errors.required">
           Contraseña es Requerida
         </div>
-        <div *ngIf="contra.errors.minlength">
-          Debe tener al menos 7 caracteres
+        <div *ngIf="contra.errors.minlength" class="mat-error">
+          Debe tener al menos 8 caracteres
+        </div>    
+        <div *ngIf="contra.errors.maxlength" class="mat-error">
+          Debe tener máximo 30 caracteres
         </div>    
       </div>
 
@@ -50,5 +60,5 @@
     </div>
     </form>
 
-
+</div>  
 </div>

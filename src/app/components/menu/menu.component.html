@@ -1,17 +1,43 @@
+<div class="body">
+  <mat-toolbar>
+    <mat-toolbar-row class="menu">
+      <div class="titulo">
+        <a routerLink="/home"
+          ><span><strong>wave</strong></span></a
+        >
+      </div>
 
-<div>
-    <mat-toolbar >
-        <mat-toolbar-row class="menu">
-            <div class="titulo">
-                <a routerLink="/home"><span><strong>wave</strong></span></a>
-            </div>
-                   
-            <div class="iconos">
-                <mat-icon>search</mat-icon>
-                <a routerLink="/categorias"><mat-icon>list</mat-icon></a>
-               <a (click)="logOut()" routerLink="/iniciar-sesion"> <mat-icon >exit_to_app</mat-icon> </a>
-            </div>
-        </mat-toolbar-row>
-    </mat-toolbar>
+      <div class="iconos">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Icon-button"
+          class="search"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item class="opciones" routerLink="/categorias">
+            <a routerLink="/categorias" class="opcion">
+              <span>Categorías</span>
+            </a>
+          </button>
+          <button mat-menu-item class="opciones" routerLink="/foros">
+            <a routerLink="/foros" class="opcion">
+              <span>Foros</span>
+            </a>
+          </button>
+          <button mat-menu-item class="opciones">
+            <a (click)="logOut()" routerLink="/iniciar-sesion" class="opcion">
+              <span>Cerrar sesión</span>
+            </a>
+          </button>
+        </mat-menu>
+
+        <button routerLink="/perfil-usuario" aria-label="Icon-button">
+          <mat-icon class="search">person</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
-

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { WaveServiceService } from 'src/app/services/wave-service.service';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-categoria',
@@ -8,22 +9,14 @@ import { WaveServiceService } from 'src/app/services/wave-service.service';
   styleUrls: ['./categoria.component.scss'],
 })
 export class CategoriaComponent implements OnInit {
-   categories: any[] = [];
-   categoryById: {};
+  categoryId: number; //Id de la categoria
+  categoryById: any = []; //Arreglo con el objeto de tipo Categoria
+  subcategories: any[] = []; //Arreglo con objetos de tipo Subcategoria
+  panelOpenState = false; //Estados del panel de contenido
+  previousUrl: string; //Ruta anterior
+  subActive: any[] = []; //Arreglo con objetos de tipo subcategoria
 
-  categoria: any;
-  subcategories: any[] = [];
-  categoryId: number;
-
-  categorias = {
-    encabezado: 
-      'https://i0.wp.com/lapalabra.gt/wp-content/uploads/2018/11/gravity-falls-diario-3-journal-3-entrega-inmediata-D_NQ_NP_808015-MLC25201571264_122016-O.jpg?fit=1042%2C663',
-    imagen:
-      'https://i.pinimg.com/originals/fc/30/a5/fc30a5269167b32e5cdab0aa8e438261.png',
-  };
-
-
-
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(
     private waveService: WaveServiceService,
@@ -32,22 +25,38 @@ export class CategoriaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.categoria = this.route.snapshot.params['id'];
-    // Carga las Subcategorias de una Categoria
-    this.waveService.getAllCategories().subscribe((response) => {
-      this.categories = response.categories;
-      console.log(this.categories);
-      this.categoryId = this.route.snapshot.params['id'];
-      this.categoryById = this.categories.filter(
-        (category) => category.id == this.categoryId
-      )[0];
-      console.log(this.categoryById);
-      this.waveService
-        .getSubcategoryByCategory(this.categoryId)
-        .subscribe((response) => {
-          this.subcategories = response.subCategories;
-          console.log(this.subcategories);
-        });
+    /**
+     * Servicio que trae todos la categoria segun el id que trae la ruta,
+     * inicializa el arreglo categoryById
+     * la pagina actual y la siguiente
+     */
+    this.categoryId = this.route.snapshot.params['id'];
+    this.waveService.getCategoryById(this.categoryId).subscribe((response) => {
+      this.categoryById = response;
     });
+
+    /**
+     * Servicio que trae todos las subcategorias segun el id de categoria
+     * que trae la ruta, inicializa el arreglo subActive con las subcategorias
+     * activas
+     */
+    this.waveService
+      .getSubcategoryByCategory(this.categoryId)
+      .subscribe((response) => {
+        this.subcategories = response.subCategories;
+        for (let sub of this.subcategories) {
+          if (sub.isActive) {
+            this.subActive.push(sub);
+          }
+        }
+      });
+  }
+
+  /**
+   * Funcion que trae la ultima ruta almacenada del location de la aplicacion
+   * @return void
+   */
+  getBack() {
+    this.waveService.getPreviousUrl();
   }
 }
