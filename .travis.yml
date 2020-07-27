@@ -1,0 +1,21 @@
+sudo: false
+language: node_js
+node_js:
+  - "6.0"
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+notifications:
+  email: false
+script:
+  - npm run build-travis
+after_success:
+  - bash ./scripts/deploy.sh
+env:
+  global:
+    - GH_USER: MariaGCafarelli
+    - GH_REPO: frontend
+    - secure: MuY3o/HKXffWEdBaA/w2NosN/qTyfq4oqxg7keD1kUs0GQ/qv5/Qns3uCjdF1k0NTh+UGpbSWzneUMjvUZQ5D/+lDBYbBqk26F1J5hxo6IGLD3pwcmTuRLYMpkNBUFlq+btwdW7+zw9naOsqibuRC+lx46lJrfzjg3fFv6JjBLuXAa7BvJIC8uvapi6BCdSQfWECS42DTyvRcum7tOxXqwD5ZtDDE6zYBbr6lHbefrwNXaHt6KQ2XxwdRDuTsNOdaDXg3hsQjZDrkb2uke95lifvn7xGzVmPXI5h+/uvKFPlYscKASvnH3qSHOSz6GTgF/CV08Wfd0qIQ7teD3Vd6c717MkuJX4nD2bNkIMpk3NetQEZPFEDN5Ld2jQl+Y/GmKZhUpJGy4mXTcztWWZ5WuSGqNPCu8XPed9hVzXIh72YKhCe5TGANnhr+0GsnW6a5uIAXsO0lI5tSHCCv4WUz3uAXVrFIFE9YhNbYHms1CRK5D0nEBN7fKLT6HA8K3mlMbKObxVVJdwke+Ffkblpclu/Hk57lWCsoIeCBGfqClSo9f/mNuo+XwYjbjNPo4miAxbsyHB9czBbgo7qVU8kENwsgNusil+5QJGApbfNiEzSFqKy4bxjD+ul+iLPEzDUDdUPA8t0USfo232PQ/gZYAANRQt75cllYJUxVpS56Rk=

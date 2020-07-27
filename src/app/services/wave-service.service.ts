@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class WaveServiceService {
   url = 'https://wave-service.herokuapp.com';
-
+  //url = 'http://localhost:3000'
   public token: string;
   public picture: string;
   public user: any;
